@@ -1,3 +1,5 @@
+/* jQuery Sizzle - This comment has jslint skip the error checking for this file */
+
 /* 
  * More info at: http://phpjs.org
  * 
@@ -121,6 +123,7 @@
 // Compression: minified
 
 var window = Titanium.UI.currentWindow;
+
 
 (function(){if(typeof(this.PHP_JS)==="undefined"){var PHP_JS=function(cfgObj){if(!(this instanceof PHP_JS)){return new PHP_JS(cfgObj);}
 window=cfgObj&&cfgObj.window?cfgObj.window:window;this.php_js={};this.php_js.ini={};if(cfgObj){for(var ini in cfgObj.ini){this.php_js.ini[ini]={};this.php_js.ini[ini].local_value=cfgObj.ini[ini];this.php_js.ini[ini].global_value=cfgObj.ini[ini];}}};}

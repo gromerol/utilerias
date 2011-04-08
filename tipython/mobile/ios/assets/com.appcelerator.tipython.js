@@ -1,3 +1,4 @@
+/* jQuery Sizzle - This comment has jslint skip the error checking for this file */
 (function(){var COMPILED=true,goog=goog||{};goog.global=this;goog.DEBUG=false;goog.LOCALE="en";goog.evalWorksForGlobals_=null;goog.provide=function(a){if(!COMPILED){if(goog.getObjectByName(a)&&!goog.implicitNamespaces_[a])throw Error('Namespace "'+a+'" already declared.');for(var b=a;b=b.substring(0,b.lastIndexOf("."));)goog.implicitNamespaces_[b]=true}goog.exportPath_(a)};if(!COMPILED)goog.implicitNamespaces_={};
 goog.exportPath_=function(a,b,c){a=a.split(".");c=c||goog.global;!(a[0]in c)&&c.execScript&&c.execScript("var "+a[0]);for(var d;a.length&&(d=a.shift());)if(!a.length&&goog.isDef(b))c[d]=b;else c=c[d]?c[d]:c[d]={}};goog.getObjectByName=function(a,b){for(var c=a.split("."),d=b||goog.global,e;e=c.shift();)if(d[e])d=d[e];else return null;return d};goog.globalize=function(a,b){var c=b||goog.global,d;for(d in a)c[d]=a[d]};
 goog.addDependency=function(a,b,c){if(!COMPILED){var d;a=a.replace(/\\/g,"/");for(var e=goog.dependencies_,f=0;d=b[f];f++){e.nameToPath[d]=a;a in e.pathToNames||(e.pathToNames[a]={});e.pathToNames[a][d]=true}for(d=0;b=c[d];d++){a in e.requires||(e.requires[a]={});e.requires[a][b]=true}}};
@@ -461,8 +462,47 @@ Sk.importSetUpPath=function(){if(!Sk.realsyspath){for(var a=[new Sk.builtin.str(
 Sk.importModuleInternal_=function(a,b,c,d){Sk.importSetUpPath();if(c===undefined)c=a;var e=null,f=c.split("."),g,h=Sk.sysmodules.mp$subscript(c);if(h!==undefined)return f.length>1?Sk.sysmodules.mp$subscript(f[0]):h;if(f.length>1){g=f.slice(0,f.length-1).join(".");e=Sk.importModuleInternal_(g,b)}h=new Sk.builtin.module;Sk.sysmodules.mp$ass_subscript(a,h);var i;if(d){a=a+".py";i=Sk.compile(d,a,"exec")}else if(d=Sk.importSearchPathForName(a,".js",true)){a=d;i={funcname:"$builtinmodule",code:Sk.read(a)}}else{a=
 Sk.importSearchPathForName(a,".py");i=Sk.compile(Sk.read(a),a,"exec")}a=h.$js=i.code;if(b){Sk.debugout("-----");a=function(){for(var j=js_beautify(i.code).split("\n"),k=1;k<=j.length;++k){for(var l="",m=(""+k).length;m<5;++m)l+=" ";j[k-1]="/* "+l+k+" */ "+j[k-1]}return j.join("\n")}(i.code);Sk.debugout(a)}a+="\n"+i.funcname+"("+("new Sk.builtin.str('"+c+"')")+");";b=goog.global.eval(a);b.__name__||(b.__name__=new Sk.builtin.str(c));h.$d=b;if(e){Sk.sysmodules.mp$subscript(g).tp$setattr(f[f.length-
 1],h);return e}return h};Sk.importModule=function(a,b){return Sk.importModuleInternal_(a,b)};Sk.importMain=function(a,b){return Sk.importModuleInternal_(a,b,"__main__")};Sk.importMainWithBody=function(a,b,c){return Sk.importModuleInternal_(a,b,"__main__",c)};Sk.builtin.__import__=function(a,b,c,d){b=Sk.importModuleInternal_(a);if(!d||d.length===0)return b;b=Sk.sysmodules.mp$subscript(a);goog.asserts.assert(b);return b};goog.exportSymbol("Sk.importMain",Sk.importMain);
-goog.exportSymbol("Sk.importMainWithBody",Sk.importMainWithBody);goog.exportSymbol("Sk.builtin.__import__",Sk.builtin.__import__);Sk.builtins={range:Sk.builtin.range,len:Sk.builtin.len,min:Sk.builtin.min,max:Sk.builtin.max,abs:Sk.builtin.abs,ord:Sk.builtin.ord,chr:Sk.builtin.chr,dir:Sk.builtin.dir,repr:Sk.builtin.repr,open:Sk.builtin.open,isinstance:Sk.builtin.isinstance,hash:Sk.builtin.hash,getattr:Sk.builtin.getattr,float_$rw$:Sk.builtin.float_,int_$rw$:Sk.builtin.int_,AttributeError:Sk.builtin.AttributeError,ValueError:Sk.builtin.ValueError,dict:Sk.builtin.dict,file:Sk.builtin.file,"function":Sk.builtin.func,generator:Sk.builtin.generator,
-list:Sk.builtin.list,long_$rw$:Sk.builtin.lng,method:Sk.builtin.method,object:Sk.builtin.object,slice:Sk.builtin.slice,str:Sk.builtin.str,set:Sk.builtin.set,tuple:Sk.builtin.tuple,type:Sk.builtin.type};goog.exportSymbol("Sk.builtins",Sk.builtins);}());
+goog.exportSymbol("Sk.importMainWithBody",Sk.importMainWithBody);goog.exportSymbol("Sk.builtin.__import__",Sk.builtin.__import__);
 
-//Inject Skulpt into the Titanium namespace as Python
+Sk.builtins={range:Sk.builtin.range,len:Sk.builtin.len,min:Sk.builtin.min,max:Sk.builtin.max,abs:Sk.builtin.abs,ord:Sk.builtin.ord,chr:Sk.builtin.chr,dir:Sk.builtin.dir,repr:Sk.builtin.repr,open:Sk.builtin.open,isinstance:Sk.builtin.isinstance,hash:Sk.builtin.hash,getattr:Sk.builtin.getattr,float_$rw$:Sk.builtin.float_,int_$rw$:Sk.builtin.int_,AttributeError:Sk.builtin.AttributeError,ValueError:Sk.builtin.ValueError,dict:Sk.builtin.dict,file:Sk.builtin.file,"function":Sk.builtin.func,generator:Sk.builtin.generator,
+list:Sk.builtin.list,long_$rw$:Sk.builtin.lng,method:Sk.builtin.method,object:Sk.builtin.object,slice:Sk.builtin.slice,str:Sk.builtin.str,set:Sk.builtin.set,tuple:Sk.builtin.tuple,type:Sk.builtin.type};
+
+Sk.builtins.helpers = (function() {
+    return {
+        executeIntoVariable: function(variableToReturn, pycode) {
+            var module,
+                returnVariable,
+                returnVariableValue;
+
+            module = Sk.importMainWithBody("<stdin>", false, pycode); //Identify the code/module to run
+            returnVariable = module.tp$getattr(variableToReturn); //Locate the variable of interest
+            returnVariableValue = returnVariable.v; //The return value is assigned to the "v" property during execution
+            return returnVariableValue;
+        },
+        
+        setModule: function(pycode) {
+            var module = Sk.importMainWithBody("<stdin>", false, pycode); //Identify the code/module to run
+            return module;
+        },
+
+        executeModuleFunction: function(module, classInstanceVariableName, methodToCall, args) {
+            var cInstanceObject,
+                methodObject,
+                result,
+                passedArgs;
+
+            cInstanceObject = module.tp$getattr(classInstanceVariableName); //Locate the object we'll interact with
+            methodObject = cInstanceObject.tp$getattr(methodToCall);
+
+            passedArgs = Array.prototype.slice.call(arguments, 3);
+            result = Sk.misceval.apply(methodObject, undefined, undefined, undefined, passedArgs);
+
+            return result;
+        }
+    };
+}());
+
 Ti.Python = Sk;
+
+goog.exportSymbol("Sk.builtins",Sk.builtins);
+}());
