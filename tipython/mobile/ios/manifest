@@ -1,0 +1,17 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 0.4
+description: Adds Python support for Titanium Mobile via Skulpt (skulpt.org)
+author: Appcelerator Inc
+license: Apache License, Version 2.0
+copyright: Copyright (c) 2011 Appcelerator Inc
+
+
+# these should not be edited
+name: tipython
+moduleid: com.appcelerator.tipython
+guid: 891abf03-5a06-4610-916d-7cd5c10d31f5
+platform: iphone
+minsdk: 1.6.1
