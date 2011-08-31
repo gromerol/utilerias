@@ -4,6 +4,8 @@
 
 The wold object is your "game board" or sorts, it's where all the Box2D stuff like gravity exists, and its where things like "bodies" and joints exist.
 
+As a note, the world by default has no "walls" so objects will keep falling till they go off the screen (but note these elements will still exist in memory)
+
 ## Methods
 
 ### setGravity
