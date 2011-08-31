@@ -45,5 +45,23 @@
 	return [proxy autorelease];
 }
 
+-(id)REV_JOINT
+{
+    return NUMINT(1);
+}
 
+-(id)STATIC_BODY
+{
+    return @"static";
+}
+
+-(id)DYNAMIC_BODY
+{
+    return @"dynamic";
+}
+
+-(id)KINEMATIC_BODY
+{
+    return @"kinematic";
+}
 @end
