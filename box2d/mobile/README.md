@@ -1,7 +1,7 @@
 Appcelerator Titanium Box2D Module for iOS 
 ==========================================
 
-This is a Box2D module for iOS developed by Jeff Haynie.
+This is a Box2D module for iOS originally developed by Jeff Haynie.
 
 [Box2D](http://www.box2d.org/) is one of the most popular physics engines used for all sorts of 
 cool things from popular games like Angry Birds to engineering simulations.
