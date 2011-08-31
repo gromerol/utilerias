@@ -278,7 +278,7 @@
 	return bp;
 }
 
--(void)removeBody:(id)body
+-(void)destroyBody:(id)body
 {
     ENSURE_SINGLE_ARG(body, TiBox2dBodyProxy);
     [lock lock];
@@ -309,20 +309,19 @@
     
     b2Body *body2 = TiBody2->body;
     
-    //NSString *jointType = [TiUtils stringValue:@"type" properties:props def:@"revolute"];
-    //if ([jointType isEqualToString:@"revolute"])
-    //{
-    //    b2RevoluteJointDef jointDef;
-    //} 
     // Need to add other joint types...
+    int jointType = [TiUtils intValue:@"type" properties:props def: 1];
     
+    //by default
     b2RevoluteJointDef jointDef;
-    
-    TiBox2dRevJointProxy *jp = nil;
-    
-    //NSArray *wCenter = B2VEC2_ARRAY(body1->GetWorldCenter());
-    
-    //ARRAY_B2VEC2([TiUtils id:@"mountPoint" properties:props def:wCenter],center);
+    TiBox2dRevJointProxy *jp;
+    switch (jointType) {
+        case 1:
+            b2RevoluteJointDef jointDef;
+            
+            TiBox2dRevJointProxy *jp = nil;
+            break;
+    }    
     
     b2Vec2 p1([TiUtils floatValue:@"jointPoint" properties:props def:0.0f], 0.0f),p2([TiUtils floatValue:@"basePoint" properties:props def:0.0f], 0.0f);
     
@@ -355,10 +354,15 @@
     jointDef.collideConnected = [TiUtils boolValue:@"collideConnected" properties:props def:true];
     
     // Need to add other joint types...
-    b2RevoluteJoint *joint;
-    joint = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
-    
-    jp = [[TiBox2dRevJointProxy alloc] initWithJoint:joint pageContext:[self executionContext]];
+    switch (jointType) {
+        case 1:
+        default:
+            b2RevoluteJoint *joint;
+            joint = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
+
+            jp = [[TiBox2dRevJointProxy alloc] initWithJoint:joint pageContext:[self executionContext]];
+            break;
+    }
     
     [lock unlock];
     

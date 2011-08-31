@@ -52,16 +52,18 @@
 
 -(id)STATIC_BODY
 {
+
     return @"static";
 }
 
 -(id)DYNAMIC_BODY
 {
-    return @"dynamic";
+ 	return @"dynamic";
 }
 
 -(id)KINEMATIC_BODY
 {
-    return @"kinematic";
+ 	return @"kinematic";
 }
+
 @end

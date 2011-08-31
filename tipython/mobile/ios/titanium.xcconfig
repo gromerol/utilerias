@@ -4,11 +4,7 @@
 // OF YOUR TITANIUM SDK YOU'RE BUILDING FOR
 //
 //
-<<<<<<< HEAD
 TITANIUM_SDK_VERSION = 1.6.1
-=======
-TITANIUM_SDK_VERSION = 1.7.2
->>>>>>> Updated docs, and updated joints, renamed removeBody to destroyBody, added "constants"
 
 
 // 
