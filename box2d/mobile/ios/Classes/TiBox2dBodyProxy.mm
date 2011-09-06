@@ -45,6 +45,11 @@
     return body;
 }
 
+-(id)view
+{
+    return viewproxy;
+}
+
 #define B2VEC2_ARRAY(v) [NSArray arrayWithObjects:NUMDOUBLE(v.x), NUMDOUBLE(v.y),nil];
 #define B2VEC2_ARRAY_WITH_PTM_RATIO(v) [NSArray arrayWithObjects:NUMDOUBLE(v.x*PTM_RATIO), NUMDOUBLE(v.y*PTM_RATIO),nil];
 #define PTM_RATIO 16
