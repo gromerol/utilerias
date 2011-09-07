@@ -35,6 +35,8 @@ The documentation for how these properties work can be found in the Box2D librar
 
 This method returns a [body proxy][]
 
+Note: the body proxy has a property called view that will let you access the views properties from the body so you can view and change the view properties.
+
 ### destroyBody
 
 This method takes one argument, a [body proxy][]
