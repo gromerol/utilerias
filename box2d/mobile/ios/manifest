@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 0.1
+version: 0.9
 description: Box2D physics engine 
 author: Jeff Haynie 
 license: Apache Public License v2 
