@@ -1,266 +1,0 @@
-Tflurry
-v7
-r0
-t320613500.708553
-cCheck dependencies
-cProcessPCH /var/folders/Ph/Ph--QmCAGAezUCgQzr9aqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TiFlurry_Prefix-emfppbhumrjfmbcdwkvzsrfbhnbq/TiFlurry_Prefix.pch.gch TiFlurry_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
-cProcessPCH /var/folders/Ph/Ph--QmCAGAezUCgQzr9aqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TiFlurry_Prefix-fafajewywjstbugxfgqxmxmbwmij/TiFlurry_Prefix.pch.gch TiFlurry_Prefix.pch normal armv7 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv6/TiFlurryModule.o /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv6/TiFlurryModuleAssets.o /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModuleAssets.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv7/TiFlurryModule.o /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv7/TiFlurryModuleAssets.o /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModuleAssets.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk
-c000000004CC7DC9E0000000000000110
-t1288166558
-s272
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/Foundation.framework/Foundation
-c000000004CC10F4700000000003E1F20
-t1287720775
-s4071200
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
-c000000004CC10F1C0000000000001466
-t1287720732
-s5222
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
-c000000004CC11AE60000000000000AA1
-t1287723750
-s2721
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h
-c000000004D6BF35300000000000000EE
-t1298920275
-s238
-i"TiModule.h"
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m
-c000000004D6BC74F000000000000067D
-t1298909007
-s1661
-i"TiFlurryModule.h"
-i"TiBase.h"
-i"TiHost.h"
-i"TiUtils.h"
-i"FlurryAPI.h"
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModuleAssets.h
-c000000004D6BF353000000000000009C
-t1298920275
-s156
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModuleAssets.m
-c000000004D6BF3530000000000000100
-t1298920275
-s256
-i"TiFlurryModuleAssets.h"
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/FlurryLib/FlurryAPI.h
-c000000004D591F680000000000000E4B
-t1297686376
-s3659
-i<UIKit/UIKit.h>
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/FlurryLib/libFlurry.a
-c000000004D6BF353000000000042087C
-t1298920275
-s4327548
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/FlurryLib/libFlurryWithLocation.a
-c000000004D591F68000000000043664C
-t1297686376
-s4417100
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/TiFlurry_Prefix.pch
-c000000004D6BF353000000000000003E
-t1298920275
-s62
-i<Foundation/Foundation.h>
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Debug-iphoneos/libTiFlurry.a
-t2
-s0
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv6/TiFlurry.LinkFileList
-c000000004D6BF4FB000000000000015E
-t1298920699
-s350
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv6/TiFlurryModule.o
-t2
-s0
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv6/TiFlurryModuleAssets.o
-t1298920700
-s6440
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv6/libTiFlurry.a
-t2
-s0
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv7/TiFlurry.LinkFileList
-c000000004D6BF4FB000000000000015E
-t1298920699
-s350
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv7/TiFlurryModule.o
-t2
-s0
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv7/TiFlurryModuleAssets.o
-t1298920700
-s6440
-
-N/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv7/libTiFlurry.a
-t2
-s0
-
-N/var/folders/Ph/Ph--QmCAGAezUCgQzr9aqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TiFlurry_Prefix-emfppbhumrjfmbcdwkvzsrfbhnbq/TiFlurry_Prefix.pch.gch
-t1298920700
-s6736452
-
-N/var/folders/Ph/Ph--QmCAGAezUCgQzr9aqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TiFlurry_Prefix-fafajewywjstbugxfgqxmxmbwmij/TiFlurry_Prefix.pch.gch
-t1298920700
-s7199300
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies320613499#320613499#0(0"0(0#1#0"8613491136#0"0#
-
-CCompileC build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv6/TiFlurryModule.o /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s320613500.586728
-e320613500.708046
-r0
-xCompileC
-xbuild/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv6/TiFlurryModule.o
-x/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-oIn file included from /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:7:
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h:7:21: error: TiModule.h: No such file or directory
-oIn file included from /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:7:
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h:10: error: cannot find interface declaration for 'TiModule', superclass of 'TiFlurryModule'
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:8:19: error: TiBase.h: No such file or directory
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:9:19: error: TiHost.h: No such file or directory
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:10:20: error: TiUtils.h: No such file or directory
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule startup]':
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:21: error: no super class declared in @interface for 'TiFlurryModule'
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule shutdown:]':
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:33: error: no super class declared in @interface for 'TiFlurryModule'
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule initialize:]':
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:40: warning: implicit declaration of function 'ENSURE_SINGLE_ARG'
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:40: error: expected expression before 'NSString'
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:42: warning: implicit declaration of function 'NUMINT'
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:42: warning: passing argument 1 of 'dictionaryWithObject:forKey:' makes pointer from integer without a cast
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:43: error: 'TiUtils' undeclared (first use in this function)
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:43: error: (Each undeclared identifier is reported only once
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:43: error: for each function it appears in.)
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule reportOnClose:]':
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:48: error: expected expression before 'NSObject'
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:49: error: 'TiUtils' undeclared (first use in this function)
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule logEvent:]':
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:69: error: 'TiUtils' undeclared (first use in this function)
-lSLF07#2@119"Compile /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320613500#320613500#0(4011"In file included from /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:7:/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h:7:21: error: TiModule.h: No such file or directoryIn file included from /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:7:/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h:10: error: cannot find interface declaration for 'TiModule', superclass of 'TiFlurryModule'/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:8:19: error: TiBase.h: No such file or directory/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:9:19: error: TiHost.h: No such file or directory/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:10:20: error: TiUtils.h: No such file or directory/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule startup]':/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:21: error: no super class declared in @interface for 'TiFlurryModule'/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule shutdown:]':/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:33: error: no super class declared in @interface for 'TiFlurryModule'/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule initialize:]':/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:40: warning: implicit declaration of function 'ENSURE_SINGLE_ARG'/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:40: error: expected expression before 'NSString'/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:42: warning: implicit declaration of function 'NUMINT'/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:42: warning: passing argument 1 of 'dictionaryWithObject:forKey:' makes pointer from integer without a cast/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:43: error: 'TiUtils' undeclared (first use in this function)/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:43: error: (Each undeclared identifier is reported only once/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:43: error: for each function it appears in.)/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule reportOnClose:]':/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:48: error: expected expression before 'NSObject'/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:49: error: 'TiUtils' undeclared (first use in this function)/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule logEvent:]':/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:69: error: 'TiUtils' undeclared (first use in this function)15(4@37"TiModule.h: No such file or directory320613500#137#163#2(7@133"In file included from /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320613500#18446744073709551615#0#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#7#0#7#0#0"0(13@152"TiModule.h: No such file or directory in /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h320613500#18446744073709551615#0#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h320613075#7#0#7#0#0"0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h320613075#7#0#7#0#28"*: No such file or directory0(4@80"Cannot find interface declaration for 'TiModule', superclass of 'TiFlurryModule'320613500#437#204#2(7@133"In file included from /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320613500#18446744073709551615#0#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#7#0#7#0#0"0(13@195"Cannot find interface declaration for 'TiModule', superclass of 'TiFlurryModule' in /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h320613500#18446744073709551615#0#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h320613075#10#0#10#0#0"0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h320613075#10#0#10#0#60"cannot find interface declaration for '*', superclass of '*'0(4@35"TiBase.h: No such file or directory320613500#641#161#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#8#0#8#0#28"*: No such file or directory0(4@35"TiHost.h: No such file or directory320613500#802#161#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#9#0#9#0#28"*: No such file or directory0(4@36"TiUtils.h: No such file or directory320613500#963#163#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#10#0#10#0#28"*: No such file or directory0(4@58"No super class declared in @interface for 'TiFlurryModule'320613500#1280#182#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#21#0#21#0#0"0(4@58"No super class declared in @interface for 'TiFlurryModule'320613500#1618#182#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#33#0#33#0#0"0(22@52"Implicit declaration of function 'ENSURE_SINGLE_ARG'320613500#1958#178#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#40#0#40#0#36"implicit declaration of function '*'0(4@37"Expected expression before 'NSString'320613500#2136#161#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#40#0#40#0#19"expected * before *0(22@41"Implicit declaration of function 'NUMINT'320613500#2297#167#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#42#0#42#0#36"implicit declaration of function '*'0(22@94"Passing argument 1 of 'dictionaryWithObject:forKey:' makes pointer from integer without a cast320613500#2464#220#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#42#0#42#0#0"0(4@49"'TiUtils' undeclared (first use in this function)320613500#2684#173#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#43#0#43#0#43"'*' undeclared (first use in this function)0(4@37"Expected expression before 'NSObject'320613500#3348#161#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#48#0#48#0#19"expected * before *0(4@49"'TiUtils' undeclared (first use in this function)320613500#3509#173#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#49#0#49#0#43"'*' undeclared (first use in this function)0(4@49"'TiUtils' undeclared (first use in this function)320613500#3838#173#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#69#0#69#0#43"'*' undeclared (first use in this function)0(0#0#111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m8619620128#2432"    cd /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -mfix-and-continue -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-generated-files.hmap -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-own-target-headers.hmap -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-all-target-headers.hmap -iquote /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-project-headers.hmap -F/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Debug-iphoneos -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Debug-iphoneos/include "-I/Library/Application Support/Titanium/mobilesdk/osx/1.4.1/iphone/include" "-I/Library/Application Support/Titanium/mobilesdk/osx/1.4.1/iphone/include/TiCore" -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/DerivedSources/armv6 -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/DerivedSources -include /var/folders/Ph/Ph--QmCAGAezUCgQzr9aqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TiFlurry_Prefix-emfppbhumrjfmbcdwkvzsrfbhnbq/TiFlurry_Prefix.pch -c /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m -o /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv6/TiFlurryModule.o1#
-
-CCompileC build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv6/TiFlurryModuleAssets.o /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModuleAssets.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s320613500.587770
-e320613500.646036
-r1
-xCompileC
-xbuild/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv6/TiFlurryModuleAssets.o
-x/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModuleAssets.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@125"Compile /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModuleAssets.m320613500#320613500#0(0"0(0#0#117"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModuleAssets.m8616978688#2444"    cd /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -mfix-and-continue -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-generated-files.hmap -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-own-target-headers.hmap -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-all-target-headers.hmap -iquote /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-project-headers.hmap -F/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Debug-iphoneos -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Debug-iphoneos/include "-I/Library/Application Support/Titanium/mobilesdk/osx/1.4.1/iphone/include" "-I/Library/Application Support/Titanium/mobilesdk/osx/1.4.1/iphone/include/TiCore" -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/DerivedSources/armv6 -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/DerivedSources -include /var/folders/Ph/Ph--QmCAGAezUCgQzr9aqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TiFlurry_Prefix-emfppbhumrjfmbcdwkvzsrfbhnbq/TiFlurry_Prefix.pch -c /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModuleAssets.m -o /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv6/TiFlurryModuleAssets.o0#
-
-CCompileC build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv7/TiFlurryModule.o /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-s320613500.588755
-e320613500.708510
-r0
-xCompileC
-xbuild/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv7/TiFlurryModule.o
-x/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-oIn file included from /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:7:
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h:7:21: error: TiModule.h: No such file or directory
-oIn file included from /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:7:
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h:10: error: cannot find interface declaration for 'TiModule', superclass of 'TiFlurryModule'
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:8:19: error: TiBase.h: No such file or directory
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:9:19: error: TiHost.h: No such file or directory
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:10:20: error: TiUtils.h: No such file or directory
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule startup]':
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:21: error: no super class declared in @interface for 'TiFlurryModule'
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule shutdown:]':
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:33: error: no super class declared in @interface for 'TiFlurryModule'
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule initialize:]':
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:40: warning: implicit declaration of function 'ENSURE_SINGLE_ARG'
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:40: error: expected expression before 'NSString'
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:42: warning: implicit declaration of function 'NUMINT'
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:42: warning: passing argument 1 of 'dictionaryWithObject:forKey:' makes pointer from integer without a cast
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:43: error: 'TiUtils' undeclared (first use in this function)
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:43: error: (Each undeclared identifier is reported only once
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:43: error: for each function it appears in.)
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule reportOnClose:]':
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:48: error: expected expression before 'NSObject'
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:49: error: 'TiUtils' undeclared (first use in this function)
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule logEvent:]':
-o/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:69: error: 'TiUtils' undeclared (first use in this function)
-lSLF07#2@119"Compile /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320613500#320613500#0(4011"In file included from /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:7:/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h:7:21: error: TiModule.h: No such file or directoryIn file included from /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:7:/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h:10: error: cannot find interface declaration for 'TiModule', superclass of 'TiFlurryModule'/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:8:19: error: TiBase.h: No such file or directory/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:9:19: error: TiHost.h: No such file or directory/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:10:20: error: TiUtils.h: No such file or directory/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule startup]':/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:21: error: no super class declared in @interface for 'TiFlurryModule'/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule shutdown:]':/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:33: error: no super class declared in @interface for 'TiFlurryModule'/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule initialize:]':/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:40: warning: implicit declaration of function 'ENSURE_SINGLE_ARG'/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:40: error: expected expression before 'NSString'/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:42: warning: implicit declaration of function 'NUMINT'/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:42: warning: passing argument 1 of 'dictionaryWithObject:forKey:' makes pointer from integer without a cast/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:43: error: 'TiUtils' undeclared (first use in this function)/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:43: error: (Each undeclared identifier is reported only once/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:43: error: for each function it appears in.)/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule reportOnClose:]':/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:48: error: expected expression before 'NSObject'/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:49: error: 'TiUtils' undeclared (first use in this function)/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m: In function '-[TiFlurryModule logEvent:]':/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m:69: error: 'TiUtils' undeclared (first use in this function)15(4@37"TiModule.h: No such file or directory320613500#137#163#2(7@133"In file included from /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320613500#18446744073709551615#0#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#7#0#7#0#0"0(13@152"TiModule.h: No such file or directory in /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h320613500#18446744073709551615#0#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h320613075#7#0#7#0#0"0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h320613075#7#0#7#0#28"*: No such file or directory0(4@80"Cannot find interface declaration for 'TiModule', superclass of 'TiFlurryModule'320613500#437#204#2(7@133"In file included from /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320613500#18446744073709551615#0#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#7#0#7#0#0"0(13@195"Cannot find interface declaration for 'TiModule', superclass of 'TiFlurryModule' in /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h320613500#18446744073709551615#0#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h320613075#10#0#10#0#0"0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.h320613075#10#0#10#0#60"cannot find interface declaration for '*', superclass of '*'0(4@35"TiBase.h: No such file or directory320613500#641#161#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#8#0#8#0#28"*: No such file or directory0(4@35"TiHost.h: No such file or directory320613500#802#161#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#9#0#9#0#28"*: No such file or directory0(4@36"TiUtils.h: No such file or directory320613500#963#163#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#10#0#10#0#28"*: No such file or directory0(4@58"No super class declared in @interface for 'TiFlurryModule'320613500#1280#182#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#21#0#21#0#0"0(4@58"No super class declared in @interface for 'TiFlurryModule'320613500#1618#182#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#33#0#33#0#0"0(22@52"Implicit declaration of function 'ENSURE_SINGLE_ARG'320613500#1958#178#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#40#0#40#0#36"implicit declaration of function '*'0(4@37"Expected expression before 'NSString'320613500#2136#161#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#40#0#40#0#19"expected * before *0(22@41"Implicit declaration of function 'NUMINT'320613500#2297#167#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#42#0#42#0#36"implicit declaration of function '*'0(22@94"Passing argument 1 of 'dictionaryWithObject:forKey:' makes pointer from integer without a cast320613500#2464#220#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#42#0#42#0#0"0(4@49"'TiUtils' undeclared (first use in this function)320613500#2684#173#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#43#0#43#0#43"'*' undeclared (first use in this function)0(4@37"Expected expression before 'NSObject'320613500#3348#161#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#48#0#48#0#19"expected * before *0(4@49"'TiUtils' undeclared (first use in this function)320613500#3509#173#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#49#0#49#0#43"'*' undeclared (first use in this function)0(4@49"'TiUtils' undeclared (first use in this function)320613500#3838#173#0(6@111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m320601807#69#0#69#0#43"'*' undeclared (first use in this function)0(0#0#111"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m8616615008#2432"    cd /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -mfix-and-continue -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-generated-files.hmap -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-own-target-headers.hmap -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-all-target-headers.hmap -iquote /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-project-headers.hmap -F/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Debug-iphoneos -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Debug-iphoneos/include "-I/Library/Application Support/Titanium/mobilesdk/osx/1.4.1/iphone/include" "-I/Library/Application Support/Titanium/mobilesdk/osx/1.4.1/iphone/include/TiCore" -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/DerivedSources/armv7 -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/DerivedSources -include /var/folders/Ph/Ph--QmCAGAezUCgQzr9aqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TiFlurry_Prefix-fafajewywjstbugxfgqxmxmbwmij/TiFlurry_Prefix.pch -c /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModule.m -o /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv7/TiFlurryModule.o1#
-
-CCompileC build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv7/TiFlurryModuleAssets.o /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModuleAssets.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-s320613500.590036
-e320613500.656720
-r1
-xCompileC
-xbuild/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv7/TiFlurryModuleAssets.o
-x/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModuleAssets.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@125"Compile /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModuleAssets.m320613500#320613500#0(0"0(0#0#117"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModuleAssets.m8616417952#2444"    cd /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -mfix-and-continue -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-generated-files.hmap -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-own-target-headers.hmap -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-all-target-headers.hmap -iquote /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-project-headers.hmap -F/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Debug-iphoneos -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Debug-iphoneos/include "-I/Library/Application Support/Titanium/mobilesdk/osx/1.4.1/iphone/include" "-I/Library/Application Support/Titanium/mobilesdk/osx/1.4.1/iphone/include/TiCore" -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/DerivedSources/armv7 -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/DerivedSources -include /var/folders/Ph/Ph--QmCAGAezUCgQzr9aqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TiFlurry_Prefix-fafajewywjstbugxfgqxmxmbwmij/TiFlurry_Prefix.pch -c /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/Classes/TiFlurryModuleAssets.m -o /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv7/TiFlurryModuleAssets.o0#
-
-CCreateUniversalBinary /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Debug-iphoneos/libTiFlurry.a normal "armv6 armv7"
-r0
-
-CLibtool /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv6/libTiFlurry.a normal armv6
-r0
-
-CLibtool /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/Objects-normal/armv7/libTiFlurry.a normal armv7
-r0
-
-CProcessPCH /var/folders/Ph/Ph--QmCAGAezUCgQzr9aqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TiFlurry_Prefix-emfppbhumrjfmbcdwkvzsrfbhnbq/TiFlurry_Prefix.pch.gch TiFlurry_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
-s320613499.971382
-e320613500.530358
-r1
-xProcessPCH
-x/var/folders/Ph/Ph--QmCAGAezUCgQzr9aqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TiFlurry_Prefix-emfppbhumrjfmbcdwkvzsrfbhnbq/TiFlurry_Prefix.pch.gch
-xTiFlurry_Prefix.pch
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@30"Precompile TiFlurry_Prefix.pch320613499#320613500#0(0"0(0#0#106"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/TiFlurry_Prefix.pch8615634240#2257"    cd /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -mfix-and-continue -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-generated-files.hmap -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-own-target-headers.hmap -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-all-target-headers.hmap -iquote /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-project-headers.hmap -F/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Debug-iphoneos -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Debug-iphoneos/include "-I/Library/Application Support/Titanium/mobilesdk/osx/1.4.1/iphone/include" "-I/Library/Application Support/Titanium/mobilesdk/osx/1.4.1/iphone/include/TiCore" -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/DerivedSources/armv6 -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/DerivedSources -c /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/TiFlurry_Prefix.pch -o /var/folders/Ph/Ph--QmCAGAezUCgQzr9aqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TiFlurry_Prefix-emfppbhumrjfmbcdwkvzsrfbhnbq/TiFlurry_Prefix.pch.gch0#
-
-CProcessPCH /var/folders/Ph/Ph--QmCAGAezUCgQzr9aqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TiFlurry_Prefix-fafajewywjstbugxfgqxmxmbwmij/TiFlurry_Prefix.pch.gch TiFlurry_Prefix.pch normal armv7 objective-c com.apple.compilers.gcc.4_2
-s320613499.973063
-e320613500.586627
-r1
-xProcessPCH
-x/var/folders/Ph/Ph--QmCAGAezUCgQzr9aqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TiFlurry_Prefix-fafajewywjstbugxfgqxmxmbwmij/TiFlurry_Prefix.pch.gch
-xTiFlurry_Prefix.pch
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@30"Precompile TiFlurry_Prefix.pch320613499#320613500#0(0"0(0#0#106"/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/TiFlurry_Prefix.pch8613602720#2257"    cd /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -mfix-and-continue -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-generated-files.hmap -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-own-target-headers.hmap -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-all-target-headers.hmap -iquote /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/TiFlurry-project-headers.hmap -F/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Debug-iphoneos -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Debug-iphoneos/include "-I/Library/Application Support/Titanium/mobilesdk/osx/1.4.1/iphone/include" "-I/Library/Application Support/Titanium/mobilesdk/osx/1.4.1/iphone/include/TiCore" -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/DerivedSources/armv7 -I/Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/build/Flurry.build/Debug-iphoneos/flurry.build/DerivedSources -c /Users/clinttredway/Appcelerator/titanium_mobile/titanium_mobile_modules/iphone/flurry/TiFlurry_Prefix.pch -o /var/folders/Ph/Ph--QmCAGAezUCgQzr9aqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TiFlurry_Prefix-fafajewywjstbugxfgqxmxmbwmij/TiFlurry_Prefix.pch.gch0#
-
