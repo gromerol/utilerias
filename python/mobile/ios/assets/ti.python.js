@@ -502,7 +502,7 @@ Sk.builtins.helpers = (function() {
     };
 }());
 
-Ti.Python = Sk;
+exports = Sk;
 
 goog.exportSymbol("Sk.builtins",Sk.builtins);
 }());

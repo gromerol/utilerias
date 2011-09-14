@@ -8,14 +8,15 @@
 var window = Ti.UI.createWindow({
 	backgroundColor:'white'
 });
-var label = Ti.UI.createLabel();
+var label = Ti.UI.createLabel({
+    text:'test'
+});
 window.add(label);
 window.open();
 
 // TODO: write your module tests here
-var tiphp = require('ti.php');
-Ti.API.info("module is => " + tiphp);
+var tipy = require('ti.python');
+Ti.API.info("module is => " + tipy);
 
-var slashed = tiphp.addslashes("mark's");
-
-label.text = slashed;
+var minValue = tipy.builtins.min(677, 45, 99, 12, 200);
+label.text = minValue;

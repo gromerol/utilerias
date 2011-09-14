@@ -4,25 +4,25 @@
  * Appcelerator Titanium is Copyright (c) 2009-2010 by Appcelerator, Inc.
  * and licensed under the Apache Public License (version 2)
  */
-#import "ComAppceleratorTipythonModule.h"
+#import "TiPythonModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
 #import "TiUtils.h"
 
-@implementation ComAppceleratorTipythonModule
+@implementation TiPythonModule
 
 #pragma mark Internal
 
 // this is generated for your module, please do not change it
 -(id)moduleGUID
 {
-	return @"891abf03-5a06-4610-916d-7cd5c10d31f5";
+	return @"a2acaf03-9353-4cb9-9a10-cc0bcbbbe595";
 }
 
 // this is generated for your module, please do not change it
 -(NSString*)moduleId
 {
-	return @"com.appcelerator.tipython";
+	return @"ti.python";
 }
 
 #pragma mark Lifecycle

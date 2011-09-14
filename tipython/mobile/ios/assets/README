@@ -1,8 +1,0 @@
-Place your assets like PNG files in this directory and they will be packaged with your module.
-
-If you create a file named com.appcelerator.tipython.js in this directory, it will be 
-compiled and used as your module.  This allows you to run pure Javascript
-modules that are pre-compiled.
-
-com.appcelerator.tipython.js is a renamed version of the /dist/skulpt.js file
-from skulpt.org with a few modifications to enabled usage in Titanium.

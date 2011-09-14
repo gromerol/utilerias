@@ -6,7 +6,7 @@
  */
 #import "TiModule.h"
 
-@interface ComAppceleratorTipythonModule : TiModule 
+@interface TiPythonModule : TiModule 
 {
 }
 
