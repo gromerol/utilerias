@@ -12,6 +12,6 @@ copyright: Copyright (c) 2011 by Jeff Haynie
 # these should not be edited
 name: box2d
 moduleid: ti.box2d
-guid: 906b17ce-2c91-471a-842c-3d6fba6d7d09
+guid: A391B0DB-94F5-4820-9972-F7D7843545A6
 platform: iphone
 minsdk: 1.7.0
