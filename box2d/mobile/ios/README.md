@@ -59,7 +59,7 @@ Here is an outline of what needs to be done
 
 * World - Sprites need to be added, and destroyJoint method needs to be added.
 
-* Bodies - Distance, and time of impact methods. Fixed rotation property. Dampening property. Bullets property. 
+* Bodies - Distance, and time of impact methods. Fixed rotation property. Dampening property. Bullets property, Sensors property. 
 
 * Polygons - creation of polygons should be done by passing an array of points as args for the shape property. 
 
