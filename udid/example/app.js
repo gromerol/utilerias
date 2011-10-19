@@ -16,4 +16,4 @@ window.open();
 var udid = require('ti.udid');
 Ti.API.info("module is => " + udid);
 
-label.text = udid.udid;
+label.text = udid.oldUDID;
