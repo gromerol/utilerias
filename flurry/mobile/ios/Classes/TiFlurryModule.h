@@ -5,8 +5,13 @@
  * and licensed under the Apache Public License (version 2)
  */
 #import "TiModule.h"
+#import "TiBase.h"
+#import "TiHost.h"
+#import "TiUtils.h"
+#import "TiApp.h"
+#import "FlurryAnalytics.h"
 
-@interface TiFlurryModule : TiModule 
+@interface TiFlurryModule : TiModule
 {
 }
 

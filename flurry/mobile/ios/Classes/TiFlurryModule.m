@@ -5,10 +5,6 @@
  * and licensed under the Apache Public License (version 2)
  */
 #import "TiFlurryModule.h"
-#import "TiBase.h"
-#import "TiHost.h"
-#import "TiUtils.h"
-#import "FlurryAPI.h"
 
 @implementation TiFlurryModule
 
@@ -16,58 +12,164 @@
 
 -(void)startup
 {
-	// this method is called when the module is first loaded
-	// you *must* call the superclass
 	[super startup];
-	
-	NSLog(@"[INFO] Flurry Analytics Module loaded");
 }
 
 -(void)shutdown:(id)sender
 {
-	// this method is called when the module is being unloaded
-	// typically this is during shutdown. make sure you don't do too
-	// much processing here or the app will be quit forceably
-	
-	// you *must* call the superclass
 	[super shutdown:sender];
 }
 
-#pragma Public APIs
+#pragma mark -
+#pragma mark Public APIs
+#pragma mark -
+#pragma mark Public Lifecycle
 
--(void)initialize:(id)args
+-(void)initialize:(id)apiKey
 {
-	ENSURE_SINGLE_ARG(args,NSString);
-	[FlurryAPI startSession:args];
-	NSDictionary *dict = [NSDictionary dictionaryWithObject:NUMINT([FlurryAPI version]) forKey:@"version"];
-	[TiUtils queueAnalytics:@"app.feature" name:@"ti.module.flurry" data:dict];
+	ENSURE_SINGLE_ARG(apiKey, NSString);
+	[FlurryAnalytics startSession:apiKey];
 }
 
+# pragma mark Public Properties
+
+-(void)setUserID:(id)value
+{
+    [FlurryAnalytics setUserID:value];
+}
+-(void)setUserId:(id)value
+{
+    [self setUserID:value];
+}
+
+-(void)setAge:(id)value
+{
+    [FlurryAnalytics setAge:[TiUtils intValue:value]];
+}
+
+-(void)setGender:(id)value
+{
+    [FlurryAnalytics setGender:value];
+}
+
+-(void)setDebugLogEnabled:(id)value
+{
+	[FlurryAnalytics setDebugLogEnabled:[TiUtils boolValue:value]];
+}
+
+-(void)setEventLoggingEnabled:(id)value
+{
+	[FlurryAnalytics setEventLoggingEnabled:[TiUtils boolValue:value]];
+}
+
+-(void)setReportOnClose:(id)value
+{
+	[FlurryAnalytics setSessionReportsOnCloseEnabled:[TiUtils boolValue:value]];
+}
 -(void)reportOnClose:(id)value
 {
-	ENSURE_SINGLE_ARG(value,NSObject);
-	BOOL yn = [TiUtils boolValue:value];
-	[FlurryAPI setSessionReportsOnCloseEnabled:yn];
+    ENSURE_SINGLE_ARG(value, NSObject);
+	[self setReportOnClose:value];
+}
+
+-(void)setSessionReportsOnPauseEnabled:(id)value
+{
+	[FlurryAnalytics setSessionReportsOnPauseEnabled:[TiUtils boolValue:value]];
+}
+-(void)sessionReportsOnPauseEnabled:(id)value
+{
+    ENSURE_SINGLE_ARG(value, NSObject);
+	[self setSessionReportsOnPauseEnabled:value];
+}
+
+-(void)setSecureTransportEnabled:(id)value
+{
+    [FlurryAnalytics setSecureTransportEnabled:[TiUtils boolValue:value]];
+}
+-(void)secureTransportEnabled:(id)value
+{
+    ENSURE_SINGLE_ARG(value, NSObject);
+	[self setSecureTransportEnabled:value];
+}
+
+# pragma mark Public Methods
+
+-(void)trackLocation:(id)args
+{
+    ENSURE_SINGLE_ARG(args, NSDictionary);
+    [FlurryAnalytics setLatitude:[TiUtils doubleValue:[args valueForKey:@"latitude"]]
+                       longitude:[TiUtils doubleValue:[args valueForKey:@"longitude"]]
+              horizontalAccuracy:[TiUtils floatValue:[args valueForKey:@"horizontalAccuracy"]]
+                verticalAccuracy:[TiUtils floatValue:[args valueForKey:@"verticalAccuracy"]]];
 }
 
 -(void)logEvent:(id)args
 {
+    ENSURE_UI_THREAD(logEvent, args);
 	NSString *event = [args objectAtIndex:0];
 	NSDictionary *props = nil;
 	if ([args count] > 1)
 	{
 		props = [args objectAtIndex:1];
 	}
-	if (props==nil)
+	if (props == nil)
 	{
-		[FlurryAPI logEvent:event];
+		[FlurryAnalytics logEvent:event];
 	}
 	else 
 	{
-		[FlurryAPI logEvent:event withParameters:props];
+		[FlurryAnalytics logEvent:event withParameters:props];
 	}
-	[TiUtils queueAnalytics:@"app.user" name:event data:props];
 }
 
+-(void)logTimedEvent:(id)args
+{
+    ENSURE_UI_THREAD(logTimedEvent, args);
+	NSString *event = [args objectAtIndex:0];
+	NSDictionary *props = nil;
+	if ([args count] > 1)
+	{
+		props = [args objectAtIndex:1];
+	}
+	if (props == nil)
+	{
+		[FlurryAnalytics logEvent:event timed:YES];
+	}
+	else 
+	{
+		[FlurryAnalytics logEvent:event withParameters:props timed:YES];
+	}
+}
+
+-(void)endTimedEvent:(id)args
+{
+    ENSURE_UI_THREAD(endTimedEvent, args);
+	NSString *event = [args objectAtIndex:0];
+	NSDictionary *props = nil;
+	if ([args count] > 1)
+	{
+		props = [args objectAtIndex:1];
+	}
+	if (props == nil)
+	{
+		[FlurryAnalytics endTimedEvent:event withParameters:nil];
+	}
+	else 
+	{
+		[FlurryAnalytics endTimedEvent:event withParameters:props];
+	}
+}
+
+-(void)logAllPageViews:(id)args
+{
+    ENSURE_UI_THREAD(logAllPageViews, args);
+    [FlurryAnalytics logAllPageViews:[[TiApp app] controller]];
+}
+
+-(void)logPageView:(id)args
+{
+    ENSURE_UI_THREAD(logPageView, args);
+    [FlurryAnalytics logPageView];
+}
 
 @end
