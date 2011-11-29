@@ -8,9 +8,9 @@ Implements php.js for Titanium Mobile
 
 To access this module from JavaScript, you would do the following:
 
-	var php = require("ti.php");
+	var PHP = require('ti.php');
 
-The php variable is a reference to the Module object.	
+The PHP variable is a reference to the Module object.	
 
 ## Reference
 Documentation of available functions as well as details of these functions can be found here:

@@ -2,20 +2,20 @@ var window = Ti.UI.createWindow({
     backgroundColor: 'white'
 });
 
-Titanium.Flurry = Ti.Flurry = require('ti.flurry');
+var Flurry = require('ti.flurry');
 
-Ti.Flurry.debugLogEnabled = true;
-Ti.Flurry.eventLoggingEnabled = true;
+Flurry.debugLogEnabled = true;
+Flurry.eventLoggingEnabled = true;
 
-Ti.Flurry.initialize('ND1292FY4ULRQF5PU4ZQ' /*<-- PUT YOUR OWN API KEY HERE!*/);
+Flurry.initialize('ND1292FY4ULRQF5PU4ZQ' /*<-- PUT YOUR OWN API KEY HERE!*/);
 
-Ti.Flurry.reportOnClose = true;
-Ti.Flurry.sessionReportsOnPauseEnabled = true;
-Ti.Flurry.secureTransportEnabled = false;
+Flurry.reportOnClose = true;
+Flurry.sessionReportsOnPauseEnabled = true;
+Flurry.secureTransportEnabled = false;
 
-Ti.Flurry.age = 24;
-Ti.Flurry.userID = 'John Adams';
-Ti.Flurry.gender = 'm';
+Flurry.age = 24;
+Flurry.userID = 'John Adams';
+Flurry.gender = 'm';
 
 /**
  * Log a very simple click event.
@@ -26,7 +26,7 @@ var logEvent = Ti.UI.createButton({
 });
 var logEventCount = 0;
 logEvent.addEventListener('click', function() {
-    Ti.Flurry.logEvent('click', { clickCount: ++logEventCount });
+    Flurry.logEvent('click', { clickCount: ++logEventCount });
 });
 window.add(logEvent);
 
@@ -38,7 +38,7 @@ var startTimedEvent = Ti.UI.createButton({
     top: 120, width: 200, height: 40
 });
 startTimedEvent.addEventListener('click', function() {
-    Ti.Flurry.logTimedEvent('timedClick');
+    Flurry.logTimedEvent('timedClick');
 });
 window.add(startTimedEvent);
 var endTimedEvent = Ti.UI.createButton({
@@ -46,7 +46,7 @@ var endTimedEvent = Ti.UI.createButton({
     top: 180, width: 200, height: 40
 });
 endTimedEvent.addEventListener('click', function() {
-    Ti.Flurry.endTimedEvent('timedClick');
+    Flurry.endTimedEvent('timedClick');
 });
 window.add(endTimedEvent);
 

@@ -17,10 +17,10 @@ window.open();
 
 
 // load the module
-var box2d = require("ti.box2d");
+var Box2D = require('ti.box2d');
 
 // create the world, using view as the surface
-var world = box2d.createWorld(view);
+var world = Box2D.createWorld(view);
 
 // create a block 
 var redBlock = Ti.UI.createView({

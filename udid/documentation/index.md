@@ -1,39 +1,24 @@
-# udid Module
+# UDID Module
 
 ## Description
 
-TODO: Enter your module description here
+Gives you access to the old UDID.
 
-## Accessing the udid Module
+## Accessing the UDID Module
 
 To access this module from JavaScript, you would do the following:
 
-	var udid = require("ti.udid");
+	var UDID = require('ti.udid');
 
-The udid variable is a reference to the Module object.	
+The UDID variable is a reference to the Module object.	
 
-## Reference
+## Methods
 
-TODO: If your module has an API, you should document
-the reference here.
-
-### ___PROJECTNAMEASIDENTIFIER__.function
-
-TODO: This is an example of a module function.
-
-### ___PROJECTNAMEASIDENTIFIER__.property
-
-TODO: This is an example of a module property.
-
-## Usage
-
-TODO: Enter your usage example here
+### string oldUDID()
+Returns the old UDID for this device.
 
 ## Author
+Matt Apperson
 
-TODO: Enter your author name, email and other contact
-details you want to share here. 
-
-## License
-
-TODO: Enter your license/legal information here.
+## Feedback and Support
+Please direct all questions, feedback, and concerns to [info@appcelerator.com](mailto:info@appcelerator.com?subject=iOS%20UDID%20Module).

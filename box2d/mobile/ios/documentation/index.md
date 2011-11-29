@@ -12,9 +12,9 @@ This module is to be considered a beta, but as it is open source, we encourage a
 
 To access this module from JavaScript, you would do the following:
 
-  var box2d = require("ti.box2d");
+  var Box2D = require('ti.box2d');
 
-The box2d variable is a reference to the Module object.  
+The Box2D variable is a reference to the Module object.  
 
 ## Methods
 
