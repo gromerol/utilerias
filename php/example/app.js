@@ -1,21 +1,11 @@
-// This is a test harness for your module
-// You should do something interesting in this harness 
-// to test out the module and to provide instructions 
-// to users on how to use it by example.
+var TiPHP = require('ti.php');
 
-
-// open a single window
-var window = Ti.UI.createWindow({
-	backgroundColor:'white'
+var win = Ti.UI.createWindow({
+    backgroundColor: 'white'
 });
-var label = Ti.UI.createLabel();
-window.add(label);
-window.open();
 
-// TODO: write your module tests here
-var tiphp = require('ti.php');
-Ti.API.info("module is => " + tiphp);
+win.add(Ti.UI.createLabel({
+    text: TiPHP.addslashes("mark's")
+}));
 
-var slashed = tiphp.addslashes("mark's");
-
-label.text = slashed;
+win.open();

@@ -10,7 +10,7 @@ In addition to gaining access to many of the core language functions, we can act
 
 To access this module from JavaScript, you would do the following:
 
-	var python = require("ti.python");
+	var Python = require('ti.python');
 
 The python variable is a reference to the Module object.	
 

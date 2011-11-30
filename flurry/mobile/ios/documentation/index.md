@@ -6,7 +6,7 @@ Module for using the Flurry event tracking service.
 ## Accessing the Flurry Module
 To access this module from JavaScript, you would do the following:
 
-	Titanium.Flurry = Ti.Flurry = require("ti.flurry");
+	var Flurry = require("ti.flurry");
 
 ## Properties
 
