@@ -2,7 +2,8 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 1.0
+version: 2.0
+apiversion: 2
 description: Provides access to the UDP protocol for sending packets across a network.
 author: Dawson Toth
 license: Appcelerator Commercial License

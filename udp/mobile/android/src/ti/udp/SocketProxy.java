@@ -13,6 +13,7 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
+import java.util.HashMap;
 
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollProxy;
@@ -91,11 +92,11 @@ public class SocketProxy extends KrollProxy {
 	}
 
 	private void fireStarted() {
-		fireEvent("started", new KrollDict());
+		fireEvent("started", new HashMap<String, Object>());
 	}
 
 	private void fireError(Object obj) {
-		KrollDict evt = new KrollDict();
+		HashMap<String, Object> evt = new HashMap<String, Object>();
 		evt.put("error", obj);
 		fireEvent("error", evt);
 	}
@@ -112,14 +113,18 @@ public class SocketProxy extends KrollProxy {
 						byte[] buf = new byte[256];
 						DatagramPacket packet = new DatagramPacket(buf, buf.length);
 						_socket.receive(packet);
-						KrollDict evt = new KrollDict();
-						byte[] response = new byte[packet.getLength()];
+
 						byte[] rawResponse = packet.getData();
-						for (int i = 0; i < response.length; i++) {
-							response[i] = rawResponse[i];
+						byte[] byteResponse = new byte[packet.getLength()];
+						String[] arrayResponse = new String[byteResponse.length];
+						for (int i = 0; i < byteResponse.length; i++) {
+							byteResponse[i] = rawResponse[i];
+							arrayResponse[i] = "" + rawResponse[i]; // MOD-333: V8 mashes our bytes to floats if we create an int array; so pass back
+																	// a string array instead and let JavaScript's type coercion work its magic.
 						}
-						evt.put("bytesData", response);
-						evt.put("stringData", new String(response));
+						HashMap<String, Object> evt = new HashMap<String, Object>();
+						evt.put("bytesData", arrayResponse);
+						evt.put("stringData", new String(byteResponse));
 						evt.put("address", packet.getAddress() + ":" + packet.getPort());
 						fireEvent("data", evt);
 					} catch (IOException e) {
@@ -146,7 +151,8 @@ public class SocketProxy extends KrollProxy {
 	// Start Public API
 
 	@Kroll.method
-	public void start(KrollDict args) {
+	public void start(HashMap hm) {
+		KrollDict args = new KrollDict(hm);
 		try {
 			if (_socket != null) {
 				fireError("Socket already started! Explicitly call stop() before attempting to start it again!");
@@ -168,7 +174,8 @@ public class SocketProxy extends KrollProxy {
 	}
 
 	@Kroll.method
-	public void sendString(KrollDict args) {
+	public void sendString(HashMap hm) {
+		KrollDict args = new KrollDict(hm);
 		try {
 			if (_socket == null) {
 				fireError("Cannot send data before the socket is started as a client or server!");
@@ -188,7 +195,8 @@ public class SocketProxy extends KrollProxy {
 	}
 
 	@Kroll.method
-	public void sendBytes(KrollDict args) {
+	public void sendBytes(HashMap hm) {
+		KrollDict args = new KrollDict(hm);
 		try {
 			if (_socket == null) {
 				fireError("Cannot send data before the socket is started as a client or server!");

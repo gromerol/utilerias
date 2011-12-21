@@ -9,13 +9,11 @@
 package ti.moddevguide;
 
 import java.io.IOException;
-import org.appcelerator.kroll.KrollInvocation;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 
 import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.TiBlob;
-import org.appcelerator.titanium.TiContext;
 import org.appcelerator.titanium.io.TiBaseFile;
 import org.appcelerator.titanium.io.TiFileFactory;
 import org.appcelerator.titanium.util.Log;
@@ -36,6 +34,8 @@ public class ModdevguideModule extends KrollModule
 	// Constants can be made available to the JavaScript using the following notations
 	@Kroll.constant public static final int DEMO_INTEGER = 50;
 	@Kroll.constant public static final String DEMO_STRING = "Hello World";
+	
+	// [TIMOB-6819] WARNING: ON V8, Boolean constants don't appear to be working yet!
 	@Kroll.constant public static final Boolean DEMO_BOOLEAN = true;
 	
 	// Module initialization
@@ -57,9 +57,9 @@ public class ModdevguideModule extends KrollModule
 		Log.d(LCAT, "[MODULE LIFECYCLE EVENT] onAppCreate notification");
 	}
 	
-	public ModdevguideModule(TiContext tiContext) 
+	public ModdevguideModule() 
 	{
-		super(tiContext);
+		super();
 		
 		Log.d(LCAT, "[MODULE LIFECYCLE EVENT] constructor");
 		
@@ -153,7 +153,7 @@ public class ModdevguideModule extends KrollModule
 		// path with the proxy context. This locates a resource relative to the 
 		// application resources folder
 		
-		String result = context.resolveUrl(null, assetName);
+		String result = resolveUrl(null, assetName);
 		
 		return result;
 	}
@@ -163,18 +163,17 @@ public class ModdevguideModule extends KrollModule
 	// The methods are exposed to javascript because of the @Kroll.method annotation
 
 	@Kroll.method
-	public TiBlob loadImageFromModule(KrollInvocation invocation, String imageName)
+	public TiBlob loadImageFromModule(String imageName)
 	{
 		Log.d(LCAT, "[ASSETSDEMO] loadImageFromModule " + imageName);
 		
 		TiBlob result = null;
-		TiContext context = invocation.getTiContext();
 		
 		int bitmapID = getIdOfModuleAsset(imageName, "drawable.");
-		Bitmap bitmap = TiUIHelper.getResourceBitmap(context, bitmapID);
+		Bitmap bitmap = TiUIHelper.getResourceBitmap(bitmapID);
 		
 		// The bitmap must be converted to a TiBlob before returning
-		result = TiBlob.blobFromImage(context, bitmap);
+		result = TiBlob.blobFromImage(bitmap);
 		
 		Log.d(LCAT, "[ASSETSDEMO] " + result);
 
@@ -182,20 +181,19 @@ public class ModdevguideModule extends KrollModule
 	}
 	
 	@Kroll.method
-	public TiBlob loadImageFromApplication(KrollInvocation invocation, String imageName)
+	public TiBlob loadImageFromApplication(String imageName)
 	{
 		Log.d(LCAT, "[ASSETSDEMO] loadImageFromApplication " + imageName);
 		
 		TiBlob result = null;
-		TiContext context = invocation.getTiContext();
 		try {
 			// Load the image from the application assets
 			String url = getPathToApplicationAsset(imageName);
-			TiBaseFile file = TiFileFactory.createTitaniumFile(context, new String[] { url }, false);
+			TiBaseFile file = TiFileFactory.createTitaniumFile(new String[] { url }, false);
 			Bitmap bitmap = TiUIHelper.createBitmap(file.getInputStream());
 			
 			// The bitmap must be converted to a TiBlob before returning
-			result = TiBlob.blobFromImage(context, bitmap);
+			result = TiBlob.blobFromImage(bitmap);
 		} catch (IOException e) {
 			Log.e(LCAT,"[ASSETSDEMO] EXCEPTION - IO");
 		}

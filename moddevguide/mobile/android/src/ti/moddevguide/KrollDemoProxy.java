@@ -8,22 +8,21 @@
 
 package ti.moddevguide;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.appcelerator.kroll.KrollDict;
-import org.appcelerator.kroll.KrollInvocation;
+import org.appcelerator.kroll.KrollFunction;
 import org.appcelerator.kroll.KrollPropertyChange;
 import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.KrollProxyListener;
 import org.appcelerator.kroll.annotations.Kroll;
-import org.appcelerator.titanium.TiContext;
-import org.appcelerator.titanium.kroll.KrollCallback;
 import org.appcelerator.titanium.util.Log;
 import org.appcelerator.titanium.util.TiConvert;
 
 // The proxy is declared with the @Kroll.proxy annotation
 
-@Kroll.proxy(creatableInModule = ModdevguideModule.class)
+@Kroll.proxy(creatableInModule = ModdevguideModule.class, propertyAccessors = { "title", "testValue", "arg1", "arg2", "value1", "value2" ,"value3", "value4", "value5" })
 public class KrollDemoProxy extends LifeCycleProxy 
 	implements KrollProxyListener 
 {
@@ -31,18 +30,15 @@ public class KrollDemoProxy extends LifeCycleProxy
 	private static final String LCAT = "ModdevguideModule";
 	
 	// The JavaScript callbacks (KrollCallback objects)
-	private KrollCallback successCallback = null;
-	private KrollCallback cancelCallback = null;
-	private KrollCallback requestDataCallback = null;
+	private KrollFunction successCallback = null;
+	private KrollFunction cancelCallback = null;
+	private KrollFunction requestDataCallback = null;
 	
-	public KrollDemoProxy(TiContext tiContext) 
+	public KrollDemoProxy() 
 	{
-		super(tiContext);
+		super();
 
-		// Registering for Event Listeners is not automatically done for KrollProxy subclasses.
-		// Register for the event change notifications if interested in receiving the 
-		// listenerAdded and listenerRemoved notifications.
-		eventManager.addOnEventChangeListener(this);
+		// Registering for Event Listeners is automatically done for KrollProxy subclasses.
 	}
 
 	// Helper Methods
@@ -50,24 +46,24 @@ public class KrollDemoProxy extends LifeCycleProxy
 	private void sendSuccessEvent(String message, String title)
 	{
 		if (successCallback != null) {
-			KrollDict event = new KrollDict();
+			HashMap<String, String> event = new HashMap<String, String>();
 			event.put("message", message);
 			event.put("title", title);
 			
 			// Fire an event directly to the specified listener (callback)
-			fireSingleEvent("success", successCallback, event, true);
+			successCallback.call(getKrollObject(), event);
 		}
 	}
 	
 	private void sendCancelEvent(String message, String title)
 	{
 		if (cancelCallback != null) {
-			KrollDict event = new KrollDict();
+			HashMap<String, String> event = new HashMap<String, String>();
 			event.put("message", message);
 			event.put("title", title);
 			
 			// Fire an event directly to the specified listener (callback)
-			fireSingleEvent("cancel", cancelCallback, event, true);
+			cancelCallback.call(getKrollObject(), event);
 		}
 	}
 
@@ -76,7 +72,7 @@ public class KrollDemoProxy extends LifeCycleProxy
 	// The methods are exposed to javascript because of the @Kroll.method annotation
 	
 	@Kroll.method
-	public void registerCallbacks(KrollInvocation invocation, KrollDict args)
+	public void registerCallbacks(HashMap args)
 	{
 		Object callback;
 		
@@ -85,20 +81,20 @@ public class KrollDemoProxy extends LifeCycleProxy
 		// Save the callback functions, verifying that they are of the correct type
 		if (args.containsKey("success")) {
 			callback = args.get("success");
-			if (callback instanceof KrollCallback) {
-				successCallback = (KrollCallback)callback;
+			if (callback instanceof KrollFunction) {
+				successCallback = (KrollFunction)callback;
 			}
 		}
 		if (args.containsKey("cancel")) {
 			callback = args.get("cancel");
-			if (callback instanceof KrollCallback) {
-				cancelCallback = (KrollCallback)callback;
+			if (callback instanceof KrollFunction) {
+				cancelCallback = (KrollFunction)callback;
 			}
 		}	
 		if (args.containsKey("requestData")) {
 			callback = args.get("requestData");
-			if (callback instanceof KrollCallback) {
-				requestDataCallback = (KrollCallback)callback;
+			if (callback instanceof KrollFunction) {
+				requestDataCallback = (KrollFunction)callback;
 			}
 		}
 		
@@ -106,19 +102,20 @@ public class KrollDemoProxy extends LifeCycleProxy
 	}
 	
 	@Kroll.method
-	public void requestDataWithCallback(KrollInvocation invocation)
+	public void requestDataWithCallback()
 	{
-		Log.d(LCAT,"[KROLLDEMO] requestDataWithCallback called");
+		Log.w(LCAT,"[KROLLDEMO] requestDataWithCallback called");
 		
 		// The 'callSync' method of the KrollCallback object can be used to directly 
 		// call the associated JavaScript function and get a return value.
-		Object result = requestDataCallback.callSync(invocation, null);
+		Log.e(LCAT,"[KROLLDEMO] requestDataWithCallback will not work with 1.8.0.1 until 1.8.1 is released! See TIMOB-6789.");
+		//Object result = requestDataCallback.callSync(invocation, null);
 		
-		Log.d(LCAT,"[KROLLDEMO] requestData callback returned " + result);
+		//Log.d(LCAT,"[KROLLDEMO] requestData callback returned " + result);
 	}
 	
-	@Kroll.method(runOnUiThread=true)
-	public void signalCallbackWithSuccess(KrollInvocation invocation, Boolean success)
+	@Kroll.method
+	public void signalCallbackWithSuccess(Boolean success)
 	{
 		Log.d(LCAT,"[KROLLDEMO] signalCallbackWithSuccess called");
 		
@@ -137,8 +134,8 @@ public class KrollDemoProxy extends LifeCycleProxy
 		Log.d(LCAT,"[KROLLDEMO] Event fired");
 	}
 	
-	@Kroll.method(runOnUiThread=true)
-	public void signalEvent(KrollInvocation invocation)
+	@Kroll.method
+	public void signalEvent()
 	{
 		Log.d(LCAT,"[KROLLDEMO] signalEvent called");
 		
@@ -146,7 +143,7 @@ public class KrollDemoProxy extends LifeCycleProxy
 		// is about to fired. There could be zero or multiple listeners for the
 		// specified event.
 		if (hasListeners("demoEvent")) {
-			KrollDict event = new KrollDict();
+			HashMap<String, Object> event = new HashMap<String, Object>();
 			event.put("index",1);
 			event.put("value",100);
 			event.put("name","userEvent");
@@ -158,17 +155,17 @@ public class KrollDemoProxy extends LifeCycleProxy
 	}
 	
 	@Kroll.method
-	public void callThisCallbackDirectly(KrollInvocation invocation, KrollDict args)
+	public void callThisCallbackDirectly(HashMap args)
 	{
 		// By specifying an explicit argument type in the method declaration (rather
 		// than a generic Object array), the argument type has already been validated
 		
 		Log.d(LCAT,"[KROLLDEMO] callThisCallbackDirectly called");
 		
-		KrollCallback callback = null;
+		KrollFunction callback = null;
 		Object object = args.get("callback");
-		if (object instanceof KrollCallback) {
-			callback = (KrollCallback)object;
+		if (object instanceof KrollFunction) {
+			callback = (KrollFunction)object;
 		}
 		
 		Object data = args.get("data");
@@ -181,7 +178,7 @@ public class KrollDemoProxy extends LifeCycleProxy
 			// The 'callSync' method of the KrollCallback object can be used to directly 
 			// call the associated JavaScript function and get a return value. In this
 			// instance there is no return value for the callback.
-			callback.callSync(invocation, arrayOfValues);
+			callback.call(getKrollObject(), arrayOfValues);
 			
 			Log.d(LCAT,"[KROLLDEMO] callback was called");
 		}
@@ -249,7 +246,7 @@ public class KrollDemoProxy extends LifeCycleProxy
 		// is about to fired. There could be zero or multiple listeners for the
 		// specified event.
 		if (hasListeners("propertyChange")) {
-			KrollDict event = new KrollDict();
+			HashMap<String, Object> event = new HashMap<String, Object>();
 			event.put("property", key);
 			event.put("oldValue",oldValue);
 			event.put("newValue",newValue);

@@ -8,6 +8,8 @@
 
 package ti.moddevguide;
 
+import java.util.HashMap;
+
 import org.appcelerator.titanium.view.TiCompositeLayout;
 import org.appcelerator.titanium.view.TiUIView;
 import org.appcelerator.kroll.KrollDict;
@@ -32,7 +34,7 @@ public class DemoView extends TiUIView
 		
 		// Create the view as a TiCompositeLayout since our demo
 		// will be adding children to the view.
-		TiCompositeLayout view = new TiCompositeLayout(proxy.getContext());
+		TiCompositeLayout view = new TiCompositeLayout(proxy.getActivity());
 		
 		// Set the view as the native view. You must set the native view
 		// for your view to be rendered correctly.
@@ -83,9 +85,9 @@ public class DemoView extends TiUIView
 		// is about to be fired. There could be zero or multiple listeners for the
 		// specified event.
 		if (proxy.hasListeners("colorChange")) {
-			KrollDict kd = new KrollDict();
-			kd.put("color", newColor);
-			proxy.fireEvent("colorChange", kd);
+			HashMap<String, String> hm = new HashMap<String, String>();
+			hm.put("color", newColor);
+			proxy.fireEvent("colorChange", hm);
 		}
 	}
 	

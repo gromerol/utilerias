@@ -10,10 +10,8 @@ package ti.moddevguide;
 
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.KrollDict;
-import org.appcelerator.kroll.KrollInvocation;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.KrollProxy;
-import org.appcelerator.titanium.TiContext;
 import org.appcelerator.titanium.TiContext.OnLifecycleEvent;
 import org.appcelerator.titanium.util.Log;
 
@@ -28,14 +26,14 @@ public class LifeCycleProxy extends KrollProxy
 	// Standard Debugging variables
 	private static final String LCAT = "ModdevguideModule";
 	
-	public LifeCycleProxy(TiContext tiContext) 
+	public LifeCycleProxy() 
 	{
-		super(tiContext);
+		super();
 		
 		// A proxy can receive lifecycle events for the current context.
 		// Note that these events are for the context and not the proxy itself.
-		// Register for these events if your proxy needs them.
-		tiContext.addOnLifecycleEventListener(this);
+		// You do not need to register for these events; your proxy will receive them
+		// if overridden.
 		
 		// Each KrollProxy object has a unique proxy id
 		Log.i(LCAT, "[PROXY LIFECYCLE EVENT] init with proxy id of " + getProxyId());
@@ -122,10 +120,9 @@ public class LifeCycleProxy extends KrollProxy
 	// The methods are exposed to javascript because of the @Kroll.method annotation
 
 	@Kroll.method
-	public void close(KrollInvocation invocation) 
+	public void close() 
 	{
-		// Remove the lifecycle event registration
-		invocation.getTiContext().removeOnLifecycleEventListener(this);
+		Log.d(LCAT, "[PROXY CONTEXT LIFECYCLE EVENT] close called");
 	}
 	
 }

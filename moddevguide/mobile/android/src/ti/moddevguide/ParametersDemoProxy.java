@@ -9,15 +9,16 @@
 package ti.moddevguide;
 
 import org.appcelerator.kroll.KrollDict;
+import org.appcelerator.kroll.KrollFunction;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.titanium.TiContext;
-import org.appcelerator.titanium.kroll.KrollCallback;
 import org.appcelerator.titanium.util.Log;
 import org.mozilla.javascript.Function;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.TimeZone;
 
 // The proxy is declared with the @Kroll.proxy annotation
@@ -28,8 +29,8 @@ public class ParametersDemoProxy extends LifeCycleProxy
 	// Standard Debugging variables
 	private static final String LCAT = "ModdevguideModule";
 	
-	public ParametersDemoProxy(TiContext tiContext) {
-		super(tiContext);
+	public ParametersDemoProxy() {
+		super();
 	}
 	
 	private void analyzeArgument(String prefix, Object arg)
@@ -44,11 +45,11 @@ public class ParametersDemoProxy extends LifeCycleProxy
 				Log.d(LCAT,prefix + "Index[" + index++ + "]");
 				analyzeArgument(prefix + ".", obj);
 			}
-		} else if (arg instanceof KrollDict) {
-			KrollDict kd = (KrollDict)arg;
+		} else if (arg instanceof HashMap) {
+			HashMap kd = (HashMap)arg;
 			Log.d(LCAT,prefix + "Dictionary with " + kd.size() + " entries");
-			for (String key : kd.keySet()) {
-				Log.d(LCAT,prefix + "Key[" + key + "]");
+			for (Object key : kd.keySet().toArray()) {
+				Log.d(LCAT,prefix + "Key[" + key.toString() + "]");
 				analyzeArgument(prefix + ".", kd.get(key));
 			}
 		} else if (arg instanceof String) {
@@ -59,7 +60,7 @@ public class ParametersDemoProxy extends LifeCycleProxy
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 			df.setTimeZone(TimeZone.getTimeZone("GMT"));
 			Log.d(LCAT,prefix + "Date = " + df.format((Date)arg));
-		} else if (arg instanceof KrollCallback) {
+		} else if (arg instanceof KrollFunction) {
 			Log.d(LCAT,prefix + "Callback");
 		} else if (arg instanceof Function) {
 			Log.d(LCAT,prefix + "Function");

@@ -10,18 +10,11 @@ package ti.moddevguide;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
-import org.appcelerator.kroll.KrollDate;
 import org.appcelerator.kroll.KrollDict;
-import org.appcelerator.kroll.KrollProxy;
-import org.appcelerator.kroll.KrollInvocation;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.titanium.TiBlob;
-import org.appcelerator.titanium.TiContext;
-import org.appcelerator.titanium.TiFileProxy;
-import org.appcelerator.titanium.io.TiBaseFile;
-import org.appcelerator.titanium.io.TiFile;
-import org.appcelerator.titanium.io.TiFileFactory;
 import org.appcelerator.titanium.util.Log;
 import org.appcelerator.titanium.util.TiConvert;
 
@@ -38,8 +31,8 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	// Standard Debugging variables
 	private static final String LCAT = "ModdevguideModule";
 	
-	public MethodsDemoProxy(TiContext tiContext) {
-		super(tiContext);
+	public MethodsDemoProxy() {
+		super();
 	}
 
 	// Public APIs (available in javascript)
@@ -47,15 +40,11 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	// The methods are exposed to javascript because of the @Kroll.method annotation.
 	// Method signatures can be specified with the following properties:
 	//
-	// 1. The first argument can be specified as a KrollInvocation argument. Specify
-	//    this in the method signature when the method requires access to the calling
-	//    context.
-	//      public void myMethod(KrollInvocation invocation, <args>);
-	// 2. The arguments can be declared as an Object[]. Specify this in the method
+	// 1. The arguments can be declared as an Object[]. Specify this in the method
 	//    signature to handle a variable number of arguments or to support manual 
 	//    type conversion of arguments.
 	//      public void myMethod(KrollInvocation invocation, Object[] args);
-	// 3. The arguments can be declared with explicit types. Specify this in the
+	// 2. The arguments can be declared with explicit types. Specify this in the
 	//    method signature to have Kroll attempt to call with an exact match of
 	//    the parameter types.
 	//      public void myMethod(KrollInvocation invocation, int firstArg, KrollDict secondArg);
@@ -70,7 +59,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	}
 	
 	@Kroll.method
-	public int demoMethodNumberInt(KrollInvocation invocation, Object[] args)
+	public int demoMethodNumberInt(Object[] args)
 	{
 		// This method is an example of exposing a native method that accepts 2
 		// integer values as arguments and returns a number.
@@ -100,7 +89,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	}
 
 	@Kroll.method
-	public float demoMethodNumberFloat(KrollInvocation invocation, Object[] args)
+	public float demoMethodNumberFloat(Object[] args)
 	{
 		// This method is an example of exposing a native method that accepts 2
 		// floating point values as arguments and returns a number. 
@@ -130,7 +119,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	}
 	
 	@Kroll.method
-	public String demoMethodString(KrollInvocation invocation, Object[] args)
+	public String demoMethodString(Object[] args)
 	{
 		// This method is an example of exposing a native method that accepts 3
 		// arguments (2 string values and 1 integer value) and returns a string.
@@ -162,7 +151,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	}
 
 	@Kroll.method
-	public KrollDict demoMethodDictionary(KrollInvocation invocation, Object args)
+	public HashMap demoMethodDictionary(Object args)
 	{
 		// This method is an example of exposing a native method that accepts an
 		// array of values and returns a dictionary of those values.
@@ -180,7 +169,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 		Log.d(LCAT,"[METHODSDEMO] demoMethodDictionary received 1 argument of type array");
 
 		Object[] argArray = (Object[])args;
-		KrollDict result = new KrollDict(argArray.length);
+		HashMap<String, Object> result = new HashMap<String, Object>(argArray.length);
 		
 		for (int index=0; index < argArray.length; index++) {
 			result.put("Index" + index, argArray[index]);
@@ -192,8 +181,9 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	}
 	
 	@Kroll.method
-	public Date demoMethodDate(KrollInvocation invocation, KrollDict args)
+	public Date demoMethodDate(HashMap hm)
 	{
+		KrollDict args = new KrollDict(hm);
 		// This method is an example of exposing a native method that accepts a dictionary
 		// argument and returns an Date object.
 		
@@ -218,7 +208,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	}
 	
 	@Kroll.method
-	public Object[] demoMethodArray(KrollInvocation invocation, Object[] args)
+	public Object[] demoMethodArray(Object[] args)
 	{
 		// This method is an example of exposing a native method that accepts a
 		// dynamic list of arguments and returns an NSArray object.
@@ -235,7 +225,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	}
 	
 	@Kroll.method
-	public Object demoMethodNull(KrollInvocation invocation)
+	public Object demoMethodNull()
 	{
 		// This method is an example of exposing a native method that returns an
 		// NSNull object.
@@ -250,14 +240,14 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	}
 	
 	@Kroll.method
-	public FileProxy demoMethodFile(KrollInvocation invocation, String arg)
+	public FileProxy demoMethodFile(String arg)
 	{
 		// This method is an example of exposing a native method that accepts a
 		// single string argument and returns a TiFile object.
 
 		Log.d(LCAT,"[METHODSDEMO] demoMethodFile received 1 argument of type String");
 		
-		FileProxy result = new FileProxy(invocation.getTiContext(), new String[] { arg } );
+		FileProxy result = new FileProxy(getTiContext(), new String[] { arg } );
 		
 		Log.d(LCAT,"[METHODSDEMO] Path: " + result.getNativePath() + " Size: " + result.getSize());
 		
@@ -265,14 +255,14 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	}
 
 	@Kroll.method
-	public TiBlob demoMethodBlob(KrollInvocation invocation)
+	public TiBlob demoMethodBlob()
 	{
 		// This method is an example of exposing a native method that returns a TiBlob
 		// object containing a predefined blob of text.
 		
 		Log.d(LCAT,"[METHODSDEMO] demoMethodBlob called");
 		
-		TiBlob result = TiBlob.blobFromString(invocation.getTiContext(), "Hello World");
+		TiBlob result = TiBlob.blobFromString("Hello World");
 
 		Log.d(LCAT,"[METHODSDEMO] " + result);
 		
@@ -280,7 +270,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	}
 	
 	@Kroll.method
-	public KrollDict demoMethodRect(KrollInvocation invocation, Object[] args)
+	public HashMap demoMethodRect(Object[] args)
 	{
 		// This method is an example of exposing a native method that accepts 4
 		// integer values as arguments and returns an equivalent TiRect object.
@@ -307,7 +297,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 		rect.right = rect.left + ((args[kArgWidth] != null) ? TiConvert.toFloat(args[kArgWidth]) : 0);
 		rect.bottom = rect.top + ((args[kArgHeight] != null) ? TiConvert.toFloat(args[kArgHeight]) : 0);
 
-		KrollDict result = new KrollDict();
+		HashMap result = new HashMap();
 		result.put("x", rect.left);
 		result.put("y", rect.top);
 		result.put("width", rect.width());
@@ -319,7 +309,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	}
 	
 	@Kroll.method
-	public KrollDict demoMethodPoint(KrollInvocation invocation, Object[] args)
+	public HashMap demoMethodPoint(Object[] args)
 	{
 		// This method is an example of exposing a native method that accepts 2
 		// integer values as arguments and returns an equivalent TiPoint object.
@@ -342,7 +332,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 		point.x = (args[kArgX] != null) ? TiConvert.toFloat(args[kArgX]) : 0;
 		point.y = (args[kArgY] != null) ? TiConvert.toFloat(args[kArgY]) : 0;
 
-		KrollDict result = new KrollDict();
+		HashMap result = new HashMap();
 		result.put("x", point.x);
 		result.put("y", point.y);
 		
@@ -352,7 +342,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	}
 	
 	@Kroll.method
-	public KrollDict demoMethodRange(KrollInvocation invocation, Object[] args)
+	public HashMap demoMethodRange(Object[] args)
 	{
 		// This method is an example of exposing a native method that accepts 2
 		// integer values as arguments and returns an equivalent TiRange object.
@@ -374,7 +364,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 		int location = (args[kArgLocation] != null) ? TiConvert.toInt(args[kArgLocation]) : 0;
 		int length = (args[kArgLength] != null) ? TiConvert.toInt(args[kArgLength]) : 0;
 
-		KrollDict result = new KrollDict();
+		HashMap result = new HashMap();
 		result.put("location", location);
 		result.put("length", length);
 		
@@ -384,7 +374,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	}
 	
 	@Kroll.method
-	public int demoMethodColor(KrollInvocation invocation, String color)
+	public int demoMethodColor(String color)
 	{
 		// This method is an example of exposing a native method that accepts a
 		// string containing a color value and returns an equivalent TiColor value.
@@ -400,7 +390,7 @@ public class MethodsDemoProxy extends LifeCycleProxy
 	}
 	
 	@Kroll.method
-	public String demoMethodOptionalArgs(KrollInvocation invocation, String greeting, @Kroll.argument(optional=true) Object name)
+	public String demoMethodOptionalArgs(String greeting, @Kroll.argument(optional=true) Object name)
 	{
 		// This method is an example of exposing a native method that accepts 1 or 2
 		// arguments (2 string values) and returns a string.
