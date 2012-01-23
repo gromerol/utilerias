@@ -30,7 +30,7 @@
 	NSTimer *timer;
 	TiViewProxy *surface;
 	TiContactListener *contactListener;
-	NSLock *lock;
+	NSRecursiveLock *lock;
 	BOOL _destroyed;
     NSMutableArray *bodies;
 }

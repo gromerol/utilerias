@@ -11,7 +11,7 @@
 {	
 @public
 	b2RevoluteJoint *joint;
-    NSLock *lock;
+    NSRecursiveLock *lock;
 }
 
 -(id)initWithJoint:(b2RevoluteJoint*)joint pageContext:(id<TiEvaluator>)context;
