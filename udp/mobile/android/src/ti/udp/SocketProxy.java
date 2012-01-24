@@ -18,9 +18,9 @@ import java.util.HashMap;
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
+import org.appcelerator.kroll.common.Log;
 import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.TiContext;
-import org.appcelerator.titanium.util.Log;
 import org.appcelerator.titanium.util.TiConvert;
 
 import android.app.Activity;
@@ -116,11 +116,10 @@ public class SocketProxy extends KrollProxy {
 
 						byte[] rawResponse = packet.getData();
 						byte[] byteResponse = new byte[packet.getLength()];
-						String[] arrayResponse = new String[byteResponse.length];
+						Integer[] arrayResponse = new Integer[byteResponse.length];
 						for (int i = 0; i < byteResponse.length; i++) {
 							byteResponse[i] = rawResponse[i];
-							arrayResponse[i] = "" + rawResponse[i]; // MOD-333: V8 mashes our bytes to floats if we create an int array; so pass back
-																	// a string array instead and let JavaScript's type coercion work its magic.
+							arrayResponse[i] = new Integer(rawResponse[i] & 0xff);
 						}
 						HashMap<String, Object> evt = new HashMap<String, Object>();
 						evt.put("bytesData", arrayResponse);
@@ -151,6 +150,7 @@ public class SocketProxy extends KrollProxy {
 	// Start Public API
 
 	@Kroll.method
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void start(HashMap hm) {
 		KrollDict args = new KrollDict(hm);
 		try {
@@ -174,6 +174,7 @@ public class SocketProxy extends KrollProxy {
 	}
 
 	@Kroll.method
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void sendString(HashMap hm) {
 		KrollDict args = new KrollDict(hm);
 		try {
@@ -195,6 +196,7 @@ public class SocketProxy extends KrollProxy {
 	}
 
 	@Kroll.method
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void sendBytes(HashMap hm) {
 		KrollDict args = new KrollDict(hm);
 		try {

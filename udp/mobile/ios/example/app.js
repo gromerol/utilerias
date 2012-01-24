@@ -59,7 +59,7 @@ sendBytes.addEventListener('click', function () {
     Ti.App.Properties.setString('SavedSendTo', sendTo.value);
     socket.sendBytes({
         host: sendTo.value,
-        data: [ 100, 10, 0, 0 ]
+        data: [ 181, 10, 0, 0 ]
     });
 });
 win.add(sendBytes);
