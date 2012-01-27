@@ -66,4 +66,23 @@
  */
 - (void)videoDidFinish:(NSString*)hook withUserCookies:(NSDictionary*)userCookies; 
 
+/*
+ called when an app is successfully launched. 
+ */
+- (void) appLaunched:(NSString *)hook
+         userCookies:(NSDictionary*) userCookies;
+
+
+/*
+ called when an ad banner is fully expanded.
+ */
+- (void) bannerExpanded:(NSString *)hook;
+
+
+/*
+ called when an ad banner is fully collapsed.
+ */
+- (void) bannerCollapsed:(NSString *)hook;
+
+
 @end

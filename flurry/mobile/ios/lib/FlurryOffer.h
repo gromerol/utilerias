@@ -8,14 +8,14 @@
 #import <UIKit/UIKit.h>
 
 @interface FlurryOffer : NSObject {
-	NSString* appName;
+	NSString* appDisplayName;
 	UIImage* appIcon;
 	NSString* referralUrl;
 	NSNumber* appPrice;
 	NSString* appDescription;
 }
 
-@property (retain) NSString* appName;
+@property (retain) NSString* appDisplayName;
 @property (retain) UIImage* appIcon;
 @property (retain) NSString* referralUrl;
 @property (retain) NSNumber* appPrice;
