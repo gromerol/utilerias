@@ -1,7 +1,7 @@
 /**
- * Your Copyright Here
+ * Titanium Tandem Scroll Module
  *
- * Appcelerator Titanium is Copyright (c) 2009-2010 by Appcelerator, Inc.
+ * Appcelerator Titanium is Copyright (c) 2009-2012 by Appcelerator, Inc.
  * and licensed under the Apache Public License (version 2)
  */
 #import "TiTandemscrollModule.h"
@@ -30,6 +30,9 @@
 -(void)dealloc
 {
 	// release any resources that have been retained by the module
+    for (TiUIScrollViewProxy* proxy in scrollViews) {
+        [proxy forgetSelf];
+    }
     [scrollViews release];
 	[super dealloc];
 }
@@ -44,9 +47,9 @@
     scrollViews = [[NSMutableArray alloc] initWithCapacity:[args count]];
     
     for (TiUIScrollViewProxy* proxy in args) {
-        UIScrollView* scroll = [(TiUIScrollView*)proxy.view scrollView];
-        scroll.delegate = self;
-        [scrollViews addObject:scroll];
+        [proxy rememberSelf];
+        [(TiUIScrollView*)proxy.view scrollView].delegate = self;
+        [scrollViews addObject:proxy];
     }
 }
 
@@ -63,10 +66,22 @@
     if (scrollView != controllingScrollView)
         return;
     
-    for (UIScrollView* scroll in scrollViews) {
+    for (TiUIScrollViewProxy* proxy in scrollViews)
+    {
+        
         // Skip the view that is actually scrolling,
-        if (scroll == scrollView)
+        UIScrollView* scroll = [(TiUIScrollView*)proxy.view scrollView];
+        if (scroll == controllingScrollView)
+        {
+            CGPoint offset = [scrollView contentOffset];
+            [proxy fireEvent:@"scroll" withObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                   NUMFLOAT(offset.x),@"x",
+                                                   NUMFLOAT(offset.y),@"y",
+                                                   NUMBOOL([scrollView isDecelerating]),@"decelerating",
+                                                   NUMBOOL([scrollView isDragging]),@"dragging", nil]];
             continue;
+        }
+        
         // Scroll proportionally.
         [scroll setContentOffset:CGPointMake(scrollView.contentOffset.x * scroll.contentSize.width / scrollView.contentSize.width,
                                              scrollView.contentOffset.y * scroll.contentSize.height / scrollView.contentSize.height) animated:NO];

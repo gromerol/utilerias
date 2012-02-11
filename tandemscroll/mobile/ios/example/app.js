@@ -17,4 +17,7 @@ for (var i = 0; i < 3; i++) {
     win.add(scrollView);
 }
 TandemScroll.lockTogether(scrollViews);
+scrollViews[scrollViews.length-1].addEventListener('scroll', function (evt) {
+    Ti.API.info(evt.x + ',' + evt.y);
+});
 win.open();
