@@ -30,10 +30,12 @@
 -(void)dealloc
 {
 	// release any resources that have been retained by the module
-    for (TiUIScrollViewProxy* proxy in scrollViews) {
-        [proxy forgetSelf];
+    if (scrollViews) {
+        for (TiUIScrollViewProxy* proxy in scrollViews) {
+            [proxy forgetSelf];
+        }
+        [scrollViews release];
     }
-    [scrollViews release];
 	[super dealloc];
 }
 
@@ -43,7 +45,12 @@
 {
     ENSURE_SINGLE_ARG(args, NSArray);
     
-    RELEASE_TO_NIL(scrollViews);
+    if (scrollViews) {
+        for (TiUIScrollViewProxy* proxy in scrollViews) {
+            [proxy forgetSelf];
+        }
+        [scrollViews release];
+    }
     scrollViews = [[NSMutableArray alloc] initWithCapacity:[args count]];
     
     for (TiUIScrollViewProxy* proxy in args) {

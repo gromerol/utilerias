@@ -8,6 +8,7 @@ Allows you to lock several ScrollViews together so that they will proportionatel
 
 ### void lockTogether(TiScrollView[] views)
 Locks the specified scroll views together so that when one is scrolled, the others will be scrolled proportionately.
+Only one set of scroll views can be locked together at any given point.
 
 ## Usage
 
