@@ -33,7 +33,7 @@
         for (TiUIScrollViewProxy* proxy in scrollViews) {
             [proxy forgetSelf];
         }
-        [scrollViews release];
+        RELEASE_TO_NIL(scrollViews);
     }
 }
 
