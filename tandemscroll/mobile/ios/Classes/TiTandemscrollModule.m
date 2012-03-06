@@ -27,13 +27,19 @@
 
 #pragma mark Cleanup 
 
+-(void)unbindScrollViews
+{
+    if (scrollViews) {
+        for (TiUIScrollViewProxy* proxy in scrollViews) {
+            [proxy forgetSelf];
+        }
+        RELEASE_TO_NIL(scrollViews);
+    }
+}
+
 -(void)dealloc
 {
-	// release any resources that have been retained by the module
-    for (TiUIScrollViewProxy* proxy in scrollViews) {
-        [proxy forgetSelf];
-    }
-    [scrollViews release];
+	[self unbindScrollViews];
 	[super dealloc];
 }
 
@@ -43,7 +49,7 @@
 {
     ENSURE_SINGLE_ARG(args, NSArray);
     
-    RELEASE_TO_NIL(scrollViews);
+    [self unbindScrollViews];
     scrollViews = [[NSMutableArray alloc] initWithCapacity:[args count]];
     
     for (TiUIScrollViewProxy* proxy in args) {
