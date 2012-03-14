@@ -41,4 +41,6 @@ Fired when data is received. A dictionary is provided with the following values:
 * string address: The raw address received.
 
 ### error
-Fired when an error is encountered.
+Fired when an error is encountered. A dictionary is provided with the following values:
+
+* string error: The error
