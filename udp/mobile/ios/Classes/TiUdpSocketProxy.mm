@@ -281,7 +281,7 @@ static NSArray* GetBytesFromData(NSData* data)
     }
     else
     {
-        [self fireEvent:@"error" withObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSError errorWithDomain:NSPOSIXErrorDomain code:err userInfo:nil],@"error",nil]];
+        [self fireEvent:@"error" withObject:[NSDictionary dictionaryWithObjectsAndKeys:[[NSError errorWithDomain:NSPOSIXErrorDomain code:err userInfo:nil] localizedDescription],@"error",nil]];
     }
 }
 
@@ -290,7 +290,7 @@ static NSArray* GetBytesFromData(NSData* data)
 {
     [self stop:nil];
     NSLog(@"[ERROR] Error Hit! %@", error);
-    [self fireEvent:@"error" withObject:[NSDictionary dictionaryWithObjectsAndKeys:error, @"error", nil]];
+    [self fireEvent:@"error" withObject:[NSDictionary dictionaryWithObjectsAndKeys:[error localizedDescription], @"error", nil]];
 }
 
 // Stops the object, reporting the supplied error to the delegate.
@@ -366,7 +366,7 @@ static NSArray* GetBytesFromData(NSData* data)
     
     if (err != 0)
     {
-        [self fireEvent:@"error" withObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSError errorWithDomain:NSPOSIXErrorDomain code:err userInfo:nil],@"error", nil]];
+        [self fireEvent:@"error" withObject:[NSDictionary dictionaryWithObjectsAndKeys:[[NSError errorWithDomain:NSPOSIXErrorDomain code:err userInfo:nil] localizedDescription],@"error", nil]];
     }
 }
 
