@@ -84,5 +84,10 @@
  */
 - (void) bannerCollapsed:(NSString *)hook;
 
+/*
+ called when an ad banner is hidden, in the event where there are no more ads to show.
+ */
+- (void) bannerHidden:(NSString *)hook;
+
 
 @end
