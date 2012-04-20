@@ -97,7 +97,7 @@ public class SocketProxy extends KrollProxy {
 
 	private void fireError(Object obj) {
 		HashMap<String, Object> evt = new HashMap<String, Object>();
-		evt.put("error", obj);
+		evt.put("error", obj.toString());
 		fireEvent("error", evt);
 	}
 
