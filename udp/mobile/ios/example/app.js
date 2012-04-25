@@ -115,7 +115,7 @@ win.add(stop);
 
 var status = Ti.UI.createLabel({
     text: 'Press Start Socket to Begin',
-    top: 10 + u, left: 10 + u, right: 10 + u, height: 'auto'
+    top: 10 + u, left: 10 + u, right: 10 + u, height: Ti.UI.SIZE || 'auto'
 });
 win.add(status);
 
