@@ -60,8 +60,8 @@
 			arrowFrame.size = [arrowImage size];
 			[arrowView setImage:arrowImage];
 			arrowFrame.origin.y=0;
-			arrowFrame.origin.x=imageFrame.size.width/2 - arrowBase/2 + offset;
-			
+			arrowFrame.origin.x=MAX(MIN(imageFrame.size.width/2 - arrowBase/2 + offset,imageFrame.size.width-arrowFrame.size.width),0);
+
 			imageFrame.origin.y += arrowHeight;
 			imageFrame.size.height -= arrowHeight;
 			break;
@@ -71,8 +71,8 @@
 			arrowFrame.size = [arrowImage size];
 			[arrowView setImage:arrowImage];
 			arrowFrame.origin.y=imageFrame.size.height - arrowFrame.size.height;
-			arrowFrame.origin.x=imageFrame.size.width/2 - arrowBase/2 + offset;
-			
+			arrowFrame.origin.x=MAX(MIN(imageFrame.size.width/2 - arrowBase/2 + offset,imageFrame.size.width-arrowFrame.size.width),0);
+
 			imageFrame.size.height -= arrowHeight;
 			break;
 			
@@ -81,8 +81,8 @@
 			arrowFrame.size = [arrowImage size];
 			[arrowView setImage:arrowImage];
 			arrowFrame.origin.x=0;
-			arrowFrame.origin.y=imageFrame.size.height/2 - arrowBase/2 + offset;
-			
+			arrowFrame.origin.y=MAX(MIN(imageFrame.size.height/2 - arrowBase/2 + offset,imageFrame.size.height-arrowFrame.size.height),0);
+
 			imageFrame.origin.x += arrowHeight;
 			imageFrame.size.width -= arrowHeight;
 			break;
@@ -92,13 +92,13 @@
 			arrowFrame.size = [arrowImage size];
 			[arrowView setImage:arrowImage];
 			arrowFrame.origin.x=imageFrame.size.width - arrowFrame.size.width;
-			arrowFrame.origin.y=imageFrame.size.height/2 - arrowBase/2 + offset;
-			
+			arrowFrame.origin.y=MAX(MIN(imageFrame.size.height/2 - arrowBase/2 + offset,imageFrame.size.height-arrowFrame.size.height),0);
+
 			imageFrame.size.width -= arrowHeight;
 			break;
 			
 	}
-	
+
 	[arrowView setFrame:arrowFrame];
 	[imageView setFrame:imageFrame];
 }
