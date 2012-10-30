@@ -4,7 +4,7 @@
 
 Demonstrates various aspects of iOS module development in Titanium.
 
-This is a companion module to the Titanium [Module Developer Guide for iOS](http://wiki.appcelerator.org/display/guides/Module+Developer+Guide+for+iOS)
+This is a companion module to the Titanium [iOS Module Development Guide](http://wiki.appcelerator.org/display/guides2/iOS+Module+Development+Guide)
 
 ## Accessing the Ti.moddevguide Module
 
@@ -64,4 +64,4 @@ Please direct all questions, feedback, and concerns to [info@appcelerator.com](m
 
 ## License
 
-Copyright(c) 2010-2011 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
+Copyright(c) 2010-2012 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
