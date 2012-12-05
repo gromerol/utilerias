@@ -15,6 +15,7 @@
 #import "TiFacebookDialogRequest.h"
 #import "TiFacebookLoginButtonProxy.h"
 #import "FBSBJSON.h"
+#import "FBSession.h"
 
 /**
  * Good reference for access_tokens and what all this crap means
@@ -147,14 +148,13 @@
 -(void)startup
 {
 	VerboseLog(@"[DEBUG] facebook startup");
+	[super startup];
 	TiThreadPerformOnMainThread(^{
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(autoExtendToken:) name:UIApplicationDidBecomeActiveNotification object:nil];
 		[nc addObserver:self selector:@selector(autoExtendToken:) name:UIApplicationSignificantTimeChangeNotification object:nil];
-	}, NO);
-	[super startup];
-    forceDialogAuth = YES;
-	[self _restore];
+		[self _restore];
+	}, YES);
 	[self handleRelaunch];
 }
 
@@ -386,8 +386,6 @@
  */
 -(void)authorize:(id)args
 {
-	ENSURE_UI_THREAD(authorize, args);
-	
 	VerboseLog(@"[DEBUG] facebook authorize");
 
 	if ([self isLoggedIn])
@@ -401,12 +399,57 @@
 		[self throwException:@"missing appid" subreason:nil location:CODELOCATION];
 	}
 	
-	// forget in case it fails
-	[self _unsave];
+	TiThreadPerformOnMainThread(^{
+		// forget in case it fails
+		[self _unsave];
+		
+		NSArray *permissions_ = permissions == nil ? [NSArray array] : permissions;
+		[facebook setForceDialog:forceDialogAuth];
+		[facebook authorize:permissions_];
+	}, NO);
+}
+
+
+-(void)reauthorize:(id)args
+{
+	ENSURE_ARG_COUNT(args, 3);
+
+	if (![self isLoggedIn])
+	{
+		[self throwException:@"NotAuthorized" subreason:@"App tried to reauthorize before being logged in." location:CODELOCATION];
+		return;
+	}
+		
+	NSArray * writePermissions = [args objectAtIndex:0];
+	NSString * audienceString = [TiUtils stringValue:[args objectAtIndex:1]];
+	KrollCallback * callback = [args objectAtIndex:2];
 	
-	NSArray *permissions_ = permissions == nil ? [NSArray array] : permissions;
-	[facebook setForceDialog:forceDialogAuth];
-	[facebook authorize:permissions_];
+	ENSURE_CLASS(writePermissions, [NSArray class]);
+	ENSURE_CLASS(audienceString, [NSString class]);
+	ENSURE_CLASS(callback, [KrollCallback class]);
+
+	FBSessionLoginBehavior behavior = FBSessionLoginBehaviorUseSystemAccountIfPresent;
+	FBSessionDefaultAudience audience = FBSessionDefaultAudienceEveryone;
+
+	FBSessionReauthorizeResultHandler handler= ^(FBSession *session, NSError *error)
+	{
+		bool success = (error == nil);
+		NSString * errorString = [error localizedDescription];
+		NSNumber * errorCode = success?nil:[NSNumber numberWithInteger:[error code]];
+		NSDictionary * propertiesDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+										 [NSNumber numberWithBool:success],@"success",
+										 errorCode,@"code", errorString,@"error", nil];
+		
+		KrollEvent * invocationEvent = [[KrollEvent alloc] initWithCallback:callback eventObject:propertiesDict thisObject:self];
+		[[callback context] enqueue:invocationEvent];
+		[propertiesDict release];
+	};
+
+	TiThreadPerformOnMainThread(^{
+		[[facebook session] reauthorizeWithPublishPermissions:writePermissions
+									   defaultAudience:audience
+									 completionHandler:handler];
+	}, NO);
 }
 
 /**

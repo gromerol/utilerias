@@ -35,6 +35,7 @@
 -(void)removeListener:(id<TiFacebookStateListener>)listener;
 
 -(void)authorize:(id)args;
+-(void)reauthorize:(id)args;
 -(void)logout:(id)args;
 
 
