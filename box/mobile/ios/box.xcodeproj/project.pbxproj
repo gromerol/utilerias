@@ -1,0 +1,1010 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		24416B8111C4CA220047AFDD /* Build & Test */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 24416B8A11C4CA520047AFDD /* Build configuration list for PBXAggregateTarget "Build & Test" */;
+			buildPhases = (
+				24416B8011C4CA220047AFDD /* ShellScript */,
+			);
+			dependencies = (
+				24416B8511C4CA280047AFDD /* PBXTargetDependency */,
+			);
+			name = "Build & Test";
+			productName = "Build & test";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		24DD6CF91134B3F500162E58 /* TiBoxModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* TiBoxModule.h */; };
+		24DD6CFA1134B3F500162E58 /* TiBoxModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* TiBoxModule.m */; };
+		24DE9E1111C5FE74003F90F6 /* TiBoxModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* TiBoxModuleAssets.h */; };
+		24DE9E1211C5FE74003F90F6 /* TiBoxModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* TiBoxModuleAssets.m */; };
+		A81CEADA13E2F4E4006CD988 /* BoxLoginBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = A81CEAD813E2F4E4006CD988 /* BoxLoginBuilder.h */; };
+		A81CEADB13E2F4E4006CD988 /* BoxLoginBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A81CEAD913E2F4E4006CD988 /* BoxLoginBuilder.m */; };
+		A857E39513EB471300276E71 /* TiBoxFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = A857E39313EB471300276E71 /* TiBoxFolder.h */; };
+		A857E39613EB471300276E71 /* TiBoxFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = A857E39413EB471300276E71 /* TiBoxFolder.m */; };
+		A857E3B113EB55B600276E71 /* TiBoxFile.h in Headers */ = {isa = PBXBuildFile; fileRef = A857E3AF13EB55B600276E71 /* TiBoxFile.h */; };
+		A857E3B213EB55B600276E71 /* TiBoxFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A857E3B013EB55B600276E71 /* TiBoxFile.m */; };
+		A86CE11013E1DD5100B02CC8 /* BoxComment.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0A513E1DD5100B02CC8 /* BoxComment.h */; };
+		A86CE11113E1DD5100B02CC8 /* BoxComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0A613E1DD5100B02CC8 /* BoxComment.m */; };
+		A86CE11213E1DD5100B02CC8 /* BoxFile.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0A713E1DD5100B02CC8 /* BoxFile.h */; };
+		A86CE11313E1DD5100B02CC8 /* BoxFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0A813E1DD5100B02CC8 /* BoxFile.m */; };
+		A86CE11413E1DD5100B02CC8 /* BoxFolder+SaveableFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0A913E1DD5100B02CC8 /* BoxFolder+SaveableFolder.h */; };
+		A86CE11513E1DD5100B02CC8 /* BoxFolder+SaveableFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0AA13E1DD5100B02CC8 /* BoxFolder+SaveableFolder.m */; };
+		A86CE11613E1DD5100B02CC8 /* BoxFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0AB13E1DD5100B02CC8 /* BoxFolder.h */; };
+		A86CE11713E1DD5100B02CC8 /* BoxFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0AC13E1DD5100B02CC8 /* BoxFolder.m */; };
+		A86CE11813E1DD5100B02CC8 /* BoxObject.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0AD13E1DD5100B02CC8 /* BoxObject.h */; };
+		A86CE11913E1DD5100B02CC8 /* BoxObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0AE13E1DD5100B02CC8 /* BoxObject.m */; };
+		A86CE11A13E1DD5100B02CC8 /* BoxRESTApiFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0AF13E1DD5100B02CC8 /* BoxRESTApiFactory.h */; };
+		A86CE11B13E1DD5100B02CC8 /* BoxRESTApiFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0B013E1DD5100B02CC8 /* BoxRESTApiFactory.m */; };
+		A86CE11C13E1DD5100B02CC8 /* BoxUpdate.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0B113E1DD5100B02CC8 /* BoxUpdate.h */; };
+		A86CE11D13E1DD5100B02CC8 /* BoxUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0B213E1DD5100B02CC8 /* BoxUpdate.m */; };
+		A86CE11E13E1DD5100B02CC8 /* BoxUser.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0B313E1DD5100B02CC8 /* BoxUser.h */; };
+		A86CE11F13E1DD5100B02CC8 /* BoxUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0B413E1DD5100B02CC8 /* BoxUser.m */; };
+		A86CE12013E1DD5100B02CC8 /* BoxCommentsListModelXMLBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0B613E1DD5100B02CC8 /* BoxCommentsListModelXMLBuilder.h */; };
+		A86CE12113E1DD5100B02CC8 /* BoxCommentsListModelXMLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0B713E1DD5100B02CC8 /* BoxCommentsListModelXMLBuilder.m */; };
+		A86CE12213E1DD5100B02CC8 /* BoxFolderXMLBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0B813E1DD5100B02CC8 /* BoxFolderXMLBuilder.h */; };
+		A86CE12313E1DD5100B02CC8 /* BoxFolderXMLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0B913E1DD5100B02CC8 /* BoxFolderXMLBuilder.m */; };
+		A86CE12413E1DD5100B02CC8 /* BoxHTTPRequestBuilders.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0BA13E1DD5100B02CC8 /* BoxHTTPRequestBuilders.h */; };
+		A86CE12513E1DD5100B02CC8 /* BoxHTTPRequestBuilders.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0BB13E1DD5100B02CC8 /* BoxHTTPRequestBuilders.m */; };
+		A86CE12613E1DD5100B02CC8 /* BoxUpdatesListModelXMLBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0BC13E1DD5100B02CC8 /* BoxUpdatesListModelXMLBuilder.h */; };
+		A86CE12713E1DD5100B02CC8 /* BoxUpdatesListModelXMLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0BD13E1DD5100B02CC8 /* BoxUpdatesListModelXMLBuilder.m */; };
+		A86CE12813E1DD5100B02CC8 /* BoxAddCommentsOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0BF13E1DD5100B02CC8 /* BoxAddCommentsOperation.h */; };
+		A86CE12913E1DD5100B02CC8 /* BoxAddCommentsOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0C013E1DD5100B02CC8 /* BoxAddCommentsOperation.m */; };
+		A86CE12A13E1DD5100B02CC8 /* BoxAPIOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0C113E1DD5100B02CC8 /* BoxAPIOperation.h */; };
+		A86CE12B13E1DD5100B02CC8 /* BoxAPIOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0C213E1DD5100B02CC8 /* BoxAPIOperation.m */; };
+		A86CE12C13E1DD5100B02CC8 /* BoxCopyOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0C313E1DD5100B02CC8 /* BoxCopyOperation.h */; };
+		A86CE12D13E1DD5100B02CC8 /* BoxCopyOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0C413E1DD5100B02CC8 /* BoxCopyOperation.m */; };
+		A86CE12E13E1DD5100B02CC8 /* BoxCreateFolderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0C513E1DD5100B02CC8 /* BoxCreateFolderOperation.h */; };
+		A86CE12F13E1DD5100B02CC8 /* BoxCreateFolderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0C613E1DD5100B02CC8 /* BoxCreateFolderOperation.m */; };
+		A86CE13013E1DD5100B02CC8 /* BoxDeleteCommentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0C713E1DD5100B02CC8 /* BoxDeleteCommentOperation.h */; };
+		A86CE13113E1DD5100B02CC8 /* BoxDeleteCommentOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0C813E1DD5100B02CC8 /* BoxDeleteCommentOperation.m */; };
+		A86CE13213E1DD5100B02CC8 /* BoxDeleteOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0C913E1DD5100B02CC8 /* BoxDeleteOperation.h */; };
+		A86CE13313E1DD5100B02CC8 /* BoxDeleteOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0CA13E1DD5100B02CC8 /* BoxDeleteOperation.m */; };
+		A86CE13413E1DD5100B02CC8 /* BoxDownloadOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0CB13E1DD5100B02CC8 /* BoxDownloadOperation.h */; };
+		A86CE13513E1DD5100B02CC8 /* BoxDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0CC13E1DD5100B02CC8 /* BoxDownloadOperation.m */; };
+		A86CE13613E1DD5100B02CC8 /* BoxGetAuthTokenOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0CD13E1DD5100B02CC8 /* BoxGetAuthTokenOperation.h */; };
+		A86CE13713E1DD5100B02CC8 /* BoxGetAuthTokenOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0CE13E1DD5100B02CC8 /* BoxGetAuthTokenOperation.m */; };
+		A86CE13813E1DD5100B02CC8 /* BoxGetCommentsOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0CF13E1DD5100B02CC8 /* BoxGetCommentsOperation.h */; };
+		A86CE13913E1DD5100B02CC8 /* BoxGetCommentsOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0D013E1DD5100B02CC8 /* BoxGetCommentsOperation.m */; };
+		A86CE13A13E1DD5100B02CC8 /* BoxGetTicketOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0D113E1DD5100B02CC8 /* BoxGetTicketOperation.h */; };
+		A86CE13B13E1DD5100B02CC8 /* BoxGetTicketOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0D213E1DD5100B02CC8 /* BoxGetTicketOperation.m */; };
+		A86CE13C13E1DD5100B02CC8 /* BoxGetUpdatesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0D313E1DD5100B02CC8 /* BoxGetUpdatesOperation.h */; };
+		A86CE13D13E1DD5100B02CC8 /* BoxGetUpdatesOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0D413E1DD5100B02CC8 /* BoxGetUpdatesOperation.m */; };
+		A86CE13E13E1DD5100B02CC8 /* BoxMoveOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0D513E1DD5100B02CC8 /* BoxMoveOperation.h */; };
+		A86CE13F13E1DD5100B02CC8 /* BoxMoveOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0D613E1DD5100B02CC8 /* BoxMoveOperation.m */; };
+		A86CE14013E1DD5100B02CC8 /* BoxNetworkOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0D713E1DD5100B02CC8 /* BoxNetworkOperation.h */; };
+		A86CE14113E1DD5100B02CC8 /* BoxNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0D813E1DD5100B02CC8 /* BoxNetworkOperation.m */; };
+		A86CE14213E1DD5100B02CC8 /* BoxOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0D913E1DD5100B02CC8 /* BoxOperation.h */; };
+		A86CE14313E1DD5100B02CC8 /* BoxOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0DA13E1DD5100B02CC8 /* BoxOperation.m */; };
+		A86CE14413E1DD5100B02CC8 /* BoxPrivateShareOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0DB13E1DD5100B02CC8 /* BoxPrivateShareOperation.h */; };
+		A86CE14513E1DD5100B02CC8 /* BoxPrivateShareOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0DC13E1DD5100B02CC8 /* BoxPrivateShareOperation.m */; };
+		A86CE14613E1DD5100B02CC8 /* BoxPublicShareOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0DD13E1DD5100B02CC8 /* BoxPublicShareOperation.h */; };
+		A86CE14713E1DD5100B02CC8 /* BoxPublicShareOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0DE13E1DD5100B02CC8 /* BoxPublicShareOperation.m */; };
+		A86CE14813E1DD5100B02CC8 /* BoxPublicUnshareOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0DF13E1DD5100B02CC8 /* BoxPublicUnshareOperation.h */; };
+		A86CE14913E1DD5100B02CC8 /* BoxPublicUnshareOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0E013E1DD5100B02CC8 /* BoxPublicUnshareOperation.m */; };
+		A86CE14A13E1DD5100B02CC8 /* BoxRegisterOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0E113E1DD5100B02CC8 /* BoxRegisterOperation.h */; };
+		A86CE14B13E1DD5100B02CC8 /* BoxRegisterOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0E213E1DD5100B02CC8 /* BoxRegisterOperation.m */; };
+		A86CE14C13E1DD5100B02CC8 /* BoxRenameOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0E313E1DD5100B02CC8 /* BoxRenameOperation.h */; };
+		A86CE14D13E1DD5100B02CC8 /* BoxRenameOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0E413E1DD5100B02CC8 /* BoxRenameOperation.m */; };
+		A86CE14E13E1DD5100B02CC8 /* BoxUploadOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0E513E1DD5100B02CC8 /* BoxUploadOperation.h */; };
+		A86CE14F13E1DD5100B02CC8 /* BoxUploadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0E613E1DD5100B02CC8 /* BoxUploadOperation.m */; };
+		A86CE15013E1DD5100B02CC8 /* BoxModelUtilityFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0E813E1DD5100B02CC8 /* BoxModelUtilityFunctions.h */; };
+		A86CE15113E1DD5100B02CC8 /* BoxModelUtilityFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0E913E1DD5100B02CC8 /* BoxModelUtilityFunctions.m */; };
+		A86CE15213E1DD5100B02CC8 /* NSArray+BoxUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0EA13E1DD5100B02CC8 /* NSArray+BoxUtils.h */; };
+		A86CE15313E1DD5100B02CC8 /* NSArray+BoxUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0EB13E1DD5100B02CC8 /* NSArray+BoxUtils.m */; };
+		A86CE15413E1DD5100B02CC8 /* NSDictionaryXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0EC13E1DD5100B02CC8 /* NSDictionaryXMLParser.h */; };
+		A86CE15513E1DD5100B02CC8 /* NSDictionaryXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0ED13E1DD5100B02CC8 /* NSDictionaryXMLParser.m */; };
+		A86CE15613E1DD5100B02CC8 /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0EF13E1DD5100B02CC8 /* GTMDefines.h */; };
+		A86CE15713E1DD5100B02CC8 /* GTMRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = A86CE0F013E1DD5100B02CC8 /* GTMRegex.h */; };
+		A86CE15813E1DD5100B02CC8 /* GTMRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = A86CE0F113E1DD5100B02CC8 /* GTMRegex.m */; };
+		A86CE16513E1DD7800B02CC8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86CE16113E1DD7800B02CC8 /* AddressBook.framework */; };
+		A86CE16613E1DD7800B02CC8 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86CE16213E1DD7800B02CC8 /* AddressBookUI.framework */; };
+		A86CE16713E1DD7800B02CC8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86CE16313E1DD7800B02CC8 /* UIKit.framework */; };
+		A86CE16813E1DD7800B02CC8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86CE16413E1DD7800B02CC8 /* CoreGraphics.framework */; };
+		A88FADE713EC4AF3000350FA /* TiBoxDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A88FADE613EC4AF3000350FA /* TiBoxDelegate.h */; };
+		A88FADEA13EC53D4000350FA /* TiBoxRegisterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A88FADE813EC53D4000350FA /* TiBoxRegisterDelegate.h */; };
+		A88FADEB13EC53D4000350FA /* TiBoxRegisterDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A88FADE913EC53D4000350FA /* TiBoxRegisterDelegate.m */; };
+		A88FADFA13EC5F28000350FA /* TiBoxSimpleDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A88FADF813EC5F28000350FA /* TiBoxSimpleDelegate.h */; };
+		A88FADFB13EC5F28000350FA /* TiBoxSimpleDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A88FADF913EC5F28000350FA /* TiBoxSimpleDelegate.m */; };
+		A89B0BBA14994E0B0095228E /* TiBoxUser.h in Headers */ = {isa = PBXBuildFile; fileRef = A89B0BB814994E0B0095228E /* TiBoxUser.h */; };
+		A89B0BBB14994E0B0095228E /* TiBoxUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A89B0BB914994E0B0095228E /* TiBoxUser.m */; };
+		A8B8538213E75767005658D4 /* TiBoxLoginViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = A8B8538013E75767005658D4 /* TiBoxLoginViewProxy.h */; };
+		A8B8538313E75767005658D4 /* TiBoxLoginViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8B8538113E75767005658D4 /* TiBoxLoginViewProxy.m */; };
+		A8B8538A13E759D1005658D4 /* TiBoxLoginView.h in Headers */ = {isa = PBXBuildFile; fileRef = A8B8538813E759D1005658D4 /* TiBoxLoginView.h */; };
+		A8B8538B13E759D1005658D4 /* TiBoxLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8B8538913E759D1005658D4 /* TiBoxLoginView.m */; };
+		A8D37D5C13F17C5F0027253B /* TiBoxGetCommentsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A8D37D5A13F17C5F0027253B /* TiBoxGetCommentsDelegate.h */; };
+		A8D37D5D13F17C5F0027253B /* TiBoxGetCommentsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D37D5B13F17C5F0027253B /* TiBoxGetCommentsDelegate.m */; };
+		A8D37D6113F183620027253B /* TiBoxComment.h in Headers */ = {isa = PBXBuildFile; fileRef = A8D37D5F13F183620027253B /* TiBoxComment.h */; };
+		A8D37D6213F183620027253B /* TiBoxComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D37D6013F183620027253B /* TiBoxComment.m */; };
+		A8D37D6513F19E9B0027253B /* TiBoxGetUpdatesDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A8D37D6313F19E9B0027253B /* TiBoxGetUpdatesDelegate.h */; };
+		A8D37D6613F19E9B0027253B /* TiBoxGetUpdatesDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D37D6413F19E9B0027253B /* TiBoxGetUpdatesDelegate.m */; };
+		A8D37D6913F19F4B0027253B /* TiBoxUpdate.h in Headers */ = {isa = PBXBuildFile; fileRef = A8D37D6713F19F4B0027253B /* TiBoxUpdate.h */; };
+		A8D37D6A13F19F4B0027253B /* TiBoxUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D37D6813F19F4B0027253B /* TiBoxUpdate.m */; };
+		AA747D9F0F9514B9006C5449 /* TiBox_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiBox_Prefix.pch */; };
+		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		24416B8411C4CA280047AFDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = box;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		24DD6CF71134B3F500162E58 /* TiBoxModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiBoxModule.h; path = Classes/TiBoxModule.h; sourceTree = "<group>"; };
+		24DD6CF81134B3F500162E58 /* TiBoxModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiBoxModule.m; path = Classes/TiBoxModule.m; sourceTree = "<group>"; };
+		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
+		24DE9E0F11C5FE74003F90F6 /* TiBoxModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiBoxModuleAssets.h; path = Classes/TiBoxModuleAssets.h; sourceTree = "<group>"; };
+		24DE9E1011C5FE74003F90F6 /* TiBoxModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiBoxModuleAssets.m; path = Classes/TiBoxModuleAssets.m; sourceTree = "<group>"; };
+		A81CEAD813E2F4E4006CD988 /* BoxLoginBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxLoginBuilder.h; sourceTree = "<group>"; };
+		A81CEAD913E2F4E4006CD988 /* BoxLoginBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxLoginBuilder.m; sourceTree = "<group>"; };
+		A820CBD513E3499E00E5A2F5 /* comment.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = comment.md; sourceTree = "<group>"; };
+		A820CBD613E3499E00E5A2F5 /* file.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = file.md; sourceTree = "<group>"; };
+		A820CBD713E3499E00E5A2F5 /* folder.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = folder.md; sourceTree = "<group>"; };
+		A820CBD813E3499E00E5A2F5 /* update.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = update.md; sourceTree = "<group>"; };
+		A820CBD913E3499E00E5A2F5 /* user.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = user.md; sourceTree = "<group>"; };
+		A820CBDC13E349AB00E5A2F5 /* chooseLoginOrRegister.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = chooseLoginOrRegister.js; sourceTree = "<group>"; };
+		A820CBDD13E349AB00E5A2F5 /* loggedIn.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = loggedIn.js; sourceTree = "<group>"; };
+		A820CBDE13E349AB00E5A2F5 /* login.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = login.js; sourceTree = "<group>"; };
+		A820CBDF13E349AB00E5A2F5 /* register.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = register.js; sourceTree = "<group>"; };
+		A820CBE013E349AB00E5A2F5 /* utility.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = utility.js; sourceTree = "<group>"; };
+		A857E39313EB471300276E71 /* TiBoxFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiBoxFolder.h; path = Classes/TiBoxFolder.h; sourceTree = "<group>"; };
+		A857E39413EB471300276E71 /* TiBoxFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiBoxFolder.m; path = Classes/TiBoxFolder.m; sourceTree = "<group>"; };
+		A857E3AF13EB55B600276E71 /* TiBoxFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiBoxFile.h; path = Classes/TiBoxFile.h; sourceTree = "<group>"; };
+		A857E3B013EB55B600276E71 /* TiBoxFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiBoxFile.m; path = Classes/TiBoxFile.m; sourceTree = "<group>"; };
+		A86CE06813E1D84400B02CC8 /* changelog */ = {isa = PBXFileReference; lastKnownFileType = text; path = changelog; sourceTree = "<group>"; };
+		A86CE06913E1D84400B02CC8 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A86CE06A13E1D84400B02CC8 /* manifest */ = {isa = PBXFileReference; lastKnownFileType = text; path = manifest; sourceTree = "<group>"; };
+		A86CE06B13E1D84400B02CC8 /* module.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = module.xcconfig; sourceTree = "<group>"; };
+		A86CE06C13E1D84400B02CC8 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		A86CE06D13E1D84400B02CC8 /* timodule.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = timodule.xml; sourceTree = "<group>"; };
+		A86CE06F13E1D85500B02CC8 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		A86CE07113E1D85500B02CC8 /* index.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = index.md; sourceTree = "<group>"; };
+		A86CE07313E1D85500B02CC8 /* app.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
+		A86CE07513E1D85500B02CC8 /* add.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = add.py; sourceTree = "<group>"; };
+		A86CE07613E1D85500B02CC8 /* install.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = install.py; sourceTree = "<group>"; };
+		A86CE07713E1D85500B02CC8 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		A86CE07813E1D85500B02CC8 /* remove.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = remove.py; sourceTree = "<group>"; };
+		A86CE07913E1D85500B02CC8 /* uninstall.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = uninstall.py; sourceTree = "<group>"; };
+		A86CE07B13E1D85500B02CC8 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		A86CE0A513E1DD5100B02CC8 /* BoxComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxComment.h; sourceTree = "<group>"; };
+		A86CE0A613E1DD5100B02CC8 /* BoxComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxComment.m; sourceTree = "<group>"; };
+		A86CE0A713E1DD5100B02CC8 /* BoxFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxFile.h; sourceTree = "<group>"; };
+		A86CE0A813E1DD5100B02CC8 /* BoxFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxFile.m; sourceTree = "<group>"; };
+		A86CE0A913E1DD5100B02CC8 /* BoxFolder+SaveableFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BoxFolder+SaveableFolder.h"; sourceTree = "<group>"; };
+		A86CE0AA13E1DD5100B02CC8 /* BoxFolder+SaveableFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BoxFolder+SaveableFolder.m"; sourceTree = "<group>"; };
+		A86CE0AB13E1DD5100B02CC8 /* BoxFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxFolder.h; sourceTree = "<group>"; };
+		A86CE0AC13E1DD5100B02CC8 /* BoxFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxFolder.m; sourceTree = "<group>"; };
+		A86CE0AD13E1DD5100B02CC8 /* BoxObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxObject.h; sourceTree = "<group>"; };
+		A86CE0AE13E1DD5100B02CC8 /* BoxObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxObject.m; sourceTree = "<group>"; };
+		A86CE0AF13E1DD5100B02CC8 /* BoxRESTApiFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxRESTApiFactory.h; sourceTree = "<group>"; };
+		A86CE0B013E1DD5100B02CC8 /* BoxRESTApiFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxRESTApiFactory.m; sourceTree = "<group>"; };
+		A86CE0B113E1DD5100B02CC8 /* BoxUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxUpdate.h; sourceTree = "<group>"; };
+		A86CE0B213E1DD5100B02CC8 /* BoxUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxUpdate.m; sourceTree = "<group>"; };
+		A86CE0B313E1DD5100B02CC8 /* BoxUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxUser.h; sourceTree = "<group>"; };
+		A86CE0B413E1DD5100B02CC8 /* BoxUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxUser.m; sourceTree = "<group>"; };
+		A86CE0B613E1DD5100B02CC8 /* BoxCommentsListModelXMLBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxCommentsListModelXMLBuilder.h; sourceTree = "<group>"; };
+		A86CE0B713E1DD5100B02CC8 /* BoxCommentsListModelXMLBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxCommentsListModelXMLBuilder.m; sourceTree = "<group>"; };
+		A86CE0B813E1DD5100B02CC8 /* BoxFolderXMLBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxFolderXMLBuilder.h; sourceTree = "<group>"; };
+		A86CE0B913E1DD5100B02CC8 /* BoxFolderXMLBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxFolderXMLBuilder.m; sourceTree = "<group>"; };
+		A86CE0BA13E1DD5100B02CC8 /* BoxHTTPRequestBuilders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxHTTPRequestBuilders.h; sourceTree = "<group>"; };
+		A86CE0BB13E1DD5100B02CC8 /* BoxHTTPRequestBuilders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxHTTPRequestBuilders.m; sourceTree = "<group>"; };
+		A86CE0BC13E1DD5100B02CC8 /* BoxUpdatesListModelXMLBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxUpdatesListModelXMLBuilder.h; sourceTree = "<group>"; };
+		A86CE0BD13E1DD5100B02CC8 /* BoxUpdatesListModelXMLBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxUpdatesListModelXMLBuilder.m; sourceTree = "<group>"; };
+		A86CE0BF13E1DD5100B02CC8 /* BoxAddCommentsOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxAddCommentsOperation.h; sourceTree = "<group>"; };
+		A86CE0C013E1DD5100B02CC8 /* BoxAddCommentsOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxAddCommentsOperation.m; sourceTree = "<group>"; };
+		A86CE0C113E1DD5100B02CC8 /* BoxAPIOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxAPIOperation.h; sourceTree = "<group>"; };
+		A86CE0C213E1DD5100B02CC8 /* BoxAPIOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxAPIOperation.m; sourceTree = "<group>"; };
+		A86CE0C313E1DD5100B02CC8 /* BoxCopyOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxCopyOperation.h; sourceTree = "<group>"; };
+		A86CE0C413E1DD5100B02CC8 /* BoxCopyOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxCopyOperation.m; sourceTree = "<group>"; };
+		A86CE0C513E1DD5100B02CC8 /* BoxCreateFolderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxCreateFolderOperation.h; sourceTree = "<group>"; };
+		A86CE0C613E1DD5100B02CC8 /* BoxCreateFolderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxCreateFolderOperation.m; sourceTree = "<group>"; };
+		A86CE0C713E1DD5100B02CC8 /* BoxDeleteCommentOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxDeleteCommentOperation.h; sourceTree = "<group>"; };
+		A86CE0C813E1DD5100B02CC8 /* BoxDeleteCommentOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxDeleteCommentOperation.m; sourceTree = "<group>"; };
+		A86CE0C913E1DD5100B02CC8 /* BoxDeleteOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxDeleteOperation.h; sourceTree = "<group>"; };
+		A86CE0CA13E1DD5100B02CC8 /* BoxDeleteOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxDeleteOperation.m; sourceTree = "<group>"; };
+		A86CE0CB13E1DD5100B02CC8 /* BoxDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxDownloadOperation.h; sourceTree = "<group>"; };
+		A86CE0CC13E1DD5100B02CC8 /* BoxDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxDownloadOperation.m; sourceTree = "<group>"; };
+		A86CE0CD13E1DD5100B02CC8 /* BoxGetAuthTokenOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxGetAuthTokenOperation.h; sourceTree = "<group>"; };
+		A86CE0CE13E1DD5100B02CC8 /* BoxGetAuthTokenOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxGetAuthTokenOperation.m; sourceTree = "<group>"; };
+		A86CE0CF13E1DD5100B02CC8 /* BoxGetCommentsOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxGetCommentsOperation.h; sourceTree = "<group>"; };
+		A86CE0D013E1DD5100B02CC8 /* BoxGetCommentsOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxGetCommentsOperation.m; sourceTree = "<group>"; };
+		A86CE0D113E1DD5100B02CC8 /* BoxGetTicketOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxGetTicketOperation.h; sourceTree = "<group>"; };
+		A86CE0D213E1DD5100B02CC8 /* BoxGetTicketOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxGetTicketOperation.m; sourceTree = "<group>"; };
+		A86CE0D313E1DD5100B02CC8 /* BoxGetUpdatesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxGetUpdatesOperation.h; sourceTree = "<group>"; };
+		A86CE0D413E1DD5100B02CC8 /* BoxGetUpdatesOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxGetUpdatesOperation.m; sourceTree = "<group>"; };
+		A86CE0D513E1DD5100B02CC8 /* BoxMoveOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxMoveOperation.h; sourceTree = "<group>"; };
+		A86CE0D613E1DD5100B02CC8 /* BoxMoveOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxMoveOperation.m; sourceTree = "<group>"; };
+		A86CE0D713E1DD5100B02CC8 /* BoxNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxNetworkOperation.h; sourceTree = "<group>"; };
+		A86CE0D813E1DD5100B02CC8 /* BoxNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxNetworkOperation.m; sourceTree = "<group>"; };
+		A86CE0D913E1DD5100B02CC8 /* BoxOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxOperation.h; sourceTree = "<group>"; };
+		A86CE0DA13E1DD5100B02CC8 /* BoxOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxOperation.m; sourceTree = "<group>"; };
+		A86CE0DB13E1DD5100B02CC8 /* BoxPrivateShareOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxPrivateShareOperation.h; sourceTree = "<group>"; };
+		A86CE0DC13E1DD5100B02CC8 /* BoxPrivateShareOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxPrivateShareOperation.m; sourceTree = "<group>"; };
+		A86CE0DD13E1DD5100B02CC8 /* BoxPublicShareOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxPublicShareOperation.h; sourceTree = "<group>"; };
+		A86CE0DE13E1DD5100B02CC8 /* BoxPublicShareOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxPublicShareOperation.m; sourceTree = "<group>"; };
+		A86CE0DF13E1DD5100B02CC8 /* BoxPublicUnshareOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxPublicUnshareOperation.h; sourceTree = "<group>"; };
+		A86CE0E013E1DD5100B02CC8 /* BoxPublicUnshareOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxPublicUnshareOperation.m; sourceTree = "<group>"; };
+		A86CE0E113E1DD5100B02CC8 /* BoxRegisterOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxRegisterOperation.h; sourceTree = "<group>"; };
+		A86CE0E213E1DD5100B02CC8 /* BoxRegisterOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxRegisterOperation.m; sourceTree = "<group>"; };
+		A86CE0E313E1DD5100B02CC8 /* BoxRenameOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxRenameOperation.h; sourceTree = "<group>"; };
+		A86CE0E413E1DD5100B02CC8 /* BoxRenameOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxRenameOperation.m; sourceTree = "<group>"; };
+		A86CE0E513E1DD5100B02CC8 /* BoxUploadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxUploadOperation.h; sourceTree = "<group>"; };
+		A86CE0E613E1DD5100B02CC8 /* BoxUploadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxUploadOperation.m; sourceTree = "<group>"; };
+		A86CE0E813E1DD5100B02CC8 /* BoxModelUtilityFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxModelUtilityFunctions.h; sourceTree = "<group>"; };
+		A86CE0E913E1DD5100B02CC8 /* BoxModelUtilityFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxModelUtilityFunctions.m; sourceTree = "<group>"; };
+		A86CE0EA13E1DD5100B02CC8 /* NSArray+BoxUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BoxUtils.h"; sourceTree = "<group>"; };
+		A86CE0EB13E1DD5100B02CC8 /* NSArray+BoxUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BoxUtils.m"; sourceTree = "<group>"; };
+		A86CE0EC13E1DD5100B02CC8 /* NSDictionaryXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryXMLParser.h; sourceTree = "<group>"; };
+		A86CE0ED13E1DD5100B02CC8 /* NSDictionaryXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryXMLParser.m; sourceTree = "<group>"; };
+		A86CE0EF13E1DD5100B02CC8 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		A86CE0F013E1DD5100B02CC8 /* GTMRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMRegex.h; sourceTree = "<group>"; };
+		A86CE0F113E1DD5100B02CC8 /* GTMRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMRegex.m; sourceTree = "<group>"; };
+		A86CE16113E1DD7800B02CC8 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		A86CE16213E1DD7800B02CC8 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		A86CE16313E1DD7800B02CC8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A86CE16413E1DD7800B02CC8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A88FADE613EC4AF3000350FA /* TiBoxDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiBoxDelegate.h; path = Classes/TiBoxDelegate.h; sourceTree = "<group>"; };
+		A88FADE813EC53D4000350FA /* TiBoxRegisterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiBoxRegisterDelegate.h; path = Classes/TiBoxRegisterDelegate.h; sourceTree = "<group>"; };
+		A88FADE913EC53D4000350FA /* TiBoxRegisterDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiBoxRegisterDelegate.m; path = Classes/TiBoxRegisterDelegate.m; sourceTree = "<group>"; };
+		A88FADF813EC5F28000350FA /* TiBoxSimpleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiBoxSimpleDelegate.h; path = Classes/TiBoxSimpleDelegate.h; sourceTree = "<group>"; };
+		A88FADF913EC5F28000350FA /* TiBoxSimpleDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiBoxSimpleDelegate.m; path = Classes/TiBoxSimpleDelegate.m; sourceTree = "<group>"; };
+		A89B0BB814994E0B0095228E /* TiBoxUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiBoxUser.h; path = Classes/TiBoxUser.h; sourceTree = "<group>"; };
+		A89B0BB914994E0B0095228E /* TiBoxUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiBoxUser.m; path = Classes/TiBoxUser.m; sourceTree = "<group>"; };
+		A8B8538013E75767005658D4 /* TiBoxLoginViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiBoxLoginViewProxy.h; path = Classes/TiBoxLoginViewProxy.h; sourceTree = SOURCE_ROOT; };
+		A8B8538113E75767005658D4 /* TiBoxLoginViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiBoxLoginViewProxy.m; path = Classes/TiBoxLoginViewProxy.m; sourceTree = SOURCE_ROOT; };
+		A8B8538813E759D1005658D4 /* TiBoxLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiBoxLoginView.h; path = Classes/TiBoxLoginView.h; sourceTree = "<group>"; };
+		A8B8538913E759D1005658D4 /* TiBoxLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiBoxLoginView.m; path = Classes/TiBoxLoginView.m; sourceTree = "<group>"; };
+		A8D37D5A13F17C5F0027253B /* TiBoxGetCommentsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiBoxGetCommentsDelegate.h; path = Classes/TiBoxGetCommentsDelegate.h; sourceTree = "<group>"; };
+		A8D37D5B13F17C5F0027253B /* TiBoxGetCommentsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiBoxGetCommentsDelegate.m; path = Classes/TiBoxGetCommentsDelegate.m; sourceTree = "<group>"; };
+		A8D37D5F13F183620027253B /* TiBoxComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiBoxComment.h; path = Classes/TiBoxComment.h; sourceTree = "<group>"; };
+		A8D37D6013F183620027253B /* TiBoxComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiBoxComment.m; path = Classes/TiBoxComment.m; sourceTree = "<group>"; };
+		A8D37D6313F19E9B0027253B /* TiBoxGetUpdatesDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiBoxGetUpdatesDelegate.h; path = Classes/TiBoxGetUpdatesDelegate.h; sourceTree = "<group>"; };
+		A8D37D6413F19E9B0027253B /* TiBoxGetUpdatesDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiBoxGetUpdatesDelegate.m; path = Classes/TiBoxGetUpdatesDelegate.m; sourceTree = "<group>"; };
+		A8D37D6713F19F4B0027253B /* TiBoxUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiBoxUpdate.h; path = Classes/TiBoxUpdate.h; sourceTree = "<group>"; };
+		A8D37D6813F19F4B0027253B /* TiBoxUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiBoxUpdate.m; path = Classes/TiBoxUpdate.m; sourceTree = "<group>"; };
+		AA747D9E0F9514B9006C5449 /* TiBox_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiBox_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D2AAC07E0554694100DB518D /* libTiBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiBox.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AAC07C0554694100DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+				A86CE16513E1DD7800B02CC8 /* AddressBook.framework in Frameworks */,
+				A86CE16613E1DD7800B02CC8 /* AddressBookUI.framework in Frameworks */,
+				A86CE16713E1DD7800B02CC8 /* UIKit.framework in Frameworks */,
+				A86CE16813E1DD7800B02CC8 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC07E0554694100DB518D /* libTiBox.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* box */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AEFE84172EC02AAC07 /* Classes */,
+				A86CE06E13E1D85500B02CC8 /* assets */,
+				A86CE07013E1D85500B02CC8 /* documentation */,
+				A86CE07213E1D85500B02CC8 /* example */,
+				A86CE07413E1D85500B02CC8 /* hooks */,
+				A86CE07A13E1D85500B02CC8 /* platform */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = box;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A86CE16113E1DD7800B02CC8 /* AddressBook.framework */,
+				A86CE16213E1DD7800B02CC8 /* AddressBookUI.framework */,
+				A86CE16313E1DD7800B02CC8 /* UIKit.framework */,
+				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+				A86CE16413E1DD7800B02CC8 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A88FADE413EC4AC8000350FA /* BoxDelegates */,
+				A857E39113EB46C500276E71 /* BoxWrappers */,
+				A86CE08413E1DD5100B02CC8 /* BoxAPI */,
+				A8B8538013E75767005658D4 /* TiBoxLoginViewProxy.h */,
+				A8B8538113E75767005658D4 /* TiBoxLoginViewProxy.m */,
+				A8B8538813E759D1005658D4 /* TiBoxLoginView.h */,
+				A8B8538913E759D1005658D4 /* TiBoxLoginView.m */,
+				24DE9E0F11C5FE74003F90F6 /* TiBoxModuleAssets.h */,
+				24DE9E1011C5FE74003F90F6 /* TiBoxModuleAssets.m */,
+				24DD6CF71134B3F500162E58 /* TiBoxModule.h */,
+				24DD6CF81134B3F500162E58 /* TiBoxModule.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AA747D9E0F9514B9006C5449 /* TiBox_Prefix.pch */,
+				24DD6D1B1134B66800162E58 /* titanium.xcconfig */,
+				A86CE06813E1D84400B02CC8 /* changelog */,
+				A86CE06913E1D84400B02CC8 /* LICENSE */,
+				A86CE06A13E1D84400B02CC8 /* manifest */,
+				A86CE06B13E1D84400B02CC8 /* module.xcconfig */,
+				A86CE06C13E1D84400B02CC8 /* README */,
+				A86CE06D13E1D84400B02CC8 /* timodule.xml */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		A820CBDB13E349AB00E5A2F5 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				A820CBDC13E349AB00E5A2F5 /* chooseLoginOrRegister.js */,
+				A820CBDD13E349AB00E5A2F5 /* loggedIn.js */,
+				A820CBDE13E349AB00E5A2F5 /* login.js */,
+				A820CBDF13E349AB00E5A2F5 /* register.js */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		A857E39113EB46C500276E71 /* BoxWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				A8D37D5F13F183620027253B /* TiBoxComment.h */,
+				A8D37D6013F183620027253B /* TiBoxComment.m */,
+				A857E39313EB471300276E71 /* TiBoxFolder.h */,
+				A857E39413EB471300276E71 /* TiBoxFolder.m */,
+				A857E3AF13EB55B600276E71 /* TiBoxFile.h */,
+				A857E3B013EB55B600276E71 /* TiBoxFile.m */,
+				A8D37D6713F19F4B0027253B /* TiBoxUpdate.h */,
+				A8D37D6813F19F4B0027253B /* TiBoxUpdate.m */,
+				A89B0BB814994E0B0095228E /* TiBoxUser.h */,
+				A89B0BB914994E0B0095228E /* TiBoxUser.m */,
+			);
+			name = BoxWrappers;
+			sourceTree = "<group>";
+		};
+		A86CE06E13E1D85500B02CC8 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				A86CE06F13E1D85500B02CC8 /* README */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		A86CE07013E1D85500B02CC8 /* documentation */ = {
+			isa = PBXGroup;
+			children = (
+				A86CE07113E1D85500B02CC8 /* index.md */,
+				A820CBD513E3499E00E5A2F5 /* comment.md */,
+				A820CBD613E3499E00E5A2F5 /* file.md */,
+				A820CBD713E3499E00E5A2F5 /* folder.md */,
+				A820CBD813E3499E00E5A2F5 /* update.md */,
+				A820CBD913E3499E00E5A2F5 /* user.md */,
+			);
+			path = documentation;
+			sourceTree = "<group>";
+		};
+		A86CE07213E1D85500B02CC8 /* example */ = {
+			isa = PBXGroup;
+			children = (
+				A820CBDB13E349AB00E5A2F5 /* views */,
+				A86CE07313E1D85500B02CC8 /* app.js */,
+				A820CBE013E349AB00E5A2F5 /* utility.js */,
+			);
+			path = example;
+			sourceTree = "<group>";
+		};
+		A86CE07413E1D85500B02CC8 /* hooks */ = {
+			isa = PBXGroup;
+			children = (
+				A86CE07513E1D85500B02CC8 /* add.py */,
+				A86CE07613E1D85500B02CC8 /* install.py */,
+				A86CE07713E1D85500B02CC8 /* README */,
+				A86CE07813E1D85500B02CC8 /* remove.py */,
+				A86CE07913E1D85500B02CC8 /* uninstall.py */,
+			);
+			path = hooks;
+			sourceTree = "<group>";
+		};
+		A86CE07A13E1D85500B02CC8 /* platform */ = {
+			isa = PBXGroup;
+			children = (
+				A86CE07B13E1D85500B02CC8 /* README */,
+			);
+			path = platform;
+			sourceTree = "<group>";
+		};
+		A86CE08413E1DD5100B02CC8 /* BoxAPI */ = {
+			isa = PBXGroup;
+			children = (
+				A86CE0A413E1DD5100B02CC8 /* Models */,
+				A86CE0E713E1DD5100B02CC8 /* Utilities */,
+				A86CE0EE13E1DD5100B02CC8 /* Vendor */,
+			);
+			name = BoxAPI;
+			path = Classes/BoxAPI;
+			sourceTree = "<group>";
+		};
+		A86CE0A413E1DD5100B02CC8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A86CE0B513E1DD5100B02CC8 /* Builders */,
+				A86CE0BE13E1DD5100B02CC8 /* Operations */,
+				A86CE0A513E1DD5100B02CC8 /* BoxComment.h */,
+				A86CE0A613E1DD5100B02CC8 /* BoxComment.m */,
+				A86CE0A713E1DD5100B02CC8 /* BoxFile.h */,
+				A86CE0A813E1DD5100B02CC8 /* BoxFile.m */,
+				A86CE0A913E1DD5100B02CC8 /* BoxFolder+SaveableFolder.h */,
+				A86CE0AA13E1DD5100B02CC8 /* BoxFolder+SaveableFolder.m */,
+				A86CE0AB13E1DD5100B02CC8 /* BoxFolder.h */,
+				A86CE0AC13E1DD5100B02CC8 /* BoxFolder.m */,
+				A86CE0AD13E1DD5100B02CC8 /* BoxObject.h */,
+				A86CE0AE13E1DD5100B02CC8 /* BoxObject.m */,
+				A86CE0AF13E1DD5100B02CC8 /* BoxRESTApiFactory.h */,
+				A86CE0B013E1DD5100B02CC8 /* BoxRESTApiFactory.m */,
+				A86CE0B113E1DD5100B02CC8 /* BoxUpdate.h */,
+				A86CE0B213E1DD5100B02CC8 /* BoxUpdate.m */,
+				A86CE0B313E1DD5100B02CC8 /* BoxUser.h */,
+				A86CE0B413E1DD5100B02CC8 /* BoxUser.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A86CE0B513E1DD5100B02CC8 /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				A81CEAD813E2F4E4006CD988 /* BoxLoginBuilder.h */,
+				A81CEAD913E2F4E4006CD988 /* BoxLoginBuilder.m */,
+				A86CE0B613E1DD5100B02CC8 /* BoxCommentsListModelXMLBuilder.h */,
+				A86CE0B713E1DD5100B02CC8 /* BoxCommentsListModelXMLBuilder.m */,
+				A86CE0B813E1DD5100B02CC8 /* BoxFolderXMLBuilder.h */,
+				A86CE0B913E1DD5100B02CC8 /* BoxFolderXMLBuilder.m */,
+				A86CE0BA13E1DD5100B02CC8 /* BoxHTTPRequestBuilders.h */,
+				A86CE0BB13E1DD5100B02CC8 /* BoxHTTPRequestBuilders.m */,
+				A86CE0BC13E1DD5100B02CC8 /* BoxUpdatesListModelXMLBuilder.h */,
+				A86CE0BD13E1DD5100B02CC8 /* BoxUpdatesListModelXMLBuilder.m */,
+			);
+			path = Builders;
+			sourceTree = "<group>";
+		};
+		A86CE0BE13E1DD5100B02CC8 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				A86CE0BF13E1DD5100B02CC8 /* BoxAddCommentsOperation.h */,
+				A86CE0C013E1DD5100B02CC8 /* BoxAddCommentsOperation.m */,
+				A86CE0C113E1DD5100B02CC8 /* BoxAPIOperation.h */,
+				A86CE0C213E1DD5100B02CC8 /* BoxAPIOperation.m */,
+				A86CE0C313E1DD5100B02CC8 /* BoxCopyOperation.h */,
+				A86CE0C413E1DD5100B02CC8 /* BoxCopyOperation.m */,
+				A86CE0C513E1DD5100B02CC8 /* BoxCreateFolderOperation.h */,
+				A86CE0C613E1DD5100B02CC8 /* BoxCreateFolderOperation.m */,
+				A86CE0C713E1DD5100B02CC8 /* BoxDeleteCommentOperation.h */,
+				A86CE0C813E1DD5100B02CC8 /* BoxDeleteCommentOperation.m */,
+				A86CE0C913E1DD5100B02CC8 /* BoxDeleteOperation.h */,
+				A86CE0CA13E1DD5100B02CC8 /* BoxDeleteOperation.m */,
+				A86CE0CB13E1DD5100B02CC8 /* BoxDownloadOperation.h */,
+				A86CE0CC13E1DD5100B02CC8 /* BoxDownloadOperation.m */,
+				A86CE0CD13E1DD5100B02CC8 /* BoxGetAuthTokenOperation.h */,
+				A86CE0CE13E1DD5100B02CC8 /* BoxGetAuthTokenOperation.m */,
+				A86CE0CF13E1DD5100B02CC8 /* BoxGetCommentsOperation.h */,
+				A86CE0D013E1DD5100B02CC8 /* BoxGetCommentsOperation.m */,
+				A86CE0D113E1DD5100B02CC8 /* BoxGetTicketOperation.h */,
+				A86CE0D213E1DD5100B02CC8 /* BoxGetTicketOperation.m */,
+				A86CE0D313E1DD5100B02CC8 /* BoxGetUpdatesOperation.h */,
+				A86CE0D413E1DD5100B02CC8 /* BoxGetUpdatesOperation.m */,
+				A86CE0D513E1DD5100B02CC8 /* BoxMoveOperation.h */,
+				A86CE0D613E1DD5100B02CC8 /* BoxMoveOperation.m */,
+				A86CE0D713E1DD5100B02CC8 /* BoxNetworkOperation.h */,
+				A86CE0D813E1DD5100B02CC8 /* BoxNetworkOperation.m */,
+				A86CE0D913E1DD5100B02CC8 /* BoxOperation.h */,
+				A86CE0DA13E1DD5100B02CC8 /* BoxOperation.m */,
+				A86CE0DB13E1DD5100B02CC8 /* BoxPrivateShareOperation.h */,
+				A86CE0DC13E1DD5100B02CC8 /* BoxPrivateShareOperation.m */,
+				A86CE0DD13E1DD5100B02CC8 /* BoxPublicShareOperation.h */,
+				A86CE0DE13E1DD5100B02CC8 /* BoxPublicShareOperation.m */,
+				A86CE0DF13E1DD5100B02CC8 /* BoxPublicUnshareOperation.h */,
+				A86CE0E013E1DD5100B02CC8 /* BoxPublicUnshareOperation.m */,
+				A86CE0E113E1DD5100B02CC8 /* BoxRegisterOperation.h */,
+				A86CE0E213E1DD5100B02CC8 /* BoxRegisterOperation.m */,
+				A86CE0E313E1DD5100B02CC8 /* BoxRenameOperation.h */,
+				A86CE0E413E1DD5100B02CC8 /* BoxRenameOperation.m */,
+				A86CE0E513E1DD5100B02CC8 /* BoxUploadOperation.h */,
+				A86CE0E613E1DD5100B02CC8 /* BoxUploadOperation.m */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
+		A86CE0E713E1DD5100B02CC8 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A86CE0E813E1DD5100B02CC8 /* BoxModelUtilityFunctions.h */,
+				A86CE0E913E1DD5100B02CC8 /* BoxModelUtilityFunctions.m */,
+				A86CE0EA13E1DD5100B02CC8 /* NSArray+BoxUtils.h */,
+				A86CE0EB13E1DD5100B02CC8 /* NSArray+BoxUtils.m */,
+				A86CE0EC13E1DD5100B02CC8 /* NSDictionaryXMLParser.h */,
+				A86CE0ED13E1DD5100B02CC8 /* NSDictionaryXMLParser.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A86CE0EE13E1DD5100B02CC8 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				A86CE0EF13E1DD5100B02CC8 /* GTMDefines.h */,
+				A86CE0F013E1DD5100B02CC8 /* GTMRegex.h */,
+				A86CE0F113E1DD5100B02CC8 /* GTMRegex.m */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		A88FADE413EC4AC8000350FA /* BoxDelegates */ = {
+			isa = PBXGroup;
+			children = (
+				A88FADE613EC4AF3000350FA /* TiBoxDelegate.h */,
+				A88FADF813EC5F28000350FA /* TiBoxSimpleDelegate.h */,
+				A88FADF913EC5F28000350FA /* TiBoxSimpleDelegate.m */,
+				A8D37D5A13F17C5F0027253B /* TiBoxGetCommentsDelegate.h */,
+				A8D37D5B13F17C5F0027253B /* TiBoxGetCommentsDelegate.m */,
+				A8D37D6313F19E9B0027253B /* TiBoxGetUpdatesDelegate.h */,
+				A8D37D6413F19E9B0027253B /* TiBoxGetUpdatesDelegate.m */,
+				A88FADE813EC53D4000350FA /* TiBoxRegisterDelegate.h */,
+				A88FADE913EC53D4000350FA /* TiBoxRegisterDelegate.m */,
+			);
+			name = BoxDelegates;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC07A0554694100DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA747D9F0F9514B9006C5449 /* TiBox_Prefix.pch in Headers */,
+				24DD6CF91134B3F500162E58 /* TiBoxModule.h in Headers */,
+				24DE9E1111C5FE74003F90F6 /* TiBoxModuleAssets.h in Headers */,
+				A86CE11013E1DD5100B02CC8 /* BoxComment.h in Headers */,
+				A86CE11213E1DD5100B02CC8 /* BoxFile.h in Headers */,
+				A86CE11413E1DD5100B02CC8 /* BoxFolder+SaveableFolder.h in Headers */,
+				A86CE11613E1DD5100B02CC8 /* BoxFolder.h in Headers */,
+				A86CE11813E1DD5100B02CC8 /* BoxObject.h in Headers */,
+				A86CE11A13E1DD5100B02CC8 /* BoxRESTApiFactory.h in Headers */,
+				A86CE11C13E1DD5100B02CC8 /* BoxUpdate.h in Headers */,
+				A86CE11E13E1DD5100B02CC8 /* BoxUser.h in Headers */,
+				A86CE12013E1DD5100B02CC8 /* BoxCommentsListModelXMLBuilder.h in Headers */,
+				A86CE12213E1DD5100B02CC8 /* BoxFolderXMLBuilder.h in Headers */,
+				A86CE12413E1DD5100B02CC8 /* BoxHTTPRequestBuilders.h in Headers */,
+				A86CE12613E1DD5100B02CC8 /* BoxUpdatesListModelXMLBuilder.h in Headers */,
+				A86CE12813E1DD5100B02CC8 /* BoxAddCommentsOperation.h in Headers */,
+				A86CE12A13E1DD5100B02CC8 /* BoxAPIOperation.h in Headers */,
+				A86CE12C13E1DD5100B02CC8 /* BoxCopyOperation.h in Headers */,
+				A86CE12E13E1DD5100B02CC8 /* BoxCreateFolderOperation.h in Headers */,
+				A86CE13013E1DD5100B02CC8 /* BoxDeleteCommentOperation.h in Headers */,
+				A86CE13213E1DD5100B02CC8 /* BoxDeleteOperation.h in Headers */,
+				A86CE13413E1DD5100B02CC8 /* BoxDownloadOperation.h in Headers */,
+				A86CE13613E1DD5100B02CC8 /* BoxGetAuthTokenOperation.h in Headers */,
+				A86CE13813E1DD5100B02CC8 /* BoxGetCommentsOperation.h in Headers */,
+				A86CE13A13E1DD5100B02CC8 /* BoxGetTicketOperation.h in Headers */,
+				A86CE13C13E1DD5100B02CC8 /* BoxGetUpdatesOperation.h in Headers */,
+				A86CE13E13E1DD5100B02CC8 /* BoxMoveOperation.h in Headers */,
+				A86CE14013E1DD5100B02CC8 /* BoxNetworkOperation.h in Headers */,
+				A86CE14213E1DD5100B02CC8 /* BoxOperation.h in Headers */,
+				A86CE14413E1DD5100B02CC8 /* BoxPrivateShareOperation.h in Headers */,
+				A86CE14613E1DD5100B02CC8 /* BoxPublicShareOperation.h in Headers */,
+				A86CE14813E1DD5100B02CC8 /* BoxPublicUnshareOperation.h in Headers */,
+				A86CE14A13E1DD5100B02CC8 /* BoxRegisterOperation.h in Headers */,
+				A86CE14C13E1DD5100B02CC8 /* BoxRenameOperation.h in Headers */,
+				A86CE14E13E1DD5100B02CC8 /* BoxUploadOperation.h in Headers */,
+				A86CE15013E1DD5100B02CC8 /* BoxModelUtilityFunctions.h in Headers */,
+				A86CE15213E1DD5100B02CC8 /* NSArray+BoxUtils.h in Headers */,
+				A86CE15413E1DD5100B02CC8 /* NSDictionaryXMLParser.h in Headers */,
+				A86CE15613E1DD5100B02CC8 /* GTMDefines.h in Headers */,
+				A86CE15713E1DD5100B02CC8 /* GTMRegex.h in Headers */,
+				A81CEADA13E2F4E4006CD988 /* BoxLoginBuilder.h in Headers */,
+				A8B8538213E75767005658D4 /* TiBoxLoginViewProxy.h in Headers */,
+				A8B8538A13E759D1005658D4 /* TiBoxLoginView.h in Headers */,
+				A857E39513EB471300276E71 /* TiBoxFolder.h in Headers */,
+				A857E3B113EB55B600276E71 /* TiBoxFile.h in Headers */,
+				A88FADE713EC4AF3000350FA /* TiBoxDelegate.h in Headers */,
+				A88FADEA13EC53D4000350FA /* TiBoxRegisterDelegate.h in Headers */,
+				A88FADFA13EC5F28000350FA /* TiBoxSimpleDelegate.h in Headers */,
+				A8D37D5C13F17C5F0027253B /* TiBoxGetCommentsDelegate.h in Headers */,
+				A8D37D6113F183620027253B /* TiBoxComment.h in Headers */,
+				A8D37D6513F19E9B0027253B /* TiBoxGetUpdatesDelegate.h in Headers */,
+				A8D37D6913F19F4B0027253B /* TiBoxUpdate.h in Headers */,
+				A89B0BBA14994E0B0095228E /* TiBoxUser.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC07D0554694100DB518D /* box */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "box" */;
+			buildPhases = (
+				D2AAC07A0554694100DB518D /* Headers */,
+				D2AAC07B0554694100DB518D /* Sources */,
+				D2AAC07C0554694100DB518D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = box;
+			productName = box;
+			productReference = D2AAC07E0554694100DB518D /* libTiBox.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "box" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* box */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC07D0554694100DB518D /* box */,
+				24416B8111C4CA220047AFDD /* Build & Test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		24416B8011C4CA220047AFDD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here\n\npython \"${TITANIUM_SDK}/titanium.py\" run --dir=\"${PROJECT_DIR}\"\nexit $?\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC07B0554694100DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24DD6CFA1134B3F500162E58 /* TiBoxModule.m in Sources */,
+				24DE9E1211C5FE74003F90F6 /* TiBoxModuleAssets.m in Sources */,
+				A86CE11113E1DD5100B02CC8 /* BoxComment.m in Sources */,
+				A86CE11313E1DD5100B02CC8 /* BoxFile.m in Sources */,
+				A86CE11513E1DD5100B02CC8 /* BoxFolder+SaveableFolder.m in Sources */,
+				A86CE11713E1DD5100B02CC8 /* BoxFolder.m in Sources */,
+				A86CE11913E1DD5100B02CC8 /* BoxObject.m in Sources */,
+				A86CE11B13E1DD5100B02CC8 /* BoxRESTApiFactory.m in Sources */,
+				A86CE11D13E1DD5100B02CC8 /* BoxUpdate.m in Sources */,
+				A86CE11F13E1DD5100B02CC8 /* BoxUser.m in Sources */,
+				A86CE12113E1DD5100B02CC8 /* BoxCommentsListModelXMLBuilder.m in Sources */,
+				A86CE12313E1DD5100B02CC8 /* BoxFolderXMLBuilder.m in Sources */,
+				A86CE12513E1DD5100B02CC8 /* BoxHTTPRequestBuilders.m in Sources */,
+				A86CE12713E1DD5100B02CC8 /* BoxUpdatesListModelXMLBuilder.m in Sources */,
+				A86CE12913E1DD5100B02CC8 /* BoxAddCommentsOperation.m in Sources */,
+				A86CE12B13E1DD5100B02CC8 /* BoxAPIOperation.m in Sources */,
+				A86CE12D13E1DD5100B02CC8 /* BoxCopyOperation.m in Sources */,
+				A86CE12F13E1DD5100B02CC8 /* BoxCreateFolderOperation.m in Sources */,
+				A86CE13113E1DD5100B02CC8 /* BoxDeleteCommentOperation.m in Sources */,
+				A86CE13313E1DD5100B02CC8 /* BoxDeleteOperation.m in Sources */,
+				A86CE13513E1DD5100B02CC8 /* BoxDownloadOperation.m in Sources */,
+				A86CE13713E1DD5100B02CC8 /* BoxGetAuthTokenOperation.m in Sources */,
+				A86CE13913E1DD5100B02CC8 /* BoxGetCommentsOperation.m in Sources */,
+				A86CE13B13E1DD5100B02CC8 /* BoxGetTicketOperation.m in Sources */,
+				A86CE13D13E1DD5100B02CC8 /* BoxGetUpdatesOperation.m in Sources */,
+				A86CE13F13E1DD5100B02CC8 /* BoxMoveOperation.m in Sources */,
+				A86CE14113E1DD5100B02CC8 /* BoxNetworkOperation.m in Sources */,
+				A86CE14313E1DD5100B02CC8 /* BoxOperation.m in Sources */,
+				A86CE14513E1DD5100B02CC8 /* BoxPrivateShareOperation.m in Sources */,
+				A86CE14713E1DD5100B02CC8 /* BoxPublicShareOperation.m in Sources */,
+				A86CE14913E1DD5100B02CC8 /* BoxPublicUnshareOperation.m in Sources */,
+				A86CE14B13E1DD5100B02CC8 /* BoxRegisterOperation.m in Sources */,
+				A86CE14D13E1DD5100B02CC8 /* BoxRenameOperation.m in Sources */,
+				A86CE14F13E1DD5100B02CC8 /* BoxUploadOperation.m in Sources */,
+				A86CE15113E1DD5100B02CC8 /* BoxModelUtilityFunctions.m in Sources */,
+				A86CE15313E1DD5100B02CC8 /* NSArray+BoxUtils.m in Sources */,
+				A86CE15513E1DD5100B02CC8 /* NSDictionaryXMLParser.m in Sources */,
+				A86CE15813E1DD5100B02CC8 /* GTMRegex.m in Sources */,
+				A81CEADB13E2F4E4006CD988 /* BoxLoginBuilder.m in Sources */,
+				A8B8538313E75767005658D4 /* TiBoxLoginViewProxy.m in Sources */,
+				A8B8538B13E759D1005658D4 /* TiBoxLoginView.m in Sources */,
+				A857E39613EB471300276E71 /* TiBoxFolder.m in Sources */,
+				A857E3B213EB55B600276E71 /* TiBoxFile.m in Sources */,
+				A88FADEB13EC53D4000350FA /* TiBoxRegisterDelegate.m in Sources */,
+				A88FADFB13EC5F28000350FA /* TiBoxSimpleDelegate.m in Sources */,
+				A8D37D5D13F17C5F0027253B /* TiBoxGetCommentsDelegate.m in Sources */,
+				A8D37D6213F183620027253B /* TiBoxComment.m in Sources */,
+				A8D37D6613F19E9B0027253B /* TiBoxGetUpdatesDelegate.m in Sources */,
+				A8D37D6A13F19F4B0027253B /* TiBoxUpdate.m in Sources */,
+				A89B0BBB14994E0B0095228E /* TiBoxUser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		24416B8511C4CA280047AFDD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC07D0554694100DB518D /* box */;
+			targetProxy = 24416B8411C4CA280047AFDD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB921F08733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphoneos*]" = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphonesimulator*]" = i386;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DSTROOT = /tmp/TiBox.dst;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TiBox_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_CFLAGS = (
+					"-DDEBUG",
+					"-DTI_POST_1_2",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = TiBox;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		1DEB922008733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphoneos*]" = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphonesimulator*]" = i386;
+				DSTROOT = /tmp/TiBox.dst;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TiBox_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DTI_POST_1_2";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = TiBox;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
+		1DEB922308733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphoneos*]" = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphonesimulator*]" = i386;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DSTROOT = /tmp/TiBox.dst;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TiBox_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_CFLAGS = (
+					"-DDEBUG",
+					"-DTI_POST_1_2",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = TiBox;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		1DEB922408733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphoneos*]" = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphonesimulator*]" = i386;
+				DSTROOT = /tmp/TiBox.dst;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TiBox_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DTI_POST_1_2";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = TiBox;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
+		24416B8211C4CA220047AFDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Build & test";
+			};
+			name = Debug;
+		};
+		24416B8311C4CA220047AFDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = "Build & test";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "box" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB921F08733DC00010E9CD /* Debug */,
+				1DEB922008733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "box" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB922308733DC00010E9CD /* Debug */,
+				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24416B8A11C4CA520047AFDD /* Build configuration list for PBXAggregateTarget "Build & Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24416B8211C4CA220047AFDD /* Debug */,
+				24416B8311C4CA220047AFDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
