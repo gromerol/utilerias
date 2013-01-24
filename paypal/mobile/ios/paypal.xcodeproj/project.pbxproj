@@ -1,0 +1,554 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		24416B8111C4CA220047AFDD /* Build & Test */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 24416B8A11C4CA520047AFDD /* Build configuration list for PBXAggregateTarget "Build & Test" */;
+			buildPhases = (
+				24416B8011C4CA220047AFDD /* ShellScript */,
+			);
+			dependencies = (
+				24416B8511C4CA280047AFDD /* PBXTargetDependency */,
+			);
+			name = "Build & Test";
+			productName = "Build & test";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		24DD6CF91134B3F500162E58 /* TiPaypalModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* TiPaypalModule.h */; };
+		24DD6CFA1134B3F500162E58 /* TiPaypalModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* TiPaypalModule.m */; };
+		A86C17F3146842F300239C92 /* libPayPalMPL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C17F2146842F300239C92 /* libPayPalMPL.a */; };
+		A86C17FF1468431100239C92 /* PayPal.h in Headers */ = {isa = PBXBuildFile; fileRef = A86C17F41468431100239C92 /* PayPal.h */; };
+		A86C18001468431100239C92 /* PayPalAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = A86C17F51468431100239C92 /* PayPalAddress.h */; };
+		A86C18011468431100239C92 /* PayPalAdvancedPayment.h in Headers */ = {isa = PBXBuildFile; fileRef = A86C17F61468431100239C92 /* PayPalAdvancedPayment.h */; };
+		A86C18021468431100239C92 /* PayPalAmounts.h in Headers */ = {isa = PBXBuildFile; fileRef = A86C17F71468431100239C92 /* PayPalAmounts.h */; };
+		A86C18031468431100239C92 /* PayPalContext.h in Headers */ = {isa = PBXBuildFile; fileRef = A86C17F81468431100239C92 /* PayPalContext.h */; };
+		A86C18041468431100239C92 /* PayPalInvoiceData.h in Headers */ = {isa = PBXBuildFile; fileRef = A86C17F91468431100239C92 /* PayPalInvoiceData.h */; };
+		A86C18051468431100239C92 /* PayPalInvoiceItem.h in Headers */ = {isa = PBXBuildFile; fileRef = A86C17FA1468431100239C92 /* PayPalInvoiceItem.h */; };
+		A86C18061468431100239C92 /* PayPalPayment.h in Headers */ = {isa = PBXBuildFile; fileRef = A86C17FB1468431100239C92 /* PayPalPayment.h */; };
+		A86C18071468431100239C92 /* PayPalPreapprovalDetails.h in Headers */ = {isa = PBXBuildFile; fileRef = A86C17FC1468431100239C92 /* PayPalPreapprovalDetails.h */; };
+		A86C18081468431100239C92 /* PayPalReceiverAmounts.h in Headers */ = {isa = PBXBuildFile; fileRef = A86C17FD1468431100239C92 /* PayPalReceiverAmounts.h */; };
+		A86C18091468431100239C92 /* PayPalReceiverPaymentDetails.h in Headers */ = {isa = PBXBuildFile; fileRef = A86C17FE1468431100239C92 /* PayPalReceiverPaymentDetails.h */; };
+		A8DE107C13E0C9220025AC6E /* TiPaypalPaypalButton.h in Headers */ = {isa = PBXBuildFile; fileRef = A8DE107813E0C9220025AC6E /* TiPaypalPaypalButton.h */; };
+		A8DE107D13E0C9220025AC6E /* TiPaypalPaypalButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DE107913E0C9220025AC6E /* TiPaypalPaypalButton.m */; };
+		A8DE107E13E0C9220025AC6E /* TiPaypalPaypalButtonProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = A8DE107A13E0C9220025AC6E /* TiPaypalPaypalButtonProxy.h */; };
+		A8DE107F13E0C9220025AC6E /* TiPaypalPaypalButtonProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DE107B13E0C9220025AC6E /* TiPaypalPaypalButtonProxy.m */; };
+		A8DE109F13E0C9DF0025AC6E /* TiPaypal_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = A8DE109E13E0C9DF0025AC6E /* TiPaypal_Prefix.pch */; };
+		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		24416B8411C4CA280047AFDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = paypal;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		24DD6CF71134B3F500162E58 /* TiPaypalModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiPaypalModule.h; path = Classes/TiPaypalModule.h; sourceTree = "<group>"; };
+		24DD6CF81134B3F500162E58 /* TiPaypalModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiPaypalModule.m; path = Classes/TiPaypalModule.m; sourceTree = "<group>"; };
+		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
+		A86C17F2146842F300239C92 /* libPayPalMPL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPayPalMPL.a; path = lib/libPayPalMPL.a; sourceTree = "<group>"; };
+		A86C17F41468431100239C92 /* PayPal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayPal.h; path = headers/PayPal.h; sourceTree = "<group>"; };
+		A86C17F51468431100239C92 /* PayPalAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayPalAddress.h; path = headers/PayPalAddress.h; sourceTree = "<group>"; };
+		A86C17F61468431100239C92 /* PayPalAdvancedPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayPalAdvancedPayment.h; path = headers/PayPalAdvancedPayment.h; sourceTree = "<group>"; };
+		A86C17F71468431100239C92 /* PayPalAmounts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayPalAmounts.h; path = headers/PayPalAmounts.h; sourceTree = "<group>"; };
+		A86C17F81468431100239C92 /* PayPalContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayPalContext.h; path = headers/PayPalContext.h; sourceTree = "<group>"; };
+		A86C17F91468431100239C92 /* PayPalInvoiceData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayPalInvoiceData.h; path = headers/PayPalInvoiceData.h; sourceTree = "<group>"; };
+		A86C17FA1468431100239C92 /* PayPalInvoiceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayPalInvoiceItem.h; path = headers/PayPalInvoiceItem.h; sourceTree = "<group>"; };
+		A86C17FB1468431100239C92 /* PayPalPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayPalPayment.h; path = headers/PayPalPayment.h; sourceTree = "<group>"; };
+		A86C17FC1468431100239C92 /* PayPalPreapprovalDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayPalPreapprovalDetails.h; path = headers/PayPalPreapprovalDetails.h; sourceTree = "<group>"; };
+		A86C17FD1468431100239C92 /* PayPalReceiverAmounts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayPalReceiverAmounts.h; path = headers/PayPalReceiverAmounts.h; sourceTree = "<group>"; };
+		A86C17FE1468431100239C92 /* PayPalReceiverPaymentDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayPalReceiverPaymentDetails.h; path = headers/PayPalReceiverPaymentDetails.h; sourceTree = "<group>"; };
+		A8DE107313E0C8FE0025AC6E /* build.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = build.py; sourceTree = "<group>"; };
+		A8DE107413E0C8FE0025AC6E /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A8DE107513E0C8FE0025AC6E /* manifest */ = {isa = PBXFileReference; lastKnownFileType = text; path = manifest; sourceTree = "<group>"; };
+		A8DE107613E0C8FE0025AC6E /* module.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = module.xcconfig; sourceTree = "<group>"; };
+		A8DE107713E0C8FE0025AC6E /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		A8DE107813E0C9220025AC6E /* TiPaypalPaypalButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiPaypalPaypalButton.h; path = Classes/TiPaypalPaypalButton.h; sourceTree = "<group>"; };
+		A8DE107913E0C9220025AC6E /* TiPaypalPaypalButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiPaypalPaypalButton.m; path = Classes/TiPaypalPaypalButton.m; sourceTree = "<group>"; };
+		A8DE107A13E0C9220025AC6E /* TiPaypalPaypalButtonProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiPaypalPaypalButtonProxy.h; path = Classes/TiPaypalPaypalButtonProxy.h; sourceTree = "<group>"; };
+		A8DE107B13E0C9220025AC6E /* TiPaypalPaypalButtonProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiPaypalPaypalButtonProxy.m; path = Classes/TiPaypalPaypalButtonProxy.m; sourceTree = "<group>"; };
+		A8DE109813E0C9550025AC6E /* index.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = index.md; sourceTree = "<group>"; };
+		A8DE109913E0C9550025AC6E /* paypalButton.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = paypalButton.md; sourceTree = "<group>"; };
+		A8DE109B13E0C9550025AC6E /* app.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
+		A8DE109E13E0C9DF0025AC6E /* TiPaypal_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiPaypal_Prefix.pch; sourceTree = "<group>"; };
+		A8DE10A013E0CA7E0025AC6E /* changelog */ = {isa = PBXFileReference; lastKnownFileType = text; path = changelog; sourceTree = "<group>"; };
+		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D2AAC07E0554694100DB518D /* libTiPaypal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiPaypal.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AAC07C0554694100DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+				A86C17F3146842F300239C92 /* libPayPalMPL.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC07E0554694100DB518D /* libTiPaypal.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* paypal */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AEFE84172EC02AAC07 /* Classes */,
+				A8DE108013E0C9290025AC6E /* Headers */,
+				A8DE109713E0C9550025AC6E /* documentation */,
+				A8DE109A13E0C9550025AC6E /* example */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = paypal;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A86C17F2146842F300239C92 /* libPayPalMPL.a */,
+				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				24DD6CF71134B3F500162E58 /* TiPaypalModule.h */,
+				24DD6CF81134B3F500162E58 /* TiPaypalModule.m */,
+				A8DE107813E0C9220025AC6E /* TiPaypalPaypalButton.h */,
+				A8DE107913E0C9220025AC6E /* TiPaypalPaypalButton.m */,
+				A8DE107A13E0C9220025AC6E /* TiPaypalPaypalButtonProxy.h */,
+				A8DE107B13E0C9220025AC6E /* TiPaypalPaypalButtonProxy.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				A8DE10A013E0CA7E0025AC6E /* changelog */,
+				A8DE109E13E0C9DF0025AC6E /* TiPaypal_Prefix.pch */,
+				A8DE107313E0C8FE0025AC6E /* build.py */,
+				A8DE107413E0C8FE0025AC6E /* LICENSE */,
+				A8DE107513E0C8FE0025AC6E /* manifest */,
+				A8DE107613E0C8FE0025AC6E /* module.xcconfig */,
+				A8DE107713E0C8FE0025AC6E /* README */,
+				24DD6D1B1134B66800162E58 /* titanium.xcconfig */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		A8DE108013E0C9290025AC6E /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				A86C17F41468431100239C92 /* PayPal.h */,
+				A86C17F51468431100239C92 /* PayPalAddress.h */,
+				A86C17F61468431100239C92 /* PayPalAdvancedPayment.h */,
+				A86C17F71468431100239C92 /* PayPalAmounts.h */,
+				A86C17F81468431100239C92 /* PayPalContext.h */,
+				A86C17F91468431100239C92 /* PayPalInvoiceData.h */,
+				A86C17FA1468431100239C92 /* PayPalInvoiceItem.h */,
+				A86C17FB1468431100239C92 /* PayPalPayment.h */,
+				A86C17FC1468431100239C92 /* PayPalPreapprovalDetails.h */,
+				A86C17FD1468431100239C92 /* PayPalReceiverAmounts.h */,
+				A86C17FE1468431100239C92 /* PayPalReceiverPaymentDetails.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		A8DE109713E0C9550025AC6E /* documentation */ = {
+			isa = PBXGroup;
+			children = (
+				A8DE109813E0C9550025AC6E /* index.md */,
+				A8DE109913E0C9550025AC6E /* paypalButton.md */,
+			);
+			path = documentation;
+			sourceTree = "<group>";
+		};
+		A8DE109A13E0C9550025AC6E /* example */ = {
+			isa = PBXGroup;
+			children = (
+				A8DE109B13E0C9550025AC6E /* app.js */,
+			);
+			path = example;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC07A0554694100DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24DD6CF91134B3F500162E58 /* TiPaypalModule.h in Headers */,
+				A8DE107C13E0C9220025AC6E /* TiPaypalPaypalButton.h in Headers */,
+				A8DE107E13E0C9220025AC6E /* TiPaypalPaypalButtonProxy.h in Headers */,
+				A8DE109F13E0C9DF0025AC6E /* TiPaypal_Prefix.pch in Headers */,
+				A86C17FF1468431100239C92 /* PayPal.h in Headers */,
+				A86C18001468431100239C92 /* PayPalAddress.h in Headers */,
+				A86C18011468431100239C92 /* PayPalAdvancedPayment.h in Headers */,
+				A86C18021468431100239C92 /* PayPalAmounts.h in Headers */,
+				A86C18031468431100239C92 /* PayPalContext.h in Headers */,
+				A86C18041468431100239C92 /* PayPalInvoiceData.h in Headers */,
+				A86C18051468431100239C92 /* PayPalInvoiceItem.h in Headers */,
+				A86C18061468431100239C92 /* PayPalPayment.h in Headers */,
+				A86C18071468431100239C92 /* PayPalPreapprovalDetails.h in Headers */,
+				A86C18081468431100239C92 /* PayPalReceiverAmounts.h in Headers */,
+				A86C18091468431100239C92 /* PayPalReceiverPaymentDetails.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC07D0554694100DB518D /* paypal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "paypal" */;
+			buildPhases = (
+				D2AAC07A0554694100DB518D /* Headers */,
+				D2AAC07B0554694100DB518D /* Sources */,
+				D2AAC07C0554694100DB518D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = paypal;
+			productName = paypal;
+			productReference = D2AAC07E0554694100DB518D /* libTiPaypal.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "paypal" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* paypal */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC07D0554694100DB518D /* paypal */,
+				24416B8111C4CA220047AFDD /* Build & Test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		24416B8011C4CA220047AFDD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here\n\npython \"${TITANIUM_SDK}/titanium.py\" run --dir=\"${PROJECT_DIR}\"\nexit $?\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC07B0554694100DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24DD6CFA1134B3F500162E58 /* TiPaypalModule.m in Sources */,
+				A8DE107D13E0C9220025AC6E /* TiPaypalPaypalButton.m in Sources */,
+				A8DE107F13E0C9220025AC6E /* TiPaypalPaypalButtonProxy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		24416B8511C4CA280047AFDD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC07D0554694100DB518D /* paypal */;
+			targetProxy = 24416B8411C4CA280047AFDD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB921F08733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphoneos*]" = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphonesimulator*]" = i386;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TiPaypal_Prefix.pch";
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/lib\"",
+				);
+				PRODUCT_NAME = "TiPaypal";
+				OTHER_CFLAGS = (
+					"-DDEBUG",
+					"-DTI_POST_1_2",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+				DSTROOT = "/tmp/TiPaypal.dst";
+			};
+			name = Debug;
+		};
+		1DEB922008733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphoneos*]" = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphonesimulator*]" = i386;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TiPaypal_Prefix.pch";
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/lib\"",
+				);
+				PRODUCT_NAME = "TiPaypal";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DTI_POST_1_2";
+				OTHER_LDFLAGS = "-ObjC";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = "/tmp/TiPaypal.dst";
+			};
+			name = Release;
+		};
+		1DEB922308733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphoneos*]" = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphonesimulator*]" = i386;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TiPaypal_Prefix.pch";
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = "TiPaypal";
+				OTHER_CFLAGS = (
+					"-DDEBUG",
+					"-DTI_POST_1_2",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+				DSTROOT = "/tmp/TiPaypal.dst";
+			};
+			name = Debug;
+		};
+		1DEB922408733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphoneos*]" = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphonesimulator*]" = i386;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TiPaypal_Prefix.pch";
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = "TiPaypal";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DTI_POST_1_2";
+				OTHER_LDFLAGS = "-ObjC";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = "/tmp/TiPaypal.dst";
+			};
+			name = Release;
+		};
+		24416B8211C4CA220047AFDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Build & test";
+			};
+			name = Debug;
+		};
+		24416B8311C4CA220047AFDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = "Build & test";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "paypal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB921F08733DC00010E9CD /* Debug */,
+				1DEB922008733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "paypal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB922308733DC00010E9CD /* Debug */,
+				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24416B8A11C4CA520047AFDD /* Build configuration list for PBXAggregateTarget "Build & Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24416B8211C4CA220047AFDD /* Debug */,
+				24416B8311C4CA220047AFDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
