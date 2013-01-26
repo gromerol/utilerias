@@ -4,7 +4,7 @@
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
-#import "FacebookModule.h"
+#import "TiFacebookModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
 #import "TiBlob.h"
@@ -17,18 +17,27 @@
 #import "FBSBJSON.h"
 #import "FBSession.h"
 
-/**
- * Good reference for access_tokens and what all this crap means
- * http://benbiddington.wordpress.com/2010/04/23/facebook-graph-api-getting-access-tokens/
- */
+@implementation TiFacebookModule
 
-@implementation FacebookModule
+#pragma mark Internal
+
+// this is generated for your module, please do not change it
+-(id)moduleGUID
+{
+	return @"da8acc57-8673-4692-9282-e3c1a21f5d83";
+}
+
+// this is generated for your module, please do not change it
+-(NSString*)moduleId
+{
+	return @"ti.facebook";
+}
 
 @synthesize facebook;
 
 #pragma mark Sessions
 
--(void)_save 
+-(void)_save
 {
 	VerboseLog(@"[DEBUG] facebook _save");
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -45,7 +54,7 @@
 		[defaults removeObjectForKey:@"FBAccessToken"];
 	}
 	
-	NSDate *expirationDate = facebook.expirationDate;  
+	NSDate *expirationDate = facebook.expirationDate;
 	if (expirationDate) {
 		[defaults setObject:expirationDate forKey:@"FBSessionExpires"];
 	} else {
@@ -61,7 +70,7 @@
 	[defaults synchronize];
 }
 
--(void)_unsave 
+-(void)_unsave
 {
 	VerboseLog(@"[DEBUG] facebook _unsave");
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -69,10 +78,10 @@
 	[defaults removeObjectForKey:@"FBAccessToken"];
 	[defaults removeObjectForKey:@"FBSessionExpires"];
 	[defaults removeObjectForKey:@"FBAppId"];
-	[defaults synchronize]; 
+	[defaults synchronize];
 }
 
--(id)_restore 
+-(id)_restore
 {
 	VerboseLog(@"[DEBUG] facebook _restore");
 	RELEASE_TO_NIL(uid);
@@ -82,9 +91,9 @@
 	NSString *uid_ = [defaults objectForKey:@"FBUserId"];
 	appid = [[defaults stringForKey:@"FBAppId"] copy];
 	facebook = [[Facebook alloc] initWithAppId:appid urlSchemeSuffix:nil andDelegate:self];
-
+	
 	VerboseLog(@"[DEBUG] facebook _restore, uid = %@",uid_);
-	if (uid_) 
+	if (uid_)
 	{
 		NSDate* expirationDate = [defaults objectForKey:@"FBSessionExpires"];
 		VerboseLog(@"[DEBUG] facebook _restore, expirationDate = %@",expirationDate);
@@ -161,7 +170,7 @@
 -(void)shutdown:(id)sender
 {
 	VerboseLog(@"[DEBUG] facebook shutdown");
-
+	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super shutdown:sender];
 }
@@ -188,7 +197,7 @@
 			{
 				param = [file toBlob:nil];
 			}
-			else 
+			else
 			{
 				// empty file?
 				param = [[[TiBlob alloc] initWithData:[NSData data] mimetype:@"text/plain"] autorelease];
@@ -222,7 +231,7 @@
             }
             [params setObject:json_value forKey:key];
 			[FBSBJSON release];
-        }            
+        }
 	}
 	return httpMethod;
 }
@@ -234,7 +243,7 @@
  *
  * var facebook = require('facebook');
  * alert(facebook.uid);
- * 
+ *
  */
 -(id)uid
 {
@@ -247,7 +256,7 @@
  * var facebook = require('facebook');
  * if (facebook.loggedIn) {
  * }
- * 
+ *
  */
 -(id)loggedIn
 {
@@ -260,7 +269,7 @@
  * var facebook = require('facebook');
  * facebook.appid = '1234';
  * alert(facebook.appid);
- * 
+ *
  */
 -(id)appid
 {
@@ -273,7 +282,7 @@
  * var facebook = require('facebook');
  * facebook.permissions = ['publish_stream'];
  * alert(facebook.permissions);
- * 
+ *
  */
 -(id)permissions
 {
@@ -285,7 +294,7 @@
  *
  * var facebook = require('facebook');
  * alert(facebook.forceDialogAuth);
- * 
+ *
  */
 -(id)forceDialogAuth
 {
@@ -297,7 +306,7 @@
  *
  * var facebook = require('facebook');
  * alert(facebook.accessToken);
- * 
+ *
  */
 -(id)accessToken
 {
@@ -309,7 +318,7 @@
  *
  * var facebook = require('facebook');
  * alert(facebook.expirationDate);
- * 
+ *
  */
 -(id)expirationDate
 {
@@ -322,7 +331,7 @@
  * var facebook = require('facebook');
  * facebook.appid = '1234';
  * alert(facebook.appid);
- * 
+ *
  */
 -(void)setAppid:(id)arg
 {
@@ -337,7 +346,7 @@
  * var facebook = require('facebook');
  * facebook.permissions = ['publish_stream'];
  * alert(facebook.permissions);
- * 
+ *
  */
 -(void)setPermissions:(id)arg
 {
@@ -351,7 +360,7 @@
  * var facebook = require('facebook');
  * facebook.forceDialogAuth = true;
  * alert(facebook.forceDialogAuth);
- * 
+ *
  */
 -(void)setForceDialogAuth:(id)arg
 {
@@ -374,11 +383,11 @@
  *      alert(e.error);
  *    }
  * });
- * 
+ *
  * facebook.addEventListener('logout',function(e) {
  *    alert('logged out');
  * });
- * 
+ *
  * facebook.appid = 'my_appid';
  * facebook.permissions = ['publish_stream'];
  * facebook.authorize();
@@ -387,7 +396,7 @@
 -(void)authorize:(id)args
 {
 	VerboseLog(@"[DEBUG] facebook authorize");
-
+	
 	if ([self isLoggedIn])
 	{
 		// if already authorized, this should do nothing
@@ -413,13 +422,13 @@
 -(void)reauthorize:(id)args
 {
 	ENSURE_ARG_COUNT(args, 3);
-
+	
 	if (![self isLoggedIn])
 	{
 		[self throwException:@"NotAuthorized" subreason:@"App tried to reauthorize before being logged in." location:CODELOCATION];
 		return;
 	}
-		
+	
 	NSArray * writePermissions = [args objectAtIndex:0];
 	NSString * audienceString = [TiUtils stringValue:[args objectAtIndex:1]];
 	KrollCallback * callback = [args objectAtIndex:2];
@@ -427,10 +436,10 @@
 	ENSURE_CLASS(writePermissions, [NSArray class]);
 	ENSURE_CLASS(audienceString, [NSString class]);
 	ENSURE_CLASS(callback, [KrollCallback class]);
-
+	
 	FBSessionLoginBehavior behavior = FBSessionLoginBehaviorUseSystemAccountIfPresent;
 	FBSessionDefaultAudience audience = FBSessionDefaultAudienceEveryone;
-
+	
 	FBSessionReauthorizeResultHandler handler= ^(FBSession *session, NSError *error)
 	{
 		bool success = (error == nil);
@@ -444,11 +453,11 @@
 		[[callback context] enqueue:invocationEvent];
 		[propertiesDict release];
 	};
-
+	
 	TiThreadPerformOnMainThread(^{
 		[[facebook session] reauthorizeWithPublishPermissions:writePermissions
-									   defaultAudience:audience
-									 completionHandler:handler];
+											  defaultAudience:audience
+											completionHandler:handler];
 	}, NO);
 }
 
@@ -486,7 +495,7 @@
 -(void)requestWithGraphPath:(id)args
 {
 	VerboseLog(@"[DEBUG] facebook requestWithGraphPath");
-
+	
 	ENSURE_ARG_COUNT(args,4);
 	ENSURE_UI_THREAD_1_ARG(args);
 	
@@ -494,7 +503,7 @@
 	NSMutableDictionary* params = [args objectAtIndex:1];
 	NSString* httpMethod = [args objectAtIndex:2];
 	KrollCallback* callback = [args objectAtIndex:3];
-
+	
 	[self convertParams:params];
 	
 	TiFacebookRequest* delegate = [[[TiFacebookRequest alloc] initWithPath:path callback:callback module:self graph:YES] autorelease];
@@ -519,7 +528,7 @@
 -(void)request:(id)args
 {
 	VerboseLog(@"[DEBUG] facebook request");
-
+	
 	ENSURE_ARG_COUNT(args,3);
 	ENSURE_UI_THREAD_1_ARG(args);
 	
@@ -546,15 +555,15 @@
  *       Ti.API.info('result was = '+JSON.stringify(e.result));
  *    }
  * });
- * 
+ *
  */
 -(void)dialog:(id)args
 {
 	ENSURE_ARG_COUNT(args,3);
 	ENSURE_UI_THREAD_1_ARG(args);
-
+	
 	VerboseLog(@"[DEBUG] facebook dialog");
-
+	
 	NSString* action = [args objectAtIndex:0];
 	NSMutableDictionary* params = [args objectAtIndex:1];
 	KrollCallback* callback = [args objectAtIndex:2];
@@ -568,10 +577,10 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  * var button = facebook.createLoginButton({bottom:10});
  * window.add(button);
- * 
+ *
  */
 -(id)createLoginButton:(id)args
 {
@@ -590,7 +599,7 @@
 			{
 				[listener login];
 			}
-			else 
+			else
 			{
 				[listener logout];
 			}
@@ -607,7 +616,7 @@
 - (void)fbDidLogin
 {
 	VerboseLog(@"[DEBUG] facebook fbDidLogin");
-
+	
 	[facebook requestWithGraphPath:@"me" andDelegate:self];
 }
 
@@ -649,7 +658,7 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults removeObjectForKey:@"FBAccessToken"];
 	[defaults removeObjectForKey:@"FBSessionExpires"];
-	[defaults synchronize]; 
+	[defaults synchronize];
 	[self fireLoginChange];
 	//Because the user ID is still the same, we can't unsave. The
 	//session expiring should NOT be considered an active move by the user
@@ -667,7 +676,7 @@
 	VerboseLog(@"[DEBUG] facebook didLoad");
 	
 	RELEASE_TO_NIL(uid);
-	uid = [[result objectForKey:@"id"] copy]; 
+	uid = [[result objectForKey:@"id"] copy];
 	[self _save];
 	loggedIn = YES;
 	[self fireLoginChange];
@@ -676,7 +685,7 @@
 }
 
 
-- (void)request:(FBRequest*)request didFailWithError:(NSError*)error 
+- (void)request:(FBRequest*)request didFailWithError:(NSError*)error
 {
 	VerboseLog(@"[DEBUG] facebook didFailWithError: %@",error);
 	
@@ -713,4 +722,8 @@
 MAKE_SYSTEM_PROP(BUTTON_STYLE_NORMAL,FB_LOGIN_BUTTON_NORMAL);
 MAKE_SYSTEM_PROP(BUTTON_STYLE_WIDE,FB_LOGIN_BUTTON_WIDE);
 
+@end
+
+@implementation FacebookModule
+//TODO: Make a deprication warning when other platforms transition as well.
 @end

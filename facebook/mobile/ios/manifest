@@ -2,17 +2,17 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 3.0
+version: 3.1.0
 apiversion: 2
-description: External version of Facebook module to support new FB SDK
+description: Allows facebook integration for Titanium apps, including iOS 6's social frameworks
 author: Blain Hamon
-license: Appcelerator Commercial License
-copyright: Copyright (c) 2012 by Appcelerator, Inc.
+license: Apache v2
+copyright: ©2013 Appcelerator
 
 
 # these should not be edited
-name: facebook
-moduleid: facebook
-guid: 2a718a2b-1de6-439a-b98b-aa60d085f8fc
+name: TiFacebook
+moduleid: ti.facebook
+guid: da8acc57-8673-4692-9282-e3c1a21f5d83
 platform: iphone
 minsdk: 3.1.0

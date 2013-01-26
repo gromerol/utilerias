@@ -12,7 +12,7 @@
 
 @synthesize _module = module;
 
--(id)_initWithPageContext:(id<TiEvaluator>)context_ args:(id)args module:(FacebookModule*)module_
+-(id)_initWithPageContext:(id<TiEvaluator>)context_ args:(id)args module:(TiFacebookModule*)module_
 {
 	if (self = [super _initWithPageContext:context_ args:args]) {
 		module = [module_ retain];

@@ -5,17 +5,17 @@
  * Please see the LICENSE included with this distribution for details.
  */
 #import "TiViewProxy.h"
-#import "FacebookModule.h"
+#import "TiFacebookModule.h"
 #import "TiFacebookLoginButton.h"
 
 @interface TiFacebookLoginButtonProxy : TiViewProxy {
 
-	FacebookModule *module;
+	TiFacebookModule *module;
 }
 
--(id)_initWithPageContext:(id<TiEvaluator>)context_ args:(id)args module:(FacebookModule*)module_;
+-(id)_initWithPageContext:(id<TiEvaluator>)context_ args:(id)args module:(TiFacebookModule*)module_;
 
-@property(nonatomic,readonly) FacebookModule *_module;
+@property(nonatomic,readonly) TiFacebookModule *_module;
 
 -(void)internalSetWidth:(id)width;
 -(void)internalSetHeight:(id)height;

@@ -1,11 +1,11 @@
 /**
  * This is a generated file. Do not edit or your changes will be lost
  */
-#import "FacebookModuleAssets.h"
+#import "TiFacebookModuleAssets.h"
 
 extern NSData* filterDataInRange(NSData* thedata, NSRange range);
 
-@implementation FacebookModuleAssets
+@implementation TiFacebookModuleAssets
 
 - (NSData*) moduleAsset
 {

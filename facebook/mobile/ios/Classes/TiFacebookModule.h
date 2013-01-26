@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2011 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -14,7 +14,7 @@
 @end
 
 
-@interface FacebookModule : TiModule <FBRequestDelegate, FBDialogDelegate, FBSessionDelegate>
+@interface TiFacebookModule : TiModule <FBRequestDelegate, FBDialogDelegate, FBSessionDelegate>
 {
 	Facebook *facebook;
 	BOOL loggedIn;
@@ -27,7 +27,7 @@
 }
 
 @property(nonatomic,readonly) Facebook *facebook;
-@property(nonatomic,readonly) NSNumber *BUTTON_STYLE_NORMAL;	  	
+@property(nonatomic,readonly) NSNumber *BUTTON_STYLE_NORMAL;
 @property(nonatomic,readonly) NSNumber *BUTTON_STYLE_WIDE;
 
 -(BOOL)isLoggedIn;
@@ -38,5 +38,11 @@
 -(void)reauthorize:(id)args;
 -(void)logout:(id)args;
 
+
+@end
+
+// Legacy class is now a subclass for backwards and cross compatibility.
+// TODO: Depricate this class.
+@interface FacebookModule : TiFacebookModule
 
 @end

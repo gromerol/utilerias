@@ -13,16 +13,16 @@ win.add(label);
 win.open();
 
 // TODO: write your module tests here
-var facebook = require('facebook');
-Ti.API.info("module is => " + facebook);
+var TiFacebook = require('ti.facebook');
+Ti.API.info("module is => " + TiFacebook);
 
-label.text = facebook.example();
+label.text = TiFacebook.example();
 
-Ti.API.info("module exampleProp is => " + facebook.exampleProp);
-facebook.exampleProp = "This is a test value";
+Ti.API.info("module exampleProp is => " + TiFacebook.exampleProp);
+TiFacebook.exampleProp = "This is a test value";
 
 if (Ti.Platform.name == "android") {
-	var proxy = facebook.createExample({
+	var proxy = TiFacebook.createExample({
 		message: "Creating an example Proxy",
 		backgroundColor: "red",
 		width: 100,

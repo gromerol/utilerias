@@ -5,14 +5,14 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
-#import "FacebookModule.h"
+#import "TiFacebookModule.h"
 #import "KrollCallback.h"
 #import "FBConnect/Facebook.h"
 
 @interface TiFacebookRequest : NSObject<FBRequestDelegate> {
 	NSString *path;
 	KrollCallback *callback;
-	FacebookModule *module;
+	TiFacebookModule *module;
 	BOOL graph;
 }
 

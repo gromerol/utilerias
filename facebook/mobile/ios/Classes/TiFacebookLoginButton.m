@@ -26,7 +26,7 @@
     [super frameSizeChanged:frame bounds:bounds];
 }
 
--(FacebookModule*)module
+-(TiFacebookModule*)module
 {
 	TiFacebookLoginButtonProxy *p = (TiFacebookLoginButtonProxy*)self.proxy;
 	return p._module;
