@@ -123,6 +123,9 @@
 		1D15605116B34AA200D43852 /* TiFacebookLoginButtonProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D15604B16B34AA200D43852 /* TiFacebookLoginButtonProxy.m */; };
 		1D15605416B34AC800D43852 /* TiFacebookRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D15605216B34AC800D43852 /* TiFacebookRequest.h */; };
 		1D15605516B34AC800D43852 /* TiFacebookRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D15605316B34AC800D43852 /* TiFacebookRequest.m */; };
+		1D15605C16B3615100D43852 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D15605916B3615100D43852 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1D15605D16B3615100D43852 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D15605A16B3615100D43852 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1D15605E16B3615100D43852 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D15605B16B3615100D43852 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		24DD6CF91134B3F500162E58 /* TiFacebookModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* TiFacebookModule.h */; };
 		24DD6CFA1134B3F500162E58 /* TiFacebookModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* TiFacebookModule.m */; };
 		24DE9E1111C5FE74003F90F6 /* TiFacebookModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* TiFacebookModuleAssets.h */; };
@@ -243,6 +246,9 @@
 		1D15604B16B34AA200D43852 /* TiFacebookLoginButtonProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TiFacebookLoginButtonProxy.m; path = Classes/TiFacebookLoginButtonProxy.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		1D15605216B34AC800D43852 /* TiFacebookRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TiFacebookRequest.h; path = Classes/TiFacebookRequest.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		1D15605316B34AC800D43852 /* TiFacebookRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TiFacebookRequest.m; path = Classes/TiFacebookRequest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		1D15605916B3615100D43852 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		1D15605A16B3615100D43852 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		1D15605B16B3615100D43852 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		24DD6CF71134B3F500162E58 /* TiFacebookModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TiFacebookModule.h; path = Classes/TiFacebookModule.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		24DD6CF81134B3F500162E58 /* TiFacebookModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TiFacebookModule.m; path = Classes/TiFacebookModule.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
@@ -259,6 +265,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+				1D15605C16B3615100D43852 /* AdSupport.framework in Frameworks */,
+				1D15605D16B3615100D43852 /* Accounts.framework in Frameworks */,
+				1D15605E16B3615100D43852 /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +296,9 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1D15605916B3615100D43852 /* AdSupport.framework */,
+				1D15605A16B3615100D43852 /* Accounts.framework */,
+				1D15605B16B3615100D43852 /* Social.framework */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
 			);
 			name = Frameworks;
