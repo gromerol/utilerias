@@ -79,7 +79,7 @@
 		NSLog(@"Unable to encode argument %@ to JSON: Encoding as ''",result);
 		resultString = @"";
 	}
-	[FBSBJSON release];
+	[stringifier release];
 	[event setObject:resultString forKey:@"result"];
 	[module _fireEventToListener:@"result" withObject:event listener:callback thisObject:nil];
 	[self autorelease];

@@ -331,7 +331,6 @@ NSArray * noniOS6Permissions = nil;
 								  @"manage_pages", nil];
 		}
 		for (NSString * permission in permissions) {
-			NSLog(@"Checking for %@ in %@: %d",permission,noniOS6Permissions,[noniOS6Permissions containsObject:permission]);
 			if ([noniOS6Permissions containsObject:permission]) {
 				behavior = FBSessionLoginBehaviorWithFallbackToWebView;
 				if (![TI_APPLICATION_DEPLOYTYPE isEqualToString:@"production"]) {
@@ -341,7 +340,6 @@ NSArray * noniOS6Permissions = nil;
 			}
 		}
 	}
-    NSLog(@"SANITY CHECK: ForceDialog %d System %d, behavior: %d",forceDialog,systemFBSDK,behavior);
 	
     [self.session openWithBehavior:(FBSessionLoginBehavior)behavior
 				 completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
