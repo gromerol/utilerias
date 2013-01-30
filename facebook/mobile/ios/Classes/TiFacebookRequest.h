@@ -16,6 +16,6 @@
 	BOOL graph;
 }
 
--(id)initWithPath:(NSString*)path_ callback:(KrollCallback*)callback_ module:(FacebookModule*)module_ graph:(BOOL)graph_;
+-(id)initWithPath:(NSString*)path_ callback:(KrollCallback*)callback_ module:(TiFacebookModule*)module_ graph:(BOOL)graph_;
 
 @end

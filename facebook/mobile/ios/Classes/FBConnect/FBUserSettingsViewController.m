@@ -114,7 +114,7 @@
     [self updateBackgroundImage];
     
     UIImageView *logo = [[[UIImageView alloc] 
-                         initWithImage:[UIImage imageNamed:@"FBUserSettingsViewResources.bundle/images/facebook-logo.png"]] autorelease];
+                         initWithImage:[UIImage imageNamed:@"modules/ti.facebook/FBUserSettingsViewResources.bundle/images/facebook-logo.png"]] autorelease];
     CGPoint center = CGPointMake(CGRectGetMidX(usableBounds), 68);
     logo.center = center;
     logo.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
@@ -153,9 +153,9 @@
     
     // Add the login/logout button
     self.loginLogoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *image = [UIImage imageNamed:@"FBUserSettingsViewResources.bundle/images/silver-button-normal.png"];
+    UIImage *image = [UIImage imageNamed:@"modules/ti.facebook/FBUserSettingsViewResources.bundle/images/silver-button-normal.png"];
     [self.loginLogoutButton setBackgroundImage:image forState:UIControlStateNormal];
-    image = [UIImage imageNamed:@"FBUserSettingsViewResources.bundle/images/silver-button-pressed.png"];
+    image = [UIImage imageNamed:@"modules/ti.facebook/FBUserSettingsViewResources.bundle/images/silver-button-pressed.png"];
     [self.loginLogoutButton setBackgroundImage:image forState:UIControlStateHighlighted];
     self.loginLogoutButton.frame = CGRectMake((int)((usableBounds.size.width - image.size.width) / 2),
                                               285,
@@ -197,7 +197,7 @@
 - (void)updateBackgroundImage {
     NSString *orientation = UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ? @"Portrait" : @"Landscape";
     NSString *idiom = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? @"IPhone" : @"IPad";
-    NSString *imagePath = [NSString stringWithFormat:@"FBUserSettingsViewResources.bundle/images/loginBackground%@%@.jpg", idiom, orientation];
+    NSString *imagePath = [NSString stringWithFormat:@"modules/ti.facebook/FBUserSettingsViewResources.bundle/images/loginBackground%@%@.jpg", idiom, orientation];
     self.backgroundImageView.image = [UIImage imageNamed:imagePath];
 }
 

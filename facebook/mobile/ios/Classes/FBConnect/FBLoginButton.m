@@ -34,17 +34,17 @@
 {
   if (_isLoggedIn) 
   {
-	  return [UIImage imageNamed:@"modules/facebook/images/LogoutNormal.png"];
+	  return [UIImage imageNamed:@"modules/ti.facebook/images/LogoutNormal.png"];
   } 
   else 
   {
 	  if (_style == FB_LOGIN_BUTTON_NORMAL)
 	  {
-		  return [UIImage imageNamed:@"modules/facebook/images/LoginNormal.png"];
+		  return [UIImage imageNamed:@"modules/ti.facebook/images/LoginNormal.png"];
 	  }
 	  else
 	  {
-		  return [UIImage imageNamed:@"modules/facebook/images/LoginWithFacebookNormal.png"];
+		  return [UIImage imageNamed:@"modules/ti.facebook/images/LoginWithFacebookNormal.png"];
 	  }
   }
 }
@@ -56,17 +56,17 @@
 {
   if (_isLoggedIn) 
   {
-    return [UIImage imageNamed:@"modules/facebook/images/LogoutPressed.png"];
+    return [UIImage imageNamed:@"modules/ti.facebook/images/LogoutPressed.png"];
   } 
   else 
   {
 	  if (_style == FB_LOGIN_BUTTON_NORMAL)
 	  {
-		  return [UIImage imageNamed:@"modules/facebook/images/LoginPressed.png"];
+		  return [UIImage imageNamed:@"modules/ti.facebook/images/LoginPressed.png"];
 	  }
 	  else 
 	  {
-		  return [UIImage imageNamed:@"modules/facebook/images/LoginWithFacebookPressed.png"];
+		  return [UIImage imageNamed:@"modules/ti.facebook/images/LoginWithFacebookPressed.png"];
 	  }
   }
 }

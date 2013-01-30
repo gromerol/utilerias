@@ -181,12 +181,12 @@ CGSize g_imageSize;
     self.button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
     self.button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
-    UIImage *image = [[UIImage imageNamed:@"FacebookSDKResources.bundle/FBLoginView/images/login-button-small.png"] 
+    UIImage *image = [[UIImage imageNamed:@"modules/ti.facebook/FacebookSDKResources.bundle/FBLoginView/images/login-button-small.png"] 
                       stretchableImageWithLeftCapWidth:kButtonLabelX topCapHeight:0];
     g_imageSize = image.size;
     [self.button setBackgroundImage:image forState:UIControlStateNormal];
     
-    image = [[UIImage imageNamed:@"FacebookSDKResources.bundle/FBLoginView/images/login-button-small-pressed.png"]
+    image = [[UIImage imageNamed:@"modules/ti.facebook/FacebookSDKResources.bundle/FBLoginView/images/login-button-small-pressed.png"]
              stretchableImageWithLeftCapWidth:kButtonLabelX topCapHeight:0];
     [self.button setBackgroundImage:image forState:UIControlStateHighlighted];
     
