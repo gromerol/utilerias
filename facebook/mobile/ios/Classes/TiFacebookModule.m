@@ -241,7 +241,7 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  * alert(facebook.uid);
  *
  */
@@ -253,7 +253,7 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  * if (facebook.loggedIn) {
  * }
  *
@@ -266,7 +266,7 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  * facebook.appid = '1234';
  * alert(facebook.appid);
  *
@@ -279,8 +279,8 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
- * facebook.permissions = ['publish_stream'];
+ * var facebook = require('ti.facebook');
+ * facebook.permissions = ['read_stream'];
  * alert(facebook.permissions);
  *
  */
@@ -292,7 +292,7 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  * alert(facebook.forceDialogAuth);
  *
  */
@@ -304,7 +304,7 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  * alert(facebook.accessToken);
  *
  */
@@ -316,7 +316,7 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  * alert(facebook.expirationDate);
  *
  */
@@ -328,7 +328,7 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  * facebook.appid = '1234';
  * alert(facebook.appid);
  *
@@ -343,7 +343,7 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  * facebook.permissions = ['publish_stream'];
  * alert(facebook.permissions);
  *
@@ -357,7 +357,7 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  * facebook.forceDialogAuth = true;
  * alert(facebook.forceDialogAuth);
  *
@@ -370,7 +370,7 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  *
  * facebook.addEventListener('login',function(e) {
  *    if (e.success) {
@@ -464,7 +464,7 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  * facebook.logout();
  *
  */
@@ -480,7 +480,7 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  *
  * facebook.requestWithGraphPath('me',{}, 'post', function(e) {
  *    if (e.success) {
@@ -513,7 +513,7 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  *
  * facebook.request('photos.upload',{picture:blob},function(e) {
  *    if (e.success) {
@@ -549,7 +549,7 @@
 /**
  * JS example:
  *
- * var facebook = require('facebook');
+ * var facebook = require('ti.facebook');
  * facebook.dialog('stream.publish',{'api_key':'1234'},function(e) {
  *    if (e.success) {
  *       Ti.API.info('result was = '+JSON.stringify(e.result));

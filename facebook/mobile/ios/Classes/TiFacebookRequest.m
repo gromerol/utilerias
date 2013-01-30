@@ -54,7 +54,12 @@
     VerboseLog(@"[DEBUG] Facebook Error description : %@ ", [error userInfo]);
     
 	NSMutableDictionary *event = [self eventParameters:NO];
-	[event setObject:[error localizedDescription] forKey:@"error"];
+	NSString * errorString = [error localizedDescription];
+	NSString * userInfoMessage = [[error userInfo] objectForKey:@"message"];
+	if (userInfoMessage != nil) {
+		errorString = [errorString stringByAppendingFormat:@" %@",userInfoMessage];
+	}	
+	[event setObject:errorString forKey:@"error"];
 	[module _fireEventToListener:@"result" withObject:event listener:callback thisObject:nil];
 	[self autorelease];
 }

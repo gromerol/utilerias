@@ -1,39 +1,31 @@
-// This is a test harness for your module
-// You should do something interesting in this harness 
-// to test out the module and to provide instructions 
-// to users on how to use it by example.
+// this sets the background color of the master UIView (when there are no windows/tab groups on it)
+Titanium.UI.setBackgroundColor('#000');
+
+// create tab group
+var tabGroup = Titanium.UI.createTabGroup({backgroundColor:'#fff'});
+var fb = require('ti.facebook');
+fb.appid = "153813154769407";
+fb.permissions = ['read_stream'];
+
+//
+// create base UI tab and root window
+//
+tabGroup.addTab(Titanium.UI.createTab({  
+    icon:'KS_nav_views.png',
+    title:'Login',
+    window:require('loginwindow').window()
+}));
+tabGroup.addTab(Titanium.UI.createTab({  
+    icon:'KS_nav_views.png',
+    title:'Read',
+    window:require('readstream').window()
+}));
+tabGroup.addTab(Titanium.UI.createTab({  
+    icon:'KS_nav_views.png',
+    title:'Publish',
+    window:require('publishstream').window()
+}));
 
 
-// open a single window
-var win = Ti.UI.createWindow({
-	backgroundColor:'white'
-});
-var label = Ti.UI.createLabel();
-win.add(label);
-win.open();
-
-// TODO: write your module tests here
-var TiFacebook = require('ti.facebook');
-Ti.API.info("module is => " + TiFacebook);
-
-label.text = TiFacebook.example();
-
-Ti.API.info("module exampleProp is => " + TiFacebook.exampleProp);
-TiFacebook.exampleProp = "This is a test value";
-
-if (Ti.Platform.name == "android") {
-	var proxy = TiFacebook.createExample({
-		message: "Creating an example Proxy",
-		backgroundColor: "red",
-		width: 100,
-		height: 100,
-		top: 100,
-		left: 150
-	});
-
-	proxy.printMessage("Hello world!");
-	proxy.message = "Hi world!.  It's me again.";
-	proxy.printMessage("Hello world!");
-	win.add(proxy);
-}
-
+// open tab group
+tabGroup.open();
