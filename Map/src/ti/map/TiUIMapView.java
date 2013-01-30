@@ -53,9 +53,17 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 		}
 	}
 	
+	protected void processPreloadRoutes() {
+		ArrayList<RouteProxy> routes = ((ViewProxy)proxy).getPreloadRoutes();
+		for (int i = 0; i < routes.size(); i++) {
+			addRoute(routes.get(i));
+		}
+	}
+	
 	protected void onViewCreated() {
 		processMapProperties(proxy.getProperties());
 		processPreloadAnnotations();
+		processPreloadRoutes();
 		getMap().setOnMarkerClickListener(this);
 		getMap().setOnMapClickListener(this);
 	}
@@ -336,6 +344,25 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 		return null;
 	}
 	
+	public void addRoute(RouteProxy r) {
+		//check if route already added.
+		if (r.getRoute() != null) {
+			return;
+		}
+
+		r.processOptions();
+		r.setRoute(map.addPolyline(r.getOptions()));
+	}
+	
+	public void removeRoute (RouteProxy r) {
+		if (r.getRoute() == null) {
+			return;
+		}
+		
+		r.getRoute().remove();
+		r.setRoute(null);
+	}
+
 	public void fireClickEvent(Marker marker, AnnotationProxy annoProxy, Object clickSource) {
 		KrollDict d = new KrollDict();
 		d.put(TiC.PROPERTY_TITLE, marker.getTitle());

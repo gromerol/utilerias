@@ -1,6 +1,5 @@
 package ti.map;
 
-
 import java.util.ArrayList;
 
 import org.appcelerator.kroll.annotations.Kroll;
@@ -25,9 +24,7 @@ import android.os.Message;
 public class ViewProxy extends TiViewProxy
 {
 	private static final String TAG = "MapViewProxy";
-	
-	private static final String TRAFFIC = "traffic";
-	
+		
 	private static final int MSG_FIRST_ID = TiViewProxy.MSG_LAST_ID + 1;
 	
 	private static final int MSG_ADD_ANNOTATION = MSG_FIRST_ID + 500;
@@ -39,14 +36,20 @@ public class ViewProxy extends TiViewProxy
 	
 	private static final int MSG_SELECT_ANNOTATION = MSG_FIRST_ID + 505;
 	private static final int MSG_DESELECT_ANNOTATION = MSG_FIRST_ID + 506;
+	
+	private static final int MSG_ADD_ROUTE = MSG_FIRST_ID + 507;	
+	private static final int MSG_REMOVE_ROUTE = MSG_FIRST_ID + 508;
+
 
 
 	
 	private ArrayList<AnnotationProxy> preloadAnnotations;
+	private ArrayList<RouteProxy> preloadRoutes;
 	
 	public ViewProxy() {
 		super();
 		preloadAnnotations = new ArrayList<AnnotationProxy>();
+		preloadRoutes = new ArrayList<RouteProxy>();
 	}
 	
 	public TiUIView createView(Activity activity) {
@@ -103,6 +106,20 @@ public class ViewProxy extends TiViewProxy
 		case MSG_DESELECT_ANNOTATION: {
 			result = (AsyncResult) msg.obj;
 			handleDeselectAnnotation(result.getArg());
+			result.setResult(null);
+			return true;
+		}
+		
+		case MSG_ADD_ROUTE: {
+			result = (AsyncResult) msg.obj;
+			handleAddRoute((RouteProxy)result.getArg());
+			result.setResult(null);
+			return true;
+		}
+		
+		case MSG_REMOVE_ROUTE: {
+			result = (AsyncResult) msg.obj;
+			handleRemoveRoute((RouteProxy)result.getArg());
 			result.setResult(null);
 			return true;
 		}
@@ -227,7 +244,20 @@ public class ViewProxy extends TiViewProxy
 		TiUIView view = peekView();
 		if (view instanceof TiUIMapView) {
 			TiUIMapView mapView = (TiUIMapView) peekView();
-			mapView.removeAnnotation(annotation);
+			if (mapView.getMap() != null) {
+				mapView.removeAnnotation(annotation);
+			} else {
+				removePreloadAnnotation(annotation);
+			}
+			
+		} else {
+			removePreloadAnnotation(annotation);
+		}
+	}
+	
+	public void removePreloadAnnotation(Object annotation) {
+		if (annotation instanceof AnnotationProxy && preloadAnnotations.contains(annotation)) {
+			preloadAnnotations.remove(annotation);
 		}
 	}
 	
@@ -271,5 +301,77 @@ public class ViewProxy extends TiViewProxy
 			TiUIMapView mapView = (TiUIMapView) peekView();
 			mapView.deselectAnnotation(annotation);
 		}
+	}
+	
+	@Kroll.method
+	public void addRoute(RouteProxy route) {
+		
+		if (TiApplication.isUIThread()) {
+			handleAddRoute(route);
+		} else {
+			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_ADD_ROUTE), route);
+
+		}
+	}
+	
+	public void handleAddRoute(Object route) {
+		if (route == null) {
+			return;
+		}
+		RouteProxy r = (RouteProxy) route;
+		TiUIView view = peekView();
+		if (view instanceof TiUIMapView) {
+			TiUIMapView mapView = (TiUIMapView) peekView();
+			if (mapView.getMap() != null) {
+				mapView.addRoute(r);
+
+			} else {
+				addPreloadRoute(r);
+			}
+		} else {
+			addPreloadRoute(r);
+		}
+
+	}
+	
+	public void addPreloadRoute(RouteProxy r) {
+		if (!preloadRoutes.contains(r)) {
+			preloadRoutes.add(r);
+		}
+	}
+	
+	public void removePreloadRoute(RouteProxy r) {
+		if (preloadRoutes.contains(r)) {
+			preloadRoutes.remove(r);
+		}
+	}
+	
+	@Kroll.method
+	public void removeRoute(RouteProxy route) {
+		if (TiApplication.isUIThread()) {
+			handleRemoveRoute(route);
+		} else {
+			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_REMOVE_ROUTE), route);
+
+		}
+	}
+	
+	public void handleRemoveRoute(RouteProxy route) {
+		TiUIView view = peekView();
+		if (view instanceof TiUIMapView) {
+			TiUIMapView mapView = (TiUIMapView) peekView();
+			if (mapView.getMap() != null) {
+				mapView.removeRoute(route);
+
+			} else {
+				removePreloadRoute(route);
+			}
+		} else {
+			removePreloadRoute(route);
+		}
+	}
+	
+	public ArrayList<RouteProxy> getPreloadRoutes() {
+		return preloadRoutes;
 	}
 }

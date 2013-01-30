@@ -11,9 +11,13 @@ import java.lang.ref.WeakReference;
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
+import org.appcelerator.kroll.common.AsyncResult;
+import org.appcelerator.kroll.common.TiMessenger;
 import org.appcelerator.titanium.TiC;
 import org.appcelerator.titanium.TiContext;
 import org.appcelerator.titanium.util.TiConvert;
+
+import android.os.Message;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -26,7 +30,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 	TiC.PROPERTY_LATITUDE,
 	TiC.PROPERTY_LONGITUDE,
 	"draggable",
-	TiC.PROPERTY_IMAGE
+	TiC.PROPERTY_IMAGE,
+	TiC.PROPERTY_PINCOLOR
 })
 public class AnnotationProxy extends KrollProxy
 {
@@ -34,7 +39,16 @@ public class AnnotationProxy extends KrollProxy
 
 	private MarkerOptions markerOptions;
 	private TiMarker marker;
-	private static final String PROPERTY_DRAGGABLE = "draggable";
+	
+	private static final int MSG_FIRST_ID = KrollProxy.MSG_LAST_ID + 1;
+	
+	private static final int MSG_SET_LONG = MSG_FIRST_ID + 300;
+	private static final int MSG_SET_LAT = MSG_FIRST_ID + 301;
+	private static final int MSG_SET_TITLE = MSG_FIRST_ID + 302;
+	private static final int MSG_SET_SUBTITLE = MSG_FIRST_ID + 303;
+	private static final int MSG_SET_DRAGGABLE= MSG_FIRST_ID + 304;
+
+
 
 	public AnnotationProxy()
 	{
@@ -53,6 +67,57 @@ public class AnnotationProxy extends KrollProxy
 		table.put(TiC.PROPERTY_SUBTITLE, TiC.PROPERTY_SUBTITLEID);
 		table.put(TiC.PROPERTY_TITLE, TiC.PROPERTY_TITLEID);
 		return table;
+	}
+	
+	public boolean handleMessage(Message msg) 
+	{
+		AsyncResult result = null;
+		switch (msg.what) {
+
+		case MSG_SET_LONG: {
+			result = (AsyncResult) msg.obj;
+			setPosition(TiConvert.toDouble(getProperty(TiC.PROPERTY_LATITUDE)), (Double)result.getArg());
+			result.setResult(null);
+			return true;
+		}
+		
+		case MSG_SET_LAT: {
+			result = (AsyncResult) msg.obj;
+			setPosition((Double)result.getArg(), TiConvert.toDouble(getProperty(TiC.PROPERTY_LONGITUDE)));
+			result.setResult(null);
+			return true;
+		}
+		
+		case MSG_SET_TITLE: {
+			result = (AsyncResult) msg.obj;
+			marker.getMarker().setTitle((String)result.getArg());
+			result.setResult(null);
+			return true;
+		}
+		
+		case MSG_SET_SUBTITLE: {
+			result = (AsyncResult) msg.obj;
+			marker.getMarker().setSnippet((String)result.getArg());
+			result.setResult(null);
+			return true;
+		}
+		
+		case MSG_SET_DRAGGABLE: {
+			result = (AsyncResult) msg.obj;
+			marker.getMarker().setDraggable((Boolean)result.getArg());
+			result.setResult(null);
+			return true;
+		}
+		
+		default : {
+			return super.handleMessage(msg);
+		}
+		}
+	}
+
+	public void setPosition(double latitude, double longitude) {
+		LatLng position = new LatLng(latitude, longitude);
+		marker.getMarker().setPosition(position);
 	}
 
 	public void processOptions() {
@@ -74,11 +139,15 @@ public class AnnotationProxy extends KrollProxy
 		if (hasProperty(TiC.PROPERTY_SUBTITLE)) {
 			markerOptions.snippet(TiConvert.toString(getProperty(TiC.PROPERTY_SUBTITLE)));
 		}
-		if (hasProperty(PROPERTY_DRAGGABLE)) {
-			markerOptions.draggable(TiConvert.toBoolean(getProperty(PROPERTY_DRAGGABLE)));
+		if (hasProperty("draggable")) {
+			markerOptions.draggable(TiConvert.toBoolean(getProperty("draggable")));
 		}
+		//image and pincolor must be defined before adding to mapview. Once added, their values are final.
 		if (hasProperty(TiC.PROPERTY_IMAGE)) {
 			handleImage(getProperty(TiC.PROPERTY_IMAGE));
+		}
+		else if (hasProperty(TiC.PROPERTY_PINCOLOR)) {
+			markerOptions.icon(BitmapDescriptorFactory.defaultMarker(TiConvert.toFloat(getProperty(TiC.PROPERTY_PINCOLOR))));
 		}
 	}
 	
@@ -114,6 +183,31 @@ public class AnnotationProxy extends KrollProxy
 		if (m != null) {
 			m.hideInfoWindow();
 		}
+	}
+	
+	public void onPropertyChanged(String name, Object value) {
+		super.onPropertyChanged(name, value);
+		
+		if (marker == null) {
+			return;
+		}
+		
+		if (name.equals(TiC.PROPERTY_LONGITUDE)) {
+			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_LONG), TiConvert.toDouble(value));
+		}
+		if (name.equals(TiC.PROPERTY_LATITUDE)) {
+			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_LAT), TiConvert.toDouble(value));
+		}
+		if (name.equals(TiC.PROPERTY_TITLE)) {
+			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_TITLE), TiConvert.toString(value));
+		}
+		if (name.equals(TiC.PROPERTY_SUBTITLE)) {
+			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_SUBTITLE), TiConvert.toString(value));
+		}
+		if (name.equals("draggable")) {
+			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_DRAGGABLE), TiConvert.toBoolean(value));
+		}
+		
 	}
 	
 }
