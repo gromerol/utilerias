@@ -230,10 +230,33 @@
 				json_value = @"";
             }
             [params setObject:json_value forKey:key];
-			[FBSBJSON release];
+			[stringifier release];
         }
 	}
 	return httpMethod;
+}
+
+//This is here for backwards compatibility to replace ENSURE_CLASS.
+//As of writing, building for 3.1.0 breaks 3.0.0 otherwise.
+-(NSString *)errorStringIf:(id)value isNotClass:(NSString *)typeName forArgument:(NSString *)argName
+{
+	NSString * valueType;
+	if([value isKindOfClass:[NSString class]]) valueType = @"a string";
+	else if([value isKindOfClass:[NSNumber class]]) valueType = @"a number";
+	else if([value isKindOfClass:[NSArray class]]) valueType = @"an array";
+	else if([value isKindOfClass:[NSDictionary class]]) valueType = @"an object";
+	else if([value isKindOfClass:[KrollCallback class]]) valueType = @"a function";
+	else if([value isKindOfClass:[KrollWrapper class]]) valueType = @"a function";
+	else
+	{
+		valueType = [value description];
+	}
+	return [NSString stringWithFormat:@"%@ takes a %@, but was passed %@ instead",argName,typeName,valueType];
+}
+#define FACEBOOK_ENSURE_TYPE(x,t,n)	\
+if(![x isKindOfClass:[t class]]){ \
+[self throwException:TiExceptionInvalidType subreason: \
+[self errorStringIf:x isNotClass:n forArgument:@"" #x] location:CODELOCATION]; \
 }
 
 #pragma mark Public APIs
@@ -418,7 +441,20 @@
 	}, NO);
 }
 
-
+/**
+ * JS example:
+ *
+ * var facebook = require('ti.facebook');
+ * ...
+ * //While authorized for readonly permissions.
+ * facebook.reauthorize(['read_stream','publish_stream'],'everyone',function(e){
+ *     if(e.success){
+ *         facebook.requestWithGraphPath(...);
+ *     } else {
+ *         Ti.API.debug('Failed authorization due to: ' + e.error);
+ *     }
+ * });
+ */
 -(void)reauthorize:(id)args
 {
 	ENSURE_ARG_COUNT(args, 3);
@@ -433,9 +469,9 @@
 	NSString * audienceString = [TiUtils stringValue:[args objectAtIndex:1]];
 	KrollCallback * callback = [args objectAtIndex:2];
 	
-	ENSURE_CLASS(writePermissions, [NSArray class]);
-	ENSURE_CLASS(audienceString, [NSString class]);
-	ENSURE_CLASS(callback, [KrollCallback class]);
+	FACEBOOK_ENSURE_TYPE(writePermissions, NSArray, @"an array");
+	FACEBOOK_ENSURE_TYPE(audienceString, NSString, @"a string");
+	FACEBOOK_ENSURE_TYPE(callback, KrollCallback, @"a function");
 	
 	FBSessionLoginBehavior behavior = FBSessionLoginBehaviorUseSystemAccountIfPresent;
 	FBSessionDefaultAudience audience = FBSessionDefaultAudienceEveryone;
@@ -443,14 +479,35 @@
 	FBSessionReauthorizeResultHandler handler= ^(FBSession *session, NSError *error)
 	{
 		bool success = (error == nil);
-		NSString * errorString = [error localizedDescription];
-		NSNumber * errorCode = success?nil:[NSNumber numberWithInteger:[error code]];
+		NSString * errorString = nil;
+		int code = 0;
+		if(!success)
+		{
+			code = [error code];
+			if (code == 0)
+			{
+				code = -1;
+			}
+			errorString = [error localizedDescription];
+			NSString * userInfoMessage = [[error userInfo] objectForKey:@"message"];
+			if (errorString == nil)
+			{
+				errorString = userInfoMessage;
+			}
+			else if (userInfoMessage != nil)
+			{
+				errorString = [errorString stringByAppendingFormat:@" %@",userInfoMessage];
+			}
+		}
+		
+		NSNumber * errorCode = [NSNumber numberWithInteger:code];
 		NSDictionary * propertiesDict = [[NSDictionary alloc] initWithObjectsAndKeys:
 										 [NSNumber numberWithBool:success],@"success",
 										 errorCode,@"code", errorString,@"error", nil];
 		
 		KrollEvent * invocationEvent = [[KrollEvent alloc] initWithCallback:callback eventObject:propertiesDict thisObject:self];
 		[[callback context] enqueue:invocationEvent];
+		[invocationEvent release];
 		[propertiesDict release];
 	};
 	
@@ -497,17 +554,23 @@
 	VerboseLog(@"[DEBUG] facebook requestWithGraphPath");
 	
 	ENSURE_ARG_COUNT(args,4);
-	ENSURE_UI_THREAD_1_ARG(args);
 	
 	NSString* path = [args objectAtIndex:0];
 	NSMutableDictionary* params = [args objectAtIndex:1];
 	NSString* httpMethod = [args objectAtIndex:2];
 	KrollCallback* callback = [args objectAtIndex:3];
 	
+	FACEBOOK_ENSURE_TYPE(path, NSString, @"a string");
+	FACEBOOK_ENSURE_TYPE(params, NSDictionary, @"an object");
+	FACEBOOK_ENSURE_TYPE(httpMethod, NSString, @"a string");
+	FACEBOOK_ENSURE_TYPE(callback, KrollCallback, @"a function");
+	
 	[self convertParams:params];
 	
-	TiFacebookRequest* delegate = [[[TiFacebookRequest alloc] initWithPath:path callback:callback module:self graph:YES] autorelease];
-	[facebook requestWithGraphPath:path andParams:params andHttpMethod:httpMethod andDelegate:delegate];
+	TiThreadPerformOnMainThread(^{
+		TiFacebookRequest* delegate = [[[TiFacebookRequest alloc] initWithPath:path callback:callback module:self graph:YES] autorelease];
+		[facebook requestWithGraphPath:path andParams:params andHttpMethod:httpMethod andDelegate:delegate];
+	}, NO);
 }
 
 /**
@@ -530,20 +593,25 @@
 	VerboseLog(@"[DEBUG] facebook request");
 	
 	ENSURE_ARG_COUNT(args,3);
-	ENSURE_UI_THREAD_1_ARG(args);
 	
 	NSString* method = [args objectAtIndex:0];
 	NSMutableDictionary* params = [args objectAtIndex:1];
 	KrollCallback* callback = [args objectAtIndex:2];
-	
+
+	FACEBOOK_ENSURE_TYPE(method, NSString, @"a string");
+	FACEBOOK_ENSURE_TYPE(params, NSDictionary, @"an object");
+	FACEBOOK_ENSURE_TYPE(callback, KrollCallback, @"a function");
+
 	NSString *httpMethod = @"GET";
 	NSString* changedHttpMethod = [self convertParams:params];
 	if (changedHttpMethod != nil) {
 		httpMethod = changedHttpMethod;
 	}
 	
-	TiFacebookRequest* delegate = [[[TiFacebookRequest alloc] initWithPath:method callback:callback module:self graph:NO] autorelease];
-	[facebook requestWithMethodName:method andParams:params andHttpMethod:httpMethod andDelegate:delegate];
+	TiThreadPerformOnMainThread(^{
+		TiFacebookRequest* delegate = [[[TiFacebookRequest alloc] initWithPath:method callback:callback module:self graph:NO] autorelease];
+		[facebook requestWithMethodName:method andParams:params andHttpMethod:httpMethod andDelegate:delegate];
+	}, NO);
 }
 
 /**
@@ -560,7 +628,6 @@
 -(void)dialog:(id)args
 {
 	ENSURE_ARG_COUNT(args,3);
-	ENSURE_UI_THREAD_1_ARG(args);
 	
 	VerboseLog(@"[DEBUG] facebook dialog");
 	
@@ -568,10 +635,16 @@
 	NSMutableDictionary* params = [args objectAtIndex:1];
 	KrollCallback* callback = [args objectAtIndex:2];
 	
+	FACEBOOK_ENSURE_TYPE(action, NSString, @"a string");
+	FACEBOOK_ENSURE_TYPE(params, NSDictionary, @"an object");
+	FACEBOOK_ENSURE_TYPE(callback, KrollCallback, @"a function");
+	
 	[self convertParams:params];
 	
-	TiFacebookDialogRequest *delegate = [[[TiFacebookDialogRequest alloc] initWithCallback:callback module:self] autorelease];
-	[facebook dialog:action andParams:params andDelegate:delegate];
+	TiThreadPerformOnMainThread(^{
+		TiFacebookDialogRequest *delegate = [[[TiFacebookDialogRequest alloc] initWithCallback:callback module:self] autorelease];
+		[facebook dialog:action andParams:params andDelegate:delegate];
+	}, NO);
 }
 
 /**
@@ -607,6 +680,45 @@
 	}
 }
 
+-(void)fireLogin:(id)result cancelled:(BOOL)cancelled withError:(NSError *)error
+{
+	BOOL success = (result != nil);
+	int code = [error code];
+	if ((code == 0) && !success)
+	{
+		code = -1;
+	}
+	NSMutableDictionary *event = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+								  NUMBOOL(cancelled),@"cancelled",
+								  NUMBOOL(success),@"success",
+								  NUMINT(code),@"code",nil];
+	if(error != nil){
+		NSString * errorString = [error localizedDescription];
+		NSString * userInfoMessage = [[error userInfo] objectForKey:@"message"];
+		if (errorString == nil)
+		{
+			errorString = userInfoMessage;
+		}
+		else if (userInfoMessage != nil)
+		{
+			errorString = [errorString stringByAppendingFormat:@" %@",userInfoMessage];
+		}
+		
+		if (errorString != nil) {
+			[event setObject:errorString forKey:@"error"];
+		}
+	}
+	if(result != nil)
+	{
+		[event setObject:result forKey:@"data"];
+		if (uid != nil)
+		{
+			[event setObject:uid forKey:@"uid"];
+		}
+	}
+	[self fireEvent:@"login" withObject:event];
+}
+
 
 #pragma mark Delegate
 
@@ -628,8 +740,7 @@
 	VerboseLog(@"[DEBUG] facebook fbDidNotLogin: cancelled=%d",cancelled);
 	loggedIn = NO;
 	[self fireLoginChange];
-	NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:NUMBOOL(cancelled),@"cancelled",NUMBOOL(NO),@"success",nil];
-	[self fireEvent:@"login" withObject:event];
+	[self fireLogin:nil cancelled:cancelled withError:nil];
 }
 
 /**
@@ -680,8 +791,7 @@
 	[self _save];
 	loggedIn = YES;
 	[self fireLoginChange];
-	NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:NUMBOOL(NO),@"cancelled",NUMBOOL(YES),@"success",uid,@"uid",result,@"data",nil];
-	[self fireEvent:@"login" withObject:event];
+	[self fireLogin:result cancelled:NO withError:nil];
 }
 
 
@@ -692,8 +802,7 @@
 	RELEASE_TO_NIL(uid);
 	loggedIn = NO;
 	[self fireLoginChange];
-	NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:NUMBOOL(NO),@"cancelled",NUMBOOL(NO),@"success",error,@"error",nil];
-	[self fireEvent:@"login" withObject:event];
+	[self fireLogin:nil cancelled:NO withError:error];
 }
 
 #pragma mark Listeners

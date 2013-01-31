@@ -29,6 +29,39 @@
 }
 
 
+-(void)fireResult:(NSString *)result cancelled:(BOOL)cancelled error:(NSError *)error
+{
+	BOOL success = !cancelled && (error == nil);
+	int code = [error code];
+	if ((code == 0) && !success)
+	{
+		code = -1;
+	}
+	
+	NSMutableDictionary *event = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+						   NUMBOOL(cancelled),@"cancelled",
+						   NUMBOOL(success),@"success",
+						   NUMINT(code),@"code",
+						   result,@"result",nil];
+	if(error != nil){
+		NSString * errorString = [error localizedDescription];
+		NSString * userInfoMessage = [[error userInfo] objectForKey:@"message"];
+		if (errorString == nil)
+		{
+			errorString = userInfoMessage;
+		}
+		else if (userInfoMessage != nil)
+		{
+			errorString = [errorString stringByAppendingFormat:@" %@",userInfoMessage];
+		}
+
+		if (errorString != nil) {
+			[event setObject:errorString forKey:@"error"];
+		}
+	}
+	[module _fireEventToListener:@"result" withObject:event listener:callback thisObject:nil];
+}
+
 #pragma mark Delegate
 
 /**
@@ -42,8 +75,7 @@
 
 	// Based on the Android code, they return ONLY the query part of the URL as 'result'.  Let's do the same.
 	// TODO: Android also attempts to parse the ref... but why would the ref ever contain a query...?
-	NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:NUMBOOL(NO),@"cancelled",NUMBOOL(YES),@"success",[url query],@"result",nil];
-	[module _fireEventToListener:@"result" withObject:event listener:callback thisObject:nil];
+	[self fireResult:[url query] cancelled:NO error:nil];
 }
 
 /**
@@ -57,8 +89,7 @@
 	
 	// Based on the Android code, they return ONLY the query part of the URL as 'result'.  Let's do the same.
 	// TODO: Android also attempts to parse the ref... but why would the ref ever contain a query...?
-	NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:NUMBOOL(YES),@"cancelled",NUMBOOL(NO),@"success",[url query],@"result",nil];
-	[module _fireEventToListener:@"result" withObject:event listener:callback thisObject:nil];
+	[self fireResult:[url query] cancelled:YES error:nil];
 }
 
 /**
@@ -70,8 +101,7 @@
 	
 	[self autorelease];
 	
-	NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:NUMBOOL(NO),@"cancelled",NUMBOOL(NO),@"success",[error localizedDescription],@"error",nil];
-	[module _fireEventToListener:@"result" withObject:event listener:callback thisObject:nil];
+	[self fireResult:nil cancelled:NO error:error];
 }
 
 /**

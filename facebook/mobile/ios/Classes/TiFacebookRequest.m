@@ -31,16 +31,34 @@
 	[super dealloc];
 }
 
--(NSMutableDictionary*)eventParameters:(BOOL)yn
+-(NSMutableDictionary*)eventParameters:(NSError *)error
 {
-	if (graph)
-	{
-		return [NSMutableDictionary dictionaryWithObjectsAndKeys:NUMBOOL(YES),@"graph",path,@"path",NUMBOOL(yn),@"success",nil];
+	//Eventually consistent error reporting will become core
+	//to event passing in Titanium
+	
+	NSNumber * success = [NSNumber numberWithBool:error==nil];
+	int code = [error code];
+	if ((error != nil) && (code == 0)) {
+		code = -1;
 	}
-	else
+	NSString * errorString = [error localizedDescription];
+	NSString * userInfoMessage = [[error userInfo] objectForKey:@"message"];
+	if (errorString == nil)
 	{
-		return [NSMutableDictionary dictionaryWithObjectsAndKeys:NUMBOOL(NO),@"graph",path,@"method",NUMBOOL(yn),@"success",nil];
+		errorString = userInfoMessage;
 	}
+	else if (userInfoMessage != nil)
+	{
+		errorString = [errorString stringByAppendingFormat:@" %@",userInfoMessage];
+	}
+
+	return [NSMutableDictionary dictionaryWithObjectsAndKeys:
+			NUMBOOL(graph),@"graph",
+			path,(graph?@"path":@"method"),
+			success,@"success",
+			NUMINT(code),@"code",
+			errorString,@"error",
+			nil];
 }
 
 #pragma mark Delegates
@@ -53,13 +71,7 @@
 	VerboseLog(@"[DEBUG] facebook didFailWithError = %@",error);
     VerboseLog(@"[DEBUG] Facebook Error description : %@ ", [error userInfo]);
     
-	NSMutableDictionary *event = [self eventParameters:NO];
-	NSString * errorString = [error localizedDescription];
-	NSString * userInfoMessage = [[error userInfo] objectForKey:@"message"];
-	if (userInfoMessage != nil) {
-		errorString = [errorString stringByAppendingFormat:@" %@",userInfoMessage];
-	}	
-	[event setObject:errorString forKey:@"error"];
+	NSMutableDictionary *event = [self eventParameters:error];
 	[module _fireEventToListener:@"result" withObject:event listener:callback thisObject:nil];
 	[self autorelease];
 }
@@ -73,7 +85,7 @@
 - (void)request:(FBRequest*)request didLoad:(id)result
 {
 	VerboseLog(@"[DEBUG] facebook didLoad");
-	NSMutableDictionary *event = [self eventParameters:YES];
+	NSMutableDictionary *event = [self eventParameters:nil];
 	
 	// On Android, Facebook is a little braindead and so it returns the stringified result without parsing the JSON.
 	// But here, we do the opposite.  So... we re-stringify and ship as a JSON string.
