@@ -1,4 +1,11 @@
+/**
+ * Appcelerator Titanium Mobile
+ * Copyright (c) 2013 by Appcelerator, Inc. All Rights Reserved.
+ * Licensed under the terms of the Apache Public License
+ * Please see the LICENSE included with this distribution for details.
+ */
 package ti.map;
+
 
 import java.util.ArrayList;
 
@@ -19,7 +26,7 @@ import android.os.Message;
 	TiC.PROPERTY_MAP_TYPE,
 	TiC.PROPERTY_REGION,
 	TiC.PROPERTY_ANNOTATIONS,
-	"traffic"
+	MapModule.PROPERTY_TRAFFIC
 })
 public class ViewProxy extends TiViewProxy
 {
@@ -56,6 +63,7 @@ public class ViewProxy extends TiViewProxy
 		return new TiUIMapView(this, activity);
 	}
 
+	@Override
 	public boolean handleMessage(Message msg) 
 	{
 		AsyncResult result = null;
@@ -148,7 +156,7 @@ public class ViewProxy extends TiViewProxy
 
 		TiUIView view = peekView();
 		if (view instanceof TiUIMapView) {
-			TiUIMapView mapView = (TiUIMapView) peekView();
+			TiUIMapView mapView = (TiUIMapView) view;
 			if (mapView.getMap() != null) {
 				mapView.addAnnotation(annotation);
 
@@ -193,7 +201,7 @@ public class ViewProxy extends TiViewProxy
 	public void handleRemoveAllAnnotations() {
 		TiUIView view = peekView();
 		if (view instanceof TiUIMapView) {
-			TiUIMapView mapView = (TiUIMapView) peekView();
+			TiUIMapView mapView = (TiUIMapView) view;
 			mapView.removeAllAnnotations();
 		}
 	}
@@ -207,6 +215,16 @@ public class ViewProxy extends TiViewProxy
 		//Marker isn't on the map
 		if (annotation instanceof AnnotationProxy && ((AnnotationProxy)annotation).getTiMarker() == null) {
 			return false;
+		}
+		
+		if (annotation instanceof String) {
+			TiUIView view = peekView();
+			if (view instanceof TiUIMapView) {
+				TiUIMapView mapView = (TiUIMapView) view;
+				if (mapView.findMarkerByTitle((String)annotation) == null) {
+					return false;
+				}
+			}
 		}
 		
 		return true;
@@ -243,7 +261,7 @@ public class ViewProxy extends TiViewProxy
 	public void handleRemoveAnnotation(Object annotation) {
 		TiUIView view = peekView();
 		if (view instanceof TiUIMapView) {
-			TiUIMapView mapView = (TiUIMapView) peekView();
+			TiUIMapView mapView = (TiUIMapView) view;
 			if (mapView.getMap() != null) {
 				mapView.removeAnnotation(annotation);
 			} else {
@@ -277,8 +295,7 @@ public class ViewProxy extends TiViewProxy
 	public void handleSelectAnnotation(Object annotation) {
 		TiUIView view = peekView();
 		if (view instanceof TiUIMapView) {
-			TiUIMapView mapView = (TiUIMapView) peekView();
-			mapView.selectAnnotation(annotation);
+			((TiUIMapView)view).selectAnnotation(annotation);
 		}
 	}
 	
@@ -298,8 +315,7 @@ public class ViewProxy extends TiViewProxy
 	public void handleDeselectAnnotation(Object annotation) {
 		TiUIView view = peekView();
 		if (view instanceof TiUIMapView) {
-			TiUIMapView mapView = (TiUIMapView) peekView();
-			mapView.deselectAnnotation(annotation);
+			((TiUIMapView)view).deselectAnnotation(annotation);
 		}
 	}
 	
@@ -321,7 +337,7 @@ public class ViewProxy extends TiViewProxy
 		RouteProxy r = (RouteProxy) route;
 		TiUIView view = peekView();
 		if (view instanceof TiUIMapView) {
-			TiUIMapView mapView = (TiUIMapView) peekView();
+			TiUIMapView mapView = (TiUIMapView) view;
 			if (mapView.getMap() != null) {
 				mapView.addRoute(r);
 
@@ -359,7 +375,7 @@ public class ViewProxy extends TiViewProxy
 	public void handleRemoveRoute(RouteProxy route) {
 		TiUIView view = peekView();
 		if (view instanceof TiUIMapView) {
-			TiUIMapView mapView = (TiUIMapView) peekView();
+			TiUIMapView mapView = (TiUIMapView) view;
 			if (mapView.getMap() != null) {
 				mapView.removeRoute(route);
 
