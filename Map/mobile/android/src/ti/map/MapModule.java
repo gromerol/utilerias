@@ -21,11 +21,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 @Kroll.module(name="Map", id="ti.map")
 public class MapModule extends KrollModule
-{
-
-	// Standard Debugging variables
-	private static final String LCAT = "MapModule";
-	
+{	
 	public static final String PROPERTY_DRAGGABLE = "draggable";
 	public static final String PROPERTY_POINTS = "points";
 	public static final String PROPERTY_TRAFFIC = "traffic";
