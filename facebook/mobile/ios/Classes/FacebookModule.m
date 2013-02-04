@@ -4,7 +4,7 @@
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
-#import "TiFacebookModule.h"
+#import "facebookmodule.h"
 #import "TiBase.h"
 #import "TiHost.h"
 #import "TiBlob.h"
@@ -17,7 +17,7 @@
 #import "FBSBJSON.h"
 #import "FBSession.h"
 
-@implementation TiFacebookModule
+@implementation facebookmodule
 
 #pragma mark Internal
 
@@ -30,7 +30,7 @@
 // this is generated for your module, please do not change it
 -(NSString*)moduleId
 {
-	return @"ti.facebook";
+	return @"facebook";
 }
 
 @synthesize facebook;
@@ -264,7 +264,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  * alert(facebook.uid);
  *
  */
@@ -276,7 +276,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  * if (facebook.loggedIn) {
  * }
  *
@@ -289,7 +289,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  * facebook.appid = '1234';
  * alert(facebook.appid);
  *
@@ -302,7 +302,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  * facebook.permissions = ['read_stream'];
  * alert(facebook.permissions);
  *
@@ -315,7 +315,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  * alert(facebook.forceDialogAuth);
  *
  */
@@ -327,7 +327,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  * alert(facebook.accessToken);
  *
  */
@@ -339,7 +339,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  * alert(facebook.expirationDate);
  *
  */
@@ -351,7 +351,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  * facebook.appid = '1234';
  * alert(facebook.appid);
  *
@@ -366,7 +366,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  * facebook.permissions = ['publish_stream'];
  * alert(facebook.permissions);
  *
@@ -380,7 +380,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  * facebook.forceDialogAuth = true;
  * alert(facebook.forceDialogAuth);
  *
@@ -393,7 +393,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  *
  * facebook.addEventListener('login',function(e) {
  *    if (e.success) {
@@ -444,7 +444,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  * ...
  * //While authorized for readonly permissions.
  * facebook.reauthorize(['read_stream','publish_stream'],'everyone',function(e){
@@ -521,7 +521,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  * facebook.logout();
  *
  */
@@ -537,7 +537,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  *
  * facebook.requestWithGraphPath('me',{}, 'post', function(e) {
  *    if (e.success) {
@@ -576,7 +576,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  *
  * facebook.request('photos.upload',{picture:blob},function(e) {
  *    if (e.success) {
@@ -617,7 +617,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  * facebook.dialog('stream.publish',{'api_key':'1234'},function(e) {
  *    if (e.success) {
  *       Ti.API.info('result was = '+JSON.stringify(e.result));
@@ -650,7 +650,7 @@ if(![x isKindOfClass:[t class]]){ \
 /**
  * JS example:
  *
- * var facebook = require('ti.facebook');
+ * var facebook = require('facebook');
  * var button = facebook.createLoginButton({bottom:10});
  * window.add(button);
  *
@@ -831,8 +831,4 @@ if(![x isKindOfClass:[t class]]){ \
 MAKE_SYSTEM_PROP(BUTTON_STYLE_NORMAL,FB_LOGIN_BUTTON_NORMAL);
 MAKE_SYSTEM_PROP(BUTTON_STYLE_WIDE,FB_LOGIN_BUTTON_WIDE);
 
-@end
-
-@implementation FacebookModule
-//TODO: Make a deprication warning when other platforms transition as well.
 @end

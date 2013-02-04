@@ -3,7 +3,7 @@ Titanium.UI.setBackgroundColor('#000');
 
 // create tab group
 var tabGroup = Titanium.UI.createTabGroup({backgroundColor:'#fff'});
-var fb = require('ti.facebook');
+var fb = require('facebook');
 fb.appid = "153813154769407";
 fb.permissions = ['read_stream'];
 

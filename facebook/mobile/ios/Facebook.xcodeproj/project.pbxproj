@@ -126,11 +126,11 @@
 		1D15605C16B3615100D43852 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D15605916B3615100D43852 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1D15605D16B3615100D43852 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D15605A16B3615100D43852 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1D15605E16B3615100D43852 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D15605B16B3615100D43852 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		24DD6CF91134B3F500162E58 /* TiFacebookModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* TiFacebookModule.h */; };
-		24DD6CFA1134B3F500162E58 /* TiFacebookModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* TiFacebookModule.m */; };
-		24DE9E1111C5FE74003F90F6 /* TiFacebookModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* TiFacebookModuleAssets.h */; };
-		24DE9E1211C5FE74003F90F6 /* TiFacebookModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* TiFacebookModuleAssets.m */; };
-		AA747D9F0F9514B9006C5449 /* TiFacebook_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiFacebook_Prefix.pch */; };
+		24DD6CF91134B3F500162E58 /* facebookmodule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* facebookmodule.h */; };
+		24DD6CFA1134B3F500162E58 /* facebookmodule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* facebookmodule.m */; };
+		24DE9E1111C5FE74003F90F6 /* facebookmoduleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* facebookmoduleAssets.h */; };
+		24DE9E1211C5FE74003F90F6 /* facebookmoduleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* facebookmoduleAssets.m */; };
+		AA747D9F0F9514B9006C5449 /* Facebook_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* Facebook_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -140,7 +140,7 @@
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
-			remoteInfo = TiFacebook;
+			remoteInfo = Facebook;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -249,14 +249,14 @@
 		1D15605916B3615100D43852 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		1D15605A16B3615100D43852 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		1D15605B16B3615100D43852 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		24DD6CF71134B3F500162E58 /* TiFacebookModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TiFacebookModule.h; path = Classes/TiFacebookModule.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		24DD6CF81134B3F500162E58 /* TiFacebookModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TiFacebookModule.m; path = Classes/TiFacebookModule.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		24DD6CF71134B3F500162E58 /* facebookmodule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = facebookmodule.h; path = Classes/facebookmodule.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		24DD6CF81134B3F500162E58 /* facebookmodule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = facebookmodule.m; path = Classes/facebookmodule.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
-		24DE9E0F11C5FE74003F90F6 /* TiFacebookModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TiFacebookModuleAssets.h; path = Classes/TiFacebookModuleAssets.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		24DE9E1011C5FE74003F90F6 /* TiFacebookModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TiFacebookModuleAssets.m; path = Classes/TiFacebookModuleAssets.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		AA747D9E0F9514B9006C5449 /* TiFacebook_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiFacebook_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		24DE9E0F11C5FE74003F90F6 /* facebookmoduleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = facebookmoduleAssets.h; path = Classes/facebookmoduleAssets.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		24DE9E1011C5FE74003F90F6 /* facebookmoduleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = facebookmoduleAssets.m; path = Classes/facebookmoduleAssets.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		AA747D9E0F9514B9006C5449 /* Facebook_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D2AAC07E0554694100DB518D /* libTiFacebook.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiFacebook.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC07E0554694100DB518D /* libFacebook.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFacebook.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,12 +277,12 @@
 		034768DFFF38A50411DB9C8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC07E0554694100DB518D /* libTiFacebook.a */,
+				D2AAC07E0554694100DB518D /* libFacebook.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0867D691FE84028FC02AAC07 /* TiFacebook */ = {
+		0867D691FE84028FC02AAC07 /* Facebook */ = {
 			isa = PBXGroup;
 			children = (
 				08FB77AEFE84172EC02AAC07 /* Classes */,
@@ -290,7 +290,7 @@
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 			);
-			name = TiFacebook;
+			name = Facebook;
 			sourceTree = "<group>";
 		};
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
@@ -308,10 +308,10 @@
 			isa = PBXGroup;
 			children = (
 				1D155F8A16B34A5100D43852 /* FBConnect */,
-				24DE9E0F11C5FE74003F90F6 /* TiFacebookModuleAssets.h */,
-				24DE9E1011C5FE74003F90F6 /* TiFacebookModuleAssets.m */,
-				24DD6CF71134B3F500162E58 /* TiFacebookModule.h */,
-				24DD6CF81134B3F500162E58 /* TiFacebookModule.m */,
+				24DE9E0F11C5FE74003F90F6 /* facebookmoduleAssets.h */,
+				24DE9E1011C5FE74003F90F6 /* facebookmoduleAssets.m */,
+				24DD6CF71134B3F500162E58 /* facebookmodule.h */,
+				24DD6CF81134B3F500162E58 /* facebookmodule.m */,
 				1D15604616B34AA200D43852 /* TiFacebookDialogRequest.h */,
 				1D15604716B34AA200D43852 /* TiFacebookDialogRequest.m */,
 				1D15604816B34AA200D43852 /* TiFacebookLoginButton.h */,
@@ -436,7 +436,7 @@
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				AA747D9E0F9514B9006C5449 /* TiFacebook_Prefix.pch */,
+				AA747D9E0F9514B9006C5449 /* Facebook_Prefix.pch */,
 				24DD6D1B1134B66800162E58 /* titanium.xcconfig */,
 			);
 			name = "Other Sources";
@@ -449,9 +449,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA747D9F0F9514B9006C5449 /* TiFacebook_Prefix.pch in Headers */,
-				24DD6CF91134B3F500162E58 /* TiFacebookModule.h in Headers */,
-				24DE9E1111C5FE74003F90F6 /* TiFacebookModuleAssets.h in Headers */,
+				AA747D9F0F9514B9006C5449 /* Facebook_Prefix.pch in Headers */,
+				24DD6CF91134B3F500162E58 /* facebookmodule.h in Headers */,
+				24DE9E1111C5FE74003F90F6 /* facebookmoduleAssets.h in Headers */,
 				1D155FE916B34A5100D43852 /* Facebook.h in Headers */,
 				1D155FEB16B34A5100D43852 /* FacebookSDK.h in Headers */,
 				1D155FEC16B34A5100D43852 /* FBCacheDescriptor.h in Headers */,
@@ -516,9 +516,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D2AAC07D0554694100DB518D /* TiFacebook */ = {
+		D2AAC07D0554694100DB518D /* Facebook */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "TiFacebook" */;
+			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "Facebook" */;
 			buildPhases = (
 				D2AAC07A0554694100DB518D /* Headers */,
 				D2AAC07B0554694100DB518D /* Sources */,
@@ -528,9 +528,9 @@
 			);
 			dependencies = (
 			);
-			name = TiFacebook;
-			productName = TiFacebook;
-			productReference = D2AAC07E0554694100DB518D /* libTiFacebook.a */;
+			name = Facebook;
+			productName = Facebook;
+			productReference = D2AAC07E0554694100DB518D /* libFacebook.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -541,7 +541,7 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 			};
-			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "TiFacebook" */;
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Facebook" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -551,12 +551,12 @@
 				French,
 				German,
 			);
-			mainGroup = 0867D691FE84028FC02AAC07 /* TiFacebook */;
+			mainGroup = 0867D691FE84028FC02AAC07 /* Facebook */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2AAC07D0554694100DB518D /* TiFacebook */,
+				D2AAC07D0554694100DB518D /* Facebook */,
 				24416B8111C4CA220047AFDD /* Build & Test */,
 			);
 		};
@@ -583,8 +583,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24DD6CFA1134B3F500162E58 /* TiFacebookModule.m in Sources */,
-				24DE9E1211C5FE74003F90F6 /* TiFacebookModuleAssets.m in Sources */,
+				24DD6CFA1134B3F500162E58 /* facebookmodule.m in Sources */,
+				24DE9E1211C5FE74003F90F6 /* facebookmoduleAssets.m in Sources */,
 				1D155FEA16B34A5100D43852 /* Facebook.m in Sources */,
 				1D155FED16B34A5100D43852 /* FBCacheDescriptor.m in Sources */,
 				1D155FEF16B34A5100D43852 /* FBCacheIndex.m in Sources */,
@@ -636,7 +636,7 @@
 /* Begin PBXTargetDependency section */
 		24416B8511C4CA280047AFDD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D2AAC07D0554694100DB518D /* TiFacebook */;
+			target = D2AAC07D0554694100DB518D /* Facebook */;
 			targetProxy = 24416B8411C4CA280047AFDD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -648,11 +648,11 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DSTROOT = /tmp/TiFacebook.dst;
+				DSTROOT = /tmp/Facebook.dst;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TiFacebook_Prefix.pch;
+				GCC_PREFIX_HEADER = Facebook_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -671,7 +671,7 @@
 					"-DTI_POST_1_2",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = TiFacebook;
+				PRODUCT_NAME = Facebook;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -685,11 +685,11 @@
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				DSTROOT = /tmp/TiFacebook.dst;
+				DSTROOT = /tmp/Facebook.dst;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TiFacebook_Prefix.pch;
+				GCC_PREFIX_HEADER = Facebook_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -706,7 +706,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = TiFacebook;
+				PRODUCT_NAME = Facebook;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -719,11 +719,11 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DSTROOT = /tmp/TiFacebook.dst;
+				DSTROOT = /tmp/Facebook.dst;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TiFacebook_Prefix.pch;
+				GCC_PREFIX_HEADER = Facebook_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -741,7 +741,7 @@
 					"-DTI_POST_1_2",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = TiFacebook;
+				PRODUCT_NAME = Facebook;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -755,11 +755,11 @@
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				DSTROOT = /tmp/TiFacebook.dst;
+				DSTROOT = /tmp/Facebook.dst;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TiFacebook_Prefix.pch;
+				GCC_PREFIX_HEADER = Facebook_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -775,7 +775,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = TiFacebook;
+				PRODUCT_NAME = Facebook;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -807,7 +807,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "TiFacebook" */ = {
+		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "Facebook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB921F08733DC00010E9CD /* Debug */,
@@ -816,7 +816,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "TiFacebook" */ = {
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Facebook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB922308733DC00010E9CD /* Debug */,

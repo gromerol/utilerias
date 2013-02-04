@@ -1,6 +1,6 @@
 exports.window = function(value){
 	var win = Titanium.UI.createWindow({title:'Login'});
-	var fb = require('ti.facebook');
+	var fb = require('facebook');
 	//
 	// Login Status
 	//

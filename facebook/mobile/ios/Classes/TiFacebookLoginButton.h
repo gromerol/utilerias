@@ -6,7 +6,7 @@
  */
 #import "TiUIView.h"
 #import "FBConnect/FBLoginButton.h"
-#import "TiFacebookModule.h"
+#import "facebookmodule.h"
 
 @interface TiFacebookLoginButton : TiUIView<TiFacebookStateListener> {
 

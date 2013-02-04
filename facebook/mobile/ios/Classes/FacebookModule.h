@@ -14,7 +14,7 @@
 @end
 
 
-@interface TiFacebookModule : TiModule <FBRequestDelegate, FBDialogDelegate, FBSessionDelegate>
+@interface facebookmodule : TiModule <FBRequestDelegate, FBDialogDelegate, FBSessionDelegate>
 {
 	Facebook *facebook;
 	BOOL loggedIn;
@@ -38,11 +38,5 @@
 -(void)reauthorize:(id)args;
 -(void)logout:(id)args;
 
-
-@end
-
-// Legacy class is now a subclass for backwards and cross compatibility.
-// TODO: Depricate this class.
-@interface FacebookModule : TiFacebookModule
 
 @end

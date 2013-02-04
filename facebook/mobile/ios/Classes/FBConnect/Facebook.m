@@ -319,7 +319,7 @@ NSArray * noniOS6Permissions = nil;
 	if (forceDialog) {
 		behavior = FBSessionLoginBehaviorForcingWebView;
 		if (systemFBSDK && ![TI_APPLICATION_DEPLOYTYPE isEqualToString:@"production"]) {
-			NSLog(@"[INFO] Dialog authorization requested. If you would like to use the iOS Facebook support, Ti.Facebook.forceDialogAuth MUST be false.");
+			NSLog(@"[INFO] Dialog authorization requested. If you would like to use the iOS Facebook support, facebook.forceDialogAuth MUST be false.");
 		}
 	} else if (systemFBSDK) {
 		behavior = FBSessionLoginBehaviorUseSystemAccountIfPresent;
@@ -334,7 +334,7 @@ NSArray * noniOS6Permissions = nil;
 			if ([noniOS6Permissions containsObject:permission]) {
 				behavior = FBSessionLoginBehaviorWithFallbackToWebView;
 				if (![TI_APPLICATION_DEPLOYTYPE isEqualToString:@"production"]) {
-					NSLog(@"[INFO] Write permissions requested during authorization. If you would like to use the iOS Facebook support, Ti.Facebook.permissions must contain readonly permissions, and use reauthorize for any write requests.");
+					NSLog(@"[INFO] Write permissions requested during authorization. If you would like to use the iOS Facebook support, facebook.permissions must contain readonly permissions, and use reauthorize for any write requests.");
 				}
 				break;
 			}

@@ -1,6 +1,6 @@
 exports.window = function(value){
 	var win = Titanium.UI.createWindow({title:'Read Stream'});
-	var fb = require('ti.facebook');
+	var fb = require('facebook');
 	var b1 = Ti.UI.createButton({
 		title:'Run Query',
 		width:200,

@@ -1,6 +1,6 @@
 exports.window = function(value){
 	var win = Titanium.UI.createWindow({title:'Publish Stream'});
-	var fb = require('ti.facebook');
+	var fb = require('facebook');
 	function showRequestResult(e) {
 		var s = '';
 		if (e.success) {

@@ -11,8 +11,8 @@ copyright: ©2013 Appcelerator
 
 
 # these should not be edited
-name: TiFacebook
-moduleid: ti.facebook
+name: Facebook
+moduleid: facebook
 guid: da8acc57-8673-4692-9282-e3c1a21f5d83
 platform: iphone
 minsdk: 3.1.0
