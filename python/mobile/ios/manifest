@@ -2,11 +2,11 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 1.0
+version: 1.0.1
 description: A module for using python commands and code in Titanium Mobile
 author: Chad Auld
-license: See LICENCE file
-copyright: Copyright (c) 2010-2011 Appcelerator inc
+license: Apache License, Version 2.0
+copyright: Copyright (c) 2010-2013 Appcelerator inc
 
 
 # these should not be edited
