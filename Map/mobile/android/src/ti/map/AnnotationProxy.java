@@ -6,15 +6,20 @@
  */
 package ti.map;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.AsyncResult;
+import org.appcelerator.kroll.common.Log;
 import org.appcelerator.kroll.common.TiMessenger;
 import org.appcelerator.titanium.TiC;
 import org.appcelerator.titanium.TiContext;
 import org.appcelerator.titanium.util.TiConvert;
 
+import android.app.Activity;
 import android.os.Message;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -154,7 +159,17 @@ public class AnnotationProxy extends KrollProxy
 		//image path 
 		if (image instanceof String) {
 			String path = "Resources/" + image;
-			markerOptions.icon(BitmapDescriptorFactory.fromAsset(path));
+			Activity activity = getActivity();
+			if (activity != null) {
+				try {
+					//check if asset exists
+					InputStream in = activity.getAssets().open(path);
+					in.close();
+					markerOptions.icon(BitmapDescriptorFactory.fromAsset(path));
+				} catch (IOException e) {
+					Log.w(TAG, "Image does not exist");
+				}
+			}
 		}
 	}
 
