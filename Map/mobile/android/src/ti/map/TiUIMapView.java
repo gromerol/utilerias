@@ -71,6 +71,9 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 		processPreloadRoutes();
 		map.setOnMarkerClickListener(this);
 		map.setOnMapClickListener(this);
+
+		((ViewProxy)proxy).clearPreloadObjects();
+		proxy.fireEvent(TiC.EVENT_COMPLETE, null);
 	}
 
 	@Override
@@ -273,34 +276,20 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 	}
 
 	protected void removeAnnotation(Object annotation) {
-		
+		TiMarker timarker = null;
 		if (annotation instanceof TiMarker) {
-			if (timarkers.remove(annotation)) {
-				TiMarker timarker = (TiMarker)annotation;
-				timarker.getMarker().remove();
-				AnnotationProxy proxy = timarker.getProxy();
-				if (proxy != null) {
-					proxy.setTiMarker(null);
-				}
-			}
+			timarker = (TiMarker)annotation;
 		} else if (annotation instanceof AnnotationProxy) {
-			TiMarker timarker = ((AnnotationProxy)annotation).getTiMarker();
-			if (timarkers.remove(timarker)) {
-				timarker.getMarker().remove();
-				AnnotationProxy proxy = timarker.getProxy();
-				if (proxy != null) {
-					proxy.setTiMarker(null);
-				}
-			}
+			timarker = ((AnnotationProxy)annotation).getTiMarker();
 		} else if (annotation instanceof String) {
-			String title = (String)annotation;
-			TiMarker timarker = findMarkerByTitle(title);
-			if (timarker != null && timarkers.remove(timarker)) {
-				timarker.getMarker().remove();
-				AnnotationProxy proxy = timarker.getProxy();
-				if (proxy != null) {
-					proxy.setTiMarker(null);
-				}
+			timarker = findMarkerByTitle((String)annotation);
+		}
+		
+		if (timarker != null && timarkers.remove(timarker)) {
+			timarker.getMarker().remove();
+			AnnotationProxy proxy = timarker.getProxy();
+			if (proxy != null) {
+				proxy.setTiMarker(null);
 			}
 		}
 	}

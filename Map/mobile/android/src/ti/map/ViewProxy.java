@@ -62,6 +62,11 @@ public class ViewProxy extends TiViewProxy
 	public TiUIView createView(Activity activity) {
 		return new TiUIMapView(this, activity);
 	}
+	
+	public void clearPreloadObjects() {
+		preloadAnnotations.clear();
+		preloadRoutes.clear();
+	}
 
 	@Override
 	public boolean handleMessage(Message msg) 
