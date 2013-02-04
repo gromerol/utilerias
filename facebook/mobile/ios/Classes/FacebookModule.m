@@ -4,7 +4,7 @@
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
-#import "facebookmodule.h"
+#import "FacebookModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
 #import "TiBlob.h"
@@ -17,8 +17,12 @@
 #import "FBSBJSON.h"
 #import "FBSession.h"
 
-@implementation facebookmodule
+/**
+ * Good reference for access_tokens and what all this crap means
+ * http://benbiddington.wordpress.com/2010/04/23/facebook-graph-api-getting-access-tokens/
+ */
 
+@implementation FacebookModule
 #pragma mark Internal
 
 // this is generated for your module, please do not change it

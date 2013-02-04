@@ -5,15 +5,15 @@
  * Please see the LICENSE included with this distribution for details.
  */
 #import "FBConnect/Facebook.h"
-#import "facebookmodule.h"
+#import "FacebookModule.h"
 #import "KrollCallback.h"
 
 @interface TiFacebookDialogRequest : NSObject <FBDialogDelegate> {
 
 	KrollCallback *callback;
-	facebookmodule *module;
+	FacebookModule *module;
 }
 
--(id)initWithCallback:(KrollCallback*)callback_ module:(facebookmodule*)module_;
+-(id)initWithCallback:(KrollCallback*)callback_ module:(FacebookModule*)module_;
 
 @end

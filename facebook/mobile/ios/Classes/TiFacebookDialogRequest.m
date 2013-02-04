@@ -10,7 +10,7 @@
 
 #pragma mark Lifecycle
 
--(id)initWithCallback:(KrollCallback*)callback_ module:(facebookmodule*)module_
+-(id)initWithCallback:(KrollCallback*)callback_ module:(FacebookModule*)module_
 {
 	if (self = [super init])
 	{

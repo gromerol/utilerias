@@ -10,7 +10,7 @@
 
 @implementation TiFacebookRequest
 
--(id)initWithPath:(NSString*)path_ callback:(KrollCallback*)callback_ module:(facebookmodule*)module_ graph:(BOOL)graph_
+-(id)initWithPath:(NSString*)path_ callback:(KrollCallback*)callback_ module:(FacebookModule*)module_ graph:(BOOL)graph_
 {
 	if (self = [super init])
 	{
