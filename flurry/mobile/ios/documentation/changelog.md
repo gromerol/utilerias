@@ -1,5 +1,7 @@
 # Change Log
 <pre>
+v1.3.1	[MOD-1087] Added attribution
+	
 v1.3.0	[MOD-554] Updated to the latest version of Flurry (3.1.0) removing UDID support
 
 v1.2	[MOD-411] Updated to the latest version of Flurry (3.0.7)
