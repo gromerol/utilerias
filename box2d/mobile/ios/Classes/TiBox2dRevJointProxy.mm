@@ -1,9 +1,8 @@
 /**
- * Appcelerator Titanium Mobile Modules
- * Copyright (c) 2011 by Appcelerator, Inc. All Rights Reserved.
- * Proprietary and Confidential - This source code is not for redistribution
+ * Ti.Box2d Module
+ * Copyright (c) 2011-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Please see the LICENSE included with this distribution for details.
  */
-
 
 #import "TiBox2dRevJointProxy.hh"
 #import "TiUtils.h"
