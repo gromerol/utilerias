@@ -44,7 +44,6 @@ exports.window = function(value){
 	}
 
 	var doPublish = newToggle('Publish stream',100);
-//	var doPublish = newToggle('Publish stream',100);
 	
 	function updateLoginStatus() {
 		label.text = 'Logged In = ' + fb.loggedIn;
