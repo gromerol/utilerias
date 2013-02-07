@@ -1,0 +1,101 @@
+---
+name: Modules.Map.Annotation
+summary: Represents a labeled point of interest on the map that the user can click on.
+description: |
+    The `Annotation` object gives you low-level control over annotations that can be added to 
+    [map view](Modules.Map.View). An annotation must have its `latitude` and `longitude`
+    properties set to appear on a map.
+
+
+    An annotation has two states: selected and deselected. A deselected annotation
+    is marked by a pin image. When the user selects the pin, the full annotation is 
+    displayed.
+
+    You can specify a custom image for the map pin by setting the
+    [image](Modules.Map.Annotation.image) property. 
+
+    When the user clicks on an annotation, a `click` event is generated. 
+    
+    The annotation itself does not generate these events. You must add event listeners to the map view instead 
+
+    Use the <Modules.Map.createAnnotation> method to create an annotation.
+extends: Titanium.Proxy
+since: "3.0.2"
+platforms: [android]
+
+properties:
+
+  - name: draggable
+    summary: Determines whether the pin can be dragged by the user.
+    description: |
+        Must be set before the annotation is added to the map view.
+    type: Boolean
+    default: false
+
+  - name: image
+    summary: Image to use for the the pin.
+    description: |
+        The image can be specificed as a path relative to Resources/ folder.
+    type: String
+    default: If not specified, a standard map pin image is used.
+
+  - name: latitude 
+    summary: Latitude of the annotation, in decimal degrees.
+    type: Number
+
+  - name: longitude
+    summary: Longitude of the annotation, in decimal degrees.
+    type: Number
+
+  - name: pincolor
+    summary: |
+        Pin color.
+    description: |
+        Pin color is ignored if a custom pin image is specified using <Modules.Map.Annotation.image>.
+    type: Number
+
+  - name: subtitle
+    summary: Secondary title of the annotation view.
+    type: String
+
+  - name: title
+    summary: Primary title of the annotation view.
+    type: String
+
+events:
+  - name: click
+    summary: |
+        Fired when the user selects, deselects, or clicks on this annotation.
+    description: |
+        This event is not currently supported on Android. Register for the 
+        [click](Modules.Map.View.click) event on the map view to receive
+        events when any of the map's annotations are clicked.
+
+        This event is fired in two circumstances:
+
+        - If the user clicks on an annotation.
+        - The user deselects an annotation.
+
+        User deselects an annotation by clicking in the map view outside of
+        the annotation. 
+        The `click` event includes a value, `clicksource`, which describes the part of the 
+        annotation that was clicked. Note that the possible values for `clicksource` differ between
+        platforms.
+
+    properties:
+
+      - name: title
+        summary: Title of the annotation.
+        type: String
+
+      - name: map
+        summary: The map view instance that this annotation belongs to.
+        type: Modules.Map.View
+
+      - name: clicksource
+        summary: Source of the click event.
+        type: String
+
+      - name: annotation
+        summary: Annotation source object.
+        type: Modules.Map.Annotation
