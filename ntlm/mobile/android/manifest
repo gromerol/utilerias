@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0.0
+apiversion: 2
+description: Provides the JCIFS library as a authenticator factory for NTLM scheme
+author: Vishal Duggal
+license: GNU LGPL 2.1
+copyright: Copyright (c) 2013 by Appcelerator, Inc.
+
+
+# these should not be edited
+name: Ntlm
+moduleid: ti.ntlm
+guid: 92cb9fd9-5dc7-4e70-b328-1cafba571492
+platform: android
+minsdk: 3.0.0
