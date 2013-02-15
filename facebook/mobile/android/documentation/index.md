@@ -15,7 +15,7 @@ The facebook variable is a reference to the Module object.
 
 ## Author
 
-Jeff Haynie, Steven Tramer, and Blain Hamon
+Bill Dawson and Ping Wang
 
 ## License
 
