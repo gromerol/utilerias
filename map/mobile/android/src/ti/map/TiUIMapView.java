@@ -30,11 +30,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
-public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener{
+public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener, GoogleMap.OnCameraChangeListener{
 
 	private GoogleMap map;
 	protected boolean animate = false;
 	protected boolean preLayout = true;
+	protected LatLngBounds preLayoutUpdateBounds;
 	protected ArrayList<TiMarker> timarkers;
 	protected AnnotationProxy selectedAnnotation;
 	
@@ -71,7 +72,7 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 		processPreloadRoutes();
 		map.setOnMarkerClickListener(this);
 		map.setOnMapClickListener(this);
-
+		map.setOnCameraChangeListener(this);
 		((ViewProxy)proxy).clearPreloadObjects();
 		proxy.fireEvent(TiC.EVENT_COMPLETE, null);
 	}
@@ -187,17 +188,7 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 
 			final LatLngBounds bounds = new LatLngBounds(southwest, northeast);
 			if (preLayout) {
-				map.setOnCameraChangeListener(new OnCameraChangeListener() {
-
-					@Override
-					public void onCameraChange(CameraPosition arg0) {
-						moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 0));
-						// Remove listener to prevent position reset on camera move.
-						map.setOnCameraChangeListener(null);
-						preLayout = false;
-					}
-
-				});
+				preLayoutUpdateBounds = bounds;
 				return;
 			} else {
 				moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 0));
@@ -404,6 +395,27 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 		map.clear();
 		map = null;
 		timarkers.clear();
+	}
+
+	@Override
+	public void onCameraChange(CameraPosition position) {
+		if (preLayout) {
+			if (preLayoutUpdateBounds != null) {
+				moveCamera(CameraUpdateFactory.newLatLngBounds(preLayoutUpdateBounds, 0));
+				preLayoutUpdateBounds = null;
+			} else {
+				//moveCamera will trigger another callback, so we do this to make sure
+				//we don't fire event when region is set initially
+				preLayout = false;
+			}
+		} else if (proxy != null) {
+			KrollDict d = new KrollDict();
+			d.put(TiC.PROPERTY_LATITUDE, position.target.latitude);
+			d.put(TiC.PROPERTY_LONGITUDE, position.target.longitude);
+			d.put(TiC.PROPERTY_SOURCE, proxy);
+			proxy.fireEvent(TiC.EVENT_REGION_CHANGED, d);
+		}
+		
 	}
 
 }
