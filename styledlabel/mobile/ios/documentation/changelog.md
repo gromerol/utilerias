@@ -1,8 +1,10 @@
 # Change Log
 <pre>
-v1.5.4  [TIMODOPEN-210] Added "backgroundColor" and "backgroundColor: 'transparent'" support
-	
-v1.5.3  [MOD-944] Move to open source repo and build with 2.1.3.GA
+v1.5.5  Added "backgroundColor" and "backgroundColor: 'transparent'" support [TIMODOPEN-210]
+
+v1.5.4  Fixed click event not firing for non-HTTP links [MOD-1076]
+
+v1.5.3  Move to open source repo and build with 2.1.3.GA [MOD-944]
 
 v1.5.2  Resolved additional issue with auto height in Titanium Mobile 1.8.2 (should use Ti.UI.SIZE for Titanium Mobile 2.x.x)
 
