@@ -33,6 +33,8 @@
 		A848FB2F13FC4DBF005D7A9D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A848FB2713FC4DBF005D7A9D /* UIKit.framework */; };
 		A848FB3013FC4DBF005D7A9D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A848FB2813FC4DBF005D7A9D /* Foundation.framework */; };
 		AA747D9F0F9514B9006C5449 /* TiStyledlabel_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiStyledlabel_Prefix.pch */; };
+		CE28A78616D31310008D6CFF /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CE28A78416D31310008D6CFF /* ColorUtils.m */; };
+		CE28A78716D31310008D6CFF /* ColorUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = CE28A78516D31310008D6CFF /* ColorUtils.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		A848FB2713FC4DBF005D7A9D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A848FB2813FC4DBF005D7A9D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AA747D9E0F9514B9006C5449 /* TiStyledlabel_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiStyledlabel_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		CE28A78416D31310008D6CFF /* ColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorUtils.m; path = Classes/ColorUtils.m; sourceTree = "<group>"; };
+		CE28A78516D31310008D6CFF /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorUtils.h; path = Classes/ColorUtils.h; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libTiStyledlabel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiStyledlabel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -105,6 +109,8 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CE28A78416D31310008D6CFF /* ColorUtils.m */,
+				CE28A78516D31310008D6CFF /* ColorUtils.h */,
 				24DE9E0F11C5FE74003F90F6 /* TiStyledlabelModuleAssets.h */,
 				24DE9E1011C5FE74003F90F6 /* TiStyledlabelModuleAssets.m */,
 				24DD6CF71134B3F500162E58 /* TiStyledlabelModule.h */,
@@ -138,6 +144,7 @@
 				24DE9E1111C5FE74003F90F6 /* TiStyledlabelModuleAssets.h in Headers */,
 				7BCA75F513D5F2D000970DC0 /* TiStyledlabelLabel.h in Headers */,
 				A848F98213FC28D0005D7A9D /* TiStyledlabelLabelProxy.h in Headers */,
+				CE28A78716D31310008D6CFF /* ColorUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +219,7 @@
 				24DE9E1211C5FE74003F90F6 /* TiStyledlabelModuleAssets.m in Sources */,
 				7BCA75F613D5F2D000970DC0 /* TiStyledlabelLabel.m in Sources */,
 				A848F98313FC28D0005D7A9D /* TiStyledlabelLabelProxy.m in Sources */,
+				CE28A78616D31310008D6CFF /* ColorUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

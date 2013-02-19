@@ -41,6 +41,8 @@ To access this module from JavaScript, you would do the following:
 
 Creates a [Ti.StyledLabel.Label][].
 
+**Note:** Setting 'backgroundColor' on the label will override any background colors set in 'html'.
+
 ## Usage
 
 See example.

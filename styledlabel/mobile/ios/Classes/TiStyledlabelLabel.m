@@ -8,6 +8,7 @@
 #import "TiApp.h"
 #import "TiBase.h"
 #import "TiUtils.h"
+#import "ColorUtils.h"
 
 @interface TiStyledlabelLabel (Private)
 
@@ -30,6 +31,7 @@
 {
     RELEASE_TO_NIL(_html);
     RELEASE_TO_NIL(_web);
+    RELEASE_TO_NIL(_backgroundColorString);
 	[super dealloc];
 }
 
@@ -97,7 +99,27 @@
     RELEASE_TO_NIL(_html);
     _html = [[NSString stringWithFormat:@"%@%@%@", head, html, onload] retain];
     
+    _webViewDidLoad = NO;
     [[self web] loadHTMLString:_html baseURL:nil];
+}
+
+-(void)setBackgroundColor_:(id)value
+{
+    RELEASE_TO_NIL(_backgroundColorString)
+    NSString *colorValue = [TiUtils stringValue:value];
+    if ([colorValue isEqualToString:@"transparent"]) {
+        [[self web]setBackgroundColor:[UIColor clearColor]];
+        [self web].opaque = NO;
+        _backgroundColorString = colorValue;
+    } else {
+        UIColor *newColor = [[TiUtils colorValue:colorValue] _color];
+        [[self web]setBackgroundColor:newColor];
+        [self web].opaque = YES;
+        _backgroundColorString = [ColorUtils htmlFromUIColor:newColor];
+    }
+    
+    [_backgroundColorString retain];
+    [self applyBackgroundColorToWebView];
 }
 
 #pragma mark -
@@ -131,10 +153,22 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    _webViewDidLoad = YES;
+    [self applyBackgroundColorToWebView];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+}
+
+#pragma mark -
+#pragma mark Utilities
+
+- (void)applyBackgroundColorToWebView
+{
+    if (_backgroundColorString && _webViewDidLoad) {
+        [[self web] stringByEvaluatingJavaScriptFromString: [NSString stringWithFormat:@"document.body.style.backgroundColor = '%@';", _backgroundColorString]];
+    }
 }
 
 @end
