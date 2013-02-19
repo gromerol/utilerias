@@ -1,0 +1,165 @@
+---
+name: Modules.Map
+summary: Add-on module for Google Maps v.2.
+description: |
+    This module is a replacement for the built-in Titanium.Map module on Android, which uses the Google Maps v.1 API. 
+    The Google Maps v.1 API is deprecated and Google will no longer issue new API keys for v.1 after March 3rd, 2013. New 
+    applications should use this module on Android.
+
+    Applications with existing v.1 API keys can continue to use the Titanium.Map module on Android, or transition to the new 
+    ti.map add-on module. 
+
+    Requirements: 
+
+    -   Obtain map API key from google. You can find instructions here: 
+        https://developers.google.com/maps/documentation/android/start#the_google_maps_api_key
+    -   Device needs to have Google Play installed. Otherwise module won't work. Module will not work on emulators.
+    
+    -   Add this to tiapp.xml - replace "API KEY HERE" with your API key.
+    
+            <manifest>
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+            <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+            <permission android:name="com.map.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
+            <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+            <uses-permission android:name="com.map.permission.MAPS_RECEIVE"/>
+            <application>
+                <meta-data
+                    android:name="com.google.android.maps.v2.API_KEY" android:value="API KEY HERE"/>
+            </application>
+            </manifest>
+          
+    - Use require('ti.map') to import the module.
+    
+extends: Titanium.Module
+since: "3.0.2"
+platforms: [android]
+properties:
+
+  - name: ANNOTATION_GREEN
+    summary: |
+        Color constant used to set a map annotation to green via the 
+        <Modules.Map.Annotation.pincolor> property.
+    type: Number
+    permission: read-only
+    
+  - name: ANNOTATION_BLUE
+    summary: |
+        Color constant used to set a map annotation to blue via the 
+        <Modules.Map.Annotation.pincolor> property.
+    type: Number
+    permission: read-only
+    
+  - name: ANNOTATION_AZURE
+    summary: |
+        Color constant used to set a map annotation to azure via the 
+        <Modules.Map.Annotation.pincolor> property.
+    type: Number
+    permission: read-only
+    
+  - name: ANNOTATION_CYAN
+    summary: |
+        Color constant used to set a map annotation to cyan via the 
+        <Modules.Map.Annotation.pincolor> property.
+    type: Number
+    permission: read-only
+    
+  - name: ANNOTATION_MAGENTA
+    summary: |
+        Color constant used to set a map annotation to magenta via the 
+        <Modules.Map.Annotation.pincolor> property.
+    type: Number
+    permission: read-only
+    
+  - name: ANNOTATION_ORANGE
+    summary: |
+        Color constant used to set a map annotation to orange via the 
+        <Modules.Map.Annotation.pincolor> property.
+    type: Number
+    permission: read-only
+    
+  - name: ANNOTATION_ROSE
+    summary: |
+        Color constant used to set a map annotation to rose via the 
+        <Modules.Map.Annotation.pincolor> property.
+    type: Number
+    permission: read-only
+    
+  - name: ANNOTATION_YELLOW
+    summary: |
+        Color constant used to set a map annotation to yellow via the 
+        <Modules.Map.Annotation.pincolor> property.
+    type: Number
+    permission: read-only
+
+  - name: ANNOTATION_VIOLET
+    summary: |
+        Color constant used to set a map annotation to violet via the 
+        <Modules.Map.Annotation.pincolor> property.
+    type: Number
+    permission: read-only
+    
+  - name: ANNOTATION_RED
+    summary: |
+        Color constant used to set a map annotation to red via the 
+        <Modules.Map.Annotation.pincolor> property.
+    type: Number
+    permission: read-only
+    
+  - name: SATELLITE_TYPE
+    summary: Used with [mapType](Modules.Map.View.mapType) to display satellite imagery of the area.
+    type: Number
+    permission: read-only
+    
+  - name: NORMAL_TYPE
+    summary: Used with [mapType](Modules.Map.View.mapType) to display a street map that shows the position of all roads and some road names.
+    type: Number
+    permission: read-only
+    
+  - name: TERRAIN_TYPE
+    summary: Used with [mapType](Modules.Map.View.mapType) to display the terrain that shows the position of all roads and some road names.
+    type: Number
+    permission: read-only
+    
+examples:
+  - title: Map Example
+    example: |
+        This is a basic map example that places a custom annotation on the map, and 
+        listens for click events on the annotation. 
+
+        In this example, a custom property (`myid`) is added to the annotation object.
+        While adding custom members to a Titanium object is not generally recommended,
+        in this case it provides a mechanism for uniquely identifying an annotation. This
+        can be useful, for example, if the annotations are dynamically generated 
+        and it is not practical to identify them by title.
+
+            var MapModule = require('ti.map');
+            var win = Titanium.UI.createWindow();
+        
+            var mountainView = MapModule.createAnnotation({
+            	latitude:37.390749,
+            	longitude:-122.081651,
+            	title:"Appcelerator Headquarters",
+            	subtitle:'Mountain View, CA',
+            	pincolor:Titanium.Map.ANNOTATION_RED,
+            	myid:1 // Custom property to uniquely identify this annotation.
+            });
+            
+            var mapview = MapModule.createView({
+            	mapType: Titanium.Map.STANDARD_TYPE,
+            	region: {latitude:33.74511, longitude:-84.38993, 
+            			latitudeDelta:0.01, longitudeDelta:0.01},
+            	animate:true,
+            	regionFit:true,
+            	userLocation:true,
+            	annotations:[mountainView]
+            });
+            
+            win.add(mapview);
+            // Handle click events on any annotations on this map.
+            mapview.addEventListener('click', function(evt) {
+                Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.myid);
+            });
+            win.open();
+
+  
