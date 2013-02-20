@@ -1,36 +1,4 @@
-Files in the "com.facebook" package are from the official Facebook Android SDK:
-
-https://github.com/facebook/facebook-android-sdk/tree/4e2e6b90fbc964ca51a81e83e802bb4a62711a78/facebook/src/com/facebook
-
-They are licensed by Facebook as follows:
-
-/*
- * Copyright 2010-2012 Facebook, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
- 
-Any modifications to those files are licensed by Appcelerator under the same Apache License, Version 2.0.  Files in the com.facebook package which have been modified by Appcelerator contain an additional license statement near the top of the file, below the Facebook license statement.
- 
-All Facebook assets are Copyright by Facebook.  The Facebook trademarks are the property
-of Facebook. This library is intended to be used solely in accordance with Facebook Terms and Conditions.
- 
-All other files:
-
-======================================
-Appcelerator Titanium Mobile
-Copyright 2008-2013 Appcelerator, Inc.
-======================================
+Copyright 2013 Appcelerator, Inc.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -249,27 +217,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
-
-
-PRIVACY NOTICE 
-==============
-
-At Appcelerator, we’re committed to transparency and we respect your privacy.
-This software collects information about you and your end-users of any
-applications that you build. The information we collect is used to 
-improve the content of our Products, Websites and Applications built using
-our technology (collectively and individually, the "Software"), used to 
-customize the content and/or layout of our Software for each individual 
-visitor, used to notify users about updates to our Software, used by us to 
-contact users for marketing purposes, disclosed when legally required to 
-do so, at the request of governmental authorities conducting an investigation, 
-to verify or enforce compliance with the policies governing our Software and 
-applicable laws or to protect against misuse or unauthorized use of our 
-Software, to a successor entity in connection with a corporate merger, 
-consolidation, sale of assets or other corporate change respecting the 
-Software.
-
-
-Please review the full text of our privacy policy online at:
-<http://www.appcelerator.com/company/privacy/>
