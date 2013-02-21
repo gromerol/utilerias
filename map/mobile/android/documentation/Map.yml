@@ -1,6 +1,6 @@
 ---
 name: Modules.Map
-summary: Native Android map module using Google Maps Android API v2.
+summary: Add-on map module using the Google Maps Android API v2.
 description: |
     This module is a replacement for the built-in Titanium.Map module on Android, which uses the Google Maps API v1.
     The Google Maps API v1 is deprecated and Google will no longer issue new Maps API v1 keys after March 3rd, 2013. New
