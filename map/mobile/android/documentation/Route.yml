@@ -1,10 +1,9 @@
 ---
 name: Modules.Map.Route
-summary: Represents a labeled point of interest on the map that the user can click on.
+summary: Represents a path between two or more points of interest.
 description: |
-    The `Route` object gives you low-level control over routes that can be added to 
-    [map view](Modules.Map.View). A route must have its `points` properties set to appear on a map.
-
+    The `Route` object gives you low-level control over routes that can be added to a
+    [map view](Modules.Map.View). A route must have its `points` property set to appear on a map.
 
     Use the <Modules.Map.createRoute> method to create a route.
 extends: Titanium.Proxy
@@ -24,8 +23,10 @@ properties:
     description: |
         For information about color values, see the "Colors" section of <Titanium.UI>. 
     type: String
+    default: black
 
   - name: width
-    summary: Line width to use when drawing the route.
+    summary: Line width in pixels to use when drawing the route.
     type: Number
+    default: 10
 
