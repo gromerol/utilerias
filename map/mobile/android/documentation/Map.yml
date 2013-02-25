@@ -1,39 +1,82 @@
 ---
 name: Modules.Map
-summary: Add-on module for Google Maps v.2.
+summary: Add-on map module using the Google Maps Android API v2.
 description: |
-    This module is a replacement for the built-in Titanium.Map module on Android, which uses the Google Maps v.1 API. 
-    The Google Maps v.1 API is deprecated and Google will no longer issue new API keys for v.1 after March 3rd, 2013. New 
+    This module is a replacement for the built-in Titanium.Map module on Android, which uses the Google Maps API v1.
+    The Google Maps API v1 is deprecated and Google will no longer issue new Maps API v1 keys after March 3rd, 2013. New
     applications should use this module on Android.
 
-    Applications with existing v.1 API keys can continue to use the Titanium.Map module on Android, or transition to the new 
-    ti.map add-on module. 
+    Applications with existing Maps API v1 keys can continue to use the Titanium.Map module on Android,
+    or transition to the new ti.map add-on module.
 
-    Requirements: 
+    ### Requirements
 
-    -   Obtain map API key from google. You can find instructions here: 
-        https://developers.google.com/maps/documentation/android/start#the_google_maps_api_key
-    -   Device needs to have Google Play installed. Otherwise module won't work. Module will not work on emulators.
-    
-    -   Add this to tiapp.xml - replace "API KEY HERE" with your API key.
-    
-            <manifest>
-            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-            <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-            <permission android:name="com.map.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
-            <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
-            <uses-permission android:name="com.map.permission.MAPS_RECEIVE"/>
-            <application>
-                <meta-data
-                    android:name="com.google.android.maps.v2.API_KEY" android:value="API KEY HERE"/>
-            </application>
-            </manifest>
-          
-    - Use require('ti.map') to import the module.
-    
+    -   Google Maps API key (required for both development and production)
+    -   Google Play installed on device.  This module is not supported on the Android emulator.
+
+    ### Getting Started
+
+    -   Download and unpack the module to your Titanium SDK home directory, for example,
+        `/Users/.../Library/Application Support/Titanium`, which make the module available to all your
+        projects.
+    -   Alternatively, you can copy the ZIP file to your `Resources` folder, which makes the module 
+        available to this single project.
+    -   Edit the `modules` section of your tiapp.xml file to include this module:
+
+            ...
+                <modules>
+                    <!-- Add this line to your modules section -->
+                    <module platform="android">ti.map</module>
+                </modules>
+            ...
+
+    -   Obtain a Google Maps API key.  For instructions, refer to
+        [Google Maps Android API v2: The Google Maps API Key](https://developers.google.com/maps/documentation/android/start#the_google_maps_api_key)
+
+    -   Add the following settings and permissions to the Android manifest section of the tiapp.xml
+        file. Replace the two instances of `<com.domain.appid>` with your application's ID (package name)
+        and replace "PASTE YOUR GOOGLE MAPS API KEY HERE" with the Google API key you obtained:
+
+            ...
+                <android xmlns:android="http://schemas.android.com/apk/res/android">
+                    <manifest>
+                        <!-- Allows the API to download data from Google Map servers -->
+                        <uses-permission android:name="android.permission.INTERNET"/>
+                        <!-- Allows the API to cache data -->
+                        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+                        <!-- Use GPS for device location -->
+                        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+                        <!-- Use Wi-Fi or mobile connection for device location -->
+                        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+                        <!-- Allows the API to access Google web-based services -->
+                        <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+                        <!-- Specify OpenGL ES 2.0 as a requirement -->
+                        <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+                        <!-- Replace com.domain.appid with your application ID -->
+                        <uses-permission android:name="<com.domain.appid>.permission.MAPS_RECEIVE"/>
+                        <permission android:name="<com.domain.appid>.permission.MAPS_RECEIVE"
+                            android:protectionLevel="signature"/>
+                        <application>
+                            <!-- Replace "PASTE YOUR GOOGLE MAPS API KEY HERE" with the Google API key you obtained -->
+                            <meta-data android:name="com.google.android.maps.v2.API_KEY"
+                                android:value="PASTE YOUR GOOGLE MAPS API KEY HERE"/>
+                        </application>
+                    </manifest>
+                </android>
+            ...
+
+    -    Instantiate the module with the `require('ti.map')` method, then make subsequent API calls with
+         the new map object.
+
+            var MapModule = require('ti.map');
+            var mapview = MapModule.createView({mapType:MapModule.NORMAL_TYPE});
+
 extends: Titanium.Module
 since: "3.0.2"
 platforms: [android]
+excludes:
+    methods: [addEventListener, fireEvent, removeEventListener]
+    properties: [bubbleParent]
 properties:
 
   - name: ANNOTATION_GREEN
@@ -140,26 +183,26 @@ examples:
 
             var MapModule = require('ti.map');
             var win = Titanium.UI.createWindow();
-        
+
             var mountainView = MapModule.createAnnotation({
-            	latitude:37.390749,
-            	longitude:-122.081651,
-            	title:"Appcelerator Headquarters",
-            	subtitle:'Mountain View, CA',
-            	pincolor:Titanium.Map.ANNOTATION_RED,
-            	myid:1 // Custom property to uniquely identify this annotation.
+                latitude:37.390749,
+                longitude:-122.081651,
+                title:"Appcelerator Headquarters",
+                subtitle:'Mountain View, CA',
+                pincolor:MapModule.ANNOTATION_RED,
+                myid:1 // Custom property to uniquely identify this annotation.
             });
-            
+
             var mapview = MapModule.createView({
-            	mapType: Titanium.Map.STANDARD_TYPE,
-            	region: {latitude:33.74511, longitude:-84.38993, 
-            			latitudeDelta:0.01, longitudeDelta:0.01},
-            	animate:true,
-            	regionFit:true,
-            	userLocation:true,
-            	annotations:[mountainView]
+                mapType: MapModule.NORMAL_TYPE,
+                region: {latitude:33.74511, longitude:-84.38993,
+                        latitudeDelta:0.01, longitudeDelta:0.01},
+                animate:true,
+                regionFit:true,
+                userLocation:true,
+                annotations:[mountainView]
             });
-            
+
             win.add(mapview);
             // Handle click events on any annotations on this map.
             mapview.addEventListener('click', function(evt) {
@@ -167,4 +210,3 @@ examples:
             });
             win.open();
 
-  

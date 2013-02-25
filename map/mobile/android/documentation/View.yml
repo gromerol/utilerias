@@ -1,10 +1,10 @@
 ---
 name: Modules.Map.View
-summary: Map view is used for embedding native mapping capabilities as a view in your application.  
+summary: Map view is used for embedding native mapping capabilities as a view in your application.
 description: |
     With native maps, you can control the mapping location, the type of map, the zoom level 
-    and you can add custom annotations directly to the map. Once the map view is
-    displayed, the user can pan and zoom the map using the native control gestures.
+    and you can add custom annotations and routes directly to the map. Once the map view is
+    displayed, the user can pan, zoom and tilt the map using the native control gestures.
     
     Use the <Modules.Map.createView> method to create a map view.
     
@@ -13,9 +13,12 @@ description: |
     the map view.
     
     You can add [Annotation](Modules.Map.Annotation) objects to the map to mark points of
-    interest. An annotation has two states: selected and deselected. A deselected annotation 
+    interest. An annotation has two states: selected and deselected. A deselected annotation
     is marked by a pin image. When selected, the full annotation is displayed, typically
-    including a title, an optional subtitle, and one or more images.
+    including a title and an optional subtitle.
+
+    You can add [Route](Modules.Map.Route) objects to the map to create paths between
+    two or more points of interest.
     
 extends: Titanium.UI.View
 excludes: {
@@ -85,7 +88,7 @@ methods:
         type: Modules.Map.Route
 
   - name: selectAnnotation
-    summary: Selects the annoation, showing the full annotation.
+    summary: Selects the annotation, showing the full annotation.
     parameters:
       - name: annotation
         summary: Annotation to show, identified by an annotation title or a <Modules.Map.Annotation> reference.
@@ -96,8 +99,8 @@ methods:
     parameters:
       - name: mapType
         summary: |
-            Map type constant, either <Modules.Map.STANDARD_TYPE>, <Modules.Map.SATELLITE_TYPE> or 
-            <Modules.Map.TERRAIN_TYPE>.
+            Map type constant, either <Modules.Map.NORMAL_TYPE>, <Modules.Map.SATELLITE_TYPE>,
+            <Modules.Map.TERRAIN_TYPE> or <Modules.Map.HYBRID_TYPE>.
         type: Number
 
 events:
@@ -109,28 +112,8 @@ events:
         Note that the `click` event is not fired every time the user clicks on the map.
         It is fired in two circumstances:
 
-        - If the user clicks on an annotation.
+        - If the user clicks on an annotation to select it.
         - The user deselects an annotation.
-
-        On iOS, the user deselects an annotation by clicking in the map view outside of
-        the annotation. On Android, if [hideAnnotationWhenTouchMap](Titanium.Map.View.hideAnnotationWhenTouchMap)
-        is set to true, the user deselects an annotation by clicking in the map view outside of
-        the annotation. Otherwise, the user deselects an annotation by clicking on the
-        annotation pin.
-
-        The `click` event includes a value, `clicksource`, which describes the part of the 
-        annotation that was clicked. Note that the possible values for `clicksource` differ between
-        platforms.
-
-        On iOS, if the user clicks on the pin or annotation, the `clicksource` is one of: 
-        `pin`, `annotation`, `leftButton`, `rightButton`, `leftView`, `rightView`, 
-        `title`, or `subtitle`. If the user deselects the annotation by clicking elsewhere
-        in the map view, `clicksource` is `null`.
-
-        On Android, the `clicksource` can be one of `pin`, `title`,
-        `subtitle`, `leftPane`, or `rightPane`. If the user deselects an
-        annotation by clicking on the pin, `clicksource` is `pin`. If the user deselects the
-        annotation by clicking elsewhere in the map view, `clicksource` is `null`.
 
     properties:
 
@@ -144,11 +127,13 @@ events:
         
       - name: map
         summary: The map view instance.
-        type: Titanium.Map.View
+        type: Modules.Map.View
 
       - name: clicksource
-        summary: Source of the click event, such as `pin`, or `leftButton`.
-        type: String
+        summary: |
+            If selected, returns the Annotation object.
+            If deselected, returns `null`.
+        type: Modules.Map.Annotation/String
 
       - name: annotation
         summary: Annotation source object.
@@ -181,11 +166,12 @@ properties:
   - name: animate
     summary: Indicates if changes to the mapping region should be animated.
     type: Boolean
+    default: false
 
   - name: annotations
     summary: An array of annotations to add to the map.
     description: |
-        There is no guarantee that the order of elements in the `annotations` property will be 
+        There is no guarantee that the order of elements in the `annotations` property will be
         maintained when creating, adding or deleting annotations from the Ti.Map.View object.
         If the application depends on the annotations being in a set order, it should keep 
         references to all of the annotations in a separate array.
@@ -193,13 +179,16 @@ properties:
 
   - name: mapType
     summary: |
-        Map type, either: <Modules.Map.NORMAL_TYPE>, <Modules.Map.SATELLITE_TYPE> or <Modules.Map.TERRAIN_TYPE>.
+        Map type, either: <Modules.Map.NORMAL_TYPE>, <Modules.Map.SATELLITE_TYPE>, <Modules.Map.TERRAIN_TYPE>
+        or <Modules.Map.HYBRID_TYPE>
     type: Number
+    default: NORMAL_TYPE
 
   - name: region
     summary: |
         A dictionary specifying the location and zoom level of the map.
     type: MapRegionType
+    default: latitude 0, longitude 0
 
   - name: userLocation
     summary: |
@@ -208,10 +197,15 @@ properties:
     description: |
         If `true`, the user's location is marked with a pin. 
     type: Boolean
+    default: false
   
   - name: traffic
-    summary: toggles traffic layer on or off.
+    summary: Toggles the traffic layer on or off.
+    description: |
+        Set to `true` to display the traffic layer or `false` to hide it.
+        This is subject to the availability of traffic data.
     type: Boolean
+    default: false
 
 ---
 name: MapRegionType
