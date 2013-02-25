@@ -180,6 +180,9 @@ properties:
 
   - name: animate
     summary: Indicates if changes to the mapping region should be animated.
+    description: |
+        Setting this to 'false' will not stop the animation from clicking the My Location button, 
+        since that is native Android behavior. 
     type: Boolean
 
   - name: annotations
@@ -206,7 +209,8 @@ properties:
         Boolean indicating if the user's current device location should be shown on the
         map.
     description: |
-        If `true`, the user's location is marked with a pin. 
+        If `true`, the user's location is marked with a pin, and the My Location button will appear in the top
+        right corner of the screen. 
     type: Boolean
   
   - name: traffic
