@@ -11,7 +11,7 @@ description: |
 
     See the examples in the <Modules.Facebook> documentation.
 extends: Titanium.UI.View
-since: "3.0.2"
+since: "3.1.0"
 platforms: [android, iphone, ipad]
 properties:
   - name: style
