@@ -26,6 +26,7 @@ import android.os.Message;
 	TiC.PROPERTY_MAP_TYPE,
 	TiC.PROPERTY_REGION,
 	TiC.PROPERTY_ANNOTATIONS,
+	TiC.PROPERTY_ANIMATE,
 	MapModule.PROPERTY_TRAFFIC
 })
 public class ViewProxy extends TiViewProxy
@@ -83,7 +84,7 @@ public class ViewProxy extends TiViewProxy
 		
 		case MSG_ADD_ANNOTATIONS: {
 			result = (AsyncResult) msg.obj;
-			handleAddAnnotations((AnnotationProxy[])result.getArg());
+			handleAddAnnotations((Object[])result.getArg());
 			result.setResult(null);
 			return true;
 		}
@@ -188,9 +189,12 @@ public class ViewProxy extends TiViewProxy
 		}
 	}
 	
-	private void handleAddAnnotations(AnnotationProxy[] annotations) {
+	private void handleAddAnnotations(Object[] annotations) {
 		for (int i = 0; i < annotations.length; i++) {
-			handleAddAnnotation(annotations[i]);
+			Object annotation = annotations[i];
+			if (annotation instanceof AnnotationProxy) {
+				handleAddAnnotation((AnnotationProxy) annotation);
+			}
 		}
 	}
 	
