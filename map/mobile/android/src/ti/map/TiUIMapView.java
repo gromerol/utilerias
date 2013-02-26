@@ -383,7 +383,10 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 	@Override
 	public void onMapClick(LatLng point) {
 		if (selectedAnnotation != null) {
-			fireClickEvent(selectedAnnotation.getTiMarker().getMarker(), selectedAnnotation, null);
+			TiMarker tiMarker = selectedAnnotation.getTiMarker();
+			if (tiMarker != null) {
+				fireClickEvent(tiMarker.getMarker(), selectedAnnotation, null);
+			}
 			selectedAnnotation = null;
 		}
 		

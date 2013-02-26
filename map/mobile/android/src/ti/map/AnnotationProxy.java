@@ -186,6 +186,9 @@ public class AnnotationProxy extends KrollProxy
 	}
 	
 	public void showInfo() {
+		if (marker == null) {
+			return;
+		}
 		Marker m = marker.getMarker();
 		if (m != null) {
 			m.showInfoWindow();
@@ -193,6 +196,9 @@ public class AnnotationProxy extends KrollProxy
 	}
 	
 	public void hideInfo() {
+		if (marker == null) {
+			return;
+		}
 		Marker m = marker.getMarker();
 		if (m != null) {
 			m.hideInfoWindow();
