@@ -46,15 +46,13 @@ description: |
              fb.permissions = [FACEBOOK_APP_PERMISSIONS];
              fb.authorize();
 
-    On iOS, you may use the `Ti.Facebook` namespace to access the Facebook add-on module
-    instead of using the `require` method to instantiate the module. However, this behavior is not 
-    cross-platform and does not work on Android.
-
     #### Facebook Login and Authorization
 
     To use Facebook, a user must log in to Facebook and explicitly authorize the
     application to perform certain actions, such as accessing profile information or 
     posting status messages. 
+
+    For iOS 6, review the "iOS 6 Support Notes" section below in addition to this section.
 
     There are two ways to initiate the login process:
 
@@ -268,15 +266,12 @@ methods:
 events:
 
   - name: login
+    extends: ErrorResponse
     summary: Fired at session login.
     properties:
       - name: uid
         summary: User ID returned by Facebook if the login was successful.
         type: String
-
-      - name: success
-        summary: Indicates if the login was successful.
-        type: Boolean
 
       - name: data
         summary: |
@@ -284,8 +279,6 @@ events:
             after a successful login. Data is in JSON format, and includes information 
             such as user name, locale and gender.
 
-      - name: error
-        summary: Error message, if request failed.
       - name: cancelled
         summary: Indicates if the user canceled the login request by closing the dialog.
 
@@ -310,6 +303,7 @@ properties:
   - name: accessToken
     summary: OAuth token set after a successful `authorize`.
     type: String
+    permission: read-only
 
   - name: appid
     summary: Your Facebook application id. You need to set this for anything to work.
@@ -318,6 +312,7 @@ properties:
   - name: expirationDate
     summary: Time at which the `accessToken` expires.
     type: Date
+    permission: read-only
 
   - name: forceDialogAuth
     summary:  |
@@ -337,6 +332,7 @@ properties:
   - name: loggedIn
     summary: Indicates if the user is logged in.
     type: Boolean
+    permission: read-only
 
   - name: permissions
     summary: Array of permissions to request for your app. 
@@ -356,6 +352,7 @@ properties:
   - name: uid
     summary: Unique user ID returned from Facebook.
     type: String
+    permission: read-only
 
 examples:
 
@@ -691,19 +688,11 @@ examples:
 
 ---
 name: FacebookGraphResponse
+extends: ErrorResponse
 summary: |
     Argument passed to the graph API callback, in response to a
     [requestWithGraphPath](Modules.Facebook.requestWithGraphPath) call.
 properties:
-
-  - name: success
-    summary: Indicates if the request succeeded.
-    type: Boolean
-
-  - name: error
-    summary: Error message, if request failed.
-    type: String
-
   - name: path
     summary: Graph API path of the original request.
     type: String
@@ -712,38 +701,25 @@ properties:
     summary: JSON response returned by Facebook.
     type: String
 
-
 ---
 name: FacebookReauthResponse
+extends: ErrorResponse
 summary: Argument passed to the reauthorize callback when the request is completed or canceled.
-description: |
-    The `success` and `cancelled` properties may not be reliable for dialogs. In the event
-    that the user canceled the dialog, the `result` field is `undefined`.
 properties:
 
-  - name: success
-    summary: Indicates if the request succeeded.
-    type: Boolean 
+  - name: cancelled
+    summary: Indicates if the user canceled the dialog. 
+    type: Boolean
 
-  - name: error
-    summary: Error message, if request failed.
-    type: String
 
 ---
 name: FacebookDialogResponse
+extends: ErrorResponse
 summary: Argument passed to the dialog callback when a dialog is completed or canceled.
 description: |
     The `success` and `cancelled` properties may not be reliable for dialogs. In the event
     that the user canceled the dialog, the `result` field is `undefined`.
 properties:
-
-  - name: success
-    summary: Indicates if the request succeeded.
-    type: Boolean 
-
-  - name: error
-    summary: Error message, if request failed.
-    type: String
 
   - name: cancelled
     summary: Indicates if the user canceled the dialog. 
@@ -758,18 +734,11 @@ properties:
 
 ---
 name: FacebookRESTResponse
+extends: ErrorResponse
 summary: |
     Argument passed to the REST API callback when a request completes (successfully
     or unsuccessfully).
 properties:
-
-  - name: success
-    summary: Indicates if the request succeeded.
-    type: Boolean
-
-  - name: error
-    summary: Error message, if request failed.
-    type: String
 
   - name: method
     summary: REST method call you specified.
