@@ -20,11 +20,9 @@ description: |
 
     #### Getting Started
 
-    -   Download and unpack the module to your Titanium SDK home directory, for example,
-        `/Users/.../Library/Application Support/Titanium`, which makes the module accessible
-        to all your projects.
-    -   Alternatively, copy the ZIP file to your `Resources` folder, which makes the module
-        accessible only to one project.
+    -   Note that this module is only available for Release 3.1 and later, and is included with the
+        Titanium SDK.  You do not need to download or unpack it.
+
     -   Edit the `modules` section of your tiapp.xml file to include this module:
 
             <modules>
@@ -124,7 +122,10 @@ description: |
     old login auth and using iOS 6's login mutually exclusive options. In other words,
     the following must happen to use iOS 6's built-in facebook login:
 
-    * The device must be running iOS 6.
+    * When registering your Facebook application, the bundle ID must match the Titanium project's app ID.
+      See instructions below.
+
+    * Enable the Facebook login on your iOS 6 device: Enter your credentials in **Settings** > **Facebook**.
 
     * The [forceDialogAuth](Modules.Facebook.forceDialogAuth) property MUST be false.
 
@@ -133,12 +134,14 @@ description: |
         ads_management, create_event, rsvp_event, manage_friendlists, manage_notifications,
         or manage_pages
 
+    * Use the [reauthorize](Modules.Facebook.reauthorize) method to request write permissions if needed.
+
     In the event that these requirements aren't met, the facebook module will gracefully
     degrade to legacy login support, using the dialog authorization, single sign-on with
     the facebook app, or authentication via Safari as previously done.
 
-    For security reasons, authorization through iOS 6 also requires your facebook
-    application ID to be associated with your Titanium application's bundle identifier
+    For security reasons, authorization through iOS 6 also requires your Facebook
+    bundle ID to be associated with your Titanium application's app ID
     specified in your tiapp.xml. This is the same bundle identifier mentioned in step 4
     of Facebook's [getting started guide](http://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/3.1/).
 
