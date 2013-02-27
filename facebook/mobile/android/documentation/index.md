@@ -3,7 +3,7 @@
 ## Documentation
 
 Please refer to the documentation available here:
-[http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.Facebook](http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.Facebook)
+[http://docs.appcelerator.com/titanium/latest/#!/api/Modules.Facebook](http://docs.appcelerator.com/titanium/latest/#!/api/Modules.Facebook)
 
 ## Accessing the facebook Module
 
