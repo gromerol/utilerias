@@ -33,7 +33,8 @@ View the [change log](changelog.html) for this module.
 
 ## Documentation
 
-Documentation is in yml files.
+  * [Google Maps v2 for Android guide](http://docs.appcelerator.com/titanium/latest/#!/guide/Google_Maps_v2_for_Android)
+  * [Map Module API Reference Documentation](http://docs.appcelerator.com/titanium/latest/#!/api/Modules.Map)
 
 ## Feedback and Support
 
