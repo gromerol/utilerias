@@ -105,6 +105,30 @@ methods:
 
 events:
 
+  - name: pinchangedragstate
+    summary: Fired when the user interacts with a draggable annotation.
+    properties:
+
+      - name: annotation
+        summary: Annotation being dragged.
+        type: Modules.Map.Annotation
+
+      - name: map
+        summary: This map view.
+        type: Modules.Map.View
+
+      - name: title
+        summary: Annotation title.
+        type: String
+
+      - name: newState
+        summary: |
+            New drag state for the annotation, one of
+            [ANNOTATION_DRAG_STATE_START](Modules.Map.ANNOTATION_DRAG_STATE_START),
+            [ANNOTATION_DRAG_STATE_END](Modules.Map.ANNOTATION_DRAG_STATE_END).
+        type: Number
+    since: "3.1.0"
+
   - name: click
     summary: |
         Fired when the user selects, deselects, or clicks on an annotation.

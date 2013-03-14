@@ -26,7 +26,7 @@ properties:
   - name: draggable
     summary: Determines whether the pin can be dragged by the user.
     description: |
-        Must be set before the annotation is added to the map view.
+        When an annotation is draggable, it can be moved by the user by long pressing on the pin.
     type: Boolean
     default: false
 

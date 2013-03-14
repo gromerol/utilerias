@@ -19,18 +19,19 @@ import org.appcelerator.titanium.view.TiUIFragment;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
-public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener, GoogleMap.OnCameraChangeListener{
+public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener,
+	GoogleMap.OnCameraChangeListener, GoogleMap.OnMarkerDragListener{
 
 	private GoogleMap map;
 	protected boolean animate = false;
@@ -73,6 +74,7 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 		map.setOnMarkerClickListener(this);
 		map.setOnMapClickListener(this);
 		map.setOnCameraChangeListener(this);
+		map.setOnMarkerDragListener(this);
 		((ViewProxy)proxy).clearPreloadObjects();
 		proxy.fireEvent(TiC.EVENT_COMPLETE, null);
 	}
@@ -362,6 +364,17 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 		proxy.fireEvent(TiC.EVENT_CLICK, d);
 	}
 
+	public void firePinChangeDragStateEvent(Marker marker, AnnotationProxy annoProxy, int dragState) {
+		KrollDict d = new KrollDict();
+		d.put(TiC.PROPERTY_TITLE, marker.getTitle());
+		d.put(TiC.PROPERTY_ANNOTATION, annoProxy);
+		d.put(MapModule.PROPERTY_MAP, proxy);
+		d.put(TiC.PROPERTY_SOURCE, proxy);
+		d.put(MapModule.PROPERTY_NEWSTATE, dragState);
+		d.put(TiC.PROPERTY_TYPE, MapModule.EVENT_PIN_CHANGE_DRAG_STATE);
+		proxy.fireEvent(MapModule.EVENT_PIN_CHANGE_DRAG_STATE, d);
+	}
+
 	@Override
 	public boolean onMarkerClick(Marker marker) {
 		AnnotationProxy annoProxy = getProxyByMarker(marker);
@@ -381,7 +394,8 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 	}
 
 	@Override
-	public void onMapClick(LatLng point) {
+	public void onMapClick(LatLng point)
+	{
 		if (selectedAnnotation != null) {
 			TiMarker tiMarker = selectedAnnotation.getTiMarker();
 			if (tiMarker != null) {
@@ -389,9 +403,54 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 			}
 			selectedAnnotation = null;
 		}
-		
+
 	}
-	
+
+	@Override
+	public void onMarkerDrag(Marker marker)
+	{
+
+	}
+
+	@Override
+	public void onMarkerDragEnd(Marker marker)
+	{
+		TiMarker timarker = null;
+		for (TiMarker t : timarkers) {
+			if (t.getMarker().equals(marker)) {
+				timarker = t;
+				break;
+			}
+		}
+		if (timarker != null) {
+			AnnotationProxy annoProxy = timarker.getProxy();
+			if (annoProxy != null) {
+				LatLng position = marker.getPosition();
+				annoProxy.setProperty(TiC.PROPERTY_LONGITUDE, position.longitude);
+				annoProxy.setProperty(TiC.PROPERTY_LATITUDE, position.latitude);
+				firePinChangeDragStateEvent(marker, annoProxy, MapModule.ANNOTATION_DRAG_STATE_END);
+			}
+		}
+	}
+
+	@Override
+	public void onMarkerDragStart(Marker marker)
+	{
+		TiMarker timarker = null;
+		for (TiMarker t : timarkers) {
+			if (t.getMarker().equals(marker)) {
+				timarker = t;
+				break;
+			}
+		}
+		if (timarker != null) {
+			AnnotationProxy annoProxy = timarker.getProxy();
+			if (annoProxy != null) {
+				firePinChangeDragStateEvent(marker, annoProxy, MapModule.ANNOTATION_DRAG_STATE_START);
+			}
+		}
+	}
+
 	@Override
 	public void release() {
 		selectedAnnotation = null;
