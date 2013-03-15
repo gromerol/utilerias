@@ -534,7 +534,7 @@ if(![x isKindOfClass:[t class]]){ \
 	VerboseLog(@"[DEBUG] facebook logout");
 	if ([self isLoggedIn])
 	{
-		[facebook logout:self];
+		TiThreadPerformOnMainThread(^{[facebook logout:self];}, NO);
 	}
 }
 
