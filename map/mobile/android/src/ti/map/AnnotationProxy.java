@@ -6,9 +6,6 @@
  */
 package ti.map;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
@@ -20,7 +17,6 @@ import org.appcelerator.titanium.TiContext;
 import org.appcelerator.titanium.util.TiConvert;
 import org.appcelerator.titanium.view.TiDrawableReference;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Message;
 
