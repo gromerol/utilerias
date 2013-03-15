@@ -18,8 +18,10 @@ import org.appcelerator.kroll.common.TiMessenger;
 import org.appcelerator.titanium.TiC;
 import org.appcelerator.titanium.TiContext;
 import org.appcelerator.titanium.util.TiConvert;
+import org.appcelerator.titanium.view.TiDrawableReference;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Message;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -158,17 +160,12 @@ public class AnnotationProxy extends KrollProxy
 	private void handleImage(Object image) {
 		//image path 
 		if (image instanceof String) {
-			String path = "Resources/" + image;
-			Activity activity = getActivity();
-			if (activity != null) {
-				try {
-					//check if asset exists
-					InputStream in = activity.getAssets().open(path);
-					in.close();
-					markerOptions.icon(BitmapDescriptorFactory.fromAsset(path));
-				} catch (IOException e) {
-					Log.w(TAG, "Image does not exist");
-				}
+			TiDrawableReference imageref = TiDrawableReference.fromUrl(this, (String) image);
+			Bitmap bitmap = imageref.getBitmap();
+			if (bitmap != null) {
+				markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap));
+			} else {
+				Log.w(TAG, "Unable to get the image from the path: " + image);
 			}
 		}
 	}
