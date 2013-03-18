@@ -23,6 +23,7 @@ public class MapModule extends KrollModule
 	public static final String PROPERTY_TRAFFIC = "traffic";
 	public static final String PROPERTY_MAP = "map";
 	public static final String PROPERTY_NEWSTATE = "newState";
+	public static final String PROPERTY_CUSTOM_VIEW = "customView";
 	public static final String EVENT_PIN_CHANGE_DRAG_STATE = "pinchangedragstate";
 	
 	@Kroll.constant public static final int NORMAL_TYPE = GoogleMap.MAP_TYPE_NORMAL;

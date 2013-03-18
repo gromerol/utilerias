@@ -23,6 +23,14 @@ platforms: [android]
 
 properties:
 
+  - name: customView
+    summary: Defines a custom view to be used by the annotation.
+    description: |
+        A custom View to display for the annotation. **User interaction is disabled on the view.**
+        No view interaction events (click, touchstart etc) will be fired.
+    type: Titanium.UI.View
+    since: "3.1.0"
+
   - name: draggable
     summary: Determines whether the pin can be dragged by the user.
     description: |
@@ -33,7 +41,7 @@ properties:
   - name: image
     summary: Image to use for the the pin.
     description: |
-        Must be set during creation.
+        Must be set during creation. This is ignored if the customView property is set.
     type: String
     default: If not specified, a standard map pin image is used.
 
