@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollProxy;
+import org.appcelerator.kroll.common.Log;
 import org.appcelerator.titanium.TiC;
 import org.appcelerator.titanium.proxy.TiViewProxy;
 import org.appcelerator.titanium.util.TiConvert;
@@ -32,6 +33,7 @@ import com.google.android.gms.maps.model.Marker;
 public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener,
 	GoogleMap.OnCameraChangeListener, GoogleMap.OnMarkerDragListener
 {
+	private static final String TAG = "TiUIMapView";
 	private GoogleMap map;
 	protected boolean animate = false;
 	protected boolean preLayout = true;
@@ -436,7 +438,7 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 	@Override
 	public void onMarkerDrag(Marker marker)
 	{
-
+		Log.d(TAG, "The annotation is dragged.", Log.DEBUG_MODE);
 	}
 
 	@Override
@@ -444,7 +446,7 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 	{
 		TiMarker timarker = null;
 		for (TiMarker t : timarkers) {
-			if (t.getMarker().equals(marker)) {
+			if (t != null && t.getMarker().equals(marker)) {
 				timarker = t;
 				break;
 			}
@@ -465,7 +467,7 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 	{
 		TiMarker timarker = null;
 		for (TiMarker t : timarkers) {
-			if (t.getMarker().equals(marker)) {
+			if (t != null && t.getMarker().equals(marker)) {
 				timarker = t;
 				break;
 			}
