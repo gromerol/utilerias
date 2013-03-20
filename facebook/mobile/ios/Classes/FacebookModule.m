@@ -534,7 +534,7 @@ if(![x isKindOfClass:[t class]]){ \
 	VerboseLog(@"[DEBUG] facebook logout");
 	if ([self isLoggedIn])
 	{
-		[facebook logout:self];
+		TiThreadPerformOnMainThread(^{[facebook logout:self];}, NO);
 	}
 }
 
@@ -712,6 +712,11 @@ if(![x isKindOfClass:[t class]]){ \
 			[event setObject:errorString forKey:@"error"];
 		}
 	}
+	else if (cancelled)
+	{
+		[event setObject:@"User cancelled the login process." forKey:@"error"];
+	}
+
 	if(result != nil)
 	{
 		[event setObject:result forKey:@"data"];
