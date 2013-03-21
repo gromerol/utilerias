@@ -105,6 +105,30 @@ methods:
 
 events:
 
+  - name: pinchangedragstate
+    summary: Fired when the user interacts with a draggable annotation.
+    properties:
+
+      - name: annotation
+        summary: Annotation being dragged.
+        type: Modules.Map.Annotation
+
+      - name: map
+        summary: This map view.
+        type: Modules.Map.View
+
+      - name: title
+        summary: Annotation title.
+        type: String
+
+      - name: newState
+        summary: |
+            New drag state for the annotation, one of
+            [ANNOTATION_DRAG_STATE_START](Modules.Map.ANNOTATION_DRAG_STATE_START),
+            [ANNOTATION_DRAG_STATE_END](Modules.Map.ANNOTATION_DRAG_STATE_END).
+        type: Number
+    since: "3.1.0"
+
   - name: click
     summary: |
         Fired when the user selects, deselects, or clicks on an annotation.
@@ -202,6 +226,15 @@ properties:
         right corner of the screen. 
     type: Boolean
     default: false
+
+  - name: enableZoomControls
+    summary: |
+        Enables or disables the built-in zoom controls.
+    description: |
+        If enabled, the zoom controls are a pair of buttons (one for zooming in, one for zooming out) that appear on the screen. 
+        When pressed, they cause the camera to zoom in (or out) by one zoom level. If disabled, the zoom controls are not shown.
+    type: Boolean
+    default: true
   
   - name: traffic
     summary: Toggles the traffic layer on or off.

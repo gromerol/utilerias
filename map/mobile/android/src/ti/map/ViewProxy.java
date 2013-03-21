@@ -27,7 +27,8 @@ import android.os.Message;
 	TiC.PROPERTY_REGION,
 	TiC.PROPERTY_ANNOTATIONS,
 	TiC.PROPERTY_ANIMATE,
-	MapModule.PROPERTY_TRAFFIC
+	MapModule.PROPERTY_TRAFFIC,
+	TiC.PROPERTY_ENABLE_ZOOM_CONTROLS
 })
 public class ViewProxy extends TiViewProxy
 {

@@ -86,6 +86,22 @@ excludes:
     properties: [bubbleParent]
 properties:
 
+  - name: ANNOTATION_DRAG_STATE_START
+    summary: |
+        Used in the [pinchangedragstate](Modules.Map.View.pinchangedragstate) event 
+        to indicate that the user started dragging the annotation.
+    type: Number
+    permission: read-only
+    since: "3.1.0"
+
+  - name: ANNOTATION_DRAG_STATE_END
+    summary: |
+        Used in the [pinchangedragstate](Modules.Map.View.pinchangedragstate) event 
+        to indicate that the user finished moving the annotation.
+    type: Number
+    permission: read-only
+    since: "3.1.0"
+
   - name: ANNOTATION_GREEN
     summary: |
         Color constant used to set a map annotation to green via the 
