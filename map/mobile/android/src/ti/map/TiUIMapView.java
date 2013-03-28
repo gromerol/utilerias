@@ -407,6 +407,11 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 	public boolean onMarkerClick(Marker marker)
 	{
 		AnnotationProxy annoProxy = getProxyByMarker(marker);
+		if (annoProxy == null) {
+			Log.e(TAG, "Marker can not be found, click event won't fired.", Log.DEBUG_MODE);
+			return false;
+		}
+
 		if (selectedAnnotation == null) {
 			annoProxy.showInfo();
 			selectedAnnotation = annoProxy;
