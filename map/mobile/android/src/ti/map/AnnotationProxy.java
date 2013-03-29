@@ -12,15 +12,18 @@ import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.AsyncResult;
 import org.appcelerator.kroll.common.Log;
 import org.appcelerator.kroll.common.TiMessenger;
+import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.TiBlob;
 import org.appcelerator.titanium.TiC;
 import org.appcelerator.titanium.TiContext;
+import org.appcelerator.titanium.TiDimension;
 import org.appcelerator.titanium.proxy.TiViewProxy;
 import org.appcelerator.titanium.util.TiConvert;
 import org.appcelerator.titanium.view.TiDrawableReference;
 
 import android.graphics.Bitmap;
 import android.os.Message;
+import android.view.View;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -29,13 +32,19 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 @Kroll.proxy(creatableInModule=MapModule.class, propertyAccessors = {
 	TiC.PROPERTY_SUBTITLE,
+	TiC.PROPERTY_SUBTITLEID,
 	TiC.PROPERTY_TITLE,
+	TiC.PROPERTY_TITLEID,
 	TiC.PROPERTY_LATITUDE,
 	TiC.PROPERTY_LONGITUDE,
 	MapModule.PROPERTY_DRAGGABLE,
 	TiC.PROPERTY_IMAGE,
 	TiC.PROPERTY_PINCOLOR,
-	MapModule.PROPERTY_CUSTOM_VIEW
+	MapModule.PROPERTY_CUSTOM_VIEW,
+	TiC.PROPERTY_LEFT_BUTTON,
+	TiC.PROPERTY_LEFT_VIEW,
+	TiC.PROPERTY_RIGHT_BUTTON,
+	TiC.PROPERTY_RIGHT_VIEW
 })
 public class AnnotationProxy extends KrollProxy
 {
@@ -43,6 +52,11 @@ public class AnnotationProxy extends KrollProxy
 
 	private MarkerOptions markerOptions;
 	private TiMarker marker;
+	private TiMapInfoWindow infoWindow = null;
+	private static final String defaultIconImageHeight = "40dip"; //The height of the default marker icon
+	// The height of the marker icon in the unit of "px". Will use it to analyze the touch event to find out
+	// the correct clicksource for the click event.
+	private int iconImageHeight = 0;
 
 	private static final int MSG_FIRST_ID = KrollProxy.MSG_LAST_ID + 1;
 
@@ -135,19 +149,43 @@ public class AnnotationProxy extends KrollProxy
 		if (hasProperty(TiC.PROPERTY_LATITUDE)) {
 			latitude = TiConvert.toDouble(getProperty(TiC.PROPERTY_LATITUDE));
 		}
-
 		LatLng position = new LatLng(latitude, longitude);
 		markerOptions.position(position);
 
-		if (hasProperty(TiC.PROPERTY_TITLE)) {
-			markerOptions.title(TiConvert.toString(getProperty(TiC.PROPERTY_TITLE)));
+		if (hasProperty(TiC.PROPERTY_LEFT_BUTTON) || hasProperty(TiC.PROPERTY_LEFT_VIEW)
+			|| hasProperty(TiC.PROPERTY_RIGHT_BUTTON) || hasProperty(TiC.PROPERTY_RIGHT_VIEW)
+			|| hasProperty(TiC.PROPERTY_TITLE) || hasProperty(TiC.PROPERTY_SUBTITLE)) {
+			getOrCreateMapInfoWindow();
+			if (hasProperty(TiC.PROPERTY_LEFT_BUTTON)) {
+				infoWindow.setLeftOrRightPane(getProperty(TiC.PROPERTY_LEFT_BUTTON), TiMapInfoWindow.LEFT_PANE);
+			} else if (hasProperty(TiC.PROPERTY_LEFT_VIEW)) {
+				infoWindow.setLeftOrRightPane(getProperty(TiC.PROPERTY_LEFT_VIEW), TiMapInfoWindow.LEFT_PANE);
+			} else {
+				infoWindow.setLeftOrRightPane(null, TiMapInfoWindow.LEFT_PANE);
+			}
+			if (hasProperty(TiC.PROPERTY_RIGHT_BUTTON)) {
+				infoWindow.setLeftOrRightPane(getProperty(TiC.PROPERTY_RIGHT_BUTTON), TiMapInfoWindow.RIGHT_PANE);
+			} else if (hasProperty(TiC.PROPERTY_RIGHT_VIEW)) {
+				infoWindow.setLeftOrRightPane(getProperty(TiC.PROPERTY_RIGHT_VIEW), TiMapInfoWindow.RIGHT_PANE);
+			} else {
+				infoWindow.setLeftOrRightPane(null, TiMapInfoWindow.RIGHT_PANE);
+			}
+			if (hasProperty(TiC.PROPERTY_TITLE)) {
+				infoWindow.setTitle(TiConvert.toString(getProperty(TiC.PROPERTY_TITLE)));
+			} else {
+				infoWindow.setTitle(null);
+			}
+			if (hasProperty(TiC.PROPERTY_SUBTITLE)) {
+				infoWindow.setSubtitle(TiConvert.toString(getProperty(TiC.PROPERTY_SUBTITLE)));
+			} else{
+				infoWindow.setSubtitle(null);
+			}
 		}
-		if (hasProperty(TiC.PROPERTY_SUBTITLE)) {
-			markerOptions.snippet(TiConvert.toString(getProperty(TiC.PROPERTY_SUBTITLE)));
-		}
+
 		if (hasProperty(MapModule.PROPERTY_DRAGGABLE)) {
 			markerOptions.draggable(TiConvert.toBoolean(getProperty(MapModule.PROPERTY_DRAGGABLE)));
 		}
+
 		// customView, image and pincolor must be defined before adding to mapview. Once added, their values are final.
 		if (hasProperty(MapModule.PROPERTY_CUSTOM_VIEW)) {
 			handleCustomView(getProperty(MapModule.PROPERTY_CUSTOM_VIEW));
@@ -155,6 +193,9 @@ public class AnnotationProxy extends KrollProxy
 			handleImage(getProperty(TiC.PROPERTY_IMAGE));
 		} else if (hasProperty(TiC.PROPERTY_PINCOLOR)) {
 			markerOptions.icon(BitmapDescriptorFactory.defaultMarker(TiConvert.toFloat(getProperty(TiC.PROPERTY_PINCOLOR))));
+			setIconImageHeight(-1);
+		} else {
+			setIconImageHeight(-1);
 		}
 	}
 
@@ -167,13 +208,13 @@ public class AnnotationProxy extends KrollProxy
 				Bitmap image = ((TiBlob) imageBlob).getImage();
 				if (image != null) {
 					markerOptions.icon(BitmapDescriptorFactory.fromBitmap(image));
-				} else {
-					Log.w(TAG, "Unable to get the image from the custom view: " + obj);
+					setIconImageHeight(image.getHeight());
+					return;
 				}
-			} else {
-				Log.w(TAG, "Unable to get the image from the custom view: " + obj);
 			}
 		}
+		Log.w(TAG, "Unable to get the image from the custom view: " + obj);
+		setIconImageHeight(-1);
 	}
 
 	private void handleImage(Object image)
@@ -184,10 +225,12 @@ public class AnnotationProxy extends KrollProxy
 			Bitmap bitmap = imageref.getBitmap();
 			if (bitmap != null) {
 				markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap));
-			} else {
-				Log.w(TAG, "Unable to get the image from the path: " + image);
+				setIconImageHeight(bitmap.getHeight());
+				return;
 			}
 		}
+		Log.w(TAG, "Unable to get the image from the path: " + image);
+		setIconImageHeight(-1);
 	}
 
 	public MarkerOptions getMarkerOptions()
@@ -227,6 +270,33 @@ public class AnnotationProxy extends KrollProxy
 		}
 	}
 
+	public TiMapInfoWindow getMapInfoWindow()
+	{
+		return infoWindow;
+	}
+
+	public void setMapInfoWindow(TiMapInfoWindow w)
+	{
+		infoWindow = w;
+	}
+
+	private void setIconImageHeight(int h)
+	{
+		if (h >= 0) {
+			iconImageHeight = h;
+		} else { // default maker icon
+			TiDimension dimension = new TiDimension(defaultIconImageHeight, TiDimension.TYPE_UNDEFINED);
+			// TiDimension needs a view to grab the window manager, so we'll just use the decorview of the current window
+			View view = TiApplication.getAppCurrentActivity().getWindow().getDecorView();
+			iconImageHeight = dimension.getAsPixels(view);
+		}
+	}
+
+	public int getIconImageHeight()
+	{
+		return iconImageHeight;
+	}
+
 	@Override
 	public void onPropertyChanged(String name, Object value)
 	{
@@ -243,10 +313,26 @@ public class AnnotationProxy extends KrollProxy
 			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_LAT), TiConvert.toDouble(value));
 		}
 		if (name.equals(TiC.PROPERTY_TITLE)) {
-			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_TITLE), TiConvert.toString(value));
+			getOrCreateMapInfoWindow().setTitle(TiConvert.toString(value));
 		}
 		if (name.equals(TiC.PROPERTY_SUBTITLE)) {
-			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_SUBTITLE), TiConvert.toString(value));
+			getOrCreateMapInfoWindow().setSubtitle(TiConvert.toString(value));
+		}
+		if (name.equals(TiC.PROPERTY_LEFT_BUTTON)) {
+			getOrCreateMapInfoWindow().setLeftOrRightPane(value, TiMapInfoWindow.LEFT_PANE);
+		}
+		if (name.equals(TiC.PROPERTY_LEFT_VIEW)) {
+			if (getProperty(TiC.PROPERTY_LEFT_BUTTON) == null) {
+				getOrCreateMapInfoWindow().setLeftOrRightPane(value, TiMapInfoWindow.LEFT_PANE);
+			}
+		}
+		if (name.equals(TiC.PROPERTY_RIGHT_BUTTON)) {
+			getOrCreateMapInfoWindow().setLeftOrRightPane(value, TiMapInfoWindow.RIGHT_PANE);
+		}
+		if (name.equals(TiC.PROPERTY_RIGHT_VIEW)) {
+			if (getProperty(TiC.PROPERTY_RIGHT_BUTTON) == null) {
+				getOrCreateMapInfoWindow().setLeftOrRightPane(value, TiMapInfoWindow.RIGHT_PANE);
+			}
 		}
 		if (name.equals(MapModule.PROPERTY_DRAGGABLE)) {
 			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_DRAGGABLE),
@@ -255,4 +341,11 @@ public class AnnotationProxy extends KrollProxy
 
 	}
 
+	private TiMapInfoWindow getOrCreateMapInfoWindow()
+	{
+		if (infoWindow == null) {
+			infoWindow = new TiMapInfoWindow(TiApplication.getInstance().getApplicationContext());
+		}
+		return infoWindow;
+	}
 }

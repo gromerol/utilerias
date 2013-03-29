@@ -8,6 +8,7 @@ package ti.map;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.AsyncResult;
@@ -38,19 +39,15 @@ public class ViewProxy extends TiViewProxy
 	
 	private static final int MSG_ADD_ANNOTATION = MSG_FIRST_ID + 500;
 	private static final int MSG_ADD_ANNOTATIONS = MSG_FIRST_ID + 501;
-	
 	private static final int MSG_REMOVE_ANNOTATION = MSG_FIRST_ID + 502;
 	private static final int MSG_REMOVE_ANNOTATIONS = MSG_FIRST_ID + 503;
 	private static final int MSG_REMOVE_ALL_ANNOTATIONS = MSG_FIRST_ID + 504;
-	
 	private static final int MSG_SELECT_ANNOTATION = MSG_FIRST_ID + 505;
 	private static final int MSG_DESELECT_ANNOTATION = MSG_FIRST_ID + 506;
-	
 	private static final int MSG_ADD_ROUTE = MSG_FIRST_ID + 507;	
 	private static final int MSG_REMOVE_ROUTE = MSG_FIRST_ID + 508;
-
-
-
+	private static final int MSG_CHANGE_ZOOM = MSG_FIRST_ID + 509;
+	private static final int MSG_SET_LOCATION = MSG_FIRST_ID + 510;
 	
 	private ArrayList<AnnotationProxy> preloadAnnotations;
 	private ArrayList<RouteProxy> preloadRoutes;
@@ -136,6 +133,16 @@ public class ViewProxy extends TiViewProxy
 			result = (AsyncResult) msg.obj;
 			handleRemoveRoute((RouteProxy)result.getArg());
 			result.setResult(null);
+			return true;
+		}
+
+		case MSG_CHANGE_ZOOM: {
+			handleZoom(msg.arg1);
+			return true;
+		}
+
+		case MSG_SET_LOCATION: {
+			handleSetLocation((HashMap) msg.obj);
 			return true;
 		}
 
@@ -399,5 +406,50 @@ public class ViewProxy extends TiViewProxy
 	
 	public ArrayList<RouteProxy> getPreloadRoutes() {
 		return preloadRoutes;
+	}
+
+	@Kroll.method
+	public void zoom(int delta)
+	{
+		if (TiApplication.isUIThread()) {
+			handleZoom(delta);
+		} else {
+			getMainHandler().obtainMessage(MSG_CHANGE_ZOOM, delta, 0).sendToTarget();
+		}
+	}
+
+	public void handleZoom(int delta)
+	{
+		TiUIView view = peekView();
+		if (view instanceof TiUIMapView) {
+			((TiUIMapView) view).changeZoomLevel(delta);
+		}
+	}
+
+	@Kroll.method
+	public void setLocation(Object location)
+	{
+		if (location instanceof HashMap) {
+			HashMap dict = (HashMap) location;
+			if (!dict.containsKey(TiC.PROPERTY_LATITUDE) || !dict.containsKey(TiC.PROPERTY_LONGITUDE)) {
+				Log.e(TAG, "Unable to set location. Missing latitude or longitude.");
+				return;
+			}
+			if (TiApplication.isUIThread()) {
+				handleSetLocation(dict);
+			} else {
+				getMainHandler().obtainMessage(MSG_SET_LOCATION, location).sendToTarget();
+			}
+		}
+	}
+
+	public void handleSetLocation(HashMap<String, Object> location)
+	{
+		TiUIView view = peekView();
+		if (view instanceof TiUIMapView) {
+			((TiUIMapView) view).updateCamera(location);
+		} else {
+			Log.e(TAG, "Unable set location since the map view has not been created yet. Use setRegion() instead.");
+		}
 	}
 }
