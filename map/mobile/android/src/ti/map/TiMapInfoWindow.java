@@ -26,18 +26,16 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class TiMapInfoWindow extends FrameLayout
+public class TiMapInfoWindow extends RelativeLayout
 {
 	private static final String TAG = "TiMapInfoWindow";
 	public static final int LEFT_PANE = 0;
 	public static final int RIGHT_PANE = 1;
 
-	private RelativeLayout layout;
 	private TiCompositeLayout leftPane;
 	private TiCompositeLayout rightPane;
 	private TextView title;
@@ -48,10 +46,8 @@ public class TiMapInfoWindow extends FrameLayout
 	public TiMapInfoWindow(Context context)
 	{
 		super(context);
-
-		layout = new RelativeLayout(context);
-		layout.setBackgroundColor(Color.WHITE);
-		layout.setGravity(Gravity.NO_GRAVITY);
+		setBackgroundColor(Color.WHITE);
+		setGravity(Gravity.NO_GRAVITY);
 
 		RelativeLayout.LayoutParams params = null;
 
@@ -63,7 +59,7 @@ public class TiMapInfoWindow extends FrameLayout
 		params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 		params.addRule(RelativeLayout.CENTER_VERTICAL);
 		params.setMargins(0, 0, 5, 0);
-		layout.addView(leftPane, params);
+		addView(leftPane, params);
 
 		// Title and subtitle
 		RelativeLayout textLayout = new RelativeLayout(getContext());
@@ -92,8 +88,8 @@ public class TiMapInfoWindow extends FrameLayout
 
 		params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		params.addRule(RelativeLayout.RIGHT_OF, 100);
-		params.addRule(RelativeLayout.ALIGN_TOP);
-		layout.addView(textLayout, params);
+		params.addRule(RelativeLayout.CENTER_VERTICAL);
+		addView(textLayout, params);
 
 		// Right button or right view
 		rightPane = new TiCompositeLayout(context);
@@ -103,11 +99,7 @@ public class TiMapInfoWindow extends FrameLayout
 		params.addRule(RelativeLayout.RIGHT_OF, 101);
 		params.addRule(RelativeLayout.CENTER_VERTICAL);
 		params.setMargins(5, 0, 0, 0);
-		layout.addView(rightPane, params);
-
-		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		fparams.gravity = Gravity.NO_GRAVITY;
-		addView(layout, fparams);
+		addView(rightPane, params);
 
 		clicksourceList = new View[] { leftPane, title, snippet, rightPane };
 	}
@@ -176,12 +168,14 @@ public class TiMapInfoWindow extends FrameLayout
 				imageview.setImageBitmap(bitmap);
 				pane.addView(imageview);
 			} else {
-				Log.w(TAG, "Unable to get the image from the left / right button: " + obj);
+				Log.w(TAG, "Unable to get the image from the left / right button: " + obj, Log.DEBUG_MODE);
 			}
 		} else if (obj instanceof TiViewProxy) {
 			TiUIView view = ((TiViewProxy) obj).getOrCreateView();
 			if (view != null) {
 				pane.addView(view.getNativeView());
+			} else {
+				Log.w(TAG, "Unable to get the view from the left / right view: " + obj, Log.DEBUG_MODE);
 			}
 		}
 	}

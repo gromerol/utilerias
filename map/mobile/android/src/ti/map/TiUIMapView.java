@@ -86,7 +86,6 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 		map.setInfoWindowAdapter(this);
 		((ViewProxy) proxy).clearPreloadObjects();
 		proxy.fireEvent(TiC.EVENT_COMPLETE, null);
-		View v = getFragment().getView();
 	}
 
 	@Override
