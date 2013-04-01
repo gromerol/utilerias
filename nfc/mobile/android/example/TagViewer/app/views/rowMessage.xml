@@ -1,8 +1,0 @@
-<Alloy>
-	<TableViewRow>
-		<View class="row">
-			<Label class="name" text="Action: "/>
-			<Label id="action"/>
-		</View>
-	</TableViewRow>
-</Alloy>

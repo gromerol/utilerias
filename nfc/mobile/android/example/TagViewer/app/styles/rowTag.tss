@@ -1,8 +1,0 @@
-"#rowTag": {
-	height: Ti.UI.SIZE,
-	layout: 'vertical',
-	className: 'rowTag'
-},
-"#techListLabel": {
-	top: 0
-}
