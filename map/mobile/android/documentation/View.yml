@@ -106,10 +106,10 @@ methods:
   - name: setLocation
     summary: Sets the map location and zoom level.
     description: |
-        Location is set using a simple dictionary object, described in <MapLocationType>. If `latitudeDelta`
-        and `longitudeDelta` are set, this specified bounds are centered on screen at the greatest
-        possible zoom level. This method can only be called after the map completes loading. Before that, use
-        [region](Modules.Map.View.region) to set map location.
+        The location is set using a simple dictionary object, described in <MapLocationTypeV2>. If `latitudeDelta`
+        and `longitudeDelta` are set, these specified parameters bound the area of interest, which is centered
+        and displayed at the greatest possible zoom level. This method can only be called after the map
+        completes loading. Before that, use [region](Modules.Map.View.region) to set the map location.
         For example:
 
              myMapView.setLocation({
@@ -119,7 +119,7 @@ methods:
       - name: location
         summary: |
             Dictionary specifying the location and the zoom level for the map.
-        type: MapLocationType
+        type: MapLocationTypeV2
     since: "3.1.0"
 
   - name: zoom
@@ -305,7 +305,7 @@ properties:
     type: Number
 
 ---
-name: MapLocationType
+name: MapLocationTypeV2
 summary: |
     Simple object used as an argument to [setLocation](Modules.Map.View.setLocation).
 properties:
