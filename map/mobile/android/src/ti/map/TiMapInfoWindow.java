@@ -35,6 +35,11 @@ public class TiMapInfoWindow extends RelativeLayout
 	private static final String TAG = "TiMapInfoWindow";
 	public static final int LEFT_PANE = 0;
 	public static final int RIGHT_PANE = 1;
+	private static final int leftPaneId = 100;
+	private static final int textLayoutId = 101;
+	private static final int rightPaneId = 102;
+	private static final int titleId = 200;
+	private static final int snippetId = 201;
 
 	private TiCompositeLayout leftPane;
 	private TiCompositeLayout rightPane;
@@ -53,7 +58,7 @@ public class TiMapInfoWindow extends RelativeLayout
 
 		// Left button or left view
 		leftPane = new TiCompositeLayout(context);
-		leftPane.setId(100);
+		leftPane.setId(leftPaneId);
 		leftPane.setTag(MapModule.PROPERTY_LEFT_PANE);
 		params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
@@ -62,12 +67,12 @@ public class TiMapInfoWindow extends RelativeLayout
 		addView(leftPane, params);
 
 		// Title and subtitle
-		RelativeLayout textLayout = new RelativeLayout(getContext());
+		RelativeLayout textLayout = new RelativeLayout(context);
 		textLayout.setGravity(Gravity.NO_GRAVITY);
-		textLayout.setId(101);
+		textLayout.setId(textLayoutId);
 
 		title = new TextView(context);
-		title.setId(200);
+		title.setId(titleId);
 		title.setTextColor(Color.BLACK);
 		title.setTag(TiC.PROPERTY_TITLE);
 		title.setTypeface(Typeface.DEFAULT_BOLD);
@@ -77,26 +82,26 @@ public class TiMapInfoWindow extends RelativeLayout
 		textLayout.addView(title, params);
 
 		snippet = new TextView(context);
-		snippet.setId(201);
+		snippet.setId(snippetId);
 		snippet.setTextColor(Color.GRAY);
 		snippet.setTag(TiC.PROPERTY_SUBTITLE);
 		snippet.setTypeface(Typeface.DEFAULT);
 		params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.addRule(RelativeLayout.BELOW, 200);
+		params.addRule(RelativeLayout.BELOW, titleId);
 		params.addRule(RelativeLayout.CENTER_HORIZONTAL);
 		textLayout.addView(snippet, params);
 
 		params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.addRule(RelativeLayout.RIGHT_OF, 100);
+		params.addRule(RelativeLayout.RIGHT_OF, leftPaneId);
 		params.addRule(RelativeLayout.CENTER_VERTICAL);
 		addView(textLayout, params);
 
 		// Right button or right view
 		rightPane = new TiCompositeLayout(context);
-		rightPane.setId(103);
+		rightPane.setId(rightPaneId);
 		rightPane.setTag(MapModule.PROPERTY_RIGHT_PANE);
 		params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.addRule(RelativeLayout.RIGHT_OF, 101);
+		params.addRule(RelativeLayout.RIGHT_OF, textLayoutId);
 		params.addRule(RelativeLayout.CENTER_VERTICAL);
 		params.setMargins(5, 0, 0, 0);
 		addView(rightPane, params);

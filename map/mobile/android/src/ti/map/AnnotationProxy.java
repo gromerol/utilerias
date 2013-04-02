@@ -60,7 +60,7 @@ public class AnnotationProxy extends KrollProxy
 
 	private static final int MSG_FIRST_ID = KrollProxy.MSG_LAST_ID + 1;
 
-	private static final int MSG_SET_LONG = MSG_FIRST_ID + 300;
+	private static final int MSG_SET_LON = MSG_FIRST_ID + 300;
 	private static final int MSG_SET_LAT = MSG_FIRST_ID + 301;
 	private static final int MSG_SET_TITLE = MSG_FIRST_ID + 302;
 	private static final int MSG_SET_SUBTITLE = MSG_FIRST_ID + 303;
@@ -92,7 +92,7 @@ public class AnnotationProxy extends KrollProxy
 		AsyncResult result = null;
 		switch (msg.what) {
 
-			case MSG_SET_LONG: {
+			case MSG_SET_LON: {
 				result = (AsyncResult) msg.obj;
 				setPosition(TiConvert.toDouble(getProperty(TiC.PROPERTY_LATITUDE)), (Double) result.getArg());
 				result.setResult(null);
@@ -275,11 +275,6 @@ public class AnnotationProxy extends KrollProxy
 		return infoWindow;
 	}
 
-	public void setMapInfoWindow(TiMapInfoWindow w)
-	{
-		infoWindow = w;
-	}
-
 	private void setIconImageHeight(int h)
 	{
 		if (h >= 0) {
@@ -307,34 +302,22 @@ public class AnnotationProxy extends KrollProxy
 		}
 
 		if (name.equals(TiC.PROPERTY_LONGITUDE)) {
-			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_LONG), TiConvert.toDouble(value));
-		}
-		if (name.equals(TiC.PROPERTY_LATITUDE)) {
+			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_LON), TiConvert.toDouble(value));
+		} else if (name.equals(TiC.PROPERTY_LATITUDE)) {
 			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_LAT), TiConvert.toDouble(value));
-		}
-		if (name.equals(TiC.PROPERTY_TITLE)) {
+		} else if (name.equals(TiC.PROPERTY_TITLE)) {
 			getOrCreateMapInfoWindow().setTitle(TiConvert.toString(value));
-		}
-		if (name.equals(TiC.PROPERTY_SUBTITLE)) {
+		} else if (name.equals(TiC.PROPERTY_SUBTITLE)) {
 			getOrCreateMapInfoWindow().setSubtitle(TiConvert.toString(value));
-		}
-		if (name.equals(TiC.PROPERTY_LEFT_BUTTON)) {
+		} else if (name.equals(TiC.PROPERTY_LEFT_BUTTON)) {
 			getOrCreateMapInfoWindow().setLeftOrRightPane(value, TiMapInfoWindow.LEFT_PANE);
-		}
-		if (name.equals(TiC.PROPERTY_LEFT_VIEW)) {
-			if (getProperty(TiC.PROPERTY_LEFT_BUTTON) == null) {
-				getOrCreateMapInfoWindow().setLeftOrRightPane(value, TiMapInfoWindow.LEFT_PANE);
-			}
-		}
-		if (name.equals(TiC.PROPERTY_RIGHT_BUTTON)) {
+		} else if (name.equals(TiC.PROPERTY_LEFT_VIEW) && getProperty(TiC.PROPERTY_LEFT_BUTTON) == null) {
+			getOrCreateMapInfoWindow().setLeftOrRightPane(value, TiMapInfoWindow.LEFT_PANE);
+		} else if (name.equals(TiC.PROPERTY_RIGHT_BUTTON)) {
 			getOrCreateMapInfoWindow().setLeftOrRightPane(value, TiMapInfoWindow.RIGHT_PANE);
-		}
-		if (name.equals(TiC.PROPERTY_RIGHT_VIEW)) {
-			if (getProperty(TiC.PROPERTY_RIGHT_BUTTON) == null) {
-				getOrCreateMapInfoWindow().setLeftOrRightPane(value, TiMapInfoWindow.RIGHT_PANE);
-			}
-		}
-		if (name.equals(MapModule.PROPERTY_DRAGGABLE)) {
+		} else if (name.equals(TiC.PROPERTY_RIGHT_VIEW) && getProperty(TiC.PROPERTY_RIGHT_BUTTON) == null) {
+			getOrCreateMapInfoWindow().setLeftOrRightPane(value, TiMapInfoWindow.RIGHT_PANE);
+		} else if (name.equals(MapModule.PROPERTY_DRAGGABLE)) {
 			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_DRAGGABLE),
 				TiConvert.toBoolean(value));
 		}
