@@ -64,9 +64,19 @@ properties:
     summary: Secondary title of the annotation view.
     type: String
 
+  - name: subtitleid
+    summary: Key in the locale file to use for the subtitle property.
+    type: String
+    since: "3.1.0"
+
   - name: title
     summary: Primary title of the annotation view.
     type: String
+
+  - name: titleid
+    summary: Key in the locale file to use for the title property.
+    type: String
+    since: "3.1.0"
 
   - name: leftButton
     summary: |
