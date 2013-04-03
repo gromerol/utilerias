@@ -62,9 +62,8 @@ public class AnnotationProxy extends KrollProxy
 
 	private static final int MSG_SET_LON = MSG_FIRST_ID + 300;
 	private static final int MSG_SET_LAT = MSG_FIRST_ID + 301;
-	private static final int MSG_SET_TITLE = MSG_FIRST_ID + 302;
-	private static final int MSG_SET_SUBTITLE = MSG_FIRST_ID + 303;
-	private static final int MSG_SET_DRAGGABLE = MSG_FIRST_ID + 304;
+	private static final int MSG_SET_DRAGGABLE = MSG_FIRST_ID + 302;
+	private static final int MSG_UPDATE_INFO_WINDOW = MSG_FIRST_ID + 303;
 
 	public AnnotationProxy()
 	{
@@ -106,24 +105,15 @@ public class AnnotationProxy extends KrollProxy
 				return true;
 			}
 
-			case MSG_SET_TITLE: {
-				result = (AsyncResult) msg.obj;
-				marker.getMarker().setTitle((String) result.getArg());
-				result.setResult(null);
-				return true;
-			}
-
-			case MSG_SET_SUBTITLE: {
-				result = (AsyncResult) msg.obj;
-				marker.getMarker().setSnippet((String) result.getArg());
-				result.setResult(null);
-				return true;
-			}
-
 			case MSG_SET_DRAGGABLE: {
 				result = (AsyncResult) msg.obj;
 				marker.getMarker().setDraggable((Boolean) result.getArg());
 				result.setResult(null);
+				return true;
+			}
+
+			case MSG_UPDATE_INFO_WINDOW: {
+				updateInfoWindow();
 				return true;
 			}
 
@@ -156,19 +146,19 @@ public class AnnotationProxy extends KrollProxy
 			|| hasProperty(TiC.PROPERTY_RIGHT_BUTTON) || hasProperty(TiC.PROPERTY_RIGHT_VIEW)
 			|| hasProperty(TiC.PROPERTY_TITLE) || hasProperty(TiC.PROPERTY_SUBTITLE)) {
 			getOrCreateMapInfoWindow();
-			if (hasProperty(TiC.PROPERTY_LEFT_BUTTON)) {
-				infoWindow.setLeftOrRightPane(getProperty(TiC.PROPERTY_LEFT_BUTTON), TiMapInfoWindow.LEFT_PANE);
-			} else if (hasProperty(TiC.PROPERTY_LEFT_VIEW)) {
-				infoWindow.setLeftOrRightPane(getProperty(TiC.PROPERTY_LEFT_VIEW), TiMapInfoWindow.LEFT_PANE);
+			Object leftButton = getProperty(TiC.PROPERTY_LEFT_BUTTON);
+			Object leftView = getProperty(TiC.PROPERTY_LEFT_VIEW);
+			Object rightButton = getProperty(TiC.PROPERTY_RIGHT_BUTTON);
+			Object rightView = getProperty(TiC.PROPERTY_RIGHT_VIEW);
+			if (leftButton != null) {
+				infoWindow.setLeftOrRightPane(leftButton, TiMapInfoWindow.LEFT_PANE);
 			} else {
-				infoWindow.setLeftOrRightPane(null, TiMapInfoWindow.LEFT_PANE);
+				infoWindow.setLeftOrRightPane(leftView, TiMapInfoWindow.LEFT_PANE);
 			}
-			if (hasProperty(TiC.PROPERTY_RIGHT_BUTTON)) {
-				infoWindow.setLeftOrRightPane(getProperty(TiC.PROPERTY_RIGHT_BUTTON), TiMapInfoWindow.RIGHT_PANE);
-			} else if (hasProperty(TiC.PROPERTY_RIGHT_VIEW)) {
-				infoWindow.setLeftOrRightPane(getProperty(TiC.PROPERTY_RIGHT_VIEW), TiMapInfoWindow.RIGHT_PANE);
+			if (rightButton != null) {
+				infoWindow.setLeftOrRightPane(rightButton, TiMapInfoWindow.RIGHT_PANE);
 			} else {
-				infoWindow.setLeftOrRightPane(null, TiMapInfoWindow.RIGHT_PANE);
+				infoWindow.setLeftOrRightPane(rightView, TiMapInfoWindow.RIGHT_PANE);
 			}
 			if (hasProperty(TiC.PROPERTY_TITLE)) {
 				infoWindow.setTitle(TiConvert.toString(getProperty(TiC.PROPERTY_TITLE)));
@@ -307,16 +297,34 @@ public class AnnotationProxy extends KrollProxy
 			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_LAT), TiConvert.toDouble(value));
 		} else if (name.equals(TiC.PROPERTY_TITLE)) {
 			getOrCreateMapInfoWindow().setTitle(TiConvert.toString(value));
+			updateInfoWindow();
 		} else if (name.equals(TiC.PROPERTY_SUBTITLE)) {
 			getOrCreateMapInfoWindow().setSubtitle(TiConvert.toString(value));
+			updateInfoWindow();
 		} else if (name.equals(TiC.PROPERTY_LEFT_BUTTON)) {
 			getOrCreateMapInfoWindow().setLeftOrRightPane(value, TiMapInfoWindow.LEFT_PANE);
+			if (value == null) {
+				Object leftView = getProperty(TiC.PROPERTY_LEFT_VIEW);
+				if (leftView != null) {
+					getOrCreateMapInfoWindow().setLeftOrRightPane(leftView, TiMapInfoWindow.LEFT_PANE);
+				}
+			}
+			updateInfoWindow();
 		} else if (name.equals(TiC.PROPERTY_LEFT_VIEW) && getProperty(TiC.PROPERTY_LEFT_BUTTON) == null) {
 			getOrCreateMapInfoWindow().setLeftOrRightPane(value, TiMapInfoWindow.LEFT_PANE);
+			updateInfoWindow();
 		} else if (name.equals(TiC.PROPERTY_RIGHT_BUTTON)) {
 			getOrCreateMapInfoWindow().setLeftOrRightPane(value, TiMapInfoWindow.RIGHT_PANE);
+			if (value == null) {
+				Object rightView = getProperty(TiC.PROPERTY_RIGHT_VIEW);
+				if (rightView != null) {
+					getOrCreateMapInfoWindow().setLeftOrRightPane(rightView, TiMapInfoWindow.LEFT_PANE);
+				}
+			}
+			updateInfoWindow();
 		} else if (name.equals(TiC.PROPERTY_RIGHT_VIEW) && getProperty(TiC.PROPERTY_RIGHT_BUTTON) == null) {
 			getOrCreateMapInfoWindow().setLeftOrRightPane(value, TiMapInfoWindow.RIGHT_PANE);
+			updateInfoWindow();
 		} else if (name.equals(MapModule.PROPERTY_DRAGGABLE)) {
 			TiMessenger.sendBlockingMainMessage(getMainHandler().obtainMessage(MSG_SET_DRAGGABLE),
 				TiConvert.toBoolean(value));
@@ -330,5 +338,20 @@ public class AnnotationProxy extends KrollProxy
 			infoWindow = new TiMapInfoWindow(TiApplication.getInstance().getApplicationContext());
 		}
 		return infoWindow;
+	}
+
+	private void updateInfoWindow()
+	{
+		if (marker == null) {
+			return;
+		}
+		if (TiApplication.isUIThread()) {
+			Marker m = marker.getMarker();
+			if (m != null && m.isInfoWindowShown()) {
+				m.showInfoWindow();
+			}
+		} else {
+			getMainHandler().sendEmptyMessage(MSG_UPDATE_INFO_WINDOW);
+		}
 	}
 }
