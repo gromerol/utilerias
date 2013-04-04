@@ -19,7 +19,10 @@ import org.appcelerator.titanium.util.TiConvert;
 import org.appcelerator.titanium.view.TiUIFragment;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.support.v4.app.Fragment;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,7 +34,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
 public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener,
-	GoogleMap.OnCameraChangeListener, GoogleMap.OnMarkerDragListener
+	GoogleMap.OnCameraChangeListener, GoogleMap.OnMarkerDragListener, GoogleMap.OnInfoWindowClickListener, GoogleMap.InfoWindowAdapter
 {
 	private static final String TAG = "TiUIMapView";
 	private GoogleMap map;
@@ -79,6 +82,8 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 		map.setOnMapClickListener(this);
 		map.setOnCameraChangeListener(this);
 		map.setOnMarkerDragListener(this);
+		map.setOnInfoWindowClickListener(this);
+		map.setInfoWindowAdapter(this);
 		((ViewProxy) proxy).clearPreloadObjects();
 		proxy.fireEvent(TiC.EVENT_COMPLETE, null);
 	}
@@ -96,7 +101,6 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 
 	public void processMapProperties(KrollDict d)
 	{
-
 		if (d.containsKey(TiC.PROPERTY_USER_LOCATION)) {
 			setUserLocation(d.getBoolean(TiC.PROPERTY_USER_LOCATION));
 		}
@@ -142,7 +146,6 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 		} else {
 			super.propertyChanged(key, oldValue, newValue, proxy);
 		}
-
 	}
 
 	public GoogleMap acquireMap()
@@ -175,12 +178,20 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 		map.getUiSettings().setZoomControlsEnabled(enabled);
 	}
 
-	protected void updateCamera(HashMap<String, Object> dict)
+	public void updateCamera(HashMap<String, Object> dict)
 	{
 		double longitude = 0;
 		double longitudeDelta = 0;
 		double latitude = 0;
 		double latitudeDelta = 0;
+
+		// In the setLocation() method, the old map module allows the user to provide two more properties - "animate" and "regionFit".
+		// In this map module, no matter "regionFit" is set to true or false, we will always make sure the specified 
+		// latitudeDelta / longitudeDelta bounds are centered on screen at the greatest possible zoom level.
+		boolean anim = animate;
+		if (dict.containsKey(TiC.PROPERTY_ANIMATE)) {
+			anim = TiConvert.toBoolean(dict, TiC.PROPERTY_ANIMATE);
+		}
 
 		if (dict.containsKey(TiC.PROPERTY_LATITUDE)) {
 			latitude = TiConvert.toDouble(dict, TiC.PROPERTY_LATITUDE);
@@ -210,19 +221,19 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 				preLayoutUpdateBounds = bounds;
 				return;
 			} else {
-				moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 0));
+				moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 0), anim);
 				return;
 			}
 		}
 
 		CameraPosition position = cameraBuilder.build();
 		CameraUpdate camUpdate = CameraUpdateFactory.newCameraPosition(position);
-		moveCamera(camUpdate);
+		moveCamera(camUpdate, anim);
 	}
 
-	protected void moveCamera(CameraUpdate camUpdate)
+	protected void moveCamera(CameraUpdate camUpdate, boolean anim)
 	{
-		if (animate) {
+		if (anim) {
 			map.animateCamera(camUpdate);
 		} else {
 			map.moveCamera(camUpdate);
@@ -284,7 +295,6 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 				return timarker;
 			}
 		}
-
 		return null;
 	}
 
@@ -323,7 +333,6 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 				marker.getMarker().showInfoWindow();
 				selectedAnnotation = marker.getProxy();
 			}
-
 		}
 	}
 
@@ -346,10 +355,12 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 
 	private AnnotationProxy getProxyByMarker(Marker m)
 	{
-		for (int i = 0; i < timarkers.size(); i++) {
-			TiMarker timarker = timarkers.get(i);
-			if (m.equals(timarker.getMarker())) {
-				return timarker.getProxy();
+		if (m != null) {
+			for (int i = 0; i < timarkers.size(); i++) {
+				TiMarker timarker = timarkers.get(i);
+				if (m.equals(timarker.getMarker())) {
+					return timarker.getProxy();
+				}
 			}
 		}
 		return null;
@@ -376,11 +387,24 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 		r.setRoute(null);
 	}
 
-	public void fireClickEvent(Marker marker, AnnotationProxy annoProxy, Object clickSource)
+	public void changeZoomLevel(int delta)
+	{
+		CameraUpdate camUpdate = CameraUpdateFactory.zoomBy(delta);
+		moveCamera(camUpdate, animate);
+	}
+
+	public void fireClickEvent(Marker marker, AnnotationProxy annoProxy, String clickSource)
 	{
 		KrollDict d = new KrollDict();
-		d.put(TiC.PROPERTY_TITLE, marker.getTitle());
-		d.put(TiC.PROPERTY_SUBTITLE, marker.getSnippet());
+		String title = null;
+		String subtitle = null;
+		TiMapInfoWindow infoWindow = annoProxy.getMapInfoWindow();
+		if (infoWindow != null) {
+			title = infoWindow.getTitle();
+			subtitle = infoWindow.getSubtitle();
+		}
+		d.put(TiC.PROPERTY_TITLE, title);
+		d.put(TiC.PROPERTY_SUBTITLE, subtitle);
 		d.put(TiC.PROPERTY_LATITUDE, marker.getPosition().latitude);
 		d.put(TiC.PROPERTY_LONGITUDE, marker.getPosition().longitude);
 		d.put(TiC.PROPERTY_ANNOTATION, annoProxy);
@@ -394,7 +418,12 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 	public void firePinChangeDragStateEvent(Marker marker, AnnotationProxy annoProxy, int dragState)
 	{
 		KrollDict d = new KrollDict();
-		d.put(TiC.PROPERTY_TITLE, marker.getTitle());
+		String title = null;
+		TiMapInfoWindow infoWindow = annoProxy.getMapInfoWindow();
+		if (infoWindow != null) {
+			title = infoWindow.getTitle();
+		}
+		d.put(TiC.PROPERTY_TITLE, title);
 		d.put(TiC.PROPERTY_ANNOTATION, annoProxy);
 		d.put(MapModule.PROPERTY_MAP, proxy);
 		d.put(TiC.PROPERTY_SOURCE, proxy);
@@ -423,7 +452,7 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 			selectedAnnotation.hideInfo();
 			selectedAnnotation = null;
 		}
-		fireClickEvent(marker, annoProxy, annoProxy);
+		fireClickEvent(marker, annoProxy, MapModule.PROPERTY_PIN);
 		return true;
 	}
 
@@ -449,40 +478,53 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 	@Override
 	public void onMarkerDragEnd(Marker marker)
 	{
-		TiMarker timarker = null;
-		for (TiMarker t : timarkers) {
-			if (t != null && t.getMarker().equals(marker)) {
-				timarker = t;
-				break;
-			}
-		}
-		if (timarker != null) {
-			AnnotationProxy annoProxy = timarker.getProxy();
-			if (annoProxy != null) {
-				LatLng position = marker.getPosition();
-				annoProxy.setProperty(TiC.PROPERTY_LONGITUDE, position.longitude);
-				annoProxy.setProperty(TiC.PROPERTY_LATITUDE, position.latitude);
-				firePinChangeDragStateEvent(marker, annoProxy, MapModule.ANNOTATION_DRAG_STATE_END);
-			}
+		AnnotationProxy annoProxy = getProxyByMarker(marker);
+		if (annoProxy != null) {
+			LatLng position = marker.getPosition();
+			annoProxy.setProperty(TiC.PROPERTY_LONGITUDE, position.longitude);
+			annoProxy.setProperty(TiC.PROPERTY_LATITUDE, position.latitude);
+			firePinChangeDragStateEvent(marker, annoProxy, MapModule.ANNOTATION_DRAG_STATE_END);
 		}
 	}
 
 	@Override
 	public void onMarkerDragStart(Marker marker)
 	{
-		TiMarker timarker = null;
-		for (TiMarker t : timarkers) {
-			if (t != null && t.getMarker().equals(marker)) {
-				timarker = t;
-				break;
-			}
+		AnnotationProxy annoProxy = getProxyByMarker(marker);
+		if (annoProxy != null) {
+			firePinChangeDragStateEvent(marker, annoProxy, MapModule.ANNOTATION_DRAG_STATE_START);
 		}
-		if (timarker != null) {
-			AnnotationProxy annoProxy = timarker.getProxy();
-			if (annoProxy != null) {
-				firePinChangeDragStateEvent(marker, annoProxy, MapModule.ANNOTATION_DRAG_STATE_START);
+	}
+
+	@Override
+	public void onInfoWindowClick(Marker marker)
+	{
+		AnnotationProxy annoProxy = getProxyByMarker(marker);
+		if (annoProxy != null) {
+			String clicksource = annoProxy.getMapInfoWindow().getClicksource();
+			// The clicksource is null means the click event is not inside "leftPane", "title", "subtible"
+			// or "rightPane". In this case, use "infoWindow" as the clicksource.
+			if (clicksource == null) {
+				clicksource = MapModule.PROPERTY_INFO_WINDOW;
 			}
+			fireClickEvent(marker, annoProxy, clicksource);
 		}
+	}
+
+	@Override
+	public View getInfoContents(Marker marker)
+	{
+		AnnotationProxy annoProxy = getProxyByMarker(marker);
+		if (annoProxy != null) {
+			return annoProxy.getMapInfoWindow();
+		}
+		return null;
+	}
+
+	@Override
+	public View getInfoWindow(Marker marker)
+	{
+		return null;
 	}
 
 	@Override
@@ -499,7 +541,7 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 	{
 		if (preLayout) {
 			if (preLayoutUpdateBounds != null) {
-				moveCamera(CameraUpdateFactory.newLatLngBounds(preLayoutUpdateBounds, 0));
+				moveCamera(CameraUpdateFactory.newLatLngBounds(preLayoutUpdateBounds, 0), animate);
 				preLayoutUpdateBounds = null;
 			} else {
 				// moveCamera will trigger another callback, so we do this to make sure
@@ -516,4 +558,21 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 
 	}
 
+	// Intercept the touch event to find out the correct clicksource if clicking on the info window.
+	@Override
+	protected boolean interceptTouchEvent(MotionEvent ev)
+	{
+		if (ev.getAction() == MotionEvent.ACTION_UP && selectedAnnotation != null) {
+			TiMapInfoWindow infoWindow = selectedAnnotation.getMapInfoWindow();
+			TiMarker timarker = selectedAnnotation.getTiMarker();
+			if (infoWindow != null && timarker != null) {
+				Marker marker = timarker.getMarker();
+				if (marker != null && marker.isInfoWindowShown()) {
+					Point markerPoint = map.getProjection().toScreenLocation(marker.getPosition());
+					infoWindow.analyzeTouchEvent( ev, markerPoint, selectedAnnotation.getIconImageHeight());
+				}
+			}
+		}
+		return false;
+	}
 }

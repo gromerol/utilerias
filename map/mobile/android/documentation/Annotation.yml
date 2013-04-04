@@ -64,7 +64,42 @@ properties:
     summary: Secondary title of the annotation view.
     type: String
 
+  - name: subtitleid
+    summary: Key in the locale file to use for the subtitle property.
+    type: String
+    since: "3.1.0"
+
   - name: title
     summary: Primary title of the annotation view.
     type: String
 
+  - name: titleid
+    summary: Key in the locale file to use for the title property.
+    type: String
+    since: "3.1.0"
+
+  - name: leftButton
+    summary: |
+        Left button image on the annotation, specified as an image URL.
+    type: String
+    since: "3.1.0"
+
+  - name: leftView
+    summary: Left view that is displayed on the annotation.
+    description: |
+        This is ignored if the `leftButton` property is set.
+    type: Titanium.UI.View
+    since: "3.1.0"
+
+  - name: rightButton
+    summary: |
+        Right button image on the annotation, specified as an image URL.
+    type: String
+    since: "3.1.0"
+
+  - name: rightView
+    summary: Right view that is displayed on the annotation.
+    description: |
+        This is ignored if the `rightButton` property is set.
+    type: Titanium.UI.View
+    since: "3.1.0"

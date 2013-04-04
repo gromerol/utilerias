@@ -103,6 +103,38 @@ methods:
             <Modules.Map.TERRAIN_TYPE> or <Modules.Map.HYBRID_TYPE>.
         type: Number
 
+  - name: setLocation
+    summary: Sets the map location and zoom level.
+    description: |
+        The location is set using a simple dictionary object, described in <MapLocationTypeV2>. If `latitudeDelta`
+        and `longitudeDelta` are set, these specified parameters bound the area of interest, which is centered
+        and displayed at the greatest possible zoom level. This method can only be called after the map
+        completes loading. Before that, use [region](Modules.Map.View.region) to set the map location.
+        For example:
+
+             myMapView.setLocation({
+                latitude:37.337681, longitude:-122.038193, animate:true,
+                latitudeDelta:0.04, longitudeDelta:0.04});
+    parameters:
+      - name: location
+        summary: |
+            Dictionary specifying the location and the zoom level for the map.
+        type: MapLocationTypeV2
+    since: "3.1.0"
+
+  - name: zoom
+    summary: Zooms in or out of the map.
+    description: |
+        Zooms in or out by specifying a relative zoom level. A positive value increases
+        the current zoom level and a negative value decreases the zoom level.
+
+        Each increase in zoom level increases the magnification by a factor of two.
+    parameters:
+      - name: level
+        summary: Relative zoom level (positive to zoom in, negative to zoom out).
+        type: Number
+    since: "3.1.0"
+
 events:
 
   - name: pinchangedragstate
@@ -139,6 +171,14 @@ events:
         - If the user clicks on an annotation to select it.
         - The user deselects an annotation.
 
+        The `click` event includes a value, `clicksource`, which describes the part of the 
+        annotation that was clicked. The `clicksource` can be one of `pin`, `title`,
+        `subtitle`, `leftPane`, `rightPane`, `infoWindow` or `null`. If the user clicks anywhere in 
+        the info window other than `title`, `subtitle`, `leftPane` or `rightPane`, the 
+        `clicksource` will be `infoWindow`. If the user deselects an annotation
+        by clicking on the pin, `clicksource` is `pin`. If the user deselects the
+        annotation by clicking elsewhere in the map view, `clicksource` is `null`.
+
     properties:
 
       - name: title
@@ -155,9 +195,8 @@ events:
 
       - name: clicksource
         summary: |
-            If selected, returns the Annotation object.
-            If deselected, returns `null`.
-        type: Modules.Map.Annotation/String
+            Source of the click event. Can be one of `pin`, `title`, `subtitle`, `leftPane`, `rightPane`, `infoWindow` or `null`.
+        type: String
 
       - name: annotation
         summary: Annotation source object.
@@ -264,3 +303,32 @@ properties:
   - name: latitudeDelta
     summary: The amount of north-to-south distance displayed on the map, measured in decimal degrees.
     type: Number
+
+---
+name: MapLocationTypeV2
+summary: |
+    Simple object used as an argument to [setLocation](Modules.Map.View.setLocation).
+properties:
+
+  - name: longitude
+    summary: Longitude value for the center point of the map, in decimal degrees.
+    type: Number
+
+  - name: latitude
+    summary: Latitude value for the center point of the map, in decimal degrees.
+    type: Number
+
+  - name: longitudeDelta
+    summary: The amount of east-to-west distance displayed on the map, measured in decimal degrees.
+    type: Number
+
+  - name: latitudeDelta
+    summary: The amount of north-to-south distance displayed on the map, measured in decimal degrees.
+    type: Number
+
+  - name: animate
+    summary: Set to `true` to animate the move to the new location.
+    description: |
+        If not set, the value of [animate](Modules.Map.View.animate) will be used.
+    type: Boolean
+since: "3.1.0"
