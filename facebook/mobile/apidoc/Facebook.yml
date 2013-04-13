@@ -50,7 +50,7 @@ description: |
     application to perform certain actions, such as accessing profile information or 
     posting status messages. 
 
-    For iOS 6, review the "iOS 6 Support Notes" section below in addition to this section.
+    For iOS, review the "iOS Support Notes" section below in addition to this section.
 
     There are two ways to initiate the login process:
     
@@ -114,7 +114,12 @@ description: |
     For details on different dialogs see the 
     [official Facebook Dialogs documentation](http://developers.facebook.com/docs/reference/dialogs/).  
 
-    #### iOS 6 Support Notes
+    #### iOS Support Notes
+    
+    As of Facebook Module 3.1, the iOS module will try to silently login on application startup
+    if the application was logged in when it exited. This is done to maintain a consistent
+    appearance regardless if your app was paused and resumed, or stopped and started, especially
+    in light of iOS 6's single sign-on.
 
     To use iOS 6's built-in Facebook login, some changes may be required of your application.
     iOS 6 does not support having required [permissions](Modules.Facebook.permissions) of
