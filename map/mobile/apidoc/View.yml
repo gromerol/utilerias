@@ -253,7 +253,7 @@ properties:
   - name: region
     summary: |
         A dictionary specifying the location and zoom level of the map.
-    type: MapRegionType
+    type: MapRegionTypev2
     default: latitude 0, longitude 0
 
   - name: userLocation
@@ -284,7 +284,7 @@ properties:
     default: false
 
 ---
-name: MapRegionType
+name: MapRegionTypev2
 summary: Simple object representing a map location and zoom level.
 properties:
 
