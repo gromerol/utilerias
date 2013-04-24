@@ -82,9 +82,10 @@ public class TiDialogListener implements DialogListener
 		String stringVals = "";
 		if (values != null) {
 			if (values.getString("post_id") == null) {
+				// No "post_id" returned means the user canceled posting.
 				doCallback(buildEventArgs(Status.CANCEL));
 				return;
-			} else if (values.size() > 0) {
+			} else {
 				stringVals = Util.encodeUrl(values);
 			}
 		}
