@@ -245,7 +245,7 @@ examples:
             // Loads the map module, which can be referenced by Alloy.Globals.Map
             Alloy.Globals.Map = require('ti.map');
 
-        app/index.xml
+        app/views/index.xml
 
             <Alloy>
                 <Window>
@@ -254,7 +254,7 @@ examples:
                 </Window>
             </Alloy>
 
-        app/index.js:
+        app/controllers/index.js:
 
             function report(evt) {
                 Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.myid);
