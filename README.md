@@ -13,6 +13,22 @@ Start Using Modules
 View the [Using Titanium Modules](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_Titanium_Modules) document for instructions on getting
 started with using modules in your application.
 
+To download an individual module without cloning this entire repo:
+
+### For an iOS Module:
+
+1. Navigate to *module_name*/mobile/*platform*, for example, paypal/mobile/ios
+2. Click on the zip file that you'll find in the list of files, for example, ti.paypal-iphone-1.6.2.zip
+3. Click View Raw, which will download the zip file for you.
+4. Proceed with using the module, as described in the docs page linked to above.
+
+### For an Android Module:
+
+1. Navigate to *module_name*/mobile/*platform*/dist, for example, paypal/mobile/android/dist
+2. Click on the zip file that you'll find in the list of files, for example, ti.paypal-android-2.2.2.zip
+3. Click View Raw, which will download the zip file for you.
+4. Proceed with using the module, as described in the docs page linked to above.
+
 Start Developing Modules
 -----------
 
