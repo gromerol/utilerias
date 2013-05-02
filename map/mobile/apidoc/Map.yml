@@ -236,8 +236,8 @@ examples:
         Previous example as an Alloy view.
 
         This example loads the Google Maps v2 module and assigns it to the `Alloy.Globals.Map` namespace
-        in the initializer file.  In the XML markup, assign the `Alloy.Globals.Map` namespace to
-        `ns` attribute of the `View` element to create a map module view. In the controller, use
+        in the initializer file.  In the XML markup, add a View element with its `ns`
+        (namespace) attribute set to `Alloy.Globals.Map`.  In the controller, use
         the `Alloy.Globals.Map` namespace to reference the map module.
 
         alloy.js:
