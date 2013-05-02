@@ -32,11 +32,12 @@ examples:
         Example of using the Facebook Login Button in Alloy.
 
         This example loads the Facebook v3 module and assigns it to the `Alloy.Globals.Facebook` namespace
-        in the initializer file.  In the XML markup, assign the `Alloy.Globals.Facebook` namespace to
-        `ns` attribute of the `LoginButton` element to create a Facebook module login button.
+        in the initializer file.  In the XML markup, add a LoginButton element with its `ns`
+        (namespace) attribute set to `Alloy.Globals.Facebook`.
         In the controller, use the `Alloy.Globals.Facebook` namespace to reference the Facebook module.
 
         app.js:
+
             // Loads the Facebook module, which can be referenced by Alloy.Globals.Facebook
             Alloy.Globals.Facebook = require('facebook');
 
