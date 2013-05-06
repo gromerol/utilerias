@@ -80,8 +80,14 @@ public class TiDialogListener implements DialogListener
 	public void onComplete(Bundle values)
 	{
 		String stringVals = "";
-		if (values != null && values.size() > 0) {
-			stringVals = Util.encodeUrl(values);
+		if (values != null) {
+			if (values.getString("post_id") == null) {
+				// No "post_id" returned means the user canceled posting.
+				doCallback(buildEventArgs(Status.CANCEL));
+				return;
+			} else {
+				stringVals = Util.encodeUrl(values);
+			}
 		}
 		complete(stringVals);
 	}
