@@ -24,6 +24,7 @@ import android.os.Message;
 
 @Kroll.proxy(creatableInModule = MapModule.class, propertyAccessors = {
 	TiC.PROPERTY_USER_LOCATION,
+	MapModule.PROPERTY_USER_LOCATION_BUTTON,
 	TiC.PROPERTY_MAP_TYPE,
 	TiC.PROPERTY_REGION,
 	TiC.PROPERTY_ANNOTATIONS,
