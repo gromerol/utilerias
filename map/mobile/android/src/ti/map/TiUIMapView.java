@@ -102,7 +102,10 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 	public void processMapProperties(KrollDict d)
 	{
 		if (d.containsKey(TiC.PROPERTY_USER_LOCATION)) {
-			setUserLocation(d.getBoolean(TiC.PROPERTY_USER_LOCATION));
+			setUserLocationEnabled(TiConvert.toBoolean(d, TiC.PROPERTY_USER_LOCATION, false));
+		}
+		if (d.containsKey(MapModule.PROPERTY_USER_LOCATION_BUTTON)) {
+			setUserLocationButtonEnabled(TiConvert.toBoolean(d, MapModule.PROPERTY_USER_LOCATION_BUTTON, true));
 		}
 		if (d.containsKey(TiC.PROPERTY_MAP_TYPE)) {
 			setMapType(d.getInt(TiC.PROPERTY_MAP_TYPE));
@@ -130,7 +133,9 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 	{
 
 		if (key.equals(TiC.PROPERTY_USER_LOCATION)) {
-			setUserLocation(TiConvert.toBoolean(newValue));
+			setUserLocationEnabled(TiConvert.toBoolean(newValue));
+		} else if (key.equals(MapModule.PROPERTY_USER_LOCATION_BUTTON)) {
+			setUserLocationButtonEnabled(TiConvert.toBoolean(newValue));
 		} else if (key.equals(TiC.PROPERTY_MAP_TYPE)) {
 			setMapType(TiConvert.toInt(newValue));
 		} else if (key.equals(TiC.PROPERTY_REGION)) {
@@ -158,9 +163,14 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 		return map;
 	}
 
-	protected void setUserLocation(boolean enabled)
+	protected void setUserLocationEnabled(boolean enabled)
 	{
 		map.setMyLocationEnabled(enabled);
+	}
+
+	protected void setUserLocationButtonEnabled(boolean enabled)
+	{
+		map.getUiSettings().setMyLocationButtonEnabled(enabled);
 	}
 
 	protected void setMapType(int type)

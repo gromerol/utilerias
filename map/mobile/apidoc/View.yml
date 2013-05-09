@@ -266,6 +266,16 @@ properties:
     type: Boolean
     default: false
 
+  - name: userLocationButton
+    summary: |
+        Enable or disables the My Location button. If the button is enabled, it is only shown when `userLocation`
+        is enabled.
+    description: |
+        If `true`, the My Location button is enabled.
+    type: Boolean
+    default: true
+    since: "3.1.1"
+
   - name: enableZoomControls
     summary: |
         Enables or disables the built-in zoom controls.
