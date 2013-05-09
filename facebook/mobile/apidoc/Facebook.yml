@@ -458,7 +458,38 @@ examples:
 
         The specified button style ('wide' or `BUTTON_STYLE_WIDE`) shows a wide version of the 
         button that displays "Connect with Facebook" instead of just "Connect".
-        
+
+  - title: Alloy XML Markup
+    example: |
+        Example of using the Facebook Login Button in Alloy.
+
+        This example loads the Facebook v3 module and assigns it to the `Alloy.Globals.Facebook` namespace
+        in the initializer file.  In the XML markup, add a LoginButton element with its `ns`
+        (namespace) attribute set to `Alloy.Globals.Facebook`.
+        In the controller, use the `Alloy.Globals.Facebook` namespace to reference the Facebook module.
+
+        `app.js`:
+
+            // Loads the Facebook module, which can be referenced by Alloy.Globals.Facebook
+            Alloy.Globals.Facebook = require('facebook');
+
+        `app/views/index.xml`:
+
+            <Alloy>
+                <Window>
+                     <!-- Use the Alloy.Globals.Facebook namespace to create a Facebook module login button -->
+                    <LoginButton id="fbButton" ns="Alloy.Globals.Facebook"/>
+                </Window>
+            </Alloy>
+
+        `app/controllers/index.js`:
+
+            // Use the Alloy.Globals.Facebook namespace to make Facebook module API calls
+            var facebook = Alloy.Globals.Facebook;
+            facebook.appid = FACEBOOK_APP_ID;
+            facebook.permissions = [FACEBOOK_APP_PERMISSIONS];
+            $.fbButton.style = facebook.BUTTON_STYLE_WIDE;
+            $.index.open();
         
   - title: Simple Graph API Call
     example: |
