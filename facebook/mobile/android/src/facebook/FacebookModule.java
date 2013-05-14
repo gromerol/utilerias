@@ -510,9 +510,18 @@ public class FacebookModule extends KrollModule
 
 		public void onFacebookError(FacebookError error)
 		{
-			Log.e(TAG, "LoginDialogListener onFacebookError: " + error.getMessage(), error);
-			loginContext = null;
-			SessionEvents.onLoginError(error.getMessage());
+			String errorMessage = error.getMessage();
+			// There is a bug in Facebook Android SDK 3.0. When the user cancels the login by pressing the
+			// "X" button, the onFacebookError callback is called instead of onCancel.
+			// http://stackoverflow.com/questions/14237157/facebookoperationcanceledexception-not-called
+			if (errorMessage != null && errorMessage.indexOf("User canceled log in") > -1) {
+				loginContext = null;
+				FacebookModule.this.loginCancel();
+			} else {
+				Log.e(TAG, "LoginDialogListener onFacebookError: " + error.getMessage(), error);
+				loginContext = null;
+				SessionEvents.onLoginError(error.getMessage());
+			}
 		}
 
 		public void onError(DialogError error)
