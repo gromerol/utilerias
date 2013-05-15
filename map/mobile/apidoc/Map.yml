@@ -15,7 +15,8 @@ description: |
     ### Requirements
 
     -   Google Maps API key (required for both development and production)
-    -   Google Play installed on device.  This module is not supported on the Android emulator.
+    -   Google Play services SDK installed using the Android SDK manager
+    -   This module only works on Android devices.  This module is not supported on the Android emulator
 
     ### Getting Started
 
