@@ -563,6 +563,9 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 			d.put(TiC.PROPERTY_LATITUDE, position.target.latitude);
 			d.put(TiC.PROPERTY_LONGITUDE, position.target.longitude);
 			d.put(TiC.PROPERTY_SOURCE, proxy);
+			LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
+			d.put(TiC.PROPERTY_LATITUDE_DELTA, (bounds.northeast.latitude - bounds.southwest.latitude));
+			d.put(TiC.PROPERTY_LONGITUDE_DELTA, (bounds.northeast.longitude - bounds.southwest.longitude));
 			proxy.fireEvent(TiC.EVENT_REGION_CHANGED, d);
 		}
 

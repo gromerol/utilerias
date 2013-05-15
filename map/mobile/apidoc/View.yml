@@ -223,6 +223,14 @@ events:
       - name: latitude
         summary: Latitude value for the center point of the map, in decimal degrees.
         type: Number
+      - name: longitudeDelta
+        summary: The amount of east-to-west distance displayed on the map, measured in decimal degrees.
+        type: Number
+        since: "3.1.1"
+      - name: latitudeDelta
+        summary: The amount of north-to-south distance displayed on the map, measured in decimal degrees.
+        type: Number
+        since: "3.1.1"
 
 properties:
 
