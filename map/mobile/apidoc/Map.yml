@@ -15,7 +15,8 @@ description: |
     ### Requirements
 
     -   Google Maps API key (required for both development and production)
-    -   Google Play installed on device.  This module is not supported on the Android emulator.
+    -   Google Play services SDK installed using the Android SDK manager
+    -   This module only works on Android devices.  This module is not supported on the Android emulator
 
     ### Getting Started
 
@@ -230,4 +231,49 @@ examples:
                 Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.myid);
             });
             win.open();
+
+  - title: Alloy XML Markup
+    example: |
+        Previous example as an Alloy view.
+
+        This example loads the Google Maps v2 module and assigns it to the `Alloy.Globals.Map` namespace
+        in the initializer file.  In the XML markup, add a View element with its `ns`
+        (namespace) attribute set to `Alloy.Globals.Map`.  In the controller, use
+        the `Alloy.Globals.Map` namespace to reference the map module.
+
+        `alloy.js`:
+
+            // Loads the map module, which can be referenced by Alloy.Globals.Map
+            Alloy.Globals.Map = require('ti.map');
+
+        `app/views/index.xml`:
+
+            <Alloy>
+                <Window>
+                    <!-- Use the Alloy.Globals.Map namespace to create a map module view -->
+                    <View id="mapview" ns="Alloy.Globals.Map" onClick="report" />
+                </Window>
+            </Alloy>
+
+        `app/controllers/index.js`:
+
+            function report(evt) {
+                Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.myid);
+            }
+
+            // API calls to the map module need to use the Alloy.Globals.Map reference
+            var mountainView = Alloy.Globals.Map.createAnnotation({
+                latitude:37.390749,
+                longitude:-122.081651,
+                title:"Appcelerator Headquarters",
+                subtitle:'Mountain View, CA',
+                pincolor:Alloy.Globals.Map.ANNOTATION_RED,
+                myid:1 // Custom property to uniquely identify this annotation.
+            });
+
+            $.mapview.region = {latitude:33.74511, longitude:-84.38993,
+                                latitudeDelta:0.01, longitudeDelta:0.01};
+            $.mapview.addAnnotation(mountainView);
+
+            $.index.open();
 

@@ -9,6 +9,7 @@
 ## Requirements
  Testing device needs to have Google Play installed. Otherwise map won't work.
  Add this to tiapp.xml - replace "API KEY HERE" with your API key.
+
         <manifest>
             <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
             <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
