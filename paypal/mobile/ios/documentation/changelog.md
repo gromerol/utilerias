@@ -1,6 +1,8 @@
 # Change Log
 <pre>
-v1.6.2  [MOD-942] Building with 2.1.3.GA and open sourcing
+v1.7.0  Upgraded to PayPal MPL library version 2.0.0 (UDID fix) [TIMODOPEN-243]
+
+v1.6.2  Building with 2.1.3.GA and open sourcing [MOD-942]
 	
 v1.6.1  Fix for memory exception when using preapproval merchant name property [TIMODOPEN-152]
 
