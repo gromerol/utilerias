@@ -185,11 +185,49 @@ properties:
     summary: Used with [mapType](Modules.Map.View.mapType) to display the terrain that shows the position of all roads and some road names.
     type: Number
     permission: read-only
-
+    
   - name: HYBRID_TYPE
     summary: Used with [mapType](Modules.Map.View.mapType) to display a satellite image of the area with road and road name information layered on top.
     type: Number
     permission: read-only
+
+  - name: SUCCESS
+    summary: Code returned from <Modules.Map.isGooglePlayServicesAvailable>. Google Play services is available, and the connection is successful.
+    type: Number
+    permission: read-only
+    
+  - name: SERVICE_MISSING
+    summary: Code returned from <Modules.Map.isGooglePlayServicesAvailable>. Google Play services is not installed on the device.
+    type: Number
+    permission: read-only
+    
+  - name: SERVICE_VERSION_UPDATE_REQUIRED
+    summary: Code returned from <Modules.Map.isGooglePlayServicesAvailable>. Google Play services is out of date.
+    type: Number
+    permission: read-only
+    
+  - name: SERVICE_DISABLED
+    summary: Code returned from <Modules.Map.isGooglePlayServicesAvailable>. Google Play services has been disabled on this device.
+    type: Number
+    permission: read-only
+    
+  - name: SERVICE_INVALID
+    summary: Code returned from <Modules.Map.isGooglePlayServicesAvailable>. The version of Google Play services installed on this device is not authentic.
+    type: Number
+    permission: read-only
+
+methods:
+  - name: isGooglePlayServicesAvailable
+    returns:
+        type: Number
+        summary: |
+            One of the following status codes:
+            <Modules.Map.SUCCESS>, <Modules.Map.SERVICE_MISSING>,
+            <Modules.Map.SERVICE_VERSION_UPDATE_REQUIRED>,
+            <Modules.Map.SERVICE_DISABLED> or <Modules.Map.SERVICE_INVALID>.
+    summary: Returns a code to indicate whether Google Play Services is available on the device.
+    since: "3.1.1"
+    
     
 examples:
   - title: Map Example

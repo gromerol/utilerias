@@ -1,36 +1,40 @@
 
 var MapModule = require('ti.map');
 
+var code = MapModule.isGooglePlayServicesAvailable();
 
-
-var win = Ti.UI.createWindow();
-var table = Ti.UI.createTableView();
-var tableData = [];
-
-var multiMapRow = Ti.UI.createTableViewRow({title: 'Multi Map'});
-tableData.push(multiMapRow);
-multiMapRow.addEventListener('click', function(e) {
-   multiMapTest();
-});
-
-
-var annotationRow = Ti.UI.createTableViewRow({title:'AnnotationTest'});
-tableData.push(annotationRow);
-annotationRow.addEventListener('click', function(e) {
-   annotationTest();
-});
-
-
-var routeRow = Ti.UI.createTableViewRow({title:'Routes Test'});
-tableData.push(routeRow);
-routeRow.addEventListener('click', function(e) {
-   routeTest();
-});
-
-
-table.setData(tableData);
-win.add(table);
-win.open();
+if (code != MapModule.SUCCESS) {
+	alert ("Google Play Services is not installed/updated/available");
+} else {
+	var win = Ti.UI.createWindow();
+	var table = Ti.UI.createTableView();
+	var tableData = [];
+	
+	var multiMapRow = Ti.UI.createTableViewRow({title: 'Multi Map'});
+	tableData.push(multiMapRow);
+	multiMapRow.addEventListener('click', function(e) {
+	   multiMapTest();
+	});
+	
+	
+	var annotationRow = Ti.UI.createTableViewRow({title:'AnnotationTest'});
+	tableData.push(annotationRow);
+	annotationRow.addEventListener('click', function(e) {
+	   annotationTest();
+	});
+	
+	
+	var routeRow = Ti.UI.createTableViewRow({title:'Routes Test'});
+	tableData.push(routeRow);
+	routeRow.addEventListener('click', function(e) {
+	   routeTest();
+	});
+	
+	
+	table.setData(tableData);
+	win.add(table);
+	win.open();
+}
 
 
 
