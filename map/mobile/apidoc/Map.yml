@@ -185,11 +185,42 @@ properties:
     summary: Used with [mapType](Modules.Map.View.mapType) to display the terrain that shows the position of all roads and some road names.
     type: Number
     permission: read-only
-
+    
   - name: HYBRID_TYPE
     summary: Used with [mapType](Modules.Map.View.mapType) to display a satellite image of the area with road and road name information layered on top.
     type: Number
     permission: read-only
+
+  - name: SUCCESS
+    summary: Code returned from <Modules.Map.isGooglePlayServicesAvailable>. Google Play services is available, and the connection is successful.
+    type: Number
+    permission: read-only
+    
+  - name: SERVICE_MISSING
+    summary: Code returned from <Modules.Map.isGooglePlayServicesAvailable>. Google Play services is not installed on the device.
+    type: Number
+    permission: read-only
+    
+  - name: SERVICE_VERSION_UPDATE_REQUIRED
+    summary: Code returned from <Modules.Map.isGooglePlayServicesAvailable>. Google Play services is out of date.
+    type: Number
+    permission: read-only
+    
+  - name: SERVICE_DISABLED
+    summary: Code returned from <Modules.Map.isGooglePlayServicesAvailable>. Google Play services has been disabled on this device.
+    type: Number
+    permission: read-only
+    
+  - name: SERVICE_INVALID
+    summary: Code returned from <Modules.Map.isGooglePlayServicesAvailable>. The version of Google Play services installed on this device is not authentic.
+    type: Number
+    permission: read-only
+
+methods:
+  - name: isGooglePlayServicesAvailable
+    type: Integer
+    summary: returns a code to indicate whether Google Play Services is available on the device.
+    
     
 examples:
   - title: Map Example
