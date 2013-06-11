@@ -218,8 +218,15 @@ properties:
 
 methods:
   - name: isGooglePlayServicesAvailable
-    type: Integer
-    summary: returns a code to indicate whether Google Play Services is available on the device.
+    returns:
+        type: Number
+        summary: |
+            One of the following status codes:
+            <Modules.Map.SUCCESS>, <Modules.Map.SERVICE_MISSING>,
+            <Modules.Map.SERVICE_VERSION_UPDATE_REQUIRED>,
+            <Modules.Map.SERVICE_DISABLED> or <Modules.Map.SERVICE_INVALID>.
+    summary: Returns a code to indicate whether Google Play Services is available on the device.
+    since: "3.1.1"
     
     
 examples:
