@@ -1,5 +1,7 @@
 # Change Log
 <pre>
+v2.1.1    Added isGooglePlayServicesAvailable.
+
 v2.1.0    Added the pinchangedragstate event to the Map View.
 		  Supported custom views for the pin.
 		  Added the enableZoomControls" property to enable/disable zoom controls.
