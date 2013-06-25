@@ -451,19 +451,9 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 			return false;
 		}
 
-		if (selectedAnnotation == null) {
-			annoProxy.showInfo();
-			selectedAnnotation = annoProxy;
-		} else if (!selectedAnnotation.equals(annoProxy)) {
-			selectedAnnotation.hideInfo();
-			annoProxy.showInfo();
-			selectedAnnotation = annoProxy;
-		} else {
-			selectedAnnotation.hideInfo();
-			selectedAnnotation = null;
-		}
+		selectedAnnotation = annoProxy;
 		fireClickEvent(marker, annoProxy, MapModule.PROPERTY_PIN);
-		return true;
+		return false;
 	}
 
 	@Override

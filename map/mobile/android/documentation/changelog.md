@@ -2,6 +2,7 @@
 <pre>
 v2.1.1    Added isGooglePlayServicesAvailable [TIMOB-14075].
           Added the userLocationButton property [TIMOB-13003].
+          Clicking on an annotation should center it in map view [TIMOB-13778].
 
 v2.1.0    Added the pinchangedragstate event to the Map View.
           Supported custom views for the pin.
