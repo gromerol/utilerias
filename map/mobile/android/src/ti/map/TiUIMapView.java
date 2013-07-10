@@ -301,7 +301,8 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 	{
 		for (int i = 0; i < timarkers.size(); i++) {
 			TiMarker timarker = timarkers.get(i);
-			if (timarker.getMarker().getTitle().equals(title)) {
+			AnnotationProxy annoProxy = timarker.getProxy();
+			if (annoProxy != null && annoProxy.getTitle().equals(title)) {
 				return timarker;
 			}
 		}
