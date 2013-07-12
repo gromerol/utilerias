@@ -1,5 +1,9 @@
 # Change Log
 <pre>
+v2.1.2    Clicking on an annotation should center it in map view [TIMOB-13778].
+          Fixed a bug where removing an annotation using its title crashed the app [TIMOB-14502].
+          Updated Google Play Services SDK.
+
 v2.1.1    Added isGooglePlayServicesAvailable [TIMOB-14075].
           Added the userLocationButton property [TIMOB-13003].
 

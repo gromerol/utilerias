@@ -301,7 +301,8 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 	{
 		for (int i = 0; i < timarkers.size(); i++) {
 			TiMarker timarker = timarkers.get(i);
-			if (timarker.getMarker().getTitle().equals(title)) {
+			AnnotationProxy annoProxy = timarker.getProxy();
+			if (annoProxy != null && annoProxy.getTitle().equals(title)) {
 				return timarker;
 			}
 		}
@@ -449,21 +450,16 @@ public class TiUIMapView extends TiUIFragment implements GoogleMap.OnMarkerClick
 		if (annoProxy == null) {
 			Log.e(TAG, "Marker can not be found, click event won't fired.", Log.DEBUG_MODE);
 			return false;
-		}
-
-		if (selectedAnnotation == null) {
-			annoProxy.showInfo();
-			selectedAnnotation = annoProxy;
-		} else if (!selectedAnnotation.equals(annoProxy)) {
-			selectedAnnotation.hideInfo();
-			annoProxy.showInfo();
-			selectedAnnotation = annoProxy;
-		} else {
+		} else if (selectedAnnotation != null && selectedAnnotation.equals(annoProxy)) {
 			selectedAnnotation.hideInfo();
 			selectedAnnotation = null;
+			fireClickEvent(marker, annoProxy, MapModule.PROPERTY_PIN);
+			return true;
 		}
+
+		selectedAnnotation = annoProxy;
 		fireClickEvent(marker, annoProxy, MapModule.PROPERTY_PIN);
-		return true;
+		return false;
 	}
 
 	@Override

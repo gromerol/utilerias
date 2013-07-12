@@ -175,8 +175,8 @@ events:
         annotation that was clicked. The `clicksource` can be one of `pin`, `title`,
         `subtitle`, `leftPane`, `rightPane`, `infoWindow` or `null`. If the user clicks anywhere in 
         the info window other than `title`, `subtitle`, `leftPane` or `rightPane`, the 
-        `clicksource` will be `infoWindow`. If the user deselects an annotation
-        by clicking on the pin, `clicksource` is `pin`. If the user deselects the
+        `clicksource` will be `infoWindow`. If the user deselects an annotation 
+        by clicking on the pin, `clicksource` is `pin`. If the user deselects the 
         annotation by clicking elsewhere in the map view, `clicksource` is `null`.
 
     properties:
