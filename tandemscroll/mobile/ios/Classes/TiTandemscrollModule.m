@@ -43,6 +43,18 @@
 	[super dealloc];
 }
 
+-(UIScrollView*)toScrollView:(id)view
+{
+    UIScrollView* scrollView = nil;
+    if ([view respondsToSelector:@selector(scrollView)]) {
+        scrollView = [view scrollView];
+    }
+    else if ([view respondsToSelector:@selector(scrollview)]) {
+        scrollView = [view scrollview];
+    }
+    return scrollView;
+}
+
 #pragma Public APIs
 
 -(void)lockTogether:(id)args
@@ -52,9 +64,11 @@
     [self unbindScrollViews];
     scrollViews = [[NSMutableArray alloc] initWithCapacity:[args count]];
     
-    for (TiUIScrollViewProxy* proxy in args) {
+    for (TiViewProxy* proxy in args) {
         [proxy rememberSelf];
-        [(TiUIScrollView*)proxy.view scrollView].delegate = self;
+        id view = proxy.view;
+        UIScrollView* scroll = [self toScrollView:view];
+        scroll.delegate = self;
         [scrollViews addObject:proxy];
     }
 }
@@ -72,11 +86,11 @@
     if (scrollView != controllingScrollView)
         return;
     
-    for (TiUIScrollViewProxy* proxy in scrollViews)
+    for (TiViewProxy* proxy in scrollViews)
     {
-        
         // Skip the view that is actually scrolling,
-        UIScrollView* scroll = [(TiUIScrollView*)proxy.view scrollView];
+        id view = proxy.view;
+        UIScrollView* scroll = [self toScrollView:view];
         if (scroll == controllingScrollView)
         {
             CGPoint offset = [scrollView contentOffset];
