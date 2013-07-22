@@ -7,6 +7,8 @@
 #import "TiModule.h"
 #import "TiUIScrollViewProxy.h"
 #import "TiUIScrollView.h"
+#import "TiUIScrollableViewProxy.h"
+#import "TiUIScrollableView.h"
 
 @interface TiTandemscrollModule : TiModule <UIScrollViewDelegate>
 {
