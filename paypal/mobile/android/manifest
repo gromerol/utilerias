@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 2.2.2
+version: 2.2.3
 apiversion: 2
 description: PayPal module for PayPal transactions
 author: Marshall Culpepper
@@ -14,4 +14,4 @@ name: paypal
 moduleid: ti.paypal
 guid: 806d55c1-4ff6-4b11-951a-115af5053252
 platform: android
-minsdk: 2.1.3.GA
+minsdk: 3.1.1.GA
