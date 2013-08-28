@@ -1,5 +1,7 @@
 # Change Log
 <pre>
+v2.2.3  [TIMODOPEN-256] Fixed click events not getting processed
+
 v2.2.2  [MOD-942] Building with 2.1.3.GA and open sourcing
 	
 v2.2.1	Fixed crash with Titanium Mobile SDK 2.0.1 [MOD-632].

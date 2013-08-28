@@ -60,11 +60,11 @@ public class PaypalButtonProxy extends TiViewProxy {
 	}
 
 	@Override
-	public boolean fireEvent(String eventName, Object data) {
+	public boolean fireEvent(String eventName, Object data, boolean bubbles) {
 		if (eventName.equals(TiC.EVENT_CLICK)) {
 			onClick();
 		}
-		return super.fireEvent(eventName, data);
+		return super.fireEvent(eventName, data, bubbles);
 	}
 
 	private void onClick() {
