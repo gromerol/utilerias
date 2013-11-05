@@ -40,6 +40,7 @@ public class SocketProxy extends KrollProxy {
 	private Thread _listeningThread;
 	private DatagramSocket _socket;
 	private Integer _port;
+	private Integer _bufferSize = 256;
 
 	// Constructor
 	public SocketProxy(TiContext tiContext) {
@@ -110,7 +111,7 @@ public class SocketProxy extends KrollProxy {
 			public void run() {
 				while (_continueListening) {
 					try {
-						byte[] buf = new byte[256];
+						byte[] buf = new byte[_bufferSize];
 						DatagramPacket packet = new DatagramPacket(buf, buf.length);
 						_socket.receive(packet);
 
@@ -148,6 +149,17 @@ public class SocketProxy extends KrollProxy {
 	// End Utility Methods
 
 	// Start Public API
+	@Kroll.method
+	@Kroll.setProperty
+	public void setBufferSize(int size) {
+		_bufferSize = size;
+	}
+
+	@Kroll.method
+	@Kroll.getProperty
+	public int getBufferSize() {
+		return _bufferSize;
+	}
 
 	@Kroll.method
 	@SuppressWarnings({ "rawtypes", "unchecked" })

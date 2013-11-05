@@ -2,3 +2,5 @@
 build.properties
 build
 .svn
+/*/mobile/android/libs/
+/*/mobile/android/dist/
