@@ -4,6 +4,11 @@
 
 Marshals UDP traffic.
 
+## Properties
+
+### int bufferSize
+Specifies how large of a packet that can be received. Defaults to 256.
+
 ## Methods
 
 ### void start(dictionary args)
