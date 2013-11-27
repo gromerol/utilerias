@@ -19,6 +19,7 @@ import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.CurrentActivityListener;
 import org.appcelerator.kroll.common.Log;
+import org.appcelerator.kroll.common.TiMessenger;
 import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.TiBlob;
 import org.appcelerator.titanium.TiContext;
@@ -386,10 +387,10 @@ public class FacebookModule extends KrollModule
 		stateListeners.remove(listener);
 	}
 
-	protected void executeAuthorize(Activity activity)
+	protected void executeAuthorize(final Activity activity)
 	{
 		loginContext = new WeakReference<Context>(activity);
-		TiActivitySupport activitySupport  = (TiActivitySupport) activity;
+		final TiActivitySupport activitySupport  = (TiActivitySupport) activity;
 		int activityCode;
 		if (forceDialogAuth) {
 			// Single sign-on support
@@ -397,7 +398,7 @@ public class FacebookModule extends KrollModule
 		} else {
 			activityCode = activitySupport.getUniqueResultCode();
 		}
-		TiActivityResultHandler resultHandler = new TiActivityResultHandler()
+		final TiActivityResultHandler resultHandler = new TiActivityResultHandler()
 		{
 			@Override
 			public void onResult(Activity activity, int requestCode, int resultCode, Intent data)
@@ -412,7 +413,18 @@ public class FacebookModule extends KrollModule
 			}
 		};
 		
-		facebook.authorize(activity, activitySupport, permissions, activityCode, new LoginDialogListener(), resultHandler);
+		if (TiApplication.isUIThread()) {
+			facebook.authorize(activity, activitySupport, permissions, activityCode, new LoginDialogListener(), resultHandler);
+		} else {
+			final int code = activityCode;
+			TiMessenger.postOnMain(new Runnable(){
+				@Override
+				public void run()
+				{
+					facebook.authorize(activity, activitySupport, permissions, code, new LoginDialogListener(), resultHandler);
+				}
+			});
+		}
 	}
 
 	protected void executeLogout()
