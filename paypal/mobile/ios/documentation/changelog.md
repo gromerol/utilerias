@@ -1,5 +1,7 @@
 # Change Log
 <pre>
+v1.8.0  Upgraded to PayPal MPL library version 2.1.0 (iOS7 fix) [TIMODOPEN-348]
+
 v1.7.0  Upgraded to PayPal MPL library version 2.0.0 (UDID fix) [TIMODOPEN-243]
 
 v1.6.2  Building with 2.1.3.GA and open sourcing [MOD-942]
