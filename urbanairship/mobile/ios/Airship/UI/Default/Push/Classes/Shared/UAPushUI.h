@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -28,15 +28,33 @@
 
 #define UA_PU_TR(key) [[UAPushUI shared].localizationBundle localizedStringForKey:key value:@"" table:nil]
 
-@interface UAPushUI : NSObject<UAPushUIProtocol> {
-    UIViewController *_apnsSettingsViewController;
-    UIViewController *_tokenSettingsViewController;
-    
-    NSBundle *localizationBundle;
-}
+/**
+ * The default implementation provided in the library's sample UI distribution.
+ */
 
-@property (nonatomic, retain) NSBundle *localizationBundle;
+@interface UAPushUI : NSObject<UAPushUIProtocol>
+
+@property (nonatomic, strong) UIViewController *apnsSettingsViewController;
+@property (nonatomic, strong) UIViewController *tokenSettingsViewController;
+@property (nonatomic, strong) NSBundle *localizationBundle;
 
 SINGLETON_INTERFACE(UAPushUI)
+
+/**
+ * Open the push token demo screen. The default implementation provides a UI for vieweing and
+ * managing device token metadata.
+ *
+ * @param viewController The parent view controller.
+ * @param animated `YES` to animate the display, otherwise `NO`
+ */
++ (void)openTokenSettings:(UIViewController *)viewController
+                 animated:(BOOL)animated;
+
+/**
+ * Close the push token demo screen.
+ *
+ * @param animated `YES` to animate the view transition, otherwise `NO`
+ */
+ + (void)closeTokenSettingsAnimated:(BOOL)animated;
 
 @end

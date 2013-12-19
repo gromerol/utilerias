@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -26,19 +26,21 @@
 #import "UAPushUI.h"
 #import "UAPushSettingsViewController.h"
 #import "UAPushMoreSettingsViewController.h"
+//Titanium
+#import "UAInboxUI.h"
 
 @implementation UAPushUI
 
 SINGLETON_IMPLEMENTATION(UAPushUI)
 
-@synthesize localizationBundle;
-
 - (id)init {
-	
-    if (self = [super init]) {
-        
-        NSString *path = [[[NSBundle mainBundle] resourcePath]
+    self = [super init];
+    if (self) {
+        //Titanium
+        NSString *path = [[[UAInboxUI shared].uiBundle resourcePath]
                           stringByAppendingPathComponent:@"UAPushLocalization.bundle"];
+        //NSString *path = [[[NSBundle mainBundle] resourcePath]
+        //                  stringByAppendingPathComponent:@"UAPushLocalization.bundle"];
         
         self.localizationBundle = [NSBundle bundleWithPath:path];
     
@@ -47,50 +49,44 @@ SINGLETON_IMPLEMENTATION(UAPushUI)
 }
 
 - (UIViewController *)apnsSettingsViewController {
-    if (_apnsSettingsViewController == nil) {
-        UIViewController *root = [[[UAPushSettingsViewController alloc]
+    if (!_apnsSettingsViewController) {
+        UIViewController *root = [[UAPushSettingsViewController alloc]
                                    initWithNibName:@"UAPushSettingsView"
-                                   bundle:nil] autorelease];
+                                            bundle:nil];
         _apnsSettingsViewController = [[UINavigationController alloc] initWithRootViewController:root];
     }
     return _apnsSettingsViewController;
 }
 
 - (UIViewController *)tokenSettingsViewController {
-    if (_tokenSettingsViewController == nil) {
-        UIViewController *root = [[[UAPushMoreSettingsViewController alloc]
+    if (!_tokenSettingsViewController) {
+        UIViewController *root = [[UAPushMoreSettingsViewController alloc]
                                    initWithNibName:@"UAPushMoreSettingsView"
-                                   bundle:nil] autorelease];
+                                            bundle:nil];
         _tokenSettingsViewController = [[UINavigationController alloc] initWithRootViewController:root];
     }
     return _tokenSettingsViewController;
 }
 
 + (void)openApnsSettings:(UIViewController *)viewController
-                   animated:(BOOL)animated {
-    [viewController presentModalViewController:[[UAPushUI shared] apnsSettingsViewController]
+                animated:(BOOL)animated {
+    [viewController presentModalViewController:[UAPushUI shared].apnsSettingsViewController
                                       animated:animated];
 }
 
 + (void)openTokenSettings:(UIViewController *)viewController
-                    animated:(BOOL)animated {
-    [viewController presentModalViewController:[[UAPushUI shared] tokenSettingsViewController]
+                 animated:(BOOL)animated {
+    [viewController presentModalViewController:[UAPushUI shared].tokenSettingsViewController
                                       animated:animated];
 }
 
 + (void)closeApnsSettingsAnimated:(BOOL)animated {
-    [[[UAPushUI shared] apnsSettingsViewController] dismissModalViewControllerAnimated:animated];
+    [[UAPushUI shared].apnsSettingsViewController dismissModalViewControllerAnimated:animated];
 }
 
 + (void)closeTokenSettingsAnimated:(BOOL)animated {
-    [[[UAPushUI shared] tokenSettingsViewController] dismissModalViewControllerAnimated:animated];
+    [[UAPushUI shared].tokenSettingsViewController dismissModalViewControllerAnimated:animated];
 }
 
-- (void)dealloc {
-    RELEASE_SAFELY(localizationBundle);
-    [_apnsSettingsViewController release];
-    [_tokenSettingsViewController release];
-    [super dealloc];
-}
 
 @end

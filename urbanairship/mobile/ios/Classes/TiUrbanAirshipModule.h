@@ -6,14 +6,12 @@
 
 #import "TiModule.h"
 
-@interface TiUrbanairshipModule : TiModule 
+@interface TiUrbanairshipModule : TiModule
 {
-	NSMutableDictionary* options;
 	BOOL initialized;
 	BOOL autoResetBadge;
 }
 
-@property (readonly, nonatomic) NSMutableDictionary* options;
 @property (readonly, nonatomic) BOOL notificationsEnabled;
 @property (readwrite, nonatomic) BOOL autoResetBadge;
 

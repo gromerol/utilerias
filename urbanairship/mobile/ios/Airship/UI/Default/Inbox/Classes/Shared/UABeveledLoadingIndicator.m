@@ -2,10 +2,14 @@
 #import "UABeveledLoadingIndicator.h"
 #include <QuartzCore/QuartzCore.h>
 
+@interface UABeveledLoadingIndicator()
+@property(nonatomic, strong) UIActivityIndicatorView *activity;
+@end
+
 @implementation UABeveledLoadingIndicator
 
 + (UABeveledLoadingIndicator *)indicator {
-    return [[[UABeveledLoadingIndicator alloc] initWithFrame:CGRectMake(0, 0, 100, 100)] autorelease];
+    return [[UABeveledLoadingIndicator alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
 }
 
 - (void)setup {
@@ -14,12 +18,12 @@
     self.layer.cornerRadius = 10.0;
     self.hidden = YES;
     
-    activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    activity.hidesWhenStopped = YES;
+    self.activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activity.hidesWhenStopped = YES;
 
-    [self addSubview:activity];
+    [self addSubview:self.activity];
     
-    activity.center = CGPointMake( self.frame.size.width/2, self.frame.size.height/2);
+    self.activity.center = CGPointMake( self.frame.size.width/2, self.frame.size.height/2);
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -36,17 +40,13 @@
 
 - (void)show {
     self.hidden = NO;
-    [activity startAnimating];
+    [self.activity startAnimating];
 }
 
 - (void)hide {
     self.hidden = YES;
-    [activity stopAnimating];
+    [self.activity stopAnimating];
 }
 
-- (void)dealloc {
-    [activity release];
-    [super dealloc];
-}
 
 @end

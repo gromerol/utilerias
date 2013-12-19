@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -25,7 +25,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "UAViewUtils.h"
 #import "UAInboxAlertHandler.h"
 #import "UAInbox.h"
 #import "UAInboxPushHandler.h"
@@ -38,19 +37,7 @@
  * designated as the [UAInbox uiClass], launching the inbox will cause it
  * to be displayed in a modal view controller.
  */
-@interface UAInboxUI : NSObject <UAInboxUIProtocol, UAInboxPushHandlerDelegate> {
-  @private
-    NSBundle *localizationBundle;
-	// Titanium
-	NSBundle *uiBundle;
-	UAInboxAlertHandler *alertHandler;
-    UIViewController *rootViewController;
-    UAInboxMessageListController *messageListController;
-    UIViewController *inboxParentController;
-    BOOL useOverlay;
-    BOOL isVisible;
-}
-
+@interface UAInboxUI : NSObject <UAInboxUIProtocol, UAInboxPushHandlerDelegate> 
 /**
  * Set this property to YES if the class should display in-app messages
  * using UAInboxOverlayController, and NO if it should navigate to the
@@ -61,11 +48,11 @@
 /**
  * The parent view controller the inbox will be launched from.
  */
-@property (nonatomic, retain) UIViewController *inboxParentController;
+@property (nonatomic, strong) UIViewController *inboxParentController;
 
-@property (nonatomic, retain) NSBundle *localizationBundle;
+@property (nonatomic, strong) NSBundle *localizationBundle;
 // Titanium
-@property (nonatomic, retain) NSBundle *uiBundle;
+@property (nonatomic, strong) NSBundle *uiBundle;
 
 SINGLETON_INTERFACE(UAInboxUI);
 
@@ -73,13 +60,15 @@ SINGLETON_INTERFACE(UAInboxUI);
 /// @name UAInboxUIProtocol Methods
 ///---------------------------------------------------------------------------------------
 + (void)quitInbox;
-+ (void)displayInbox:(UIViewController *)viewController animated:(BOOL)animated;
-+ (void)displayMessage:(UIViewController *)viewController message:(NSString*)messageID;
-+ (void)loadLaunchMessage;
++ (void)displayInboxInViewController:(UIViewController *)parentViewController animated:(BOOL)animated;
++ (void)displayMessageWithID:(NSString *)messageID inViewController:(UIViewController *)parentViewController;
 
 ///---------------------------------------------------------------------------------------
 /// @name UAInboxPushHandlerDelegate Methods
 ///---------------------------------------------------------------------------------------
-- (void)newMessageArrived:(NSDictionary *)message;
+- (void)richPushNotificationArrived:(NSDictionary *)message;
+- (void)richPushMessageAvailable:(UAInboxMessage *)richPushMessage;
+- (void)applicationLaunchedWithRichPushNotification:(NSDictionary *)notification;
+- (void)launchRichPushMessageAvailable:(UAInboxMessage *)richPushMessage;
 
 @end

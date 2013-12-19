@@ -1,5 +1,5 @@
 /*
-Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+Copyright 2009-2013 Urban Airship Inc. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -25,33 +25,19 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import <UIKit/UIKit.h>
 #import "UAInboxMessage.h"
+#import "UIWebView+UAAdditions.h"
 
 
 /**
  * This class is a reference implementation of a view controller embedding
  * a UIWebview sourcing content from a rich push message.
  */
-@interface UAInboxMessageViewController : UIViewController <UIWebViewDelegate> {
-    UISegmentedControl* messageNav;
-    IBOutlet UIWebView *webView;
-    IBOutlet UIActivityIndicatorView* activity;
-    IBOutlet UILabel* statusBarTitle;
-    IBOutlet UIView* statusBar;
-
-    UAInboxMessage* message;
-    
-    BOOL shouldShowAlerts;
-}
-
-/**
- * The UIWebView used to display the message content.
- */
-@property (nonatomic, retain) UIWebView* webView;
+@interface UAInboxMessageViewController : UIViewController <UIWebViewDelegate> 
 
 /**
  * The UAInboxMessage being displayed.
  */
-@property (nonatomic, retain) UAInboxMessage* message;
+@property (nonatomic, strong) UAInboxMessage *message;
 
 /**
  * Set this property to YES is the class should show alert dialogs in erroneous
@@ -63,7 +49,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * Load a UAInboxMessage at a particular index in the message list.
  * @param index The corresponding index in the message list as an integer.
  */
-- (void)loadMessageAtIndex:(int)index;
+- (void)loadMessageAtIndex:(NSUInteger)index;
 
 /**
  * Load a UAInboxMessage by message ID.

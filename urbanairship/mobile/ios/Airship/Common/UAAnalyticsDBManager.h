@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -25,20 +25,22 @@
 
 #import <Foundation/Foundation.h>
 #import "UAGlobal.h"
-#import "UASQLite.h"
 
 @class UAEvent;
+@class UASQLite;
 
 @interface UAAnalyticsDBManager : NSObject {
-    UASQLite *db;
+    dispatch_queue_t dbQueue;
 }
+
+@property (nonatomic, strong) UASQLite *db;
 
 SINGLETON_INTERFACE(UAAnalyticsDBManager);
 
 - (void)resetDB;
 
 - (void)addEvent:(UAEvent *)event withSession:(NSDictionary *)session;
-- (NSArray *)getEvents:(int)max;
+- (NSArray *)getEvents:(NSUInteger)max;
 - (NSArray *)getEventByEventId:(NSString *)event_id;
 
 - (void)deleteEvent:(NSNumber *)eventId;

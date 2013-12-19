@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -25,17 +25,19 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UAObservable : NSObject {
-    NSMutableSet* observers;
-    NSLock* observerLock;
-}
+__attribute__((deprecated("As of version 3.0")))
+/**
+ * @deprecated As of version 3.0. Replaced by NSNotification and
+ * callback-based methods in `UAPush`, `UAInboxMessage` and `UAInboxMessageList`.
+ */
+@interface UAObservable : NSObject 
 
--(void)notifyObservers:(SEL)selector;
--(void)notifyObservers:(SEL)selector withObject:(id)arg1;
--(void)notifyObservers:(SEL)selector withObject:(id)arg1 withObject:(id)arg2;
--(void)addObserver:(id)observer;
--(void)removeObserver:(id)observer;
--(void)removeObservers;
--(int)countObservers;
+- (void)notifyObservers:(SEL)selector;
+- (void)notifyObservers:(SEL)selector withObject:(id)arg1;
+- (void)notifyObservers:(SEL)selector withObject:(id)arg1 withObject:(id)arg2;
+- (void)addObserver:(id)observer;
+- (void)removeObserver:(id)observer;
+- (void)removeObservers;
+- (NSUInteger)countObservers;
 
 @end

@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -26,15 +26,13 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
-@interface UAPushSettingsTokenViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate> {
-    NSString *text;
-    IBOutlet UIButton *copyButton;
-    IBOutlet UIButton *emailButton;
-    IBOutlet UILabel *tokenLabel;
-}
+@interface UAPushSettingsTokenViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
 
-@property (nonatomic, retain) UILabel *tokenLabel;
-@property (nonatomic, retain) UIButton *emailButton;
+@property (nonatomic, copy) NSString *text;
+//note: naming this property copyButton will confuse cocoa's getter naming conventions with respect to memory management
+@property (nonatomic, strong) IBOutlet UIButton *cpyButton;
+@property (nonatomic, strong) IBOutlet UIButton *emailButton;
+@property (nonatomic, strong) IBOutlet UILabel *tokenLabel;
 
 - (IBAction)copyDeviceToken;
 - (IBAction)emailDeviceToken;

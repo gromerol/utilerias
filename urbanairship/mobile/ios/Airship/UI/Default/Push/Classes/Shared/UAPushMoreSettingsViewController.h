@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -27,29 +27,24 @@
 #import <CoreLocation/CoreLocation.h>
 #import "UAPush.h"
 
-@interface UAPushMoreSettingsViewController : UIViewController <UARegistrationObserver> {
-    IBOutlet UITableView *tableView;
-    IBOutlet UIImageView *footerImageView;
+@interface UAPushMoreSettingsViewController : UIViewController
 
-    UITableViewCell *deviceTokenCell;
-    UITableViewCell *deviceTokenTypesCell;
-    UITableViewCell *deviceTokenDisabledTypesCell;
-    UITableViewCell *deviceTokenAliasCell;
-    UITableViewCell *deviceTokenTagsCell;
-    
-    UITableViewCell *helpSoundsCell;
-    UITableViewCell *helpLogCell;
-    UITableViewCell *locationCell_;
-
-    UIViewController *tokenViewController;
-    UIViewController *aliasViewController;
-    UIViewController *tagsViewController;
-
-}
-
-@property (nonatomic, retain) UITableView *tableView;
-@property (nonatomic, retain) UIImageView *footerImageView;
-@property (nonatomic, retain) UITableViewCell *locationCell;
+@property (nonatomic, strong) UITableViewCell *deviceTokenCell;
+@property (nonatomic, strong) UITableViewCell *deviceTokenTypesCell;
+@property (nonatomic, strong) UITableViewCell *deviceTokenDisabledTypesCell;
+@property (nonatomic, strong) UITableViewCell *deviceTokenAliasCell;
+@property (nonatomic, strong) UITableViewCell *deviceTokenTagsCell;
+@property (nonatomic, strong) UITableViewCell *usernameCell;
+@property (nonatomic, strong) UITableViewCell *helpSoundsCell;
+@property (nonatomic, strong) UITableViewCell *helpLogCell;
+@property (nonatomic, strong) UIViewController *tokenViewController;
+@property (nonatomic, strong) UIViewController *aliasViewController;
+@property (nonatomic, strong) UIViewController *tagsViewController;
+@property (nonatomic, strong) UIViewController *userInfoViewController;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UIImageView *footerImageView;
+@property (nonatomic, strong) UITableViewCell *locationCell;
+@property (nonatomic, strong) id userCreatedObserver;
 
 - (void)initCells;
 - (void)updateCellValues;

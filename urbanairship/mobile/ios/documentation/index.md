@@ -21,6 +21,19 @@ To access this module from JavaScript, you would do the following:
 ## Apple Push Docs
 <http://developer.apple.com/library/ios/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction/Introduction.html>
 
+## Breaking Changes
+
+If you are upgrading from an earlier version of this module (prior to version 3.0.0) you should be
+aware of the following breaking changes to the API:
+
+* The deprecated `options` property has been removed. The `airshipconfig.plist' file is now required to specify your Urban Airship credentials and options.
+* The properties in the `airshipconfig.plist` file have changed from earlier versions of the Urban Airship SDK. See the `Create AirshipConfig.plist` section of
+the [Urban Airship documentation](http://docs.urbanairship.com/build/ios.html) for further details. The `airshipconfig.plist` file included with the module's
+example application contains the updated properties.
+* Rich Push user info is stored in the device keychain. This allows the user info to persist through app uninstalls and device upgrades, but this can cause
+problems during development if you want to test a fresh install. To force a reset of the user credentials, set `clearKeychain` to YES in either the `AirshipConfig.plist`
+file. This clears the keychain every time the application starts, so it should only be used in development.
+
 ## Setup
 
 Follow these steps to properly setup your Titanium iOS application to use Urban Airship push notifications.
