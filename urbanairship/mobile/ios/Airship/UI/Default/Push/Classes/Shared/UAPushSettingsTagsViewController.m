@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -27,6 +27,11 @@
 #import "UAPushSettingsAddTagViewController.h"
 #import "UAPush.h"
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+// This is available in iOS 6.0 and later, define it for older versions
+#define NSLineBreakByWordWrapping 0
+#endif
+
 enum {
     SectionDesc     = 0,
     SectionTags     = 1,
@@ -40,9 +45,6 @@ enum {
 
 @implementation UAPushSettingsTagsViewController
 
-@synthesize textCell;
-@synthesize textLabel;
-
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -53,12 +55,12 @@ enum {
     self.title = @"Tags";
     
     //Create an add button in the nav bar
-    if (addButton == nil) {
-        addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
+    if (self.addButton == nil) {
+        self.addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
     }
-    self.navigationItem.rightBarButtonItem = addButton;
+    self.navigationItem.rightBarButtonItem = self.addButton;
     
-    textLabel.text = @"Assign tags to a device to simplify "
+    self.textLabel.text = @"Assign tags to a device to simplify "
     @"the process of sending notifications. Define custom tags, or use UATagUtils to "
     @"generate commonly used tags.";
 }
@@ -67,6 +69,7 @@ enum {
     
     //default to editing, since the view is for adding/removing tags
     [self setEditing:YES];
+    [self.tableView reloadData];
     [super viewWillAppear:animated];
     
 }
@@ -108,7 +111,7 @@ enum {
     switch (indexPath.section) {
         case SectionDesc:
         {
-            cell = textCell;
+            cell = self.textCell;
             break;
         }
         case SectionTags:
@@ -117,7 +120,7 @@ enum {
             
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             // Configure the cell...
@@ -161,9 +164,7 @@ enum {
         
         // Commit to server
         [[UAPush shared] removeTagFromCurrentDevice:tagToDelete];
-
-//        // Delete the row from the data source.
-//        [[UAPush shared].tags removeObjectAtIndex:indexPath.row];
+        [[UAPush shared] updateRegistration];
         
         // Delete the row from the view
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -192,14 +193,20 @@ enum {
 #define kCellPaddingHeight 10
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *text;
+    
     if (indexPath.section == SectionDesc) {
-        CGFloat height = [textLabel.text sizeWithFont:textLabel.font
-                          constrainedToSize:CGSizeMake(240, 1500)
-                              lineBreakMode:UILineBreakModeWordWrap].height;
-        return height + kCellPaddingHeight * 2;
+        text = self.textLabel.text;
     } else {
-        return 44;
+        text = [[UAPush shared].tags objectAtIndex:indexPath.row];
     }
+    
+    CGFloat height = [text sizeWithFont:self.textLabel.font
+                                     constrainedToSize:CGSizeMake(240, 1500)
+                                         lineBreakMode:NSLineBreakByWordWrapping].height;
+    
+    return height + kCellPaddingHeight * 2;
+
 }
 
 #pragma mark -
@@ -207,14 +214,13 @@ enum {
 
 - (void)addItem:(id)sender {
     
-    if (addTagController == nil) {
-        addTagController = [[UAPushSettingsAddTagViewController alloc] init];
-        addTagController.tagDelegate = self;
+    if (!self.addTagController) {
+        self.addTagController = [[UAPushSettingsAddTagViewController alloc] init];
+        self.addTagController.tagDelegate = self;
     }
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addTagController];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.addTagController];
     [[self navigationController] presentModalViewController:navigationController animated:YES];
-    [navigationController release];
 }
 
 
@@ -231,17 +237,19 @@ enum {
          UALOG(@"Tag is an empty string.");
          return;
      }
-     
-     NSInteger index = [[UAPush shared].tags count];
-     // TODO: setup new tag update functionality here
-//     [[UAPush shared].tags insertObject:tag atIndex:index];
+
+     // Add a tag to the end of the existing set of tags
      NSMutableArray* tagUpdate = [NSMutableArray arrayWithArray:[[UAPush shared] tags]];
      [tagUpdate addObject:tag];
      [[UAPush shared] setTags:tagUpdate];
+
+     // Update the tableview
+     NSInteger index = [[UAPush shared].tags count] -1;
      NSArray *indexArray = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:index inSection:SectionTags]];
      [self.tableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationTop];
-     
-     [[UAPush shared] updateRegistration];//update server
+
+     // Update the registration
+     [[UAPush shared] updateRegistration];
  }
  
  - (void)cancelAddTag {
@@ -261,35 +269,20 @@ enum {
 - (void)viewDidUnload {
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     // For example: self.myOutlet = nil;
-    
-    if (addTagController) {
-        addTagController.tagDelegate = nil;
-        RELEASE_SAFELY(addTagController);
-    }
+
+    self.addTagController.tagDelegate = nil;
+    self.addTagController = nil;
     
     self.textCell = nil;
     self.textLabel = nil;
-    
-    RELEASE_SAFELY(addButton);
-    
+    self.addButton = nil;
+
     [super viewDidUnload];
 }
 
 
-- (void)dealloc {
-    
-    RELEASE_SAFELY(addButton);
-    
-    self.textCell = nil;
-    self.textLabel = nil;
-    
-    if (addTagController) {
-        addTagController.tagDelegate = nil;
-        RELEASE_SAFELY(addTagController);
-    }
-
-    
-    [super dealloc];
+- (void)dealloc {    
+    self.addTagController.tagDelegate = nil;
 }
 
 

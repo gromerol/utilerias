@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -25,23 +25,22 @@
 #import "UALocationDemoAnnotation.h"
 #import "UAGlobal.h"
 
-@implementation UALocationDemoAnnotation
-@synthesize coordinate = coordinate_;
-@synthesize title = title_;
-@synthesize subtitle = subtitle_;
+@interface UALocationDemoAnnotation()
 
-- (void)dealloc {
-    RELEASE_SAFELY(title_);
-    RELEASE_SAFELY(subtitle_);
-    [super dealloc];
-}
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *subtitle;
+
+@end
+
+@implementation UALocationDemoAnnotation
+
 
 - (id)initWithLocation:(CLLocation*)location {
     self = [super init];
     if (self){
-        coordinate_ = location.coordinate;
-        title_ = @"Location";
-        subtitle_ = [[self monthDateFromDate:location.timestamp] retain];
+        self.coordinate = location.coordinate;
+        self.title = @"Location";
+        self.subtitle = [self monthDateFromDate:location.timestamp];
     }
     return self;
 }
@@ -49,15 +48,15 @@
 - (NSString*)monthDateFromDate:(NSDate *)date {
     NSUInteger components = NSMonthCalendarUnit | NSDayCalendarUnit;
     NSDateComponents *monthDay = [[NSCalendar currentCalendar] components:components fromDate:date];
-    return [NSString stringWithFormat:@"%d/%d", monthDay.month, monthDay.day];
+    return [NSString stringWithFormat:@"%ld/%ld", (long)monthDay.month, (long)monthDay.day];
 }
 
 + (UALocationDemoAnnotation*)locationAnnotationFromLocation:(CLLocation*)location {
-    return [[[UALocationDemoAnnotation alloc] initWithLocation:location] autorelease];
+    return [[UALocationDemoAnnotation alloc] initWithLocation:location];
 }
 
 - (NSString*)description {
-    return [NSString stringWithFormat:@"%@ %@ %f %f", title_, subtitle_, coordinate_.longitude, coordinate_.latitude];
+    return [NSString stringWithFormat:@"%@ %@ %f %f", self.title, self.subtitle, self.coordinate.longitude, self.coordinate.latitude];
 }
 
 

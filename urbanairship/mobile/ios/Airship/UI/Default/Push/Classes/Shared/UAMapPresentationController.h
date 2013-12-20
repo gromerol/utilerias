@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -27,21 +27,14 @@
 #import <MapKit/MapKit.h>
 
 @class UALocationService;
-@interface UAMapPresentationController : UIViewController <MKMapViewDelegate>  {
-    UALocationService *locationService_;
-    NSMutableArray *locations_;
-    MKMapView *mapView_;
-    NSMutableArray *annotations_;
-    UIBarButtonItem *rightButton_;
-    id <MKAnnotation> lastUserAnnotation_;
-}
+@interface UAMapPresentationController : UIViewController <MKMapViewDelegate>
 
-@property (nonatomic, retain) UALocationService *locationService;
+@property (nonatomic, strong) UALocationService *locationService;
 @property (nonatomic, copy) NSMutableArray *locations;
-@property (nonatomic, retain) IBOutlet MKMapView *mapView;
-@property (nonatomic, retain) NSMutableArray *annotations;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *rightButton;
-@property (nonatomic, retain) id <MKAnnotation> lastUserAnnotation;
+@property (nonatomic, strong) IBOutlet MKMapView *mapView;
+@property (nonatomic, strong) NSMutableArray *annotations;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *rightButton;
+@property (nonatomic, strong) id <MKAnnotation> lastUserAnnotation;
 
 - (void)moveSpanToCoordinate:(CLLocationCoordinate2D)location;
 - (void)convertLocationsToAnnotations;

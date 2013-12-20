@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -26,16 +26,10 @@
 #import <UIKit/UIKit.h>
 
 
-@interface UAPushSettingsSoundsViewController : UITableViewController {
+@interface UAPushSettingsSoundsViewController : UITableViewController
 
-    NSMutableArray *soundList;
-
-    IBOutlet UITableViewCell *textCell;
-    IBOutlet UILabel *textLabel;
-    
-}
-
-@property (nonatomic, retain) UITableViewCell *textCell;
-@property (nonatomic, retain) UILabel *textLabel;
+@property (nonatomic, strong) NSMutableArray *soundList;
+@property (nonatomic, strong) IBOutlet UITableViewCell *textCell;
+@property (nonatomic, strong) IBOutlet UILabel *textLabel;
 
 @end

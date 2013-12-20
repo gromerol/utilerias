@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -33,30 +33,17 @@
 
 @interface UAInboxNavUI ()
 
-@property (nonatomic, retain) UIViewController *rootViewController;
+@property (nonatomic, strong) UIViewController *rootViewController;
 @property (nonatomic, assign) BOOL isVisible;
-@property (nonatomic, retain) UAInboxMessageViewController *messageViewController;
-@property (nonatomic, retain) UAInboxMessageListController *messageListController;
+@property (nonatomic, strong) UAInboxMessageViewController *messageViewController;
+@property (nonatomic, strong) UAInboxMessageListController *messageListController;
+@property (nonatomic, strong) UAInboxAlertHandler *alertHandler;
 
 - (void)quitInbox;
 
 @end
 
 @implementation UAInboxNavUI
-
-@synthesize localizationBundle;
-//Titanium
-@synthesize uiBundle;
-@synthesize rootViewController;
-@synthesize inboxParentController;
-@synthesize navigationController;
-@synthesize messageListController;
-@synthesize messageViewController;
-@synthesize popoverController;
-@synthesize popoverButton;
-@synthesize useOverlay;
-@synthesize isVisible;
-@synthesize popoverSize;
 
 SINGLETON_IMPLEMENTATION(UAInboxNavUI)
 
@@ -66,24 +53,10 @@ static BOOL runiPhoneTargetOniPad = NO;
     runiPhoneTargetOniPad = value;
 }
 
-- (void)dealloc {
-    RELEASE_SAFELY(localizationBundle);
-	//Titanium
-	RELEASE_SAFELY(uiBundle);
-	RELEASE_SAFELY(alertHandler);
-    RELEASE_SAFELY(rootViewController);
-    RELEASE_SAFELY(inboxParentController);
-    self.popoverController = nil;
-    self.popoverButton = nil;
-    self.navigationController = nil;
-    self.messageListController = nil;
-    self.messageViewController = nil;
-    [super dealloc];
-} 
 
 - (id)init {
-    if (self = [super init]) {
-		
+    self = [super init];
+    if (self) {
 		//Titanium
 		NSString* uiPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"modules/ti.urbanairship/Airship.bundle"];
 		self.uiBundle = [NSBundle bundleWithPath:uiPath];
@@ -97,15 +70,15 @@ static BOOL runiPhoneTargetOniPad = NO;
         self.isVisible = NO;
         
 		//Titanium
-        UAInboxMessageListController *mlc = [[[UAInboxMessageListController alloc] initWithNibName:@"UAInboxMessageListController" bundle:self.uiBundle] autorelease];
-        //UAInboxMessageListController *mlc = [[[UAInboxMessageListController alloc] initWithNibName:@"UAInboxMessageListController" bundle:nil] autorelease];
-        mlc.title = @"Inbox";
+        UAInboxMessageListController *mlc = [[UAInboxMessageListController alloc] initWithNibName:@"UAInboxMessageListController" bundle:self.uiBundle];
+        //UAInboxMessageListController *mlc = [[[UAInboxMessageListController alloc] initWithNibName:@"UAInboxMessageListController" bundle:nil]];
+        
         mlc.navigationItem.leftBarButtonItem = 
-            [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(inboxDone:)] autorelease];
+            [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(inboxDone:)];
         
         self.messageListController = mlc;
         
-        alertHandler = [[UAInboxAlertHandler alloc] init];
+        self.alertHandler = [[UAInboxAlertHandler alloc] init];
         
         self.popoverSize = CGSizeMake(320, 1100);
     }
@@ -117,24 +90,22 @@ static BOOL runiPhoneTargetOniPad = NO;
     [self quitInbox];
 }
 
-+ (void)displayInbox:(UIViewController *)viewController animated:(BOOL)animated {
-    
-    [[UAInbox shared].messageList addObserver:[UAInboxNavUI shared].messageListController];
++ (void)displayInboxInViewController:(UIViewController *)parentViewController animated:(BOOL)animated {
 
     if ([UAInboxNavUI shared].isVisible) {
         //don't display twice
         return;
     }
 
-    if ([viewController isKindOfClass:[UINavigationController class]]) {
+    if ([parentViewController isKindOfClass:[UINavigationController class]]) {
         [UAInboxNavUI shared].isVisible = YES;
-        if (viewController) {
-            [UAInboxNavUI shared].inboxParentController = viewController;
+        if (parentViewController) {
+            [UAInboxNavUI shared].inboxParentController = parentViewController;
         }
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && !runiPhoneTargetOniPad) {
-            [UAInboxNavUI shared].navigationController = [[[UINavigationController alloc] initWithRootViewController:[UAInboxNavUI shared].messageListController] autorelease];
-            [UAInboxNavUI shared].popoverController = [[[UIPopoverController alloc] initWithContentViewController:[UAInboxNavUI shared].navigationController] autorelease];
+            [UAInboxNavUI shared].navigationController = [[UINavigationController alloc] initWithRootViewController:[UAInboxNavUI shared].messageListController];
+            [UAInboxNavUI shared].popoverController = [[UIPopoverController alloc] initWithContentViewController:[UAInboxNavUI shared].navigationController];
             
             [UAInboxNavUI shared].popoverController.popoverContentSize = [UAInboxNavUI shared].popoverSize;
             [UAInboxNavUI shared].messageListController.contentSizeForViewInPopover = [UAInboxNavUI shared].popoverSize;
@@ -146,7 +117,7 @@ static BOOL runiPhoneTargetOniPad = NO;
                        permittedArrowDirections:UIPopoverArrowDirectionAny
                                        animated:animated];
         } else {
-            [UAInboxNavUI shared].navigationController = (UINavigationController *)viewController;
+            [UAInboxNavUI shared].navigationController = (UINavigationController *)parentViewController;
             [[UAInboxNavUI shared].navigationController pushViewController:[UAInboxNavUI shared].messageListController animated:animated];
         }
     } else {
@@ -155,8 +126,7 @@ static BOOL runiPhoneTargetOniPad = NO;
 
 } 
 
-
-+ (void)displayMessage:(UIViewController *)viewController message:(NSString *)messageID {
++ (void)displayMessageWithID:(NSString *)messageID inViewController:(UIViewController *)parentViewController {
 
     if(![UAInboxNavUI shared].isVisible) {
         
@@ -167,24 +137,27 @@ static BOOL runiPhoneTargetOniPad = NO;
 
         else {
             UALOG(@"UI needs to be brought up!");
-            [UAInboxNavUI displayInbox:viewController?:[UAInboxNavUI shared].inboxParentController animated:NO];
+            parentViewController = parentViewController?:[UAInboxNavUI shared].inboxParentController;
+            [UAInboxNavUI displayInboxInViewController:parentViewController animated:NO];
         }
     }
 	
     // If the message view is already open, just load the first message.
-    if ([viewController isKindOfClass:[UINavigationController class]]) {
+    if ([parentViewController isKindOfClass:[UINavigationController class]]) {
 		
         // For iPhone
-        UINavigationController *navController = (UINavigationController *)viewController;
+        UINavigationController *navController = (UINavigationController *)parentViewController;
         
 		if ([navController.topViewController class] == [UAInboxMessageViewController class]) {
-            [[UAInboxNavUI shared].messageViewController loadMessageForID:messageID];
+			//Titanium
+			[[UAInboxMessageViewController alloc] initWithNibName:@"UAInboxMessageViewController" bundle:[UAInboxNavUI shared].uiBundle];
+            //[[[UAInboxMessageViewController alloc] initWithNibName:@"UAInboxMessageViewController" bundle:nil]];
         } else {
-			
-            [UAInboxNavUI shared].messageViewController = 
-				//Titanium
-				[[[UAInboxMessageViewController alloc] initWithNibName:@"UAInboxMessageViewController" bundle:[UAInboxNavUI shared].uiBundle] autorelease];
-                //[[[UAInboxMessageViewController alloc] initWithNibName:@"UAInboxMessageViewController" bundle:nil] autorelease];
+            //Titanium
+            [UAInboxNavUI shared].messageViewController =
+                [[UAInboxMessageViewController alloc] initWithNibName:@"UAInboxMessageViewController" bundle:[UAInboxNavUI shared].uiBundle];
+			//[UAInboxNavUI shared].messageViewController =
+            //    [[UAInboxMessageViewController alloc] initWithNibName:@"UAInboxMessageViewController" bundle:nil];
             [[UAInboxNavUI shared].messageViewController loadMessageForID:messageID];
             [navController pushViewController:[UAInboxNavUI shared].messageViewController animated:YES];
         }
@@ -196,40 +169,14 @@ static BOOL runiPhoneTargetOniPad = NO;
 }
 
 - (void)quitInbox {
-    
-    [[UAInbox shared].messageList removeObserver:[UAInboxNavUI shared].messageListController];
-    
     self.isVisible = NO;
-    [self.navigationController popToViewController:messageListController animated:YES];
+    [self.navigationController popToViewController:self.messageListController animated:YES];
     [self.navigationController popViewControllerAnimated:YES];
     
     if (self.popoverController) {
         [self.popoverController dismissPopoverAnimated:YES];
         self.popoverController = nil;
     }
-
-    
-}
-
-+ (void)loadLaunchMessage {
-	
-	// if pushhandler has a messageID load it
-    UAInboxPushHandler *pushHandler = [UAInbox shared].pushHandler;
-	if (pushHandler.viewingMessageID && pushHandler.hasLaunchMessage) {
-
-		UAInboxMessage *msg = [[UAInbox shared].messageList messageForID:pushHandler.viewingMessageID];
-		if (!msg) {
-			return;
-		}
-        
-        UIViewController *rvc = [UAInboxNavUI shared].rootViewController;
-		
-		[UAInbox displayMessage:rvc message:pushHandler.viewingMessageID];
-		
-		pushHandler.viewingMessageID = nil;
-		pushHandler.hasLaunchMessage = NO;
-	}
-
 }
 
 + (void)land {
@@ -242,11 +189,23 @@ static BOOL runiPhoneTargetOniPad = NO;
     }
 }
 
-- (void)newMessageArrived:(NSDictionary *)message {
-    
-    NSString* alertText = [[message objectForKey: @"aps"] objectForKey: @"alert"];
-    [alertHandler showNewMessageAlert:alertText];
+- (void)richPushNotificationArrived:(NSDictionary *)message {
+    //custom launch notification handling here
 }
 
+- (void)richPushMessageAvailable:(UAInboxMessage *)richPushMessage {
+    NSString *alertText = richPushMessage.title;
+    [self.alertHandler showNewMessageAlert:alertText withViewBlock:^{
+        [[UAInbox shared].uiClass displayMessageWithID:richPushMessage.messageID inViewController:nil];
+    }];
+}
+
+- (void)applicationLaunchedWithRichPushNotification:(NSDictionary *)notification {
+    //custom launch notification handling here
+}
+
+- (void)launchRichPushMessageAvailable:(UAInboxMessage *)richPushMessage {
+    [[UAInbox shared].uiClass displayMessageWithID:richPushMessage.messageID inViewController:nil];
+}
 
 @end

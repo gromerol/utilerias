@@ -1,5 +1,5 @@
 /*
-Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+Copyright 2009-2013 Urban Airship Inc. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -28,6 +28,8 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #import "UAInboxUI.h"
 #import "UAInboxMessageList.h"
 
+#import "UIWebView+UAAdditions.h"
+
 #import "UAUtils.h"
 
 #define kMessageUp 0
@@ -38,50 +40,39 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 - (void)refreshHeader;
 - (void)updateMessageNavButtons;
 
-@property (nonatomic, retain) UIActivityIndicatorView* activity;
-@property (nonatomic, retain) UIView* statusBar;
-@property (nonatomic, retain) UIView* statusBarTitle;
-@property (nonatomic, retain) UISegmentedControl* messageNav;
-
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activity;
+@property (nonatomic, strong) IBOutlet UIView *statusBar;
+@property (nonatomic, strong) IBOutlet UILabel *statusBarTitle;
+@property (nonatomic, strong) UISegmentedControl *messageNav;
+/**
+ * The UIWebView used to display the message content.
+ */
+@property (nonatomic, strong) UIWebView *webView;
 @end
 
 @implementation UAInboxMessageViewController
 
-@synthesize webView;
-@synthesize activity;
-@synthesize statusBar;
-@synthesize statusBarTitle;
-@synthesize messageNav;
-@synthesize message;
-@synthesize shouldShowAlerts;
+
 
 - (void)dealloc {
-    [[UAInbox shared].messageList removeObserver:self];
-    RELEASE_SAFELY(message);
-    RELEASE_SAFELY(webView);
-    RELEASE_SAFELY(activity);
-    RELEASE_SAFELY(statusBar);
-    RELEASE_SAFELY(statusBarTitle);
-    RELEASE_SAFELY(messageNav);
-    [super dealloc];
+    self.webView.delegate = nil;
+
 }
 
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle {
     if (self = [super initWithNibName:nibName bundle:nibBundle]) {
         
-        [[UAInbox shared].messageList addObserver:self];
-        
         self.title = UA_INBOX_TR(@"UA_Message");
 
         // "Segmented" up/down control to the right
-        UISegmentedControl *segmentedControl = [[[UISegmentedControl alloc] initWithItems:
+        UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:
                                                  [NSArray arrayWithObjects:
 												  //Titanium
 												  [UIImage imageWithContentsOfFile:[[UAInboxUI shared].uiBundle pathForResource:@"up" ofType:@"png"]],
                                                   //[UIImage imageNamed:@"up.png"],
 												  [UIImage imageWithContentsOfFile:[[UAInboxUI shared].uiBundle pathForResource:@"down" ofType:@"png"]],
                                                   //[UIImage imageNamed:@"down.png"],
-                                                  nil]] autorelease];
+                                                  nil]];
         [segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
         segmentedControl.frame = CGRectMake(0, 0, 90, 30);
         segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
@@ -90,59 +81,50 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         UIBarButtonItem *segmentBarItem = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
         self.navigationItem.rightBarButtonItem = segmentBarItem;
-        [segmentBarItem release];
-
-        [webView setDataDetectorTypes:UIDataDetectorTypeAll];
-        
         self.shouldShowAlerts = YES;
+
+        // make our existing layout work in iOS7
+        if ([self respondsToSelector:NSSelectorFromString(@"edgesForExtendedLayout")]) {
+            self.edgesForExtendedLayout = UIRectEdgeNone;
+        }
     }
 
     return self;
 }
 
 - (void)viewDidLoad {
-    int index = [[UAInbox shared].messageList indexOfMessage:message];
-
-    // IBOutlet(webView etc) alloc memory when viewDidLoad, so we need to Reload message.
-    [self loadMessageAtIndex:index];
+    [self.webView setDataDetectorTypes:UIDataDetectorTypeAll];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(messageListUpdated)
+                                                 name:UAInboxMessageListUpdatedNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UAInboxMessageListUpdatedNotification object:nil];
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    switch (toInterfaceOrientation) {
-        case UIDeviceOrientationPortrait:
-            [webView stringByEvaluatingJavaScriptFromString:@"window.__defineGetter__('orientation',function(){return 0;});window.onorientationchange();"];
-            break;
-        case UIDeviceOrientationLandscapeLeft:
-            [webView stringByEvaluatingJavaScriptFromString:@"window.__defineGetter__('orientation',function(){return 90;});window.onorientationchange();"];
-            break;
-        case UIDeviceOrientationLandscapeRight:
-            [webView stringByEvaluatingJavaScriptFromString:@"window.__defineGetter__('orientation',function(){return -90;});window.onorientationchange();"];
-            break;
-        case UIDeviceOrientationPortraitUpsideDown:
-            [webView stringByEvaluatingJavaScriptFromString:@"window.__defineGetter__('orientation',function(){return 180;});window.onorientationchange();"];
-            break;
-        default:
-            break;
-    }
-}
-
-
 #pragma mark -
 #pragma mark UI
 
 - (void)refreshHeader {
-    int count = [[UAInbox shared].messageList messageCount];
-    int index = [[UAInbox shared].messageList indexOfMessage:message];
+    NSUInteger count = [[UAInbox shared].messageList messageCount];
+    NSUInteger index = [[UAInbox shared].messageList indexOfMessage:self.message];
 
-    if (index >= 0 && index < count) {
-        self.title = [NSString stringWithFormat: @"%d %@ %d", index+1, UA_INBOX_TR(@"UA_Of"), count];
+    if (index < count) {
+        self.title = [NSString stringWithFormat:UA_INBOX_TR(@"UA_Message_Fraction"), index+1, count];
     } else {
-        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
-        statusBar.hidden = YES;
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
+        self.statusBar.hidden = YES;
         self.title = @"";
     }
 
@@ -159,31 +141,43 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     [self loadMessageAtIndex:[[UAInbox shared].messageList indexOfMessage:msg]];
 }
 
-- (void)loadMessageAtIndex:(int)index {
+- (void)loadMessageAtIndex:(NSUInteger)index {
+    [self.webView stopLoading];
+    [self.webView removeFromSuperview];
+    self.webView.delegate = nil;
+
+    self.webView = [[UIWebView alloc] init];
+    self.webView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    self.webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+
+    self.webView.delegate = self;
+
+    [self.view insertSubview:self.webView belowSubview:self.statusBar];
+
     self.message = [[UAInbox shared].messageList messageAtIndex:index];
     if (self.message == nil) {
-        UALOG(@"Can not find message with index: %d", index);
+        UALOG(@"Can not find message with index: %lu", (unsigned long)index);
         return;
     }
 
     [self refreshHeader];
 
-    NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL: message.messageBodyURL];
+    NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL: self.message.messageBodyURL];
     
     [requestObj setTimeoutInterval:5];
     
     NSString *auth = [UAUtils userAuthHeaderString];
     [requestObj setValue:auth forHTTPHeaderField:@"Authorization"];
-    
-    [webView stopLoading];
-    [webView loadRequest:requestObj];
+
+    [self.webView loadRequest:requestObj];
 }
+
 
 #pragma mark UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)wv shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSURL *url = [request URL];
-
+    
     /*
      ua://callbackArguments:withOptions:/[<arguments>][?<dictionary>]
      */
@@ -199,10 +193,10 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     else if ((navigationType == UIWebViewNavigationTypeLinkClicked) &&
              (([[url host] isEqualToString:@"phobos.apple.com"]) ||
               ([[url host] isEqualToString:@"itunes.apple.com"]))) {
-
-        // TODO: set the url scheme to http, as it could be itms which will cause the store to launch twice (undesireable)
-
-        return ![[UIApplication sharedApplication] openURL:url];
+                 
+        // Set the url scheme to http, as it could be itms which will cause the store to launch twice (undesireable)
+        NSString *stringURL = [NSString stringWithFormat:@"http://%@%@", url.host, url.path];
+        return ![[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
     }
 
     // send maps.google.com url or maps: to GoogleMaps.app
@@ -250,108 +244,67 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     // send tel: to Phone.app
     else if ((navigationType == UIWebViewNavigationTypeLinkClicked) && ([[url scheme] isEqualToString:@"tel"])) {
-
-        // TODO: Phone number must not contain spaces or brackets. Spaces or plus signs OK. Can add come checks here.
-
-        return ![[UIApplication sharedApplication] openURL:url];
+        NSURL *validPhoneUrl = [self createValidPhoneNumberUrlFromUrl:url];
+        return ![[UIApplication sharedApplication] openURL:validPhoneUrl];
     }
 
     // send sms: to Messages.app
     else if ((navigationType == UIWebViewNavigationTypeLinkClicked) && ([[url scheme] isEqualToString:@"sms"])) {
-        return ![[UIApplication sharedApplication] openURL:url];
+        NSURL *validPhoneUrl = [self createValidPhoneNumberUrlFromUrl:url];
+        return ![[UIApplication sharedApplication] openURL:validPhoneUrl];
     }
 
     // load local file and http/https webpages in webview
     return YES;
 }
 
-- (void)populateJavascriptEnvironment {
-    
-    // This will inject the current device orientation
-    // Note that face up and face down orientations will be ignored as this
-    // casts a device orientation to an interface orientation
-    [self willRotateToInterfaceOrientation:(UIInterfaceOrientation)[[UIDevice currentDevice] orientation] duration:0];
-    
-    /*
-     * Define and initialize our one global
-     */
-    NSString* js = @"var UAirship = {};";
-    
-    /*
-     * Set the device model.
-     */
-    NSString *model = [UIDevice currentDevice].model;
-    js = [js stringByAppendingFormat:@"UAirship.devicemodel=\"%@\";", model];
-    
-    /*
-     * Set the UA user ID.
-     */
-    NSString *userID = [UAUser defaultUser].username;
-    js = [js stringByAppendingFormat:@"UAirship.userID=\"%@\";", userID];
-    
-    /*
-     * Set the current message ID.
-     */
-    NSString* messageID = message.messageID;
-    js = [js stringByAppendingFormat:@"UAirship.messageID=\"%@\";", messageID];
-    
-    /*
-     * Define UAirship.handleCustomURL.
-     */
-    js = [js stringByAppendingString:@"UAirship.invoke = function(url) { location = url; };"];
-    
-    /*
-     * Execute the JS we just constructed.
-     */
-    [webView stringByEvaluatingJavaScriptFromString:js];
-}
+- (NSURL *)createValidPhoneNumberUrlFromUrl:(NSURL *)url {
 
-- (void)injectViewportFix {
-    NSString *js = @"var metaTag = document.createElement('meta');"
-    "metaTag.name = 'viewport';"
-    "metaTag.content = 'width=device-width; initial-scale=1.0; maximum-scale=1.0;';"
-    "document.getElementsByTagName('head')[0].appendChild(metaTag);";
+    NSString *decodedUrlString = [url.absoluteString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"+-.0123456789"] invertedSet];
+    NSString *strippedNumber = [[decodedUrlString componentsSeparatedByCharactersInSet:characterSet] componentsJoinedByString:@""];
+
+    NSString *scheme = [decodedUrlString hasPrefix:@"sms"] ? @"sms:" : @"tel:";
     
-    [webView stringByEvaluatingJavaScriptFromString:js];
+    return [NSURL URLWithString:[scheme stringByAppendingString:strippedNumber]];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)wv {
-    [statusBar setHidden: NO];
-    [activity startAnimating];
-    statusBarTitle.text = message.title;
+    [self.statusBar setHidden: NO];
+    [self.activity startAnimating];
+    self.statusBarTitle.text = self.message.title;
     
-    [self populateJavascriptEnvironment];
+    [self.webView populateJavascriptEnvironment:self.message];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)wv {
-    [statusBar setHidden: YES];
-    [activity stopAnimating];
+    [self.statusBar setHidden: YES];
+    [self.activity stopAnimating];
 
     // Mark message as read after it has finished loading
-    if(message.unread) {
-        [message markAsRead];
+    if(self.message.unread) {
+        [self.message markAsReadWithDelegate:nil];
     }
     
-    [self injectViewportFix];
+    [self.webView injectViewportFix];
 }
 
 - (void)webView:(UIWebView *)wv didFailLoadWithError:(NSError *)error {
-    [statusBar setHidden: YES];
-    [activity stopAnimating];
+    [self.statusBar setHidden: YES];
+    [self.activity stopAnimating];
 
     if (error.code == NSURLErrorCancelled)
         return;
     UALOG(@"Failed to load message: %@", error);
     
-    if (shouldShowAlerts) {
+    if (self.shouldShowAlerts) {
         
-        UIAlertView *someError = [[UIAlertView alloc] initWithTitle:UA_INBOX_TR(@"UA_Ooops")
+        UIAlertView *someError = [[UIAlertView alloc] initWithTitle:UA_INBOX_TR(@"UA_Mailbox_Error_Title")
                                                             message:UA_INBOX_TR(@"UA_Error_Fetching_Message")
                                                            delegate:self
                                                   cancelButtonTitle:UA_INBOX_TR(@"UA_OK")
                                                   otherButtonTitles:nil];
         [someError show];
-        [someError release];
     }
 }
 
@@ -359,7 +312,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 - (IBAction)segmentAction:(id)sender {
     UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
-    int index = [[UAInbox shared].messageList indexOfMessage:message];
+    NSUInteger index = [[UAInbox shared].messageList indexOfMessage:self.message];
 
     if(segmentedControl.selectedSegmentIndex == kMessageUp) {
         [self loadMessageAtIndex:index-1];
@@ -369,30 +322,30 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 - (void)updateMessageNavButtons {
-    int index = [[UAInbox shared].messageList indexOfMessage:message];
+    NSUInteger index = [[UAInbox shared].messageList indexOfMessage:self.message];
 
-    if (message == nil || index == NSNotFound) {
-        [messageNav setEnabled: NO forSegmentAtIndex: kMessageUp];
-        [messageNav setEnabled: NO forSegmentAtIndex: kMessageDown];
+    if (self.message == nil || index == NSNotFound) {
+        [self.messageNav setEnabled: NO forSegmentAtIndex: kMessageUp];
+        [self.messageNav setEnabled: NO forSegmentAtIndex: kMessageDown];
     } else {
         if(index <= 0) {
-            [messageNav setEnabled: NO forSegmentAtIndex: kMessageUp];
+            [self.messageNav setEnabled: NO forSegmentAtIndex: kMessageUp];
         } else {
-            [messageNav setEnabled: YES forSegmentAtIndex: kMessageUp];
+            [self.messageNav setEnabled: YES forSegmentAtIndex: kMessageUp];
         }
         if(index >= [[UAInbox shared].messageList messageCount] - 1) {
-            [messageNav setEnabled: NO forSegmentAtIndex: kMessageDown];
+            [self.messageNav setEnabled: NO forSegmentAtIndex: kMessageDown];
         } else {
-            [messageNav setEnabled: YES forSegmentAtIndex: kMessageDown];
+            [self.messageNav setEnabled: YES forSegmentAtIndex: kMessageDown];
         }
     }
 
-    UALOG(@"update nav %d, of %d", index, [[UAInbox shared].messageList messageCount]);
+    UALOG(@"update nav %lu, of %lu", (unsigned long)index, (unsigned long)[[UAInbox shared].messageList messageCount]);
 }
 
-#pragma mark UAInboxMessageListObserver
+#pragma mark NSNotificationCenter callbacks
 
-- (void)messageListLoaded {
+- (void)messageListUpdated {
     [self refreshHeader];
 }
 

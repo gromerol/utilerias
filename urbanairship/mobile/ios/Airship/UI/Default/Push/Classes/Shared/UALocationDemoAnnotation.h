@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -25,11 +25,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@interface UALocationDemoAnnotation : NSObject <MKAnnotation> {
-    CLLocationCoordinate2D coordinate_;
-    NSString *title_;
-    NSString *subtitle_;
-}
+@interface UALocationDemoAnnotation : NSObject <MKAnnotation>
 
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 @property (nonatomic, readonly, copy) NSString *title;

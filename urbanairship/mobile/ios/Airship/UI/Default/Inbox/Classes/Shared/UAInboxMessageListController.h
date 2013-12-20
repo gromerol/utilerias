@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -25,7 +25,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import "UAInboxMessageListObserver.h"
+#import "UAInboxMessageListDelegate.h"
 #import "UABarButtonSegmentedControl.h"
 #import "UABeveledLoadingIndicator.h"
 
@@ -33,27 +33,7 @@
  * This class is a reference implementation of a table view controller drawing from the inbox
  * message list.
  */
-@interface UAInboxMessageListController : UIViewController <UITableViewDelegate, UITableViewDataSource, UAInboxMessageListObserver> {
-    IBOutlet UITableView *messageTable;
-    
-    IBOutlet UIView *loadingView;
-    IBOutlet UABeveledLoadingIndicator *loadingIndicator;
-    IBOutlet UILabel *loadingLabel;
-
-    // navigation badge
-    IBOutlet UITabBar *tabbar;
-    IBOutlet UITabBarItem *tabbarItem;
-    UIView *badgeView;
-    NSMutableSet *selectedIndexPathsForEditing;
-    NSMutableSet *setOfUnreadMessagesInSelection; 
-    UABarButtonSegmentedControl *deleteItem;
-    UIBarButtonItem *markAsReadButtonItem;
-    UIBarButtonItem *editItem;
-    UIBarButtonItem *cancelItem;
-    NSString *cellReusableId;
-    NSString *cellNibName;
-    BOOL shouldShowAlerts;
-}
+@interface UAInboxMessageListController : UIViewController <UITableViewDelegate, UITableViewDataSource, UAInboxMessageListDelegate>
 
 /**
  * Set this property to YES if the class should show alert dialogs in erroneous

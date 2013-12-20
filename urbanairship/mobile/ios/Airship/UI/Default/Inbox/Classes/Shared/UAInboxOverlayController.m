@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -52,27 +52,41 @@
 #import "UAInboxUI.h"
 #import "UAUtils.h"
 
+#import "UIWebView+UAAdditions.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 #define kShadeViewTag 1000
 
-@interface UAInboxOverlayController(Private)
+static NSMutableSet *overlayControllers = nil;
+
+@interface UAInboxOverlayController()
 
 - (id)initWithParentViewController:(UIViewController *)parent andMessageID:(NSString*)messageID;
-- (void)loadMessageAtIndex:(int)index;
+- (void)loadMessageAtIndex:(NSUInteger)index;
 - (void)loadMessageForID:(NSString *)mid;
 - (void)displayWindow;
 - (void)closePopupWindow;
 
+@property(nonatomic, strong) UIViewController *parentViewController;
+@property(nonatomic, strong) UIView *bgView;
+@property(nonatomic, strong) UIView *bigPanelView;
+@property(nonatomic, strong) UABeveledLoadingIndicator *loadingIndicator;
 @end
 
 @implementation UAInboxOverlayController
 
-@synthesize webView, message;
+// Setup a container for the newly allocated controllers, will be released by OS. 
++ (void)initialize {
+    if (self == [UAInboxOverlayController class]){
+        overlayControllers = [[NSMutableSet alloc] initWithCapacity:1];
+    }
+}
 
-
+// While this breaks from convention, it does not actually leak. Turning off analyzer warnings
 + (void)showWindowInsideViewController:(UIViewController *)viewController withMessageID:(NSString *)messageID {
-    [[UAInboxOverlayController alloc] initWithParentViewController:viewController andMessageID:messageID];
+    UAInboxOverlayController *overlayController = [[UAInboxOverlayController alloc] initWithParentViewController:viewController andMessageID:messageID];
+    [overlayControllers addObject:overlayController];
 }
 
 
@@ -81,23 +95,24 @@
     if (self) {
         // Initialization code here.
         
-        parentViewController = [parent retain];
+        self.parentViewController = parent;
         UIView *sview = parent.view;
         
-        bgView = [[[UIView alloc] initWithFrame: sview.bounds] autorelease];
-        bgView.autoresizesSubviews = YES;
-        bgView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.bgView = [[UIView alloc] initWithFrame: sview.bounds];
+        self.bgView.autoresizesSubviews = YES;
+        self.bgView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
-        [sview addSubview: bgView];
+        [sview addSubview: self.bgView];
         
         //set the frame later
-        webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-        webView.backgroundColor = [UIColor clearColor];
-        webView.opaque = NO;
-        webView.delegate = self;
+        self.webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+        self.webView.backgroundColor = [UIColor clearColor];
+        self.webView.opaque = NO;
+        self.webView.delegate = self;
+        [self.webView setDataDetectorTypes:UIDataDetectorTypeAll];
         
         //hack to hide the ugly webview gradient
-        for (UIView* subView in [webView subviews]) {
+        for (UIView* subView in [self.webView subviews]) {
             if ([subView isKindOfClass:[UIScrollView class]]) {
                 for (UIView* shadowView in [subView subviews]) {
                     if ([shadowView isKindOfClass:[UIImageView class]]) {
@@ -107,12 +122,12 @@
             }
         }
         
-        loadingIndicator = [[UABeveledLoadingIndicator indicator] retain];
+        self.loadingIndicator = [UABeveledLoadingIndicator indicator];
                 
         //required to receive orientation updates from NSNotificationCenter
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self 
+        [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(orientationChanged:) 
                                                      name:UIDeviceOrientationDidChangeNotification object:nil];
         
@@ -124,32 +139,29 @@
 }
 
 - (void)dealloc {
-    self.message = nil;
-    self.webView = nil;
-    [parentViewController release];
-    [loadingIndicator release];
+    self.webView.delegate = nil;
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIDeviceOrientationDidChangeNotification
                                                   object:nil];
-    [super dealloc];
 }
 
-- (void)loadMessageAtIndex:(int)index {
+- (void)loadMessageAtIndex:(NSUInteger)index {
     self.message = [[UAInbox shared].messageList messageAtIndex:index];
     if (self.message == nil) {
-        UALOG(@"Can not find message with index: %d", index);
+        UALOG(@"Can not find message with index: %lu", (unsigned long)index);
         [self closePopupWindow];
         return;
     }
     
-    NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL: message.messageBodyURL];
+    NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL: self.message.messageBodyURL];
     NSString *auth = [UAUtils userAuthHeaderString];
     
     [requestObj setValue:auth forHTTPHeaderField:@"Authorization"];
     [requestObj setTimeoutInterval:5];
     
-    [webView stopLoading];
-    [webView loadRequest:requestObj];
+    [self.webView stopLoading];
+    [self.webView loadRequest:requestObj];
     [self performSelector:@selector(displayWindow) withObject:nil afterDelay:0.1];
 }
 
@@ -171,31 +183,32 @@
 - (void)constructWindow {
     
     //the new panel
-    bigPanelView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, bgView.frame.size.width, bgView.frame.size.height)] autorelease];
-    bigPanelView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    bigPanelView.autoresizesSubviews = YES;
-    bigPanelView.center = CGPointMake( bgView.frame.size.width/2, bgView.frame.size.height/2);
+    self.bigPanelView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bgView.frame.size.width, self.bgView.frame.size.height)];
+    
+    self.bigPanelView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.bigPanelView.autoresizesSubviews = YES;
+    self.bigPanelView.center = CGPointMake( self.bgView.frame.size.width/2, self.bgView.frame.size.height/2);
     
     //add the window background
-    UIView *background = [[[UIView alloc] initWithFrame:CGRectInset
-                           (bigPanelView.frame, 15, 30)] autorelease];
+    UIView *background = [[UIView alloc] initWithFrame:CGRectInset
+                           (self.bigPanelView.frame, 15, 30)];
     background.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     background.backgroundColor = [UIColor whiteColor];
     background.layer.borderColor = [[UIColor blackColor] CGColor];
     background.layer.borderWidth = 2;
-    background.center = CGPointMake(bigPanelView.frame.size.width/2, bigPanelView.frame.size.height/2);
-    [bigPanelView addSubview: background];
+    background.center = CGPointMake(self.bigPanelView.frame.size.width/2, self.bigPanelView.frame.size.height/2);
+    [self.bigPanelView addSubview: background];
     
     //add the web view
     int webOffset = 2;
-    webView.frame = CGRectInset(background.frame, webOffset, webOffset);
-    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.webView.frame = CGRectInset(background.frame, webOffset, webOffset);
+    self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    [bigPanelView addSubview: webView];
+    [self.bigPanelView addSubview: self.webView];
     
-    [webView addSubview:loadingIndicator];
-    loadingIndicator.center = CGPointMake(webView.frame.size.width/2, webView.frame.size.height/2);
-    [loadingIndicator show];
+    [self.webView addSubview:self.loadingIndicator];
+    self.loadingIndicator.center = CGPointMake(self.webView.frame.size.width/2, self.webView.frame.size.height/2);
+    [self.loadingIndicator show];
     
     //add the close button
     int closeBtnOffset = 10;
@@ -210,7 +223,7 @@
                                   closeBtnImg.size.width + closeBtnOffset, 
                                   closeBtnImg.size.height + closeBtnOffset)];
     [closeBtn addTarget:self action:@selector(closePopupWindow) forControlEvents:UIControlEventTouchUpInside];
-    [bigPanelView addSubview: closeBtn];
+    [self.bigPanelView addSubview: closeBtn];
     
 }
 
@@ -218,10 +231,10 @@
     
     if ([self shouldTransition]) {
         //faux view
-        UIView* fauxView = [[[UIView alloc] initWithFrame: bgView.bounds] autorelease];
+        UIView* fauxView = [[UIView alloc] initWithFrame: self.bgView.bounds];
         fauxView.autoresizesSubviews = YES;
         fauxView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [bgView addSubview: fauxView];
+        [self.bgView addSubview: fauxView];
         
         //animation options
         UIViewAnimationOptions options = UIViewAnimationOptionTransitionFlipFromRight |
@@ -231,103 +244,35 @@
         [self constructWindow];
         
         //run the animation
-        [UIView transitionFromView:fauxView toView:bigPanelView duration:0.5 options:options completion: ^(BOOL finished) {
+        [UIView transitionFromView:fauxView toView:self.bigPanelView duration:0.5 options:options completion: ^(BOOL finished) {
             
             //dim the contents behind the popup window
-            UIView* shadeView = [[[UIView alloc] initWithFrame:bigPanelView.bounds] autorelease];
+            UIView* shadeView = [[UIView alloc] initWithFrame:self.bigPanelView.bounds];
             shadeView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
             shadeView.backgroundColor = [UIColor blackColor];
             shadeView.alpha = 0.3;
             shadeView.tag = kShadeViewTag;
-            [bigPanelView addSubview: shadeView];
-            [bigPanelView sendSubviewToBack: shadeView];
+            [self.bigPanelView addSubview: shadeView];
+            [self.bigPanelView sendSubviewToBack: shadeView];
         }];
     }
     
     else {
         [self constructWindow];
-        [bgView addSubview:bigPanelView];
-    }
-}
-
-- (void)onRotationChange:(UIInterfaceOrientation)toInterfaceOrientation {
-    
-    if(![parentViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
-        return;
-    }
-    
-    switch (toInterfaceOrientation) {
-        case UIDeviceOrientationPortrait:
-            [webView stringByEvaluatingJavaScriptFromString:@"window.__defineGetter__('orientation',function(){return 0;});window.onorientationchange();"];
-            break;
-        case UIDeviceOrientationLandscapeLeft:
-            [webView stringByEvaluatingJavaScriptFromString:@"window.__defineGetter__('orientation',function(){return 90;});window.onorientationchange();"];
-            break;
-        case UIDeviceOrientationLandscapeRight:
-            [webView stringByEvaluatingJavaScriptFromString:@"window.__defineGetter__('orientation',function(){return -90;});window.onorientationchange();"];
-            break;
-        case UIDeviceOrientationPortraitUpsideDown:
-            [webView stringByEvaluatingJavaScriptFromString:@"window.__defineGetter__('orientation',function(){return 180;});window.onorientationchange();"];
-            break;
-        default:
-            break;
+        [self.bgView addSubview:self.bigPanelView];
     }
 }
 
 - (void)orientationChanged:(NSNotification *)notification {
     // Note that face up and face down orientations will be ignored as this
     // casts a device orientation to an interface orientation
-    [self onRotationChange:(UIInterfaceOrientation)[UIDevice currentDevice].orientation];
-}
-
-- (void)populateJavascriptEnvironment {
     
+    if(![self.parentViewController shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)[UIDevice currentDevice].orientation]) {
+        return;
+    }
+
     // This will inject the current device orientation
-    // Note that face up and face down orientations will be ignored as this
-    // casts a device orientation to an interface orientation
-    [self onRotationChange:(UIInterfaceOrientation)[UIDevice currentDevice].orientation];
-    
-    /*
-     * Define and initialize our one global
-     */
-    NSString* js = @"var UAirship = {};";
-    
-    /*
-     * Set the device model.
-     */
-    NSString *model = [UIDevice currentDevice].model;
-    js = [js stringByAppendingFormat:@"UAirship.devicemodel=\"%@\";", model];
-    
-    /*
-     * Set the UA user ID.
-     */
-    NSString *userID = [UAUser defaultUser].username;
-    js = [js stringByAppendingFormat:@"UAirship.userID=\"%@\";", userID];
-    
-    /*
-     * Set the current message ID.
-     */
-    NSString* messageID = message.messageID;
-    js = [js stringByAppendingFormat:@"UAirship.messageID=\"%@\";", messageID];
-    
-    /*
-     * Define UAirship.handleCustomURL.
-     */
-    js = [js stringByAppendingString:@"UAirship.invoke = function(url) { location = url; };"];
-    
-    /*
-     * Execute the JS we just constructed.
-     */
-    [webView stringByEvaluatingJavaScriptFromString:js];
-}
-
-- (void)injectViewportFix {
-    NSString *js = @"var metaTag = document.createElement('meta');"
-    "metaTag.name = 'viewport';"
-    "metaTag.content = 'width=device-width; initial-scale=1.0; maximum-scale=1.0;';"
-    "document.getElementsByTagName('head')[0].appendChild(metaTag);";
-    
-    [webView stringByEvaluatingJavaScriptFromString:js];
+    [self.webView willRotateToInterfaceOrientation:(UIInterfaceOrientation)[[UIDevice currentDevice] orientation]];
 }
 
 /**
@@ -335,7 +280,7 @@
  */
 - (void)closePopupWindow {
     //remove the shade
-    [[bigPanelView viewWithTag: kShadeViewTag] removeFromSuperview];
+    [[self.bigPanelView viewWithTag: kShadeViewTag] removeFromSuperview];
     [self performSelector:@selector(finish) withObject:nil afterDelay:0.1];
     
 }
@@ -344,10 +289,10 @@
  * Removes child views from bigPanelView and bgView
  */
 - (void)removeChildViews {
-    for (UIView* child in bigPanelView.subviews) {
+    for (UIView* child in self.bigPanelView.subviews) {
         [child removeFromSuperview];
     }
-    for (UIView* child in bgView.subviews) {
+    for (UIView* child in self.bgView.subviews) {
         [child removeFromSuperview];
     }
 }
@@ -361,30 +306,27 @@
     if ([self shouldTransition]) {
         
         //faux view
-        __block UIView* fauxView = [[UIView alloc] initWithFrame: CGRectMake(10, 10, 200, 200)];
-        [bgView addSubview: fauxView];
+        UIView* fauxView = [[UIView alloc] initWithFrame: CGRectMake(10, 10, 200, 200)];
+        [self.bgView addSubview: fauxView];
         
         //run the animation
         UIViewAnimationOptions options = UIViewAnimationOptionTransitionFlipFromLeft |
         UIViewAnimationOptionAllowUserInteraction    |
         UIViewAnimationOptionBeginFromCurrentState;
-        
-        //hold to the bigPanelView, because it'll be removed during the animation
-        [bigPanelView retain];
-        
-        [UIView transitionFromView:bigPanelView toView:fauxView duration:0.5 options:options completion:^(BOOL finished) {
+                
+        [UIView transitionFromView:self.bigPanelView toView:fauxView duration:0.5 options:options completion:^(BOOL finished) {
             
             [self removeChildViews];
-            [bigPanelView release];
-            [bgView removeFromSuperview];
-            [self release];
+            self.bigPanelView = nil;
+            [self.bgView removeFromSuperview];
+            [overlayControllers removeObject:self];
         }];
     }
     
     else {
         [self removeChildViews];
-        [bgView removeFromSuperview];
-        [self release];
+        [self.bgView removeFromSuperview];
+        [overlayControllers removeObject:self];
     }
 }
 
@@ -409,10 +351,10 @@
     else if ((navigationType == UIWebViewNavigationTypeLinkClicked) &&
              (([[url host] isEqualToString:@"phobos.apple.com"]) ||
               ([[url host] isEqualToString:@"itunes.apple.com"]))) {
-                 
-                 // TODO: set the url scheme to http, as it could be itms which will cause the store to launch twice (undesireable)
-                 
-                 return ![[UIApplication sharedApplication] openURL:url];
+
+                 // Set the url scheme to http, as it could be itms which will cause the store to launch twice (undesireable)
+                 NSString *stringURL = [NSString stringWithFormat:@"http://%@%@", url.host, url.path];
+                 return ![[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
              }
     
     // send maps.google.com url or maps: to GoogleMaps.app
@@ -460,51 +402,60 @@
     
     // send tel: to Phone.app
     else if ((navigationType == UIWebViewNavigationTypeLinkClicked) && ([[url scheme] isEqualToString:@"tel"])) {
-        
-        // TODO: Phone number must not contain spaces or brackets. Spaces or plus signs OK. Can add come checks here.
-        
-        return ![[UIApplication sharedApplication] openURL:url];
+        NSURL *validPhoneUrl = [self createValidPhoneNumberUrlFromUrl:url];
+        return ![[UIApplication sharedApplication] openURL:validPhoneUrl];
     }
-    
+
     // send sms: to Messages.app
     else if ((navigationType == UIWebViewNavigationTypeLinkClicked) && ([[url scheme] isEqualToString:@"sms"])) {
-        return ![[UIApplication sharedApplication] openURL:url];
+        NSURL *validPhoneUrl = [self createValidPhoneNumberUrlFromUrl:url];
+        return ![[UIApplication sharedApplication] openURL:validPhoneUrl];
     }
-    
+
     // load local file and http/https webpages in webview
     return YES;
 }
 
+- (NSURL *)createValidPhoneNumberUrlFromUrl:(NSURL *)url {
+
+    NSString *decodedUrlString = [url.absoluteString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"+-.0123456789"] invertedSet];
+    NSString *strippedNumber = [[decodedUrlString componentsSeparatedByCharactersInSet:characterSet] componentsJoinedByString:@""];
+
+    NSString *scheme = [decodedUrlString hasPrefix:@"sms"] ? @"sms:" : @"tel:";
+
+    return [NSURL URLWithString:[scheme stringByAppendingString:strippedNumber]];
+}
 
 - (void)webViewDidStartLoad:(UIWebView *)wv {
-    [self populateJavascriptEnvironment];
+    [self.webView populateJavascriptEnvironment:self.message];
+    [self.webView willRotateToInterfaceOrientation:(UIInterfaceOrientation)[[UIDevice currentDevice] orientation]];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)wv {
-    [loadingIndicator hide];
+    [self.loadingIndicator hide];
     
     // Mark message as read after it has finished loading
-    if(message.unread) {
-        [message markAsRead];
+    if(self.message.unread) {
+        [self.message markAsReadWithDelegate:nil];
     }
 
-    [self injectViewportFix];
+    [self.webView injectViewportFix];
 }
 
 - (void)webView:(UIWebView *)wv didFailLoadWithError:(NSError *)error {
     
-    [loadingIndicator hide];
+    [self.loadingIndicator hide];
     
     if (error.code == NSURLErrorCancelled)
         return;
     UALOG(@"Failed to load message: %@", error);
-    UIAlertView *someError = [[UIAlertView alloc] initWithTitle:UA_INBOX_TR(@"UA_Ooops")
+    UIAlertView *someError = [[UIAlertView alloc] initWithTitle:UA_INBOX_TR(@"UA_Mailbox_Error_Title")
                                                         message:UA_INBOX_TR(@"UA_Error_Fetching_Message")
                                                        delegate:self
                                               cancelButtonTitle:UA_INBOX_TR(@"UA_OK")
                                               otherButtonTitles:nil];
     [someError show];
-    [someError release];
 }
 
 

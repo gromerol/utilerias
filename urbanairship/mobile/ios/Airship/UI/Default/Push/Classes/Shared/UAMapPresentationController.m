@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -27,28 +27,12 @@
 #import "UALocationDemoAnnotation.h"
 #import "UALocationService.h"
 #import "UAGlobal.h"
-//Titanium (build server still using version 4.3)
-typedef NSInteger MKUserTrackingMode;
-
 
 @implementation UAMapPresentationController
-@synthesize locationService = locationService_;
-@synthesize locations = locations_;
-@synthesize mapView = mapView_;
-@synthesize annotations = annotations_;
-@synthesize rightButton = rightButton_;
-@synthesize lastUserAnnotation = lastUserAnnotation_;
 
 #pragma mark -
 #pragma mark Memory
 
-- (void) dealloc {
-    RELEASE_SAFELY(locationService_);
-    RELEASE_SAFELY(locations_);
-    RELEASE_SAFELY(annotations_);
-    RELEASE_SAFELY(lastUserAnnotation_);
-    [super dealloc];
-}
 
 
 #pragma mark -
@@ -56,13 +40,13 @@ typedef NSInteger MKUserTrackingMode;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (!locations_) {
+    if (!self.locations) {
         self.locations = [NSMutableArray array];
     }
-    UALOG(@"LOCATIONS ARRAY %@", locations_);
+    UA_LDEBUG(@"LOCATIONS ARRAY %@", self.locations);
     self.annotations = [NSMutableArray array];
     [self convertLocationsToAnnotations];
-    self.navigationItem.rightBarButtonItem = rightButton_;
+    self.navigationItem.rightBarButtonItem = self.rightButton;
 }
 
 - (void)viewDidUnload
@@ -73,7 +57,7 @@ typedef NSInteger MKUserTrackingMode;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    mapView_.delegate = nil; // delegate is set in xib
+    self.mapView.delegate = nil; // delegate is set in xib
     [super viewWillDisappear:animated];
 }
 
@@ -91,33 +75,33 @@ typedef NSInteger MKUserTrackingMode;
 - (void)moveSpanToCoordinate:(CLLocationCoordinate2D)location {
     MKCoordinateSpan span = MKCoordinateSpanMake(0.05, 0.05);
     MKCoordinateRegion region = MKCoordinateRegionMake(location, span);
-    [mapView_ setRegion:region animated:NO  ];
+    [self.mapView setRegion:region animated:NO  ];
 }
 
 - (void)convertLocationsToAnnotations {
-    for (CLLocation* location in locations_) {
+    for (CLLocation* location in self.locations) {
         UALocationDemoAnnotation *annotation = [UALocationDemoAnnotation locationAnnotationFromLocation:location];
-        [annotations_ addObject:annotation];
+        [self.annotations addObject:annotation];
     }
-    UALOG(@"ANNOTATIONS %@", annotations_);
+    UA_LDEBUG(@"ANNOTATIONS %@", self.annotations);
 }
 
 - (void)annotateMap {
-    UALOG(@"annotateMap");
-    [mapView_ addAnnotations:annotations_];
-    rightButton_.title = @"-Pin";
+    UA_LDEBUG(@"annotateMap");
+    [self.mapView addAnnotations:self.annotations];
+    self.rightButton.title = @"-Pin";
 }
 
 - (IBAction)rightBarButtonPressed:(id)sender {
-    UALOG(@"Right bar button pressed");
+    UA_LDEBUG(@"Right bar button pressed");
     // The Map                   
-    if ([[mapView_ annotations] count] > 1) {
-        UALOG(@"Removing annotations");
-        [mapView_ removeAnnotations:annotations_];
-        rightButton_.title = @"+Pin";
+    if (self.mapView.annotations.count > 1) {
+        UA_LDEBUG(@"Removing annotations");
+        [self.mapView removeAnnotations:self.annotations];
+        self.rightButton.title = @"+Pin";
     }
     else {
-        UALOG(@"Adding annotations");
+        UA_LDEBUG(@"Adding annotations");
         [self annotateMap];
     }
 }
@@ -127,29 +111,29 @@ typedef NSInteger MKUserTrackingMode;
 #pragma mark MKMapViewDelegate 
 
 - (void)mapView:(MKMapView *)mapView didChangeUserTrackingMode:(MKUserTrackingMode)mode animated:(BOOL)animated {
-    UALOG(@"didChangeUserTrackingMode");
+    UA_LDEBUG(@"didChangeUserTrackingMode");
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id < MKAnnotation >)annotation {
     // Return nil for the MKUserLocation object
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         self.lastUserAnnotation = annotation;
-        UALOG(@"Returning nil for MKUserLocation Lat:%f Long:%f", annotation.coordinate.latitude, annotation.coordinate.longitude);
+        UA_LDEBUG(@"Returning nil for MKUserLocation Lat:%f Long:%f", annotation.coordinate.latitude, annotation.coordinate.longitude);
         return nil;
     }
-    UALOG(@"Creating view for annotation %@", annotation);
+    UA_LDEBUG(@"Creating view for annotation %@", annotation);
     
     if (!annotation) {
-        UALOG(@"ANNOTATION IS NIL!!!!");
+        UA_LDEBUG(@"ANNOTATION IS NIL!!!!");
     }
     MKPinAnnotationView *pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
     pinView.pinColor = MKPinAnnotationColorPurple;
     pinView.animatesDrop = YES;
-    return [pinView autorelease];
+    return pinView;
 }
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
-    UALOG(@"Annotations added to map %@", views);
+    UA_LDEBUG(@"Annotations added to map %@", views);
     if ([views count] > 0) {
        MKAnnotationView *view = [views objectAtIndex:0];
         CLLocationCoordinate2D coord = view.annotation.coordinate;

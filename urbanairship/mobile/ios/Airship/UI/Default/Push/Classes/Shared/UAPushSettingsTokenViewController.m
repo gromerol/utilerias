@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2012 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2013 Urban Airship Inc. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -25,28 +25,28 @@
 
 #import "UAPushSettingsTokenViewController.h"
 #import "UAirship.h"
+//Titanium
+#import "UAInboxUI.h"
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+// This is available in iOS 6.0 and later, define it for older versions
+#define NSLineBreakByWordWrapping 0
+#endif
 
 @implementation UAPushSettingsTokenViewController
 
-@synthesize emailButton;
-@synthesize tokenLabel;
-
-- (void)dealloc {
-    RELEASE_SAFELY(emailButton);
-    RELEASE_SAFELY(tokenLabel);
-    RELEASE_SAFELY(text);
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.title = @"Device Token";
 
-    text = @"Your current device token. Test a push notification at "
+    self.text = @"Your current device token. Test a push notification at "
            @"https://go.urbanairship.com";
+}
 
-    tokenLabel.text = [UAirship shared].deviceToken ? [UAirship shared].deviceToken : @"Unavailable";
+- (void)viewWillAppear:(BOOL)animated {
+    self.tokenLabel.text = [UAirship shared].deviceToken ? [UAirship shared].deviceToken : @"Unavailable";
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -66,9 +66,9 @@
 
 - (CGFloat)tableView: (UITableView *) tableView heightForRowAtIndexPath:(NSIndexPath *) indexPath {
     UIFont *font = [UIFont systemFontOfSize:17];
-    CGFloat height = [text sizeWithFont:font
+    CGFloat height = [self.text sizeWithFont:font
                       constrainedToSize:CGSizeMake(280.0, 1500.0)
-                          lineBreakMode:UILineBreakModeWordWrap].height;
+                          lineBreakMode:NSLineBreakByWordWrapping].height;
     return height + kCellPaddingHeight;
 }
 
@@ -80,27 +80,29 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIImage *bgImage = [UIImage imageNamed:@"middle-detail.png"];
+	//Titanium
+	UIImage* bgImage = [UIImage imageWithContentsOfFile:[[UAInboxUI shared].uiBundle pathForResource:@"middle-detail.png" ofType:@"png"]];
+    //UIImage *bgImage = [UIImage imageNamed:@"middle-detail.png"];
     UIImage *stretchableBgImage = [bgImage stretchableImageWithLeftCapWidth:20 topCapHeight:0];
     UIImageView *bgImageView = [[UIImageView alloc] initWithImage: stretchableBgImage];
 
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"description-cell"];
     if (!cell) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier:@"description-cell"] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                       reuseIdentifier:@"description-cell"];
     }
     
     UIFont *font = [UIFont systemFontOfSize: 17];
 
     UILabel* description = [[UILabel alloc] init];
-    description.text = text;
+    description.text = self.text;
     description.lineBreakMode = UILineBreakModeWordWrap;
     description.numberOfLines = 0;
     description.backgroundColor = [UIColor clearColor];
     [description setFont: font];
-    CGFloat height = [text sizeWithFont:font
+    CGFloat height = [self.text sizeWithFont:font
                       constrainedToSize:CGSizeMake(280.0, 800.0)
-                          lineBreakMode:UILineBreakModeWordWrap].height;
+                          lineBreakMode:NSLineBreakByWordWrapping].height;
     [description setFrame: CGRectMake(0.0f, 10.0f, 320.0f, height)];
     [description setBounds: CGRectMake(0.20f, 0.0f, 290.0f, height)];
     [description setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
@@ -109,8 +111,6 @@
     [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
     [cell setBackgroundView: bgImageView];
 
-    [description release];
-    [bgImageView release];
 
     return cell;
 }
@@ -118,8 +118,11 @@
 #pragma mark -
 #pragma mark UI Button Actions
 - (IBAction)copyDeviceToken {
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = [UAirship shared].deviceToken;
+    NSString *token = [UAirship shared].deviceToken;
+    if (token) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = token;
+    }
 }
 
 - (IBAction)emailDeviceToken {
@@ -136,12 +139,10 @@
         [mfViewController setMessageBody:messageBody isHTML:NO];
 		
 		[self presentModalViewController:mfViewController animated:YES];
-		[mfViewController release];
 	}else {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Your device is not currently configured to send mail." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
 		
 		[alert show];
-		[alert release];
 	}
 }
 
@@ -173,7 +174,6 @@
 	[self dismissModalViewControllerAnimated:YES];
 	
 
-	[alert release];
 }
 
 @end

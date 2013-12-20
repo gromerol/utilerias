@@ -12,17 +12,19 @@
 #import "TiBlob.h"
 #import "TiUIButtonBarProxy.h"
 
+#import "UAirship.h"
+#import "UAConfig.h"
+#import "UAPush.h"
+
 #import "UAInboxPushHandler.h"
 #import "UAInboxUI.h"
 #import "UAInboxNavUI.h"
-#import "UAirship.h"
 #import "UAInbox.h"
 #import "UAInboxMessageList.h"
-#import "UAPush.h"
 
 @implementation TiUrbanairshipModule
 
-@synthesize options, autoResetBadge, notificationsEnabled;
+@synthesize autoResetBadge, notificationsEnabled;
 
 #pragma mark Internal
 
@@ -84,18 +86,45 @@
 
 -(void)shutdown:(id)sender
 {
-	// this method is called when the module is being unloaded
-	// typically this is during shutdown. make sure you don't do too
-	// much processing here or the app will be quit forceably
-	[UAirship land];
 	// you *must* call the superclass
 	[super shutdown:sender];
 }
 
-- (void)failIfSimulator {
+- (void)checkIfSimulator {
     if ([[[UIDevice currentDevice] model] rangeOfString:@"Simulator"].location != NSNotFound) {
 		NSLog(@"[ERROR] You can see UAInbox in the simulator, but you will not be able to receive push notifications");
     }
+}
+
++ (void)load
+{
+    // Register to receive a notification for the application launching
+    // This mechanism allows the module to perform actions during application startup
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAppCreate:)
+                                                 name:@"UIApplicationDidFinishLaunchingNotification" object:nil];
+}
+
++(void)onAppCreate:(NSNotification *)notification
+{
+	// SUPER WARNING!!!!!!
+	// This initialization method MUST be run on the UI thread. The setup of UAInboxUI and UAInboxNavUI must occur
+	// on the UI thread or else it will not draw properly. A perfect symptom of this is that the navigation bar in
+	// the navigation controller draws transparent and the leftbarbutton doesn't render on first display. I spent
+	// a good amount of time trying to figure out why this was occurring until I realized that this method was being
+	// called by a newly added method that was not being run on the UI thread.
+	// The following ENSURE_CONSISTENCY macro verifies that any calls in the future will be caught immediately!
+	ENSURE_CONSISTENCY([NSThread isMainThread]);
+
+	NSLog(@"[DEBUG] Urban Airship taking off");
+
+	// Create Airship singleton that's used to talk to Urban Airship servers.
+	UAConfig *config = [UAConfig defaultConfig];
+
+	// Disable the automatic integration support in UA for backward compatibility
+	config.automaticSetupEnabled = NO;
+
+	// Call takeOff (which creates the UAirship singleton)
+	[UAirship takeOff:config];
 }
 
 -(void)initializeIfNeeded
@@ -105,33 +134,7 @@
         return;
     }
 	
-	// SUPER WARNING!!!!!!
-	// This initialization method MUST be run on the UI thread. The setup of UAInboxUI and UAInboxNavUI must occur
-	// on the UI thread or else it will not draw properly. A perfect symptom of this is that the navigation bar in 
-	// the navigation controller draws transparent and the leftbarbutton doesn't render on first display. I spent
-	// a good amount of time trying to figure out why this was occurring until I realized that this method was being
-	// called by a newly added method that was not being run on the UI thread.
-	// The following ENSURE_CONSISTENCY macro verifies that any calls in the future will be caught immediately!
-	ENSURE_CONSISTENCY([NSThread isMainThread]);
-	
-	[self failIfSimulator];
-
-	NSLog(@"[DEBUG] Urban Airship starting init");
-	
-	id launchOptions = [[TiApp app] launchOptions];
-	
-	// Set the takeoff options, which includes both the launch options from the
-	// command line as well as the user's options for Urban Airship
-    NSMutableDictionary *takeOffOptions = [[[NSMutableDictionary alloc] init] autorelease];
-    // Adding support for the AirshipConfig.plist file as part of the upgrade to 1.3.2 [MOD-804]
-    // The options property is now optional
-    if (options != nil) {
-        [takeOffOptions setValue:options forKey:UAirshipTakeOffOptionsAirshipConfigKey];
-    }
-	[takeOffOptions setValue:launchOptions forKey:UAirshipTakeOffOptionsLaunchOptionsKey];
-	
-    // Create Airship singleton that's used to talk to Urban Airhship servers.
-    [UAirship takeOff:takeOffOptions];
+	[self checkIfSimulator];
 
 	// [MOD-238] Automatically reset badge count at startup
     [self handleAutoBadgeReset];
@@ -146,13 +149,6 @@
 	// Get the root view controller from the app
 	[UAInboxUI shared].inboxParentController = [[TiApp app] controller];
 	[UAInboxUI shared].useOverlay = NO;
-	
-	// Get the launch options from the app startup
-    [UAInboxPushHandler handleLaunchOptions:launchOptions];
-	
-	if([[UAInbox shared].pushHandler hasLaunchMessage]) {
-		[UAInboxUI loadLaunchMessage];
-	}    
 
 	initialized = YES;
     [self updateUAServer];
@@ -160,13 +156,7 @@
 	NSLog(@"inited");
 }
 
-#pragma mark Cleanup 
-
--(void)dealloc
-{
-	// release any resources that have been retained by the module
-	[super dealloc];
-}
+#pragma mark Cleanup
 
 #pragma mark Internal Memory Management
 
@@ -180,25 +170,10 @@
 #pragma Public APIs
 
 -(void)registerDevice:(id)arg
-{	
+{
+	ENSURE_SINGLE_ARG(arg, NSString);
 	ENSURE_UI_THREAD_1_ARG(arg);
 	
-	[self initializeIfNeeded];
-	
-    // Passing the options in this method is being deprecated, but for now we will continue to support
-    // them by setting the property values on the module object
-	NSData* token = [arg objectAtIndex:0];
-    if ([arg count] > 1) {
-        NSLog(@"[WARN] Passing options to registerDevice has been DEPRECATED. Use 'tags' and 'alias' properties");
-        id opts = [arg objectAtIndex:1];
-        if (opts != nil)
-        {
-            ENSURE_DICT(opts);
-            [self setValuesForKeysWithDictionary:opts];
-        }
-    }
-
-    
     // NOTE: We are not using the UA registerForRemoteNotificationTypes method since we rely on the developer
     // calling the Ti.Network.registerForRemoteNotifications method. The following call will generate an
     // error message in the log from UA about missing notification types.    
@@ -207,7 +182,24 @@
     // to continue support for registering a device token without using their UAPush registration mechanism.
     // We could consider switching over to the UAPush mechanism but that would mean a change to existing user
     // applications. Perhaps we could switch over with a new API and start deprecating the current method.
-    [[UAPush shared] registerDeviceToken:token withExtraInfo:nil];
+    
+    // The token received in the success callback to 'Ti.Network.registerForPushNotifications' is a hex-encode
+    // string. We need to convert it back to it's byte format as an NSData object.
+    NSMutableData *token = [[NSMutableData alloc] init];
+    unsigned char whole_byte;
+    char byte_chars[3] = { '\0', '\0', '\0' };
+    int i;
+    for (i=0; i<[arg length]/2; i++) {
+        byte_chars[0] = [arg characterAtIndex:i*2];
+        byte_chars[1] = [arg characterAtIndex:i*2+1];
+        whole_byte = strtol(byte_chars, NULL, 16);
+        [token appendBytes:&whole_byte length:1];
+    }
+    [[UAPush shared] registerDeviceToken:token];
+
+   	[self initializeIfNeeded];
+
+    [self updateUAServer];
 }
 	
 // [MOD-214] Add unregisterDevice method
@@ -228,7 +220,7 @@
 	BOOL animated = [TiUtils boolValue:@"animated" properties:args def:YES];
 
 	UIViewController* viewController = [[TiApp app] controller];
-	[UAInbox displayInbox:viewController animated:animated];
+	[UAInbox displayInboxInViewController:viewController animated:animated];
 }
 
 -(void)hideInbox:(id)arg
