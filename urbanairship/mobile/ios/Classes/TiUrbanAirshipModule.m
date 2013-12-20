@@ -174,8 +174,6 @@
 	ENSURE_SINGLE_ARG(arg, NSString);
 	ENSURE_UI_THREAD_1_ARG(arg);
 	
-	[self initializeIfNeeded];
-	
     // NOTE: We are not using the UA registerForRemoteNotificationTypes method since we rely on the developer
     // calling the Ti.Network.registerForRemoteNotifications method. The following call will generate an
     // error message in the log from UA about missing notification types.    
@@ -184,8 +182,23 @@
     // to continue support for registering a device token without using their UAPush registration mechanism.
     // We could consider switching over to the UAPush mechanism but that would mean a change to existing user
     // applications. Perhaps we could switch over with a new API and start deprecating the current method.
-    [[UAPush shared] registerDeviceToken:arg];
     
+    // The token received in the success callback to 'Ti.Network.registerForPushNotifications' is a hex-encode
+    // string. We need to convert it back to it's byte format as an NSData object.
+    NSMutableData *token = [[NSMutableData alloc] init];
+    unsigned char whole_byte;
+    char byte_chars[3] = { '\0', '\0', '\0' };
+    int i;
+    for (i=0; i<[arg length]/2; i++) {
+        byte_chars[0] = [arg characterAtIndex:i*2];
+        byte_chars[1] = [arg characterAtIndex:i*2+1];
+        whole_byte = strtol(byte_chars, NULL, 16);
+        [token appendBytes:&whole_byte length:1];
+    }
+    [[UAPush shared] registerDeviceToken:token];
+
+   	[self initializeIfNeeded];
+
     [self updateUAServer];
 }
 	
