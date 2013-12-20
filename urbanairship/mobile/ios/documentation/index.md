@@ -31,7 +31,7 @@ aware of the following breaking changes to the API:
 the [Urban Airship documentation](http://docs.urbanairship.com/build/ios.html) for further details. The `airshipconfig.plist` file included with the module's
 example application contains the updated properties.
 * Rich Push user info is stored in the device keychain. This allows the user info to persist through app uninstalls and device upgrades, but this can cause
-problems during development if you want to test a fresh install. To force a reset of the user credentials, set `clearKeychain` to YES in either the `AirshipConfig.plist`
+problems during development if you want to test a fresh install. To force a reset of the user credentials, set `clearKeychain` to YES in the `AirshipConfig.plist`
 file. This clears the keychain every time the application starts, so it should only be used in development.
 
 ## Setup

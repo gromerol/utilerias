@@ -114,17 +114,17 @@
 	// called by a newly added method that was not being run on the UI thread.
 	// The following ENSURE_CONSISTENCY macro verifies that any calls in the future will be caught immediately!
 	ENSURE_CONSISTENCY([NSThread isMainThread]);
-    
-  	NSLog(@"[DEBUG] Urban Airship taking off");
-    
-    // Create Airship singleton that's used to talk to Urban Airship servers.
-    UAConfig *config = [UAConfig defaultConfig];
-    
-    // Disable the automatic integration support in UA for backward compatibility
-    config.automaticSetupEnabled = NO;
 
-    // Call takeOff (which creates the UAirship singleton)
-    [UAirship takeOff:config];
+	NSLog(@"[DEBUG] Urban Airship taking off");
+
+	// Create Airship singleton that's used to talk to Urban Airship servers.
+	UAConfig *config = [UAConfig defaultConfig];
+
+	// Disable the automatic integration support in UA for backward compatibility
+	config.automaticSetupEnabled = NO;
+
+	// Call takeOff (which creates the UAirship singleton)
+	[UAirship takeOff:config];
 }
 
 -(void)initializeIfNeeded
@@ -171,7 +171,7 @@
 
 -(void)registerDevice:(id)arg
 {
-    ENSURE_SINGLE_ARG(arg, NSString);
+	ENSURE_SINGLE_ARG(arg, NSString);
 	ENSURE_UI_THREAD_1_ARG(arg);
 	
 	[self initializeIfNeeded];
