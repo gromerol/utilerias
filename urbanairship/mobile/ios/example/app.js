@@ -88,17 +88,6 @@ Ti.API.info("module is => " + UrbanAirship);
  * Urban Airship will load the options from an AirshipConfig.plist file that
  * should be stored in the application bundle. You will find an example
  * AirshipConfig.plist file in the 'example/platform/iphone' folder of the module.
- * Alternatively, you can set the 'options' property of the module object.
- 
-UrbanAirship.options = {
-    APP_STORE_OR_AD_HOC_BUILD: false,
-    PRODUCTION_APP_KEY: '=== YOUR PROD APP KEY ===',
-    PRODUCTION_APP_SECRET: '=== YOUR PROD APP SECRET ===',
-    DEVELOPMENT_APP_KEY: '=== YOUR DEV APP KEY ===',
-    DEVELOPMENT_APP_SECRET: '=== YOUR DEV APP SECRET ===',
-    LOGGING_ENABLED: true
-};
-
 */
 
 // Set UA options
