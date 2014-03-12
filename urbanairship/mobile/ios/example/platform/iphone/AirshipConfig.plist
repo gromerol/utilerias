@@ -3,8 +3,8 @@
 	"developmentAppKey" = "Your development app key";
 	"developmentAppSecret" = "Your development app secret";
 	"developmentLogLevel" = 4;
-	"producationAppKey" = "Your production app key";
-	"producationAppSecret" = "Your production app secret";
+	"productionAppKey" = "Your production app key";
+	"productionAppSecret" = "Your production app secret";
 	"productionLogLevel" = 1;
 	"analyticsEnabled" = NO;
 }
