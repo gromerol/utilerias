@@ -24,7 +24,7 @@
     ad = [[GADBannerView alloc] initWithFrame:bounds];
     
     // Specify the ad's "unit identifier." This is your AdMob Publisher ID.
-    ad.adUnitID = [self.proxy valueForKey:@"publisherId"];
+    ad.adUnitID = [self.proxy valueForKey:@"adUnitId"];
     
     // Let the runtime know which UIViewController to restore after taking
     // the user wherever the ad goes and add it to the view hierarchy.
@@ -33,11 +33,20 @@
     // Initiate a generic request to load it with an ad.
     GADRequest* request = [GADRequest request];
     
+    if ([self.proxy valueForKey:@"publisherId"]) {
+        NSLog(@"`publisherId` has been removed. Use `adUnitId` instead.");
+    }
+    if ([TiUtils boolValue:[self.proxy valueForKey:@"testing"] def:NO]) {
+        NSLog(@"`testing` has been deprecated. Use `testDevices` instead.");
+        // testing is deprecated
+        request.testing = YES;
+    }
+    
     // Go through the configurable properties, populating our request with their values (if they have been provided).
     request.keywords = [self.proxy valueForKey:@"keywords"];
     request.birthday = [self.proxy valueForKey:@"dateOfBirth"];
-    request.testing = [TiUtils boolValue:[self.proxy valueForKey:@"testing"] def:NO];
-    
+    request.testDevices = [self.proxy valueForKey:@"testDevices"];
+  
     NSString* backgroundColor = [self.proxy valueForKey:@"adBackgroundColor"];
     if (backgroundColor != nil) {
         ad.backgroundColor = [[TiUtils colorValue:backgroundColor] _color];

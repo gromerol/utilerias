@@ -4,3 +4,6 @@ build
 .svn
 /*/mobile/android/libs/
 /*/mobile/android/dist/
+
+/admob/mobile/ios/admob.xcodeproj/xcuserdata/
+/admob/mobile/ios/admob.xcodeproj/project.xcworkspace/
