@@ -10,9 +10,12 @@
     UIWebView* _web;
     NSString* _html;
     float _contentHeight;
+    BOOL _webViewDidLoad;
+    NSString* _backgroundColorString;
 }
 
 -(void)setHtml_:(NSString *)html;
+-(void)setBackgroundColor_:(id)value;
 -(void)createView;
 -(float)currentContentHeight;
 
